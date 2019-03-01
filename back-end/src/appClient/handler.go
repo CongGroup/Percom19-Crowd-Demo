@@ -2,6 +2,7 @@ package appClient
 
 import (
 	"contract"
+	"encoding/hex"
 	"encoding/json"
 	"errors"
 	"github.com/ethereum/go-ethereum/common"
@@ -108,6 +109,7 @@ func (h *Handler) submitHandler(gcuid int, data []byte) {
 		return
 	}
 
+	log.Println("data to encrypt:",payload.Value)
 	u:= user.NewUser(common.HexToAddress(payload.Address),pk,h.agg)
 	cipher,err:=zcrypto.PubKey.Encrypt(payload.Value)
 	if err!=nil {
@@ -116,12 +118,13 @@ func (h *Handler) submitHandler(gcuid int, data []byte) {
 		return
 	}
 
-	submitData,err:=json.Marshal(cipher.C)
+	submitData:=cipher.C.Bytes()
 	if err!=nil {
 		log.Println(err.Error())
 		h.errorHandler(gcuid,DATA_FORMAT_ERROR,err)
 		return
 	}
+
 	err =u.Send(contract.FUNCTION_SUBMIT,payload.TaskId,submitData)
 
 	if err!=nil {
@@ -167,7 +170,9 @@ func (h *Handler) aggregateHandler(gcuid int, data []byte) {
 
 	total:= big.NewInt(1)
 	for i:=0; i< int(count.Int64()); i++ {
-		submitDataByte,err:= h.agg.Call(contract.FUNCTION_GET_SUBMIT_DATA_OF_TASK,payload.TaskId,big.NewInt(0))
+		submitDataByte,err:= h.agg.Call(contract.FUNCTION_GET_SUBMIT_DATA_OF_TASK,payload.TaskId,big.NewInt(int64(i)))
+		submitDataByte=submitDataByte[64:]
+
 		if err!=nil {
 			log.Println(err.Error())
 			h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
@@ -175,13 +180,13 @@ func (h *Handler) aggregateHandler(gcuid int, data []byte) {
 		}
 		submitData:=new(big.Int).SetBytes(submitDataByte)
 		total.Mul(total,submitData)
-		total.Mod(total,zcrypto.PubKey.N)
+		total.Mod(total,zcrypto.PubKey.GetNSquare())
 	}
 
 	m:=zcrypto.PriKey.Decrypt(&zcrypto.Cypher{C:total})
 	log.Println("aggregate result = ",m);
 
-	aggregation,err:= json.Marshal(total)
+	aggregation:=total.Bytes()
 	if err!=nil {
 		log.Println(err.Error())
 		h.errorHandler(gcuid,UNMARSHAL_JSON_ERROR,err)
@@ -426,6 +431,7 @@ func (h *Handler) getAggregationResultHandler(gcuid int, data[]byte) {
 		return
 	}
 	aggregateResultByte,err:= h.agg.Call(contract.FUNCTION_GET_AGGREGATION_RESULT_OF_TASK, payload.TaskId)
+	aggregateResultByte = aggregateResultByte[64:]
 	if err!=nil {
 		log.Println(err.Error())
 		h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
@@ -435,6 +441,7 @@ func (h *Handler) getAggregationResultHandler(gcuid int, data[]byte) {
 	aggregateResult:=zcrypto.PriKey.Decrypt(&zcrypto.Cypher {
 		C: new(big.Int).SetBytes(aggregateResultByte),
 	})
+	log.Println("aggregation result:",aggregateResult)
 
 	res:= &GetAggregateResultResponse{
 		Response:Response{
@@ -462,20 +469,11 @@ func (h *Handler) getSolicitInfoHandler(gcuid int, data[]byte) {
 		return
 	}
 
-	type solicitInfo struct {
-		DataFee *big.Int `json:"dataFee"`
-		ServiceFee *big.Int `json:"serviceFee"`
-		ServiceProvider common.Address `json:"serviceProvider"`
-		Target *big.Int `json:"target"`
-	}
-
-	var info solicitInfo
-	err =json.Unmarshal(infoByte,info)
-	if err!=nil {
-		log.Println(err.Error())
-		h.errorHandler(gcuid,UNMARSHAL_JSON_ERROR,err)
-		return
-	}
+	var info contract.SolicitInfo
+	info.DataFee = new(big.Int).SetBytes(infoByte[:32])
+	info.ServiceFee = new(big.Int).SetBytes(infoByte[32:64])
+	info.ServiceProvider = common.HexToAddress("0x"+hex.EncodeToString(infoByte[76:96]))
+	info.Target = new(big.Int).SetBytes(infoByte[96:128])
 
 
 	res:= &GetSolicitInfoResponse{

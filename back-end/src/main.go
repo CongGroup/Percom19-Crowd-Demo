@@ -24,7 +24,7 @@ func testPallier() {
 		log.Println()
 		return
 	}
-	log.Println("N: ",pri.N," G: ",pri.G, "lambda", pri.Lambda, "mu:", pri.Mu)
+	log.Println("N: ",pri.N," G: ",pri.G, "lambda", pri.Lambda, "mu:", pri.Mu," cipher:",cypher.C)
 	m:= pri.Decrypt(cypher)
 	log.Println(m)
 }
@@ -49,7 +49,9 @@ func requestParserWrapper(manager *appClient.HandlerManager, agg *contract.Agg) 
 			log.Println("upgrade:", err)
 			return
 		}
+		log.Println("connection,:",&c);
 		handler:= appHandler(c,agg)
+		log.Println("handler:",handler)
 		manager.Register <- handler
 		handler.HandleRequest()
 		manager.Unregister <- handler
@@ -90,7 +92,7 @@ func main() {
 
 	fmt.Println("Running http server")
 	http.ListenAndServe(
-		":4000",
+		"0.0.0.0:4000",
 		h.CORS(
 			h.AllowedMethods([]string{"get", "options", "post", "put", "head"}),
 			h.AllowedOrigins([]string{"*"}),

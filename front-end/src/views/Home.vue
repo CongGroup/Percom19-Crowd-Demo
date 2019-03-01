@@ -31,7 +31,7 @@
                 } else {
                     console.log("create account");
                     account = util.createAccount();
-                    this.$cookies.set('account',account);
+                    this.$cookies.set('account',account,'7d');
                 }
                 this.$store.commit('setAccount', account);
                 account.privateKey = account.privateKey.slice(2);

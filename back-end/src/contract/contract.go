@@ -8,7 +8,7 @@ import (
 
 const (
 	GETH_PORT    = "ws://localhost:8650"
-	CONTRACT_ADDRESS = "0x4fd5d6798446836a130fff2a1fe304d56f71e952"
+	CONTRACT_ADDRESS = "0xb3e28797359b701066359fba65c27cb7eabfe45a"
 	CONTRACT_ABI     = `[
 	{
 		"constant": false,
@@ -134,6 +134,158 @@ const (
 		"type": "fallback"
 	},
 	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "taskId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "newStage",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "oldStage",
+				"type": "uint256"
+			}
+		],
+		"name": "StageTransfer",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "taskId",
+				"type": "uint256"
+			}
+		],
+		"name": "Solicit",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "taskId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "registerNumber",
+				"type": "uint256"
+			}
+		],
+		"name": "Register",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "taskId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "submitNumber",
+				"type": "uint256"
+			}
+		],
+		"name": "Submit",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "taskId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "aggregateResult",
+				"type": "bytes"
+			}
+		],
+		"name": "Aggregate",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "taskId",
+				"type": "uint256"
+			}
+		],
+		"name": "Approve",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "taskId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "claimNumber",
+				"type": "uint256"
+			}
+		],
+		"name": "Claim",
+		"type": "event"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "task_id",
+				"type": "uint256"
+			}
+		],
+		"name": "getAggregationResultOfTask",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "task_id",
+				"type": "uint256"
+			}
+		],
+		"name": "getClaimNumberOfTask",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"constant": true,
 		"inputs": [
 			{
@@ -143,6 +295,37 @@ const (
 		],
 		"name": "getRegisterNumberOfTask",
 		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "task_id",
+				"type": "uint256"
+			}
+		],
+		"name": "getSolicitInfoOfTask",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "address"
+			},
 			{
 				"name": "",
 				"type": "uint256"
@@ -253,6 +436,13 @@ var (
 	LogApprove string
 	LogClaim string
 )
+
+type SolicitInfo struct {
+	DataFee         *big.Int       `json:"dataFee"`
+	ServiceFee      *big.Int       `json:"serviceFee"`
+	ServiceProvider common.Address `json:"serviceProvider"`
+	Target          *big.Int       `json:"target"`
+}
 
 const (
 	//event list

@@ -2,8 +2,12 @@ package appClient
 
 import (
 	"contract"
+	"encoding/hex"
 	"encoding/json"
+	"github.com/ethereum/go-ethereum/common"
 	"log"
+	"math/big"
+	"zcrypto"
 )
 
 
@@ -39,13 +43,12 @@ func (this *HandlerManager) Start() {
 				case message:= <- this.Broadcast:
 					log.Println("broadcast a message:",string(message))
 					for handler:= range this.Handlers {
-						log.Println("")
-						go func() {
-							err:=handler.Send(message)
+						go func(h *Handler) {
+							err:=h.Send(message)
 							if err!=nil {
 								log.Println("push message to a close socket")
 							}
-						}()
+						}(handler)
 					}
 		}
 	}
@@ -86,9 +89,44 @@ func (this *HandlerManager) SubScriptContractEvent(c contract.Contract) {
 				this.Broadcast<-data
 
 			case contract.LogSolicit:
-				// TODO
-				//var res appClient.GetSolicitInfoResponse
-				//gcuid:= appClient.GCUID_SOLICIT_INFO
+				var solicitEvent contract.SolicitEvent
+				err:=c.Unpack(&solicitEvent, contract.EVENT_SOLICIT, vLog.Data)
+				if err!=nil {
+					log.Println(err.Error())
+					return
+				}
+
+
+				infoByte,err:= c.Call(contract.FUNCTION_GET_SOLICITINFO_OF_TASK, solicitEvent.TaskId)
+				if err!=nil {
+					log.Println(err.Error())
+					return
+				}
+
+				var info contract.SolicitInfo
+				info.DataFee = new(big.Int).SetBytes(infoByte[:32])
+				info.ServiceFee = new(big.Int).SetBytes(infoByte[32:64])
+				info.ServiceProvider = common.HexToAddress("0x"+hex.EncodeToString(infoByte[76:96]))
+				info.Target = new(big.Int).SetBytes(infoByte[96:128])
+
+				gcuid:= GCUID_SOLICIT_INFO
+				res:= &GetSolicitInfoResponse{
+					Response: Response{
+						Gcuid:gcuid,
+						Status: SUCCESS,
+					},
+					DataFee:info.DataFee,
+					ServiceFee:info.ServiceFee,
+					ServiceProvider:info.ServiceProvider.String(),
+					Target: info.Target,
+				}
+				data,err:=json.Marshal(res)
+				if err!=nil {
+					log.Println(err.Error())
+					return
+				}
+
+				this.Broadcast<-data
 			case contract.LogRegister:
 				var registerEvent contract.RegisterEvent
 				err:= c.Unpack(&registerEvent, contract.EVENT_REGISTER, vLog.Data)
@@ -134,11 +172,41 @@ func (this *HandlerManager) SubScriptContractEvent(c contract.Contract) {
 				}
 				this.Broadcast <-data
 			case contract.LogAggregate:
-				// TODO
-				//var res appClient.GetAggregateResultResponse
-				//gcuid:= appClient.GCUID_AGGREGATE_RESULT
-				//case logApprove:
-				//	gcuid:= appClient.GCUIDD_AGGREGATE_RESULT
+				var aggregateEvent contract.AggregateEvent
+				err:= c.Unpack(&aggregateEvent,contract.EVENT_AGGREGATE,vLog.Data)
+				if err!=nil {
+					log.Println(err.Error())
+					return
+				}
+
+				gcuid:= GCUID_AGGREGATE_RESULT
+
+
+				aggregateResultByte,err:= c.Call(contract.FUNCTION_GET_AGGREGATION_RESULT_OF_TASK, aggregateEvent.TaskId)
+				aggregateResultByte = aggregateResultByte[64:]
+				if err!=nil {
+					log.Println(err.Error())
+					return
+				}
+
+				aggregateResult:=zcrypto.PriKey.Decrypt(&zcrypto.Cypher {
+					C: new(big.Int).SetBytes(aggregateResultByte),
+				})
+
+				res:= &GetAggregateResultResponse {
+					Response: Response{
+						Gcuid:gcuid,
+						Status:SUCCESS,
+					},
+					Amount:aggregateResult,
+				}
+
+				data,err:=json.Marshal(res)
+				if err!=nil {
+					log.Println(err.Error())
+					return
+				}
+				this.Broadcast <-data
 			case contract.LogClaim:
 				var claimEvent contract.ClaimEvent
 				err:= c.Unpack(&claimEvent,contract.EVENT_CLAIM,vLog.Data)
