@@ -1,0 +1,208 @@
+package appClient
+
+import "math/big"
+
+const (
+	GCUID_SOLICIT = iota
+	GCUID_REGISTER
+	GCUID_SUBMIT
+	GCUID_AGGREGATION
+	GCUID_APPROVE
+	GCUID_CLAIM
+)
+
+const (
+	GCUID_ETHER = 101+iota
+	GCUID_CURRENT_STAGE
+	GCUID_REGISTER_NUMBER
+	GCUID_SUBMISSION_NUMBER
+	GCUID_SOLICIT_INFO
+	GCUID_AGGREGATE_RESULT
+	GCUID_CLAIM_NUMBER
+)
+
+const (
+	SUCCESS = 0
+	FAIL = 1
+)
+
+const (
+	// error id
+	UNMARSHAL_JSON_ERROR = iota
+	DATA_FORMAT_ERROR
+	KEY_FORMAT_ERROR
+	TRANSACTION_ERROR
+	CALL_TRANSACTION_ERROR
+	ENCRYPTION_ERROR
+)
+
+const (
+	// error message
+	MSG_UNMARSHAL_JSON_ERROR = "can not unmarshal json"
+	MSG_DATA_FORMAT_ERROR = "wrong data format"
+	MSG_KEY_FORMAT_ERROR = "wrong private key format"
+	MSG_TRANSACTION_ERROR = "transaction revert"
+	MSG_CALL_TRANSACTION_ERROR = "can not call transaction"
+	MSG_ENCRYPTION_ERROR = "can not encrypt data"
+)
+
+const (
+	SERVER_ERROR_CODE = 500
+	CLIENT_ERROR_CODE = 400
+)
+
+type SolicitRequest struct {
+	Gcuid int `json:"gcuid"`
+	DataFee *big.Int `json:"dataFee"`
+	ServiceFee *big.Int `json:"serviceFee"`
+	ServiceProvider string `json:"serviceProvider"`
+	Target *big.Int `json:"target"`
+	PrivateKey string `json:"privateKey"`
+	Address string `json:"address"`
+}
+
+type SolicitResponse struct {
+	Response
+}
+
+type RegisterRequest struct {
+	Gcuid int `json:"gcuid"`
+	TaskId *big.Int `json:"taskId"`
+	PrivateKey string `json:"privateKey"`
+	Address string `json:"address"`
+}
+
+type RegisterResponse struct {
+	Response
+}
+
+type SubmitRequest struct {
+	Gcuid int `json:"gcuid"`
+	TaskId *big.Int `json:"taskId"`
+	Value *big.Int	`json:"value"`
+	Address string `json:"address"`
+	PrivateKey string `json:"privateKey"`
+}
+
+type SubmitResponse struct {
+	Response
+}
+
+type AggregateResquest struct {
+	Gcuid int `json:"gcuid"`
+	TaskId *big.Int `json:"taskId"`
+	PrivateKey string `json:"privateKey"`
+	Address string `json:"address"`
+}
+
+
+type AggregateResponse struct {
+	Response
+}
+
+type ApproveRequest struct {
+	Gcuid int `json:"gcuid"`
+	TaskId *big.Int `json:"taskId"`
+	PrivateKey string `json:"privateKey"`
+	Address string `json:"address"`
+}
+
+type ApproveResponse struct {
+	Response
+}
+
+type ClaimRequest struct {
+	Gcuid int `json:"gcuid"`
+	TaskId *big.Int `json:"taskId"`
+	PrivateKey string `json:"privateKey"`
+	Address string `json:"address"`
+}
+
+type ClaimResponse struct {
+	Response
+}
+
+type GetEtherRequest struct {
+	Gcuid int `json:"gcuid"`
+	Address string `json:"address"`
+}
+
+type GetEtherResponse struct {
+	Response
+	Amount *big.Int `json:"amount"`
+}
+
+type GetStageRequest struct {
+	Gcuid int `json:"gcuid"`
+	TaskId *big.Int `json:"taskId"`
+}
+
+type GetStageResponse struct {
+	Response
+	Stage *big.Int `json:"stage"`
+}
+
+type GetRegisterNumberRequest struct {
+	Gcuid int `json:"gcuid"`
+	TaskId *big.Int `json:"taskId"`
+}
+
+type GetRegisterNumberResponse struct {
+	Response
+	Amount *big.Int `json:"amount"`
+}
+
+type GetSubmissionNumberRequest struct {
+	Gcuid int `json:"gcuid"`
+	TaskId *big.Int `json:"taskId"`
+}
+
+type GetSubmissionNumberResponse struct {
+	Response
+	Amount *big.Int `json:"amount"`
+}
+
+type GetAggregateResultRequest struct {
+	Gcuid int `json:"gcuid"`
+	TaskId *big.Int `json:"taskId"`
+}
+
+type GetAggregateResultResponse struct {
+	Response
+	Amount *big.Int `json:"amount"`
+}
+
+type GetSolicitInfoResquest struct {
+	Gcuid int `json:"gcuid"`
+	TaskId *big.Int `json:"taskId"`
+}
+
+type GetSolicitInfoResponse struct {
+	Response
+	DataFee *big.Int `json:"dataFee"`
+	ServiceFee *big.Int `json:"serviceFee"`
+	ServiceProvider string `json:"serviceProvider"`
+	Target *big.Int `json:"target"`
+}
+
+type GetClaimNumberResquest struct {
+	Gcuid int `json:"gcuid"`
+	TaskId *big.Int `json:"taskId"`
+}
+
+type GetClaimNumberResponse struct {
+	Response
+	Amount *big.Int `json:"amount"`
+}
+
+type Response struct {
+	Gcuid int `json:"gcuid"`
+	Status int `json:"status"`
+}
+
+type Error struct {
+	Status int `json:"status"`
+	Gcuid int `json:"gcuid"`
+	Code int `json:"code"`
+	Reason string `json:"reason"`
+}

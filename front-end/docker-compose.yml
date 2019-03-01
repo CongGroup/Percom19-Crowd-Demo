@@ -1,0 +1,12 @@
+version: '3.2'
+services:
+  frontend:
+    build:
+      context: .
+      args:
+        SERVER_PATH: "http://localhost:4000"
+    image: xarcher/demo-front:latest
+    ports:
+      - "8080:8080"
+    command: http-server dist
+
