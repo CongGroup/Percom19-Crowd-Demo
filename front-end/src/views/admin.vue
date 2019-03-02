@@ -1,6 +1,6 @@
 <template>
-    <div class="home">
-        <submit :account="account" />
+    <div>
+        <manager :serviceProviderAccount="serviceProviderAccount" :dataConsumerAccount="dataConsumerAccount"></manager>
     </div>
 </template>
 
@@ -8,13 +8,14 @@
     // @ is an alias to /src
     require("@/assets/css/style.css");
     export default {
-        name: "home",
+        name: "admin",
         components: {
-            submit: () => import("@/components/submit.vue")
+            manager: () => import("../components/manager.vue")
         },
         data: function () {
             return {
-
+                serviceProviderAccount: undefined,
+                dataConsumerAccount: undefined,
             }
         },
         computed: {
@@ -22,23 +23,15 @@
                 return this.$store.state.account
             }
         },
-        beforeCreate: function () {
-            import('../assets/js/tx.js').then(util => {
-                let account;
-                if(this.$cookies.isKey("account")) {
-                    console.log("stored in cookie");
-                    account = this.$cookies.get("account");
-                } else {
-                    console.log("create account");
-                    account = util.createAccount();
-                    this.$cookies.set('account',account,'7d');
-                }
-                this.$store.commit('setAccount', account);
-                account.privateKey = account.privateKey.slice(2);
-                //test
-                console.log("address: "+account.address);
-                console.log("private key: " + account.privateKey);
-            })
+        created: function() {
+            this.serviceProviderAccount = {
+                address: "0x88d6F234b6327b7a9d9d23014EFd6E05b6Dc8943",
+                privateKey: "65CF458E20E12991BA6AEBC210B8293AD5B3495F585CECC6D22DE77933DE2B0F"
+            };
+            this.dataConsumerAccount = {
+                address: "0x3c62aa7913bc303ee4b9c07df87b556b6770e3fc",
+                privateKey: "e27cb51d1eb94ad42b8f196e341e082042639677df43fd7d1440c07b40e2a065"
+            };
         }
     };
 </script>

@@ -48,24 +48,10 @@
         </div>
 
         <div v-if="account!==undefined">
-            <div class="form" v-if="atStage('solicit')">
-                <span class="label">Value:</span>
-                <input class="input" v-model.number="value">
-                <button class="btn btn-dark" @click="solicit"> solicit</button>
-            </div>
-            <div v-else-if="equalsToSubmitState(1)">
-                <div class="waiting">Soliciting {{waiting}}</div>
-            </div>
-        </div>
-
-        <div v-if="account!==undefined">
             <div class="form" v-if="atStage('register')">
                 <span class="label">Value:</span>
                 <input class="input" v-model.number="value">
                 <button class="btn btn-dark" @click="register"> register</button>
-            </div>
-            <div v-else-if="equalsToSubmitState(1)">
-                <div class="waiting">Submitting {{waiting}}</div>
             </div>
         </div>
 
@@ -75,41 +61,14 @@
                 <input class="input" v-model.number="value">
                 <button class="btn btn-dark" @click="submit"> submit</button>
             </div>
-            <div v-else-if="equalsToSubmitState(1)">
-                <div class="waiting">Submitting {{waiting}}</div>
-            </div>
         </div>
 
-        <div v-if="account!==undefined">
-            <div class="form" v-if="atStage('aggregate')">
-                <span class="label">Value:</span>
-                <input class="input" v-model.number="value">
-                <button class="btn btn-dark" @click="aggregate"> aggregate</button>
-            </div>
-            <div v-else-if="equalsToSubmitState(1)">
-                <div class="waiting">Submitting {{waiting}}</div>
-            </div>
-        </div>
 
-        <div v-if="account!==undefined">
-            <div class="form" v-if="atStage('approve')">
-                <span class="label">Value:</span>
-                <input class="input" v-model.number="value">
-                <button class="btn btn-dark" @click="approve"> approve</button>
-            </div>
-            <div v-else-if="equalsToSubmitState(1)">
-                <div class="waiting">Submitting {{waiting}}</div>
-            </div>
-        </div>
-
-        <div v-if="account!==undefined">
+        <div class="formLists" v-if="account!==undefined">
             <div class="form" v-if="atStage('claim')">
                 <span class="label">Value:</span>
                 <input class="input" v-model.number="value">
                 <button class="btn btn-dark" @click="claim"> claim</button>
-            </div>
-            <div v-else-if="equalsToSubmitState(1)">
-                <div class="waiting">Submitting {{waiting}}</div>
             </div>
         </div>
 
@@ -149,6 +108,7 @@
         },
         data: function () {
             return {
+                initialized:false,
                 submitStatus: INITIAL,
                 waiting: "",
                 waitingAnimate: undefined,
@@ -260,19 +220,6 @@
                 };
                 this.ws.send(JSON.stringify(payload));
             },
-            solicit: function() {
-                console.log("solicit");
-                let payload = {
-                    gcuid: GCUID_SOLICIT,
-                    dataFee: 1230,
-                    serviceFee: 16,
-                    serviceProvider: this.account.address,
-                    target: 1,
-                    privateKey: this.account.privateKey,
-                    address: this.account.address,
-                };
-                this.ws.send(JSON.stringify(payload));
-            },
             register: function() {
                 console.log("register");
                 let payload = {
@@ -301,26 +248,6 @@
                 this.submitStatus = SUBMITTED;
                 this.endWaiting();
             },
-            aggregate: function() {
-                console.log("aggregate");
-                let payload = {
-                    gcuid: GCUID_AGGREGATION,
-                    taskId: TASK_ID,
-                    privateKey: this.account.privateKey,
-                    address: this.account.address
-                };
-                this.ws.send(JSON.stringify(payload));
-            },
-            approve: function() {
-                console.log("approve");
-                let payload = {
-                    gcuid: GCUID_APPROVE,
-                    taskId: TASK_ID,
-                    privateKey: this.account.privateKey,
-                    address: this.account.address
-                };
-                this.ws.send(JSON.stringify(payload));
-            },
             claim: function() {
                 console.log("claim");
                 let payload = {
@@ -330,9 +257,6 @@
                     address: this.account.address,
                 };
                 this.ws.send(JSON.stringify(payload));
-            },
-            equalsToSubmitState: function (state) {
-                return this.submitStatus === state ;
             },
             startWaiting: function () {
                 this.waitingAnimate = setInterval(()=>{
@@ -348,9 +272,9 @@
                 return parseFloat(ether)/10**18
             },
             cleanState: function() {
-                this.claimNumber = 0;
-                this.registerNumber = 0;
-                this.submissionNumber = 0;
+                this.claimNumber = undefined;
+                this.registerNumber = undefined;
+                this.submissionNumber = undefined;
                 this.solicitInfo = {
                     dataFee: undefined,
                     serviceFee: undefined,
@@ -359,15 +283,37 @@
                 }
             },
             initialDisplay: function() {
-                this.getRegisterNumber();
-                this.getSubmissionNumber();
                 this.getCurrentStage();
-                this.getClaimNumber();
-                this.getAggregateResult();
-                this.getSolicitInfo();
+                this.getEther()
+            },
+            initializeState: function(stage) {
+                if('register' === this.mapToStage[stage]) {
+                    this.registerNumber = 0;
+                } else if('submit' === this.mapToStage[stage]) {
+                    this.submissionNumber = 0;
+                } else if('claim' === this.mapToStage[stage]) {
+                    this.claimNumber = 0;
+                }
+            },
+            getInfo: function() {
+                if(this.shouldShow('approve')) {
+                    this.getAggregateResult();
+                }
+                if(this.shouldShow('register')) {
+                    this.getSolicitInfo();
+                }
+                if(this.shouldShow('claim')) {
+                    this.getClaimNumber();
+                }
+                if(this.shouldShow('register')) {
+                    this.getRegisterNumber();
+                }
+                if(this.shouldShow('submit')) {
+                    this.getSubmissionNumber()
+                }
             },
             initialWS: function() {
-                this.ws = new WebSocket("ws://144.214.109.245:4000");
+                this.ws = new WebSocket("ws://0.0.0.0:4000");
                 this.ws.onopen = e => {
                     console.log("websocket open");
                     this.initialDisplay();
@@ -438,6 +384,14 @@
                                 this.stage = res.stage;
                                 if(this.stageToProcedure[this.stage] === 'Solicit') {
                                     this.cleanState();
+                                } else {
+                                    if(!this.initialied) {
+                                        console.log("get info");
+                                        this.getInfo();
+                                        this.initialied = true;
+                                    } else {
+                                        initializeState(res.stage)
+                                    }
                                 }
                             } else {
                                 console.log(res.reason);
@@ -475,6 +429,7 @@
                 };
                 this.ws.onclose = e=> {
                     console.log("websocket close");
+                    this.initialied = false;
                     this.reconnect()
                 };
             },

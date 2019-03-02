@@ -70,13 +70,13 @@ contract Crowdsourcing {
 	// event Approve(bytes32 task_id);
 	// event Claim(address user, uint amount ,bytes32 task_id);
 	// event ReceiveFund(uint amount, address supporter);
-	event StageTransfer(uint indexed taskId, uint indexed newStage, uint indexed oldStage);
-	event Solicit(uint indexed taskId);
-	event Register(uint indexed taskId,uint registerNumber);
-	event Submit(uint indexed taskId, uint submitNumber);
-	event Aggregate(uint indexed taskId,bytes aggregateResult);
-	event Approve(uint indexed taskId);
-	event Claim(uint indexed taskId,uint claimNumber);
+	event StageTransfer(uint  taskId, uint  newStage, uint  oldStage);
+	event Solicit(uint  taskId);
+	event Register(uint  taskId,uint registerNumber);
+	event Submit(uint  taskId, uint submitNumber);
+	event Aggregate(uint  taskId,bytes aggregateResult);
+	event Approve(uint  taskId);
+	event Claim(uint taskId,uint claimNumber);
 
 	constructor () public payable {
 		
