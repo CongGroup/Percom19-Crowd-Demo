@@ -12,7 +12,7 @@
                 </div>
                 <div class="item">
                     <div class="label">Your Balance: </div>
-                    <div class="value"> {{ether}} </div>
+                    <div class="value"> {{tokenBalance}} </div>
                 </div>
                 <div v-if="shouldShow('register')">
                     <div class="item">
@@ -47,27 +47,25 @@
             </div>
         </div>
 
+        <!--<div v-if="account!==undefined">-->
+            <!--<div class="form" v-if="atStage('register')">-->
+                <!--<span class="label">Value:</span>-->
+                <!--<input class="input" v-model.number="value">-->
+                <!--<button class="btn btn-dark" @click="register"> register</button>-->
+            <!--</div>-->
+        <!--</div>-->
+
         <div v-if="account!==undefined">
             <div class="form" v-if="atStage('register')">
                 <span class="label">Value:</span>
                 <input class="input" v-model.number="value">
-                <button class="btn btn-dark" @click="register"> register</button>
-            </div>
-        </div>
-
-        <div v-if="account!==undefined">
-            <div class="form" v-if="atStage('submit')">
-                <span class="label">Value:</span>
-                <input class="input" v-model.number="value">
-                <button class="btn btn-dark" @click="submit"> submit</button>
+                <button class="btn btn-dark" @click="registerAndSubmit"> submit</button>
             </div>
         </div>
 
 
         <div class="formLists" v-if="account!==undefined">
             <div class="form" v-if="atStage('claim')">
-                <span class="label">Value:</span>
-                <input class="input" v-model.number="value">
                 <button class="btn btn-dark" @click="claim"> claim</button>
             </div>
         </div>
@@ -87,6 +85,9 @@
     const GCUID_APPROVE = 4;
     const GCUID_CLAIM = 5;
 
+    const GCUID_REGISTER_AND_SUBMIT = 6;
+    const GCUID_STOP_REGISTER_AND_SUBMIT = 7;
+
     const GCUID_ETHER = 101;
     const GCUID_CURRENT_STAGE = 102;
     const GCUID_REGISTER_NUMBER = 103;
@@ -94,6 +95,8 @@
     const GCUID_SOLICIT_INFO = 105;
     const GCUID_AGGREGATE_RESULT = 106;
     const GCUID_CLAIM_NUMBER = 107;
+
+    const GCUID_BALANCE = 108;
 
     const TASK_ID = 0;
 
@@ -114,7 +117,7 @@
                 waitingAnimate: undefined,
                 ws: undefined,
                 value: 0,
-                ether: undefined,
+                tokenBalance: undefined,
                 stage: undefined,
                 registerNumber: undefined,
                 submissionNumber: undefined,
@@ -153,7 +156,7 @@
         watch: {
             account: function(newV,oldV){
                 if(newV !== undefined){
-                    this.getEther();
+                    this.getTokenBalance();
                 }
             }
         },
@@ -164,10 +167,10 @@
             atStage: function(stage) {
                 return this.stage == this.mapToStage[stage];
             },
-            getEther: function () {
+            getTokenBalance: function () {
                 console.log("get Balance");
                 let payload = {
-                    "gcuid": GCUID_ETHER,
+                    "gcuid": GCUID_BALANCE,
                     "address": this.account.address
                 };
                 this.ws.send(JSON.stringify(payload));
@@ -220,23 +223,13 @@
                 };
                 this.ws.send(JSON.stringify(payload));
             },
-            register: function() {
-                console.log("register");
-                let payload = {
-                    gcuid: GCUID_REGISTER,
-                    taskId: TASK_ID,
-                    privateKey: this.account.privateKey,
-                    address: this.account.address,
-                };
-                this.ws.send(JSON.stringify(payload));
-            },
-            submit: function() {
-                console.log("submitting");
+            registerAndSubmit: function() {
+                console.log("register and submit");
                 this.startWaiting();
                 this.submitStatus = SUBMITTING;
 
                 let payload = {
-                    gcuid: GCUID_SUBMIT,
+                    gcuid: GCUID_REGISTER_AND_SUBMIT,
                     taskId: TASK_ID,
                     value: this.value,
                     address: this.account.address,
@@ -284,14 +277,16 @@
             },
             initialDisplay: function() {
                 this.getCurrentStage();
-                this.getEther()
+                if(this.account!==undefined) {
+                    this.getTokenBalance();
+                }
             },
             initializeState: function(stage) {
-                if('register' === this.mapToStage[stage]) {
+                if('register' === this.mapToStage[stage] && this.registerNumber === undefined) {
                     this.registerNumber = 0;
-                } else if('submit' === this.mapToStage[stage]) {
+                } else if('submit' === this.mapToStage[stage] && this.submissionNumber=== undefined) {
                     this.submissionNumber = 0;
-                } else if('claim' === this.mapToStage[stage]) {
+                } else if('claim' === this.mapToStage[stage] && this.claimNumber === undefined) {
                     this.claimNumber = 0;
                 }
             },
@@ -328,13 +323,7 @@
                                 console.log(res.reason);
                             }
                             break;
-                        case GCUID_REGISTER:
-                            if (res.status === 0) {
-                            } else {
-                                console.log(res.reason);
-                            }
-                            break;
-                        case GCUID_SUBMIT:
+                        case GCUID_REGISTER_AND_SUBMIT:
                             if (res.status === 0) {
                             } else {
                                 console.log(res.reason);
@@ -354,13 +343,14 @@
                             break;
                         case GCUID_CLAIM:
                             if (res.status === 0) {
+                                this.getTokenBalance();
                             } else {
                                 console.log(res.reason);
                             }
                             break;
-                        case GCUID_ETHER:
+                        case GCUID_BALANCE:
                             if (res.status === 0) {
-                                this.ether = this.formatEther(res.amount);
+                                this.tokenBalance = res.amount;
                             } else {
                                 console.log(res.reason);
                             }
@@ -390,7 +380,7 @@
                                         this.getInfo();
                                         this.initialied = true;
                                     } else {
-                                        initializeState(res.stage)
+                                        this.initializeState(res.stage)
                                     }
                                 }
                             } else {
@@ -418,6 +408,7 @@
                             break;
                         case GCUID_CLAIM_NUMBER:
                             if (res.status === 0) {
+                                console.log("claim number:",res.amount);
                                 this.claimNumber = res.amount;
                             } else {
                                 console.log(res.reason);

@@ -9,6 +9,9 @@ const (
 	GCUID_AGGREGATION
 	GCUID_APPROVE
 	GCUID_CLAIM
+
+	GCUID_REGISTER_AND_SUBMIT // for demo
+	GCUID_STOP_REGISTER_AND_SUBMIT // for demo
 )
 
 const (
@@ -19,6 +22,9 @@ const (
 	GCUID_SOLICIT_INFO
 	GCUID_AGGREGATE_RESULT
 	GCUID_CLAIM_NUMBER
+
+	GCUID_BALANCE
+	GCUID_GET_SUBMIT_VALUES  // TODO
 )
 
 const (
@@ -109,6 +115,7 @@ type ApproveRequest struct {
 
 type ApproveResponse struct {
 	Response
+	SubmitValues []*big.Int `json:"submitValues"`
 }
 
 type ClaimRequest struct {
@@ -122,8 +129,45 @@ type ClaimResponse struct {
 	Response
 }
 
+
+// for demo
+type RegisterAndSubmitRequest struct {
+	Gcuid int `json:"gcuid"`
+	TaskId *big.Int `json:"taskId"`
+	Value *big.Int	`json:"value"`
+	Address string `json:"address"`
+	PrivateKey string `json:"privateKey"`
+}
+
+// for demo
+type RegisterAndSubmitResponse struct {
+	Response
+}
+
+type stopRegisterAndSubmitRequest struct {
+	Gcuid int `json:"gcuid"`
+	TaskId *big.Int `json:"taskId"`
+	PrivateKey string `json:"privateKey"`
+	Address string `json:"address"`
+}
+
+type stopRegisterAndSubmitResponse struct {
+	Response
+}
+
 type GetEtherRequest struct {
 	Gcuid int `json:"gcuid"`
+	Address string `json:"address"`
+}
+
+type GetBalanceRequest struct {
+	Gcuid int `json:"gcuid"`
+	Address string `json:"address"`
+}
+
+type GetBalanceResponse struct {
+	Response
+	Amount *big.Int `json:"amount"`
 	Address string `json:"address"`
 }
 

@@ -17,14 +17,16 @@ import (
 type Handler struct {
 	w *websocket.Conn
 	agg *contract.Agg
+	token *contract.ERC20
 	mutex *sync.Mutex
 }
 
-func NewHandler(w *websocket.Conn, agg *contract.Agg) *Handler {
+func NewHandler(w *websocket.Conn, agg *contract.Agg, token *contract.ERC20) *Handler {
 	return &Handler{
 		w:w,
 		mutex:&sync.Mutex{},
 		agg:agg,
+		token:token,
 	}
 }
 
@@ -43,6 +45,9 @@ func (h *Handler) solicitHandler(gcuid int,data []byte) {
 		h.errorHandler(gcuid,KEY_FORMAT_ERROR,err)
 		return
 	}
+
+	log.Println("data fee:",payload.DataFee);
+	log.Println("service fee:",payload.ServiceFee);
 	u:= user.NewUser(common.HexToAddress(payload.Address),pk,h.agg)
 	err =u.Send(contract.FUNCTION_SOLICIT,payload.DataFee,payload.ServiceFee,common.HexToAddress(payload.ServiceProvider),payload.Target)
 	if err!=nil {
@@ -238,11 +243,39 @@ func (h *Handler) approveHandler(gcuid int, data []byte) {
 		return
 	}
 
+
+	countByte,err:= h.agg.Call(contract.FUNCTION_GET_SUBMIT_COUNT_OF_TASK,payload.TaskId)
+	if err!=nil {
+		log.Println(err.Error())
+		h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
+		return
+	}
+	count:=new(big.Int).SetBytes(countByte)
+
+	submitValues:=make([]*big.Int,count.Int64(),count.Int64())
+	for i:=0; i< int(count.Int64()); i++ {
+		submitDataByte,err:= h.agg.Call(contract.FUNCTION_GET_SUBMIT_DATA_OF_TASK,payload.TaskId,big.NewInt(int64(i)))
+		submitDataByte=submitDataByte[64:]
+
+		if err!=nil {
+			log.Println(err.Error())
+			h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
+			return
+		}
+		encryptedSubmitData:=new(big.Int).SetBytes(submitDataByte)
+
+		submitData:=zcrypto.PriKey.Decrypt(&zcrypto.Cypher {
+			C: encryptedSubmitData,
+		})
+		submitValues[i] = submitData
+	}
+
 	res:= &ApproveResponse{
 		Response: Response {
 			Gcuid:gcuid,
 			Status:SUCCESS,
 		},
+		SubmitValues:submitValues,
 	}
 
 	h.wrapperAndSend(gcuid, res)
@@ -284,6 +317,92 @@ func (h *Handler) claimHandler(gcuid int, data []byte) {
 	h.wrapperAndSend(gcuid, res)
 }
 
+func (h *Handler) registerAndSubmitHandler(gcuid int, data[]byte) {
+	var payload RegisterAndSubmitRequest
+	err:= json.Unmarshal(data,&payload)
+	if err!=nil {
+		log.Println(err.Error())
+		h.errorHandler(gcuid,DATA_FORMAT_ERROR,err)
+		return
+	}
+
+	pk,err:= derivePrivateKey(payload.PrivateKey)
+	if err!=nil {
+		log.Println(err.Error())
+		h.errorHandler(gcuid,KEY_FORMAT_ERROR,err)
+		return
+	}
+
+	log.Println("data to encrypt:",payload.Value)
+	u:= user.NewUser(common.HexToAddress(payload.Address),pk,h.agg)
+	cipher,err:=zcrypto.PubKey.Encrypt(payload.Value)
+	if err!=nil {
+		log.Println(err.Error())
+		h.errorHandler(gcuid,ENCRYPTION_ERROR,err)
+		return
+	}
+
+	submitData:=cipher.C.Bytes()
+	if err!=nil {
+		log.Println(err.Error())
+		h.errorHandler(gcuid,DATA_FORMAT_ERROR,err)
+		return
+	}
+
+	err =u.Send(contract.FUNCTION_REGISTER_AND_SUBMIT,payload.TaskId,submitData)
+
+	if err!=nil {
+		log.Println(err.Error())
+		h.errorHandler(gcuid,TRANSACTION_ERROR,err)
+		return
+	}
+
+	res:= &RegisterAndSubmitResponse{
+		Response: Response {
+			Gcuid:gcuid,
+			Status:SUCCESS,
+		},
+	}
+
+	h.wrapperAndSend(gcuid, res)
+}
+
+func (h *Handler) stopRegisterAndSubmitHandler (gcuid int, data []byte) {
+	var payload stopRegisterAndSubmitRequest
+	err:= json.Unmarshal(data,&payload)
+	if err!=nil {
+		log.Println(err.Error())
+		h.errorHandler(gcuid, DATA_FORMAT_ERROR, err)
+		return
+	}
+
+	pk,err:= derivePrivateKey(payload.PrivateKey)
+	if err!=nil {
+		log.Println(err.Error())
+		h.errorHandler(gcuid,KEY_FORMAT_ERROR,err)
+		return
+	}
+	u:= user.NewUser(common.HexToAddress(payload.Address),pk,h.agg)
+
+	err =u.Send(contract.FUNCTION_STOP_REGISTER_AND_SUBMIT,payload.TaskId)
+
+	if err!=nil {
+		log.Println(err.Error())
+		h.errorHandler(gcuid,TRANSACTION_ERROR,err)
+		return
+	}
+
+
+	res:= &stopRegisterAndSubmitResponse{
+		Response: Response {
+			Gcuid:gcuid,
+			Status:SUCCESS,
+		},
+	}
+
+	h.wrapperAndSend(gcuid, res)
+}
+
 func (h *Handler) getEtherHandler(gcuid int, data []byte) {
 	var payload GetEtherRequest
 	err:= json.Unmarshal(data,&payload)
@@ -306,6 +425,35 @@ func (h *Handler) getEtherHandler(gcuid int, data []byte) {
 			Status:SUCCESS,
 		},
 		Amount:balance,
+	}
+
+	h.wrapperAndSend(gcuid, res)
+}
+
+func (h *Handler) getBalanceHandler(gcuid int, data[]byte) {
+	var payload GetBalanceRequest
+	err:= json.Unmarshal(data,&payload)
+	if err!=nil {
+		log.Println(err.Error())
+		h.errorHandler(gcuid,DATA_FORMAT_ERROR,err)
+		return
+	}
+
+	countByte,err:= h.token.Call(contract.FUNCTION_BALANCE_OF,common.HexToAddress(payload.Address))
+	if err!=nil {
+		log.Println(err.Error())
+		h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
+		return
+	}
+	count:= new(big.Int).SetBytes(countByte)
+
+	res:= &GetBalanceResponse{
+		Response:Response{
+			Gcuid:gcuid,
+			Status:SUCCESS,
+		},
+		Amount:count,
+		Address:payload.Address,
 	}
 
 	h.wrapperAndSend(gcuid, res)
@@ -490,6 +638,7 @@ func (h *Handler) getSolicitInfoHandler(gcuid int, data[]byte) {
 	h.wrapperAndSend(gcuid,res)
 }
 
+
 func (h *Handler) HandleRequest () {
 	for {
 		_,data,err:= h.w.ReadMessage()
@@ -520,6 +669,10 @@ func (h *Handler) HandleRequest () {
 			go h.approveHandler(GCUID_APPROVE,data)
 		case GCUID_CLAIM:
 			go h.claimHandler(GCUID_CLAIM,data)
+		case GCUID_REGISTER_AND_SUBMIT:
+			go h.registerAndSubmitHandler(GCUID_REGISTER_AND_SUBMIT,data)
+		case GCUID_STOP_REGISTER_AND_SUBMIT:
+			go h.stopRegisterAndSubmitHandler(GCUID_STOP_REGISTER_AND_SUBMIT,data)
 		case GCUID_ETHER:
 			go h.getEtherHandler(GCUID_ETHER,data)
 		case GCUID_CURRENT_STAGE:
@@ -534,6 +687,8 @@ func (h *Handler) HandleRequest () {
 			go h.getAggregationResultHandler(GCUID_AGGREGATE_RESULT,data)
 		case GCUID_CLAIM_NUMBER:
 			go h.getClaimNumberHandler(GCUID_CLAIM_NUMBER,data)
+		case GCUID_BALANCE:
+			go h.getBalanceHandler(GCUID_BALANCE,data)
 		}
 	}
 }

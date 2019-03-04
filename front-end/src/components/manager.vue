@@ -2,10 +2,11 @@
     <div class="agg">
         <div class="container">
             <div class="adminStage">
-                <div class="stageForm">
+                <div class="stageForm" v-if="!enableStatics">
                     <img class="icon" alt="Vue logo" src="../assets/cd3.jpeg"/>
                     <div class="value">{{stageToProcedure[stage]}} </div>
                 </div>
+                <bar-statistics :chart-data="graph" :options="graphOptions" v-else></bar-statistics>
                 <div class="stageContent contract">
                     <div >
                         <div class="item">
@@ -50,15 +51,26 @@
                         <div class="label">Address: </div>
                         <div class="value"> {{dataConsumerAccount.address}}</div>
                     </div>
-
+                    <div class="item">
+                        <div class="label">Your Balance: </div>
+                        <div class="value"> {{consumerTokenBalance}} </div>
+                    </div>
                     <div class="col buttonGroup">
                         <div class="form" v-if="atStage('solicit')">
                             <span class="label">Target Number:</span>
-                            <input class="input" v-model.number="value">
+                            <input class="input" v-model.number="targetNumber">
                             <button  :disabled="!atStage('solicit')" class="btn btn-dark contract-button" @click="solicit"> solicit</button>
                         </div>
-                        <div class="form">
-                            <button :disabled="!atStage('approve')" class="btn btn-dark contract-button" @click="approve"> approve</button>
+                        <div class="form" v-if="atStage('register')">
+                            <button :disabled="!atStage('register')" class="btn btn-dark contract-button" @click="stopRegisterAndSubmit"> stop register</button>
+                        </div>
+                        <div class="row">
+                            <div class="form" v-if="atStage('approve')">
+                                <button :disabled="!atStage('approve')" class="btn btn-dark contract-button" @click="approve"> approve</button>
+                            </div>
+                            <div class="form" v-if="atStage('claim')">
+                                <button :disabled="false" class="btn btn-dark contract-button" @click="showStatics"> showStatics</button>
+                            </div>
                         </div>
                     </div>
 
@@ -75,13 +87,13 @@
                     </div>
                     <div class="item">
                         <div class="label">Your Balance: </div>
-                        <div class="value"> {{ether}} </div>
+                        <div class="value"> {{tokenBalance}} </div>
                     </div>
                     <div class="col buttonGroup">
-                        <div class="form">
+                        <div class="form" v-if="atStage('aggregate')">
                             <button :disabled="!atStage('aggregate')" class="btn btn-dark contract-button" @click="aggregate"> aggregate</button>
                         </div>
-                        <div class="form">
+                        <div class="form" v-if="atStage('claim')">
                             <button :disabled="!atStage('claim')" class="btn btn-dark contract-button" @click="claim"> claim</button>
                         </div>
                     </div>
@@ -93,12 +105,15 @@
 
 
 <script>
+    import barChart from './bar.js';
     const GCUID_SOLICIT = 0;
     const GCUID_REGISTER = 1;
     const GCUID_SUBMIT = 2;
     const GCUID_AGGREGATION = 3;
     const GCUID_APPROVE = 4;
     const GCUID_CLAIM = 5;
+
+    const GCUID_STOP_REGISTER_AND_SUBMIT = 7;
 
     const GCUID_ETHER = 101;
     const GCUID_CURRENT_STAGE = 102;
@@ -107,6 +122,8 @@
     const GCUID_SOLICIT_INFO = 105;
     const GCUID_AGGREGATE_RESULT = 106;
     const GCUID_CLAIM_NUMBER = 107;
+
+    const GCUID_BALANCE = 108;
 
     const TASK_ID = 0;
 
@@ -120,6 +137,9 @@
             serviceProviderAccount: Object,
             dataConsumerAccount: Object,
         },
+        components: {
+            barStatistics: barChart
+        },
         data: function () {
             return {
                 submitStatus: INITIAL,
@@ -127,12 +147,17 @@
                 waitingAnimate: undefined,
                 ws: undefined,
                 value: 0,
-                ether: undefined,
+                tokenBalance: undefined,
+                consumerTokenBalance: undefined,
                 stage: undefined,
                 registerNumber: undefined,
                 submissionNumber: undefined,
+                submitValues: undefined,
                 claimNumber: undefined,
                 initialied: false,
+                enableStatics: false,
+                graph: undefined,
+                graphOptions: undefined,
                 mapToStage : {
                     "solicit":0,
                     "register":1,
@@ -141,6 +166,7 @@
                     "approve":4,
                     "claim": 5,
                 },
+                targetNumber: 1,
                 stageToProcedure : {
                     0: "Solicit",
                     1: "Register",
@@ -167,13 +193,20 @@
                 return this.stage >= this.mapToStage[stage];
             },
             atStage: function(stage) {
-                return this.stage == this.mapToStage[stage];
+                return this.stage === this.mapToStage[stage];
             },
-            getEther: function () {
+            getTokenBalance: function () {
                 console.log("get Balance:",this.serviceProviderAccount.address);
                 let payload = {
-                    "gcuid": GCUID_ETHER,
+                    "gcuid": GCUID_BALANCE,
                     "address": this.serviceProviderAccount.address
+                };
+                this.ws.send(JSON.stringify(payload));
+            },
+            getConsumerTokenBalance: function() {
+                let payload = {
+                    "gcuid": GCUID_BALANCE,
+                    "address": this.dataConsumerAccount.address
                 };
                 this.ws.send(JSON.stringify(payload));
             },
@@ -232,7 +265,7 @@
                     dataFee: 1230,
                     serviceFee: 16,
                     serviceProvider: this.serviceProviderAccount.address,
-                    target: 1,
+                    target: this.targetNumber,
                     privateKey: this.dataConsumerAccount.privateKey,
                     address: this.dataConsumerAccount.address,
                 };
@@ -268,14 +301,81 @@
                 };
                 this.ws.send(JSON.stringify(payload));
             },
-            formatEther: function(ether) {
-                return parseFloat(ether)/10**18
+            stopRegisterAndSubmit: function () {
+                console.log("stop register and submit");
+                let payload = {
+                    gcuid: GCUID_STOP_REGISTER_AND_SUBMIT,
+                    taskId:  TASK_ID,
+                    privateKey: this.dataConsumerAccount.privateKey,
+                    address: this.dataConsumerAccount.address,
+                };
+                this.ws.send(JSON.stringify(payload));
+            },
+            showStatics: function() {
+                console.log("showStatics");
+                if(this.graph===undefined) {
+                    let qualifiedData = [154,165,170,156,182,183,190,166,165,160,124,200,212,323];
+                    let space = 5;
+                    let minH = 150;
+                    let maxH = 200;
+                    let bucket = Array((maxH-minH)/space+2).fill(0);
+                    qualifiedData.forEach(v=>{
+                        let bucketNumber = Math.floor((v-minH)/space)+1;
+                        if(bucketNumber >= bucket.length) {
+                            bucketNumber = bucket.length - 1;
+                        }
+                        if(bucketNumber < 0) {
+                            bucketNumber = 0;
+                        }
+                        ++bucket[bucketNumber];
+                    });
+
+                    let labels = [];
+                    for(let i=0;i<bucket.length;++i) {
+                        if(i===0) labels.push(`0-${minH}`);
+                        else if(i===bucket.length-1) labels.push(`>${maxH}`);
+                        else {
+                            let start = minH + space*(i-1);
+                            let end = minH + space*i;
+                            labels.push(`${start}-${end}`);
+                        }
+                    }
+
+                    let datasets = [
+                        {
+                            label: 'Height',
+                            data: bucket,
+                            borderColor: '#002266',
+                            backgroundColor:'#002266',
+                            hoverBackgroundColor:'#ff5050',
+                            hoverBorderColor: '#ff5050',
+                            hoverBorderWidth: 1,
+                        },{
+                            label:'',
+                            data: bucket,
+                            type:'line',
+                            backgroundColor:'#ffffff',
+                            borderColor: '#000000',
+                        }
+                    ];
+
+                    this.graph = {
+                        labels: labels,
+                        datasets: datasets,
+                    };
+                }
+                if(!this.enableStatics) {
+                    this.enableStatics = true;
+                } else {
+                    this.enableStatics = false;
+                }
             },
             cleanState: function() {
                 this.claimNumber = undefined;
                 this.registerNumber = undefined;
                 this.submissionNumber = undefined;
                 this.aggregateResult = undefined;
+                this.submitValues = undefined;
                 this.solicitInfo = {
                     dataFee: undefined,
                     serviceFee: undefined,
@@ -285,14 +385,15 @@
             },
             initialDisplay: function() {
                 this.getCurrentStage();
-                this.getEther()
+                this.getTokenBalance();
+                this.getConsumerTokenBalance();
             },
             initializeState: function(stage) {
-                if('register' === this.mapToStage[stage]) {
+                if('register' === this.mapToStage[stage] && this.registerNumber === undefined) {
                     this.registerNumber = 0;
-                } else if('submit' === this.mapToStage[stage]) {
+                } else if('submit' === this.mapToStage[stage] && this.submissionNumber=== undefined) {
                     this.submissionNumber = 0;
-                } else if('claim' === this.mapToStage[stage]) {
+                } else if('claim' === this.mapToStage[stage] && this.claimNumber === undefined) {
                     this.claimNumber = 0;
                 }
             },
@@ -325,6 +426,7 @@
                     switch (res.gcuid) {
                         case GCUID_SOLICIT:
                             if (res.status === 0) {
+                                this.getConsumerTokenBalance();
                             } else {
                                 console.log(res.reason);
                             }
@@ -349,19 +451,32 @@
                             break;
                         case GCUID_APPROVE:
                             if (res.status === 0) {
+                                this.submitValues = res.submitValues;
+                                console.log("submit values:",this.submitValues);
                             } else {
                                 console.log(res.reason);
                             }
                             break;
                         case GCUID_CLAIM:
                             if (res.status === 0) {
+                                this.getTokenBalance();
                             } else {
                                 console.log(res.reason);
                             }
                             break;
-                        case GCUID_ETHER:
+                        case GCUID_STOP_REGISTER_AND_SUBMIT:
                             if (res.status === 0) {
-                                this.ether = this.formatEther(res.amount);
+                            } else {
+                                console.log(res.reason);
+                            }
+                            break;
+                        case GCUID_BALANCE:
+                            if (res.status === 0) {
+                                if(res.address === this.serviceProviderAccount.address) {
+                                    this.tokenBalance =  res.amount;
+                                } else if(res.address === this.dataConsumerAccount.address) {
+                                    this.consumerTokenBalance = res.amount;
+                                }
                             } else {
                                 console.log(res.reason);
                             }
@@ -419,6 +534,7 @@
                             break;
                         case GCUID_CLAIM_NUMBER:
                             if (res.status === 0) {
+                                console.log("claim number:"+res.amount);
                                 this.claimNumber = res.amount;
                             } else {
                                 console.log(res.reason);

@@ -39,7 +39,7 @@ func testBulletProof() {
 	}
 }
 
-func requestParserWrapper(manager *appClient.HandlerManager, agg *contract.Agg) func(w http.ResponseWriter, r *http.Request){
+func requestParserWrapper(manager *appClient.HandlerManager, agg *contract.Agg, token *contract.ERC20) func(w http.ResponseWriter, r *http.Request){
 	return func (w http.ResponseWriter, r *http.Request){
 		log.Println("receive a reqeust")
 		var upgrader = websocket.Upgrader{}
@@ -49,9 +49,7 @@ func requestParserWrapper(manager *appClient.HandlerManager, agg *contract.Agg) 
 			log.Println("upgrade:", err)
 			return
 		}
-		log.Println("connection,:",&c);
-		handler:= appHandler(c,agg)
-		log.Println("handler:",handler)
+		handler:= appHandler(c,agg,token)
 		manager.Register <- handler
 		handler.HandleRequest()
 		manager.Unregister <- handler
@@ -73,8 +71,8 @@ func requestParserWrapper(manager *appClient.HandlerManager, agg *contract.Agg) 
 //	defer c.Close()
 //}
 
-func appHandler(c *websocket.Conn, agg *contract.Agg) *appClient.Handler {
-	return appClient.NewHandler(c,agg)
+func appHandler(c *websocket.Conn, agg *contract.Agg, token *contract.ERC20) *appClient.Handler {
+	return appClient.NewHandler(c,agg,token)
 }
 
 func main() {
@@ -85,10 +83,12 @@ func main() {
 
 	manager:= appClient.NewHandlerManager()
 	agg:= contract.NewAgg(contract.GETH_PORT,contract.CONTRACT_ABI,common.HexToAddress(contract.CONTRACT_ADDRESS))
+	token:= contract.NewERC20(contract.GETH_PORT,contract.ERC20_ABI,common.HexToAddress(contract.ERC20_ADDRESS))
+
 	go manager.Start()
 	go manager.SubScriptContractEvent(agg)
 
-	r.HandleFunc("/", requestParserWrapper(manager,agg)).Methods("GET")
+	r.HandleFunc("/", requestParserWrapper(manager,agg,token)).Methods("GET")
 
 	fmt.Println("Running http server")
 	http.ListenAndServe(

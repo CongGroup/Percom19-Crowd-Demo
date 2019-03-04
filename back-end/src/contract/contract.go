@@ -8,7 +8,7 @@ import (
 
 const (
 	GETH_PORT    = "ws://localhost:8650"
-	CONTRACT_ADDRESS = "0xb3e28797359b701066359fba65c27cb7eabfe45a"
+	CONTRACT_ADDRESS = "0x3730363bdef2a8ac7c545ea4e6ea06b3980b3fc2"
 	CONTRACT_ABI     = `[
 	{
 		"constant": false,
@@ -54,6 +54,20 @@ const (
 		"constant": false,
 		"inputs": [
 			{
+				"name": "erc20",
+				"type": "address"
+			}
+		],
+		"name": "changeERC20Contract",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
 				"name": "task_id",
 				"type": "uint256"
 			}
@@ -73,6 +87,24 @@ const (
 			}
 		],
 		"name": "register",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "task_id",
+				"type": "uint256"
+			},
+			{
+				"name": "data",
+				"type": "bytes"
+			}
+		],
+		"name": "registerAndSubmit",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -110,6 +142,20 @@ const (
 			{
 				"name": "task_id",
 				"type": "uint256"
+			}
+		],
+		"name": "stopRegisterAndSubmit",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "task_id",
+				"type": "uint256"
 			},
 			{
 				"name": "data",
@@ -123,7 +169,12 @@ const (
 		"type": "function"
 	},
 	{
-		"inputs": [],
+		"inputs": [
+			{
+				"name": "erc20",
+				"type": "address"
+			}
+		],
 		"payable": true,
 		"stateMutability": "payable",
 		"type": "constructor"
@@ -423,6 +474,20 @@ const (
 		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "token",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
 	}
 ]`
 )
@@ -468,6 +533,10 @@ const (
 	FUNCTION_AGGREGATE = "aggregate"
 	FUNCTION_APPROVE = "approve"
 	FUNCTION_CLAIM = "claim"
+
+	FUNCTION_REGISTER_AND_SUBMIT = "registerAndSubmit"
+	FUNCTION_STOP_REGISTER_AND_SUBMIT = "stopRegisterAndSubmit"
+
 	FUNCTION_GET_SOLICITINFO_OF_TASK = "getSolicitInfoOfTask"
 	FUNCTION_GET_AGGREGATION_RESULT_OF_TASK = "getAggregationResultOfTask"
 )
@@ -513,7 +582,7 @@ func init() {
 	submitSig:= []byte("Submit(uint256,uint256)")
 	aggregateSig:= []byte("Aggregate(uint256,bytes)")
 	approveSig:= []byte("Approve(uint256")
-	claimSig:= []byte("Claim(uint256,uint256")
+	claimSig:= []byte("Claim(uint256,uint256)")
 
 	LogStageTransfer = crypto.Keccak256Hash(stageTransferSig).Hex()
 	LogSolicit = crypto.Keccak256Hash(solicitSig).Hex()
