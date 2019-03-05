@@ -1,42 +1,38 @@
-// import {AbiCoder} from 'web3-eth-abi';
+import {AbiCoder} from 'web3-eth-abi';
 import {Accounts} from 'web3-eth-accounts';
-// const coder = new AbiCoder();
-const accounts = new Accounts('ws://127.0.0.1:8650');
 
-function add0x (input) {
-    if (typeof(input) !== 'string') {
-        return input;
-    }
-    if (input.length < 2 || input.slice(0,2) !== '0x') {
-        return '0x' + input;
-    }
-    return input;
+const config = require('../config/agg.json');
+const coder = new AbiCoder();
+const accounts = new Accounts('');
+
+function encodeFunction(funcName,...args) {
+    let jsonInterface = searchForJsonInterface(funcName);
+    // console.log(jsonInterface);
+    return coder.encodeFunctionCall(jsonInterface,args)
 }
 
-function assembleFunction (jsonInterface, args) {
-    // txObject contains gasPrice, gasLimit, nonce, to, value
-    // let jsonInterface = {
-    //     "name": "test",
-    //     "type": "function",
-    //     "inputs": [
-    //         {
-    //             "name": "c",
-    //             "type": "int256"
-    //         },
-    //         {
-    //             "name": "b",
-    //             "type": "int256"
-    //         }
-    //     ],
-    // };
-
-    let txData = coder.encodeFunctionCall(jsonInterface, args);
-
-    return txData
+function getBaseTxObject() {
+    return {
+        to: config.address,
+        gasPrice: 0,
+        gas:"3000000",
+        value:"0",
+    }
 }
 
-function signTx(tx, privateKey) {
-    return accounts.signTransaction(tx,privateKey)
+function searchForJsonInterface(funcName) {
+    for(let i =0;i<config.abi.length;++i) {
+        if (config.abi[i].name === funcName && config.abi[i].type === 'function') {
+            return config.abi[i];
+        }
+    }
+}
+
+function signTx(tx,privateKey) {
+    return accounts.signTransaction(tx,privateKey).then(signedTx=>{
+        console.log(signedTx);
+        return signedTx.rawTransaction;
+    })
 }
 
 const createAccount = ()=> {
@@ -47,4 +43,4 @@ const createAccount = ()=> {
     }
 };
 
-export { createAccount};
+export { createAccount, signTx, encodeFunction,getBaseTxObject};

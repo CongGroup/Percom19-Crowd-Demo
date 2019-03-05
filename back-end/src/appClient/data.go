@@ -12,6 +12,7 @@ const (
 
 	GCUID_REGISTER_AND_SUBMIT // for demo
 	GCUID_STOP_REGISTER_AND_SUBMIT // for demo
+	GCUID_SEND_TRANSACTION
 )
 
 const (
@@ -24,7 +25,6 @@ const (
 	GCUID_CLAIM_NUMBER
 
 	GCUID_BALANCE
-	GCUID_GET_SUBMIT_VALUES  // TODO
 )
 
 const (
@@ -126,6 +126,15 @@ type ClaimRequest struct {
 }
 
 type ClaimResponse struct {
+	Response
+}
+
+type SendTransactionRequest struct {
+	Gcuid int `json:"gcuid"`
+	RawTransaction string `json:"rawTransaction"`
+}
+
+type SendTransactionResponse struct {
 	Response
 }
 

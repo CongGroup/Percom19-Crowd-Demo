@@ -36,6 +36,7 @@ func (this *User) SendWithValue(value *big.Int,funcName string, args ...interfac
 	nonce, err:= this.c.GetNonce(this.Address)
 	if err!=nil {
 		log.Println(err.Error())
+		return err
 	}
 
 	tx:= types.NewTransaction(nonce,this.c.GetAddress(),value,contract.GasLimit,big.NewInt(contract.GasPrice),input);

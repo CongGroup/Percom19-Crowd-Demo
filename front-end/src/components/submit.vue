@@ -78,6 +78,8 @@
 
 
 <script>
+    import {getBaseTxObject,signTx,encodeFunction} from "../assets/js/tx";
+
     const GCUID_SOLICIT = 0;
     const GCUID_REGISTER = 1;
     const GCUID_SUBMIT = 2;
@@ -87,6 +89,7 @@
 
     const GCUID_REGISTER_AND_SUBMIT = 6;
     const GCUID_STOP_REGISTER_AND_SUBMIT = 7;
+    const GCUID_SEND_TRANSACTION = 8;
 
     const GCUID_ETHER = 101;
     const GCUID_CURRENT_STAGE = 102;
@@ -111,6 +114,8 @@
         },
         data: function () {
             return {
+                wsPath: "ws://0.0.0.0:4000",
+                httpPath: "http://0.0.0.0:4000",
                 initialized:false,
                 submitStatus: INITIAL,
                 waiting: "",
@@ -225,31 +230,74 @@
             },
             registerAndSubmit: function() {
                 console.log("register and submit");
-                this.startWaiting();
-                this.submitStatus = SUBMITTING;
+                // let payload = {
+                //     gcuid: GCUID_REGISTER_AND_SUBMIT,
+                //     taskId: TASK_ID,
+                //     value: this.value,
+                //     address: this.account.address,
+                //     privateKey: this.account.privateKey,
+                // };
+                // this.ws.send(JSON.stringify(payload));
+                console.log("address:"+this.account.address);
+                let p1 = this.axios.get(`${this.httpPath}/nonce/${this.account.address}`);
+                let p2 = this.axios.get(`${this.httpPath}/chainId`);
+                let p3 = this.axios.post(`${this.httpPath}/encryptedData`,this.value);
+                Promise.all([p1,p2,p3]).then(([r1,r2,r3])=>{
+                    let nonce = r1.data;
+                    let chainId = r2.data;
+                    let encryptedData = r3.data;
+                    console.log(`nonce:${nonce}`);
+                    console.log(`chainId:${chainId}`);
+                    console.log(`encryptedData:${encryptedData}`);
 
-                let payload = {
-                    gcuid: GCUID_REGISTER_AND_SUBMIT,
-                    taskId: TASK_ID,
-                    value: this.value,
-                    address: this.account.address,
-                    privateKey: this.account.privateKey,
-                };
-
-                this.ws.send(JSON.stringify(payload));
-
-                this.submitStatus = SUBMITTED;
-                this.endWaiting();
+                    let data = encodeFunction("registerAndSubmit",TASK_ID,encryptedData);
+                    let tx = getBaseTxObject();
+                    tx.from = this.account.address;
+                    tx.nonce = nonce;
+                    tx.data = data;
+                    console.log(`data:${data}`);
+                    tx.chainId = chainId;
+                    return signTx(tx,'0x'+this.account.privateKey)
+                }).then((rawTx)=>{
+                    let payload = {
+                        gcuid: GCUID_SEND_TRANSACTION,
+                        rawTransaction: rawTx.slice(2),
+                    };
+                    this.ws.send(JSON.stringify(payload));
+                }).catch(err=>console.log(err))
             },
             claim: function() {
                 console.log("claim");
-                let payload = {
-                    gcuid: GCUID_CLAIM,
-                    taskId: TASK_ID,
-                    privateKey: this.account.privateKey,
-                    address: this.account.address,
-                };
-                this.ws.send(JSON.stringify(payload));
+                // let payload = {
+                //     gcuid: GCUID_CLAIM,
+                //     taskId: TASK_ID,
+                //     privateKey: this.account.privateKey,
+                //     address: this.account.address,
+                // };
+                // this.ws.send(JSON.stringify(payload));
+                let p1 = this.axios.get(`${this.httpPath}/nonce/${this.account.address}`);
+                let p2 = this.axios.get(`${this.httpPath}/chainId`);
+                Promise.all([p1,p2]).then(([r1,r2])=>{
+                    let nonce = r1.data;
+                    let chainId = r2.data;
+                    console.log(`nonce:${nonce}`);
+                    console.log(`chainId:${chainId}`);
+
+                    let data = encodeFunction("claim",TASK_ID);
+                    let tx = getBaseTxObject();
+                    tx.nonce = nonce;
+                    tx.data = data;
+                    tx.from = this.accout;
+                    console.log(`data:${data}`);
+                    tx.chainId = chainId;
+                    return signTx(tx,'0x'+this.account.privateKey)
+                }).then((rawTx)=>{
+                    let payload = {
+                        gcuid: GCUID_SEND_TRANSACTION,
+                        rawTransaction: rawTx.slice(2),
+                    };
+                    this.ws.send(JSON.stringify(payload));
+                }).catch(err=>console.log(err))
             },
             startWaiting: function () {
                 this.waitingAnimate = setInterval(()=>{
@@ -409,7 +457,16 @@
                         case GCUID_CLAIM_NUMBER:
                             if (res.status === 0) {
                                 console.log("claim number:",res.amount);
-                                this.claimNumber = res.amount;
+                                if(this.stage === this.mapToStage['claim']) {
+                                    this.claimNumber = res.amount;
+                                }
+                            } else {
+                                console.log(res.reason);
+                            }
+                            break;
+                        case GCUID_SEND_TRANSACTION:
+                            if (res.status === 0) {
+                                console.log("send transaction successfully");
                             } else {
                                 console.log(res.reason);
                             }

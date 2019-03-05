@@ -6,6 +6,8 @@ import (
 	"encoding/json"
 	"errors"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/rlp"
 	"github.com/gorilla/websocket"
 	"log"
 	"math/big"
@@ -638,6 +640,47 @@ func (h *Handler) getSolicitInfoHandler(gcuid int, data[]byte) {
 	h.wrapperAndSend(gcuid,res)
 }
 
+func (h *Handler) sendTransactionHandler(gcuid int,data []byte) {
+	var payload SendTransactionRequest
+	err:= json.Unmarshal(data,&payload)
+	if err!=nil {
+		log.Println(err.Error())
+		h.errorHandler(gcuid,DATA_FORMAT_ERROR,err)
+		return
+	}
+
+	rawTx,err:= hex.DecodeString(payload.RawTransaction)
+	if err!=nil {
+		log.Println(err.Error())
+		h.errorHandler(gcuid,DATA_FORMAT_ERROR,err)
+		return
+	}
+
+	var tx types.Transaction
+
+	rlp.DecodeBytes(rawTx,&tx)
+	if err!=nil {
+		log.Println(err.Error())
+		h.errorHandler(gcuid,DATA_FORMAT_ERROR,err)
+		return
+	}
+
+	_, err =h.agg.SendTransaction(&tx)
+	if err!=nil {
+		log.Println(err.Error())
+		h.errorHandler(gcuid,TRANSACTION_ERROR,err)
+		return
+	}
+
+	res:= &SendTransactionResponse{
+		Response: Response{
+			Gcuid:gcuid,
+			Status:SUCCESS,
+		},
+	}
+
+	h.wrapperAndSend(gcuid,res)
+}
 
 func (h *Handler) HandleRequest () {
 	for {
@@ -689,6 +732,8 @@ func (h *Handler) HandleRequest () {
 			go h.getClaimNumberHandler(GCUID_CLAIM_NUMBER,data)
 		case GCUID_BALANCE:
 			go h.getBalanceHandler(GCUID_BALANCE,data)
+		case GCUID_SEND_TRANSACTION:
+			go h.sendTransactionHandler(GCUID_SEND_TRANSACTION,data)
 		}
 	}
 }

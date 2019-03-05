@@ -106,6 +106,7 @@
 
 <script>
     import barChart from './bar.js';
+    import {getBaseTxObject,encodeFunction,signTx} from '../assets/js/tx.js'
     const GCUID_SOLICIT = 0;
     const GCUID_REGISTER = 1;
     const GCUID_SUBMIT = 2;
@@ -114,6 +115,7 @@
     const GCUID_CLAIM = 5;
 
     const GCUID_STOP_REGISTER_AND_SUBMIT = 7;
+    const GCUID_SEND_TRANSACTION = 8;
 
     const GCUID_ETHER = 101;
     const GCUID_CURRENT_STAGE = 102;
@@ -124,6 +126,7 @@
     const GCUID_CLAIM_NUMBER = 107;
 
     const GCUID_BALANCE = 108;
+    const GCUID_SUBMIT_VALUES = 109;
 
     const TASK_ID = 0;
 
@@ -142,6 +145,8 @@
         },
         data: function () {
             return {
+                wsPath: "ws://0.0.0.0:4000",
+                httpPath: "http://0.0.0.0:4000",
                 submitStatus: INITIAL,
                 waiting: "",
                 waitingAnimate: undefined,
@@ -270,6 +275,28 @@
                     address: this.dataConsumerAccount.address,
                 };
                 this.ws.send(JSON.stringify(payload));
+                // send by mobile
+                // let data = encodeFunction("solicit",1230,16,this.serviceProviderAccount.address,this.targetNumber);
+                // let p1 = this.axios.get(`${this.httpPath}/nonce/${this.dataConsumerAccount.address}`);
+                // let p2 = this.axios.get(`${this.httpPath}/chainId`);
+                // Promise.all([p1,p2]).then(([r1,r2])=>{
+                //     let nonce = r1.data;
+                //     let chainId = r2.data;
+                //     console.log(`nonce:${nonce}`);
+                //     console.log(`chainId:${chainId}`);
+                //     let tx = getBaseTxObject();
+                //     tx.nonce = nonce;
+                //     tx.data = data;
+                //     console.log(`data:${data}`);
+                //     tx.chainId = chainId;
+                //     return signTx(tx,'0x'+this.dataConsumerAccount.privateKey)
+                // }).then((rawTx)=>{
+                //     let payload = {
+                //         gcuid: GCUID_SEND_TRANSACTION,
+                //         rawTransaction: rawTx.slice(2),
+                //     };
+                //     this.ws.send(JSON.stringify(payload));
+                // }).catch(err=>console.log(err))
             },
             aggregate: function() {
                 console.log("aggregate");
@@ -376,6 +403,7 @@
                 this.submissionNumber = undefined;
                 this.aggregateResult = undefined;
                 this.submitValues = undefined;
+                this.enableStatics = false;
                 this.solicitInfo = {
                     dataFee: undefined,
                     serviceFee: undefined,
@@ -415,7 +443,7 @@
                 }
             },
             initialWS: function() {
-                this.ws = new WebSocket("ws://0.0.0.0:4000");
+                this.ws = new WebSocket(this.wsPath);
                 this.ws.onopen = e => {
                     console.log("websocket open");
                     this.initialDisplay();
@@ -511,6 +539,13 @@
                                 }
                             } else {
                                 console.log(res.reason);
+                            }
+                            break;
+                        case GCUID_SEND_TRANSACTION:
+                            if (res.status === 0) {
+                                console.log("send transaction")
+                            } else {
+                                console.log(res.reason)
                             }
                             break;
                         case GCUID_SOLICIT_INFO:

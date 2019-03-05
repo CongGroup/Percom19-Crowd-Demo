@@ -8,14 +8,17 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "chart.js": "^2.7.3",
     "vue": "^2.6.6",
+    "vue-axios": "^2.1.4",
     "vue-chartjs": "^3.4.0",
     "vue-cookies": "^1.5.12",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
     "web3-eth-abi": "^1.0.0-beta.46",
-    "web3-eth-accounts": "^1.0.0-beta.46"
+    "web3-eth-accounts": "^1.0.0-beta.46",
+    "web3-eth-contract": "^1.0.0-beta.47"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.4.0",
