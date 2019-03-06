@@ -167,7 +167,7 @@ func (h *Handler) aggregateHandler(gcuid int, data []byte) {
 	}
 	u:= user.NewUser(common.HexToAddress(payload.Address),pk,h.agg)
 
-	countByte,err:= h.agg.Call(contract.FUNCTION_GET_SUBMIT_COUNT_OF_TASK,payload.TaskId)
+	countByte,err:= h.agg.Call(contract.FUNCTION_GET_REGISTER_NUMBER_OF_TASK,payload.TaskId)
 	if err!=nil {
 		log.Println(err.Error())
 		h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
@@ -176,15 +176,39 @@ func (h *Handler) aggregateHandler(gcuid int, data []byte) {
 	count:=new(big.Int).SetBytes(countByte)
 
 	total:= big.NewInt(1)
+	qualfiedState:= make([]byte,count.Int64(),count.Int64());
 	for i:=0; i< int(count.Int64()); i++ {
 		submitDataByte,err:= h.agg.Call(contract.FUNCTION_GET_SUBMIT_DATA_OF_TASK,payload.TaskId,big.NewInt(int64(i)))
-		submitDataByte=submitDataByte[64:]
-
 		if err!=nil {
 			log.Println(err.Error())
 			h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
 			return
 		}
+		submitProofByte,err:= h.agg.Call(contract.FUNCTION_GET_SUBMIT_PROOF_OF_TASK,payload.TaskId,big.NewInt(int64(i)))
+		if err!=nil {
+			log.Println(err.Error())
+			h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
+			return
+		}
+		submitDataByte=submitDataByte[64:]
+		submitProofByte = submitProofByte[64:]
+		rp:= new(zcrypto.RangeProof).SetBytes(submitProofByte)
+		log.Println("len submit proof:",len(submitProofByte))
+		log.Println("len challenge:",len(rp.IPP.Challenges))
+		log.Println("after A:",rp.IPP.A)
+		log.Println("after B:",rp.IPP.B)
+
+		if err!=nil {
+			log.Println(err.Error())
+			h.errorHandler(gcuid,UNMARSHAL_JSON_ERROR,err)
+			return
+		}
+		if !zcrypto.RPVerify(*rp) {
+			qualfiedState[i] = byte(0)
+			continue
+		}
+
+		qualfiedState[i]=byte(1)
 		submitData:=new(big.Int).SetBytes(submitDataByte)
 		total.Mul(total,submitData)
 		total.Mod(total,zcrypto.PubKey.GetNSquare())
@@ -202,7 +226,7 @@ func (h *Handler) aggregateHandler(gcuid int, data []byte) {
 
 	share:= []byte{}
 	attestatino := []byte{}
-	err =u.Send(contract.FUNCTION_AGGREGATE,payload.TaskId,aggregation,share,attestatino)
+	err =u.Send(contract.FUNCTION_AGGREGATE,payload.TaskId,aggregation,qualfiedState,share,attestatino)
 
 	if err!=nil {
 		log.Println(err.Error())
@@ -581,12 +605,19 @@ func (h *Handler) getAggregationResultHandler(gcuid int, data[]byte) {
 		return
 	}
 	aggregateResultByte,err:= h.agg.Call(contract.FUNCTION_GET_AGGREGATION_RESULT_OF_TASK, payload.TaskId)
-	aggregateResultByte = aggregateResultByte[64:]
 	if err!=nil {
 		log.Println(err.Error())
 		h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
 		return
 	}
+	aggregateResultByte = aggregateResultByte[64:]
+
+	qualifiedNumberByte,err:= h.agg.Call(contract.FUNCTION_GET_QUALIFIED_NUMBER_OF_TASK, payload.TaskId)
+	if err!=nil {
+		log.Println(err.Error())
+		return
+	}
+
 
 	aggregateResult:=zcrypto.PriKey.Decrypt(&zcrypto.Cypher {
 		C: new(big.Int).SetBytes(aggregateResultByte),
@@ -599,6 +630,7 @@ func (h *Handler) getAggregationResultHandler(gcuid int, data[]byte) {
 			Status:SUCCESS,
 		},
 		Amount:aggregateResult,
+		QualifiedNumber:new(big.Int).SetBytes(qualifiedNumberByte),
 	}
 	h.wrapperAndSend(gcuid,res)
 }
@@ -682,6 +714,69 @@ func (h *Handler) sendTransactionHandler(gcuid int,data []byte) {
 	h.wrapperAndSend(gcuid,res)
 }
 
+func (h *Handler) qualfiedNumberHandler(gcuid int, data[] byte) {
+	log.Println("get qualified Number")
+	var payload GetQualifiedNumberRequest
+	err:= json.Unmarshal(data,&payload)
+	if err!=nil {
+		log.Println(err.Error())
+		h.errorHandler(gcuid,DATA_FORMAT_ERROR,err)
+		return
+	}
+
+	countByte,err:= h.agg.Call(contract.FUNCTION_GET_QUALIFIED_NUMBER_OF_TASK,payload.TaskId)
+	if err!=nil {
+		log.Println(err.Error())
+		h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
+		return
+	}
+	count:= new(big.Int).SetBytes(countByte)
+	log.Println("qualified number:",count)
+
+	res:= &GetQualfiedNumberResponse{
+		Response:Response{
+			Gcuid:gcuid,
+			Status:SUCCESS,
+		},
+		Amount:count,
+	}
+
+	h.wrapperAndSend(gcuid, res)
+}
+
+func (h *Handler) isQualifiedHandler(gcuid int,data[]byte) {
+	var payload IsQualifiedRequest
+	err:= json.Unmarshal(data,&payload)
+	if err!=nil {
+		log.Println(err.Error())
+		h.errorHandler(gcuid,DATA_FORMAT_ERROR,err)
+		return
+	}
+
+	qualifiedByte,err:= h.agg.Call(contract.FUNCTION_IS_QUALIFIED_PROVIDER_FOR_TASK,payload.TaskId,common.HexToAddress(payload.Address))
+	if err!=nil {
+		log.Println(err.Error())
+		h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
+		return
+	}
+	qualified:= new(big.Int).SetBytes(qualifiedByte).Int64()!=0
+	if qualified {
+		log.Println("user ",payload.Address," is qualified")
+	} else {
+		log.Println("user ",payload.Address," is not qualified")
+	}
+
+	res:= &IsQualifiedResponse{
+		Response:Response{
+			Gcuid:gcuid,
+			Status:SUCCESS,
+		},
+		Qualified:qualified,
+	}
+
+	h.wrapperAndSend(gcuid, res)
+}
+
 func (h *Handler) HandleRequest () {
 	for {
 		_,data,err:= h.w.ReadMessage()
@@ -734,6 +829,10 @@ func (h *Handler) HandleRequest () {
 			go h.getBalanceHandler(GCUID_BALANCE,data)
 		case GCUID_SEND_TRANSACTION:
 			go h.sendTransactionHandler(GCUID_SEND_TRANSACTION,data)
+		case GCUID_QUALIFIED_NUMBER:
+			go h.qualfiedNumberHandler(GCUID_QUALIFIED_NUMBER,data)
+		case GCUID_IS_QUALIFIED:
+			go h.isQualifiedHandler(GCUID_IS_QUALIFIED,data)
 		}
 	}
 }

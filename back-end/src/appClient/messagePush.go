@@ -183,7 +183,13 @@ func (this *HandlerManager) SubScriptContractEvent(c contract.Contract) {
 
 
 				aggregateResultByte,err:= c.Call(contract.FUNCTION_GET_AGGREGATION_RESULT_OF_TASK, aggregateEvent.TaskId)
+				if err!=nil {
+					log.Println(err.Error())
+					return
+				}
 				aggregateResultByte = aggregateResultByte[64:]
+
+				qualifiedNumberByte,err:= c.Call(contract.FUNCTION_GET_QUALIFIED_NUMBER_OF_TASK, aggregateEvent.TaskId)
 				if err!=nil {
 					log.Println(err.Error())
 					return
@@ -199,6 +205,7 @@ func (this *HandlerManager) SubScriptContractEvent(c contract.Contract) {
 						Status:SUCCESS,
 					},
 					Amount:aggregateResult,
+					QualifiedNumber: new(big.Int).SetBytes(qualifiedNumberByte),
 				}
 
 				data,err:=json.Marshal(res)

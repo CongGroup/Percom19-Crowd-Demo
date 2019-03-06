@@ -8,7 +8,7 @@ import (
 
 const (
 	GETH_PORT    = "ws://localhost:8650"
-	CONTRACT_ADDRESS = "0x3730363bdef2a8ac7c545ea4e6ea06b3980b3fc2"
+	CONTRACT_ADDRESS = "0x9b926656d0ce54fff291b0d1d80c76241580acd4"
 	CONTRACT_ABI     = `[
 	{
 		"constant": false,
@@ -19,6 +19,10 @@ const (
 			},
 			{
 				"name": "aggregation",
+				"type": "bytes"
+			},
+			{
+				"name": "qualifiedSets",
 				"type": "bytes"
 			},
 			{
@@ -102,6 +106,10 @@ const (
 			{
 				"name": "data",
 				"type": "bytes"
+			},
+			{
+				"name": "proof",
+				"type": "bytes"
 			}
 		],
 		"name": "registerAndSubmit",
@@ -159,6 +167,10 @@ const (
 			},
 			{
 				"name": "data",
+				"type": "bytes"
+			},
+			{
+				"name": "proof",
 				"type": "bytes"
 			}
 		],
@@ -344,6 +356,25 @@ const (
 				"type": "uint256"
 			}
 		],
+		"name": "getQualifiedNumberOfTask",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "task_id",
+				"type": "uint256"
+			}
+		],
 		"name": "getRegisterNumberOfTask",
 		"outputs": [
 			{
@@ -449,6 +480,52 @@ const (
 	},
 	{
 		"constant": true,
+		"inputs": [
+			{
+				"name": "task_id",
+				"type": "uint256"
+			},
+			{
+				"name": "index",
+				"type": "uint256"
+			}
+		],
+		"name": "getSubmitProofOfTask",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "task_id",
+				"type": "uint256"
+			},
+			{
+				"name": "user",
+				"type": "address"
+			}
+		],
+		"name": "isQualifiedProviderForTask",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
 		"inputs": [],
 		"name": "lastest_task",
 		"outputs": [
@@ -527,6 +604,10 @@ const (
 	FUNCTION_GET_SUBMIT_COUNT_OF_TASK = "getSubmitCountOfTask"
 	FUNCTION_GET_REGISTER_NUMBER_OF_TASK = "getRegisterNumberOfTask"
 	FUNCTION_GET_CLAIM_NUMBER_OF_TASK = "getClaimNumberOfTask"
+	FUNCTION_GET_QUALIFIED_NUMBER_OF_TASK = "getQualifiedNumberOfTask"
+	FUNCTION_IS_QUALIFIED_PROVIDER_FOR_TASK = "isQualifiedProviderForTask"
+	FUNCTION_GET_SUBMIT_PROOF_OF_TASK = "getSubmitProofOfTask"
+
 	FUNCTION_SOLICIT = "solicit"
 	FUNCTION_REGISTER = "register"
 	FUNCTION_SUBMIT = "submit"

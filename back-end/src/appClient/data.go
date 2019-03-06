@@ -3,6 +3,11 @@ package appClient
 import "math/big"
 
 const (
+	MAX_RANGE = 256
+	MIN_RANGE = 0
+)
+
+const (
 	GCUID_SOLICIT = iota
 	GCUID_REGISTER
 	GCUID_SUBMIT
@@ -23,8 +28,10 @@ const (
 	GCUID_SOLICIT_INFO
 	GCUID_AGGREGATE_RESULT
 	GCUID_CLAIM_NUMBER
-
 	GCUID_BALANCE
+
+	GCUID_QUALIFIED_NUMBER
+	GCUID_IS_QUALIFIED
 )
 
 const (
@@ -223,6 +230,7 @@ type GetAggregateResultRequest struct {
 type GetAggregateResultResponse struct {
 	Response
 	Amount *big.Int `json:"amount"`
+	QualifiedNumber *big.Int `json:"qualifiedNumber"`
 }
 
 type GetSolicitInfoResquest struct {
@@ -248,6 +256,27 @@ type GetClaimNumberResponse struct {
 	Amount *big.Int `json:"amount"`
 }
 
+type GetQualifiedNumberRequest struct {
+	Gcuid int `json:"gcuid"`
+	TaskId *big.Int `json:"taskId"`
+}
+
+type GetQualfiedNumberResponse struct {
+	Response
+	Amount *big.Int `json:"amount"`
+}
+
+type IsQualifiedRequest struct {
+	Gcuid int `json:"gcuid"`
+	TaskId *big.Int `json:"taskId"`
+	Address string `json:"address"`
+}
+
+type IsQualifiedResponse struct {
+	Response
+	Qualified bool `json:"qualified"`
+}
+
 type Response struct {
 	Gcuid int `json:"gcuid"`
 	Status int `json:"status"`
@@ -258,4 +287,9 @@ type Error struct {
 	Gcuid int `json:"gcuid"`
 	Code int `json:"code"`
 	Reason string `json:"reason"`
+}
+
+type SubmitPayload struct {
+	SubmitData string `json:"submitData"`
+	SubmitProof string `json:"submitProof"`
 }

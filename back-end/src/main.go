@@ -3,12 +3,11 @@ package main
 import (
 	"appClient"
 	"contract"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"github.com/deroproject/derosuite/crypto"
-	"github.com/deroproject/derosuite/crypto/ringct"
 	"github.com/ethereum/go-ethereum/common"
-	h "github.com/gorilla/handlers"
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
 	"io/ioutil"
@@ -31,14 +30,16 @@ func testPallier() {
 	log.Println(m)
 }
 
-func testBulletProof() {
-	s1:=*(crypto.RandomScalar())
-	bp:=ringct.BULLETPROOF_Prove_Amount(14,&s1)
-	if !bp.BULLETPROOF_Verify_ultrafast() {
-		log.Println("bullet proof test fail")
+func testBulletProof2() {
+	rp:=zcrypto.RPProve(big.NewInt(25))
+	result := zcrypto.RPVerify(rp);
+	log.Println(len(rp.IPP.L),len(rp.IPP.R),len(rp.IPP.Challenges))
+	if result {
+		log.Println("pass test")
 	} else {
-		log.Println("past test")
+		log.Println("test fail")
 	}
+
 }
 
 func requestParserWrapper(manager *appClient.HandlerManager, agg *contract.Agg, token *contract.ERC20) func(w http.ResponseWriter, r *http.Request){
@@ -86,12 +87,6 @@ func getNonce(agg *contract.Agg) func(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func getSubmitValues(agg *contract.Agg)func(w http.ResponseWriter, r *http.Request) {
-	return func(w http.ResponseWriter, r *http.Request) {
-		log.Println("get submit values")
-	}
-}
-
 func getChainId(agg *contract.Agg) func(w http.ResponseWriter, r* http.Request) {
 	return func(w http.ResponseWriter,r *http.Request){
 		log.Println("get chain id")
@@ -131,6 +126,20 @@ func getEncryptedData(w http.ResponseWriter, r *http.Request) {
 	}
 
 	log.Println("data to encrypt:",amount)
+
+
+
+	var submitProof string
+
+	if amount<=appClient.MIN_RANGE || amount>= appClient.MAX_RANGE {
+		log.Println("out of range, generate random proof");
+		data:= make([]byte,1248)
+		submitProof="0x"+hex.EncodeToString(data)
+	} else {
+		rpV := zcrypto.RPProve(big.NewInt(amount));
+		submitProof="0x"+hex.EncodeToString(rpV.Bytes())
+	}
+
 	cipher,err:=zcrypto.PubKey.Encrypt(big.NewInt(amount))
 	if err!=nil {
 		log.Println(err.Error())
@@ -138,19 +147,72 @@ func getEncryptedData(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	submitData,err:= json.Marshal("0x"+cipher.C.Text(16));
+	submitData := "0x"+cipher.C.Text(16)
+	//log.Println("proof:",submitProof)
+
+	submitPayload,err := json.Marshal(&appClient.SubmitPayload{
+		SubmitData:submitData,
+		SubmitProof:submitProof,
+	})
 	if err!=nil {
 		log.Println(err.Error())
 		http.Error(w,err.Error(),http.StatusInternalServerError)
 		return
 	}
-	w.Write(submitData)
+
+	w.Write(submitPayload)
 }
 
-func main() {
-	//testPallier()
+func getStatistics(agg *contract.Agg) func(w http.ResponseWriter, r* http.Request) {
+	return func(w http.ResponseWriter,r *http.Request){
+		log.Println("get statistics")
+		vars:=mux.Vars(r)
+		taskId,_:= new(big.Int).SetString(vars["taskId"],10)
+
+		countByte,err:= agg.Call(contract.FUNCTION_GET_REGISTER_NUMBER_OF_TASK,taskId)
+		if err!=nil {
+			log.Println(err.Error())
+			http.Error(w,err.Error(),http.StatusInternalServerError)
+			return
+		}
+		count:=new(big.Int).SetBytes(countByte)
+		submitValues:=make([]*big.Int,count.Int64(),count.Int64())
+		for i:=0; i< int(count.Int64()); i++ {
+			submitDataByte,err:= agg.Call(contract.FUNCTION_GET_SUBMIT_DATA_OF_TASK, taskId,big.NewInt(int64(i)))
+			submitDataByte=submitDataByte[64:]
+
+			if err!=nil {
+				log.Println(err.Error())
+				http.Error(w,err.Error(),http.StatusInternalServerError)
+				return
+			}
+			encryptedSubmitData:=new(big.Int).SetBytes(submitDataByte)
+
+			submitData:=zcrypto.PriKey.Decrypt(&zcrypto.Cypher {
+				C: encryptedSubmitData,
+			})
+			submitValues[i] = submitData
+		}
+
+		type payload struct {
+			SubmitValues []*big.Int `json:"submitValues"`
+		}
+		submitValuesWrapper,err :=json.Marshal(&payload{
+			submitValues,
+		})
+		if err!=nil {
+			log.Println(err.Error())
+			http.Error(w,err.Error(),http.StatusInternalServerError)
+		}
+		w.Write(submitValuesWrapper)
+	}
+}
+
+func init() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	//testBulletProof()
+}
+
+func start() {
 	r := mux.NewRouter()
 
 	manager:= appClient.NewHandlerManager()
@@ -163,16 +225,25 @@ func main() {
 	r.HandleFunc("/", requestParserWrapper(manager,agg,token)).Methods("GET")
 	r.HandleFunc("/nonce/{user}",getNonce(agg)).Methods("GET")
 	r.HandleFunc("/chainId",getChainId(agg)).Methods("GET")
-	r.HandleFunc("/getSubmitValues/{taskId}",getSubmitValues(agg)).Methods("GET")
 	r.HandleFunc("/encryptedData",getEncryptedData).Methods("POST")
+	r.HandleFunc("/statistics/{taskId}",getStatistics(agg)).Methods("GET")
 
 	fmt.Println("Running http server")
 	http.ListenAndServe(
 		"0.0.0.0:4000",
-		h.CORS(
-			h.AllowedMethods([]string{"get", "options", "post", "put", "head"}),
-			h.AllowedOrigins([]string{"*"}),
-			h.AllowedHeaders([]string{"Content-Type"}),
+		handlers.CORS(
+			handlers.AllowedMethods([]string{"get", "options", "post", "put", "head"}),
+			handlers.AllowedOrigins([]string{"*"}),
+			handlers.AllowedHeaders([]string{"Content-Type"}),
 		)(r),
 	)
+}
+
+func main() {
+	//testPallier()
+	log.SetFlags(log.LstdFlags | log.Lshortfile)
+	//testBulletProof()
+	//testBulletProof2()
+
+	start()
 }

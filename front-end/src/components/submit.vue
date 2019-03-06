@@ -37,8 +37,16 @@
                     <span class="value"> {{submissionNumber}} </span>
                 </div>
                 <div class="item" v-if="shouldShow('approve')">
+                    <span class="label">Qualified Number:  </span>
+                    <span class="value">{{qualifiedNumber}}</span>
+                </div>
+                <div class="item" v-if="shouldShow('approve')">
+                    <span class="label">Are you qualified?  </span>
+                    <span class="value">{{qualified === undefined ? '': qualified?'true':'false'}}</span>
+                </div>
+                <div class="item" v-if="shouldShow('approve')">
                     <span class="label">Final aggregate result:</span>
-                    <span class="value"> {{aggregateResult}} </span>
+                    <span class="value"> {{ qualifiedNumber !==0 ?aggregateResult:"NAN"}} </span>
                 </div>
                 <div class="item" v-if="shouldShow('claim')">
                     <span class="label">Claim number:</span>
@@ -86,7 +94,6 @@
     const GCUID_AGGREGATION = 3;
     const GCUID_APPROVE = 4;
     const GCUID_CLAIM = 5;
-
     const GCUID_REGISTER_AND_SUBMIT = 6;
     const GCUID_STOP_REGISTER_AND_SUBMIT = 7;
     const GCUID_SEND_TRANSACTION = 8;
@@ -98,8 +105,9 @@
     const GCUID_SOLICIT_INFO = 105;
     const GCUID_AGGREGATE_RESULT = 106;
     const GCUID_CLAIM_NUMBER = 107;
-
     const GCUID_BALANCE = 108;
+    const GCUID_QUALIFIED_NUMBER = 109;
+    const GCUID_IS_QUALIFIED = 110;
 
     const TASK_ID = 0;
 
@@ -127,6 +135,7 @@
                 registerNumber: undefined,
                 submissionNumber: undefined,
                 claimNumber: undefined,
+                qualified: undefined,
                 mapToStage : {
                     "solicit":0,
                     "register":1,
@@ -150,6 +159,7 @@
                     target: undefined
                 },
                 aggregateResult: undefined,
+                qualifiedNumber: undefined,
             }
         },
         computed: {
@@ -245,12 +255,13 @@
                 Promise.all([p1,p2,p3]).then(([r1,r2,r3])=>{
                     let nonce = r1.data;
                     let chainId = r2.data;
-                    let encryptedData = r3.data;
+                    let encryptedData = r3.data.submitData;
+                    let proof = r3.data.submitProof;
                     console.log(`nonce:${nonce}`);
                     console.log(`chainId:${chainId}`);
-                    console.log(`encryptedData:${encryptedData}`);
+                    // console.log(`submitPayload:${JSON.stringify(r3.data)}`);
 
-                    let data = encodeFunction("registerAndSubmit",TASK_ID,encryptedData);
+                    let data = encodeFunction("registerAndSubmit",TASK_ID,encryptedData,proof);
                     let tx = getBaseTxObject();
                     tx.from = this.account.address;
                     tx.nonce = nonce;
@@ -299,23 +310,29 @@
                     this.ws.send(JSON.stringify(payload));
                 }).catch(err=>console.log(err))
             },
-            startWaiting: function () {
-                this.waitingAnimate = setInterval(()=>{
-                    if(this.waiting.length>=4) this.waiting = "";
-                    else this.waiting += '.';
-                },1000);
+            getQualifiedNumber: function() {
+                console.log("get qualifiedNumber");
+                let payload = {
+                    gcuid: GCUID_QUALIFIED_NUMBER,
+                    taskId: TASK_ID,
+                };
+                this.ws.send(JSON.stringify(payload));
             },
-            endWaiting: function () {
-                clearInterval(this.waitingAnimate);
-                this.waiting="";
-            },
-            formatEther: function(ether) {
-                return parseFloat(ether)/10**18
+            isQualified: function() {
+                console.log("get isQualified");
+                let payload = {
+                    gcuid: GCUID_IS_QUALIFIED,
+                    taskId: TASK_ID,
+                    address: this.account.address,
+                };
+                this.ws.send(JSON.stringify(payload));
             },
             cleanState: function() {
                 this.claimNumber = undefined;
                 this.registerNumber = undefined;
                 this.submissionNumber = undefined;
+                this.qualifiedNumber = undefined;
+                this.qualified = undefined;
                 this.solicitInfo = {
                     dataFee: undefined,
                     serviceFee: undefined,
@@ -341,6 +358,8 @@
             getInfo: function() {
                 if(this.shouldShow('approve')) {
                     this.getAggregateResult();
+                    this.getQualifiedNumber();
+                    this.isQualified();
                 }
                 if(this.shouldShow('register')) {
                     this.getSolicitInfo();
@@ -363,27 +382,8 @@
                 };
                 this.ws.onmessage = e => {
                     let res = JSON.parse(e.data);
-                    console.log(res);
                     switch (res.gcuid) {
-                        case GCUID_SOLICIT:
-                            if (res.status === 0) {
-                            } else {
-                                console.log(res.reason);
-                            }
-                            break;
                         case GCUID_REGISTER_AND_SUBMIT:
-                            if (res.status === 0) {
-                            } else {
-                                console.log(res.reason);
-                            }
-                            break;
-                        case GCUID_AGGREGATION:
-                            if (res.status === 0) {
-                            } else {
-                                console.log(res.reason);
-                            }
-                            break;
-                        case GCUID_APPROVE:
                             if (res.status === 0) {
                             } else {
                                 console.log(res.reason);
@@ -450,6 +450,8 @@
                         case GCUID_AGGREGATE_RESULT:
                             if (res.status === 0) {
                                 this.aggregateResult = res.amount;
+                                this.qualifiedNumber = res.qualifiedNumber;
+                                this.isQualified();
                             } else {
                                 console.log(res.reason);
                             }
@@ -471,6 +473,22 @@
                                 console.log(res.reason);
                             }
                             break;
+                        case GCUID_QUALIFIED_NUMBER:
+                            if (res.status === 0) {
+                                this.qualifiedNumber = res.amount;
+                                console.log("qualified number:",this.qualifiedNumber);
+                            } else {
+                                console.log(res.reason);
+                            }
+                            break;
+                        case GCUID_IS_QUALIFIED:
+                            if (res.status === 0) {
+                                this.qualified = res.qualified;
+                                console.log("send transaction successfully");
+                            } else {
+                                console.log(res.reason);
+                            }
+                            break;
                         default:
                             console.log("unknown response")
                     }
@@ -485,10 +503,10 @@
                 setTimeout(this.initialWS,2000);
             },
         },
-        created: function () {
+        beforeMount: function () {
             this.initialWS();
             console.log(this.ws)
-        }
+        },
     };
 </script>
 

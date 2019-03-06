@@ -31,8 +31,12 @@
                         <span class="value"> {{submissionNumber}} </span>
                     </div>
                     <div class="item" >
+                        <span class="label">Qualified number:</span>
+                        <span class="value"> {{qualifiedNumber}} </span>
+                    </div>
+                    <div class="item" >
                         <span class="label">Final aggregate result:</span>
-                        <span class="value"> {{aggregateResult}} </span>
+                        <span class="value"> {{qualifiedNumber !==0 ?aggregateResult:"NAN"}} </span>
                     </div>
                     <div class="item">
                         <span class="label">Claim number:</span>
@@ -126,7 +130,9 @@
     const GCUID_CLAIM_NUMBER = 107;
 
     const GCUID_BALANCE = 108;
-    const GCUID_SUBMIT_VALUES = 109;
+    const GCUID_QUALIFIED_NUMBER = 109;
+    const GCUID_IS_QUALIFIED = 110;
+    const GCUID_SUBMIT_VALUES = 111;
 
     const TASK_ID = 0;
 
@@ -147,9 +153,6 @@
             return {
                 wsPath: "ws://0.0.0.0:4000",
                 httpPath: "http://0.0.0.0:4000",
-                submitStatus: INITIAL,
-                waiting: "",
-                waitingAnimate: undefined,
                 ws: undefined,
                 value: 0,
                 tokenBalance: undefined,
@@ -160,6 +163,7 @@
                 submitValues: undefined,
                 claimNumber: undefined,
                 initialied: false,
+                qualifiedNumber: undefined,
                 enableStatics: false,
                 graph: undefined,
                 graphOptions: undefined,
@@ -338,9 +342,27 @@
                 };
                 this.ws.send(JSON.stringify(payload));
             },
+            getQualifiedNumber: function() {
+                console.log("get qualifiedNumber");
+                let payload = {
+                    gcuid: GCUID_QUALIFIED_NUMBER,
+                    taskId: TASK_ID,
+                };
+                this.ws.send(JSON.stringify(payload));
+            },
             showStatics: function() {
                 console.log("showStatics");
+
                 if(this.graph===undefined) {
+                    if(this.submitValues===undefined) {
+                        console.log("refectch submit values");
+                        let p = this.axios.get(`${this.httpPath}/statistics/${TASK_ID}`);
+                        p.then((res)=>{
+                            this.submitValues = res.data.submitValues;
+                            console.log("submitValues:",this.submitValues)
+                        })
+                    }
+
                     let qualifiedData = [154,165,170,156,182,183,190,166,165,160,124,200,212,323];
                     let space = 5;
                     let minH = 150;
@@ -398,10 +420,12 @@
                 }
             },
             cleanState: function() {
+                console.log("clean state!!!!!!");
                 this.claimNumber = undefined;
                 this.registerNumber = undefined;
                 this.submissionNumber = undefined;
                 this.aggregateResult = undefined;
+                this.qualifiedNumber = undefined;
                 this.submitValues = undefined;
                 this.enableStatics = false;
                 this.solicitInfo = {
@@ -428,6 +452,7 @@
             getInfo: function() {
                 if(this.shouldShow('approve')) {
                     this.getAggregateResult();
+                    this.getQualifiedNumber();
                 }
                 if(this.shouldShow('register')) {
                     this.getSolicitInfo();
@@ -450,7 +475,6 @@
                 };
                 this.ws.onmessage = e => {
                     let res = JSON.parse(e.data);
-                    console.log(res);
                     switch (res.gcuid) {
                         case GCUID_SOLICIT:
                             if (res.status === 0) {
@@ -562,7 +586,9 @@
                             break;
                         case GCUID_AGGREGATE_RESULT:
                             if (res.status === 0) {
+                                console.log("aggregate result",res)
                                 this.aggregateResult = res.amount;
+                                this.qualifiedNumber = res.qualifiedNumber;
                             } else {
                                 console.log(res.reason);
                             }
@@ -570,7 +596,17 @@
                         case GCUID_CLAIM_NUMBER:
                             if (res.status === 0) {
                                 console.log("claim number:"+res.amount);
-                                this.claimNumber = res.amount;
+                                if(this.stage === this.mapToStage['claim']) {
+                                    this.claimNumber = res.amount;
+                                }
+                            } else {
+                                console.log(res.reason);
+                            }
+                            break;
+                        case GCUID_QUALIFIED_NUMBER:
+                            if (res.status === 0) {
+                                this.qualifiedNumber = res.amount;
+                                console.log("qualified number:",this.qualifiedNumber)
                             } else {
                                 console.log(res.reason);
                             }
@@ -589,10 +625,10 @@
                 setTimeout(this.initialWS,2000);
             },
         },
-        created: function () {
+        beforeMount: function () {
             this.initialWS();
             console.log(this.ws)
-        }
+        },
     };
 </script>
 

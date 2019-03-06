@@ -1,26 +1,66 @@
 package zcrypto
 
 import (
+	"bytes"
 	"crypto/elliptic"
 	"crypto/rand"
 	"crypto/sha256"
 	"encoding/binary"
-	"math/big"
 	"fmt"
 	"github.com/btcsuite/btcd/btcec"
 	"math"
+	"math/big"
 	"strconv"
 )
 
 var EC CryptoParams
-var VecLength = 64
+var VecLength = 16
 
 /*
 Implementation of BulletProofs
 */
 
+type ContractPackable interface {
+	Bytes() []byte
+}
+
 type ECPoint struct {
-	X, Y *big.Int
+	X *big.Int `json:"x"`
+	Y *big.Int `json:"y"`
+}
+
+func NewECPoint(x,y *big.Int) *ECPoint {
+	return &ECPoint{
+		X:x,
+		Y:y,
+	}
+}
+
+func NewFalcyPoint() *ECPoint {
+	return &ECPoint{
+		X: big.NewInt(1),
+		Y: big.NewInt(1),
+	}
+}
+
+func NewECPointCopy(p *ECPoint) *ECPoint {
+	return &ECPoint{
+		X: new(big.Int).Set(p.X),
+		Y: new(big.Int).Set(p.Y),
+	}
+}
+
+func (p *ECPoint) Bytes() []byte {
+	var b bytes.Buffer
+	b.Write(p.X.Bytes())
+	b.Write(p.Y.Bytes())
+	return b.Bytes()
+}
+
+func (p *ECPoint) SetBytes(buffer []byte) *ECPoint {
+	p.X = new(big.Int).SetBytes(buffer[:32])
+	p.Y = new(big.Int).SetBytes(buffer[32:64])
+	return p
 }
 
 // Equal returns true if points p (self) and p2 (arg) are the same.
@@ -223,12 +263,74 @@ InnerProd Proof
 This stores the argument values
 */
 type InnerProdArg struct {
-	L []ECPoint
-	R []ECPoint
-	A *big.Int
-	B *big.Int
+	L []ECPoint `json:"l"`
+	R []ECPoint `json:"r"`
+	A *big.Int  `json:"a"`
+	B *big.Int `json:"b"`
 
-	Challenges []*big.Int
+	Challenges []*big.Int `json:"challenges"`
+}
+
+func NewFalcyProdArg() *InnerProdArg {
+	p:=NewInnerProdArg()
+	for i:=0;i< len(p.L);i++ {
+		p.L[i] = * NewFalcyPoint()
+	}
+	for i:=0;i< len(p.R);i++ {
+		p.R[i] = * NewFalcyPoint()
+	}
+	for i:=0;i< len(p.Challenges);i++ {
+		p.Challenges[i] = big.NewInt(1)
+	}
+	return p
+}
+
+func NewInnerProdArg() *InnerProdArg {
+	p := &InnerProdArg{
+		L:make([]ECPoint,4),
+		R:make([]ECPoint,4),
+		A:big.NewInt(1),
+		B:big.NewInt(1),
+		Challenges:make([]*big.Int,5),
+	}
+	return p
+}
+
+func(arg *InnerProdArg) Bytes() []byte {
+	var b bytes.Buffer
+	for i:=0;i< len(arg.L); i++ {
+		b.Write(arg.L[i].Bytes())
+	}
+	for i:=0;i< len(arg.R); i++ {
+		b.Write(arg.R[i].Bytes())
+	}
+	b.Write(arg.A.Bytes())
+	b.Write(arg.B.Bytes())
+	for i:=0;i<len(arg.Challenges);i++ {
+		b.Write(arg.Challenges[i].Bytes())
+	}
+	return b.Bytes()
+}
+
+func(arg *InnerProdArg) SetBytes(buffer []byte) *InnerProdArg {
+	offset:=0
+	for i:=0;i< len(arg.L);i++ {
+		arg.L[i] = * new(ECPoint).SetBytes(buffer[offset:offset+64])
+		offset+=64
+	}
+	for i:=0;i< len(arg.R);i++ {
+		arg.R[i] = * new(ECPoint).SetBytes(buffer[offset:offset+64])
+		offset+=64
+	}
+	arg.A = new(big.Int).SetBytes(buffer[offset:offset+32])
+	offset+=32
+	arg.B = new(big.Int).SetBytes(buffer[offset:offset+32])
+	offset+=32
+	for i:=0;i< len(arg.Challenges);i++ {
+		arg.Challenges[i] = new(big.Int).SetBytes(buffer[offset:offset+32])
+		offset+=32
+	}
+	return arg
 }
 
 func GenerateNewParams(G, H []ECPoint, x *big.Int, L, R, P ECPoint) ([]ECPoint, []ECPoint, ECPoint) {
@@ -558,20 +660,83 @@ func VectorSum(y []*big.Int) *big.Int {
 }
 
 type RangeProof struct {
-	Comm ECPoint
-	A    ECPoint
-	S    ECPoint
-	T1   ECPoint
-	T2   ECPoint
-	Tau  *big.Int
-	Th   *big.Int
-	Mu   *big.Int
-	IPP  InnerProdArg
+	Comm ECPoint `json:"comm"`
+	A    ECPoint `json:"a"`
+	S    ECPoint `json:"s"`
+	T1   ECPoint `json:"t1"`
+	T2   ECPoint `json:"t2"`
+	Tau  *big.Int `json:"tau"`
+	Th   *big.Int `json:"th"`
+	Mu   *big.Int `json:"mu"`
+	IPP  InnerProdArg `json:"ipp"`
 
 	// challenges
-	Cy *big.Int
-	Cz *big.Int
-	Cx *big.Int
+	Cy *big.Int `json:"cy"`
+	Cz *big.Int `json:"cz"`
+	Cx *big.Int `json:"cx"`
+}
+
+func NewFalseRangeProof() *RangeProof {
+	rp := &RangeProof{
+		Comm: * NewFalcyPoint(),
+		A: * NewFalcyPoint(),
+		S: * NewFalcyPoint(),
+		T1: * NewFalcyPoint(),
+		T2: * NewFalcyPoint(),
+		Tau: new(big.Int).SetInt64(0),
+		Th: new(big.Int).SetInt64(0),
+		Mu: new(big.Int).SetInt64(0),
+		Cy: new(big.Int).SetInt64(0),
+		Cz: new(big.Int).SetInt64(0),
+		Cx: new(big.Int).SetInt64(0),
+		IPP: * NewFalcyProdArg(),
+	}
+	return rp
+}
+
+func (rp * RangeProof) Bytes() []byte{
+	var b bytes.Buffer
+	b.Write(rp.Comm.Bytes())
+	b.Write(rp.A.Bytes())
+	b.Write(rp.S.Bytes())
+	b.Write(rp.T1.Bytes())
+	b.Write(rp.T2.Bytes())
+	b.Write(rp.Tau.Bytes())
+	b.Write(rp.Th.Bytes())
+	b.Write(rp.Mu.Bytes())
+	b.Write(rp.Cy.Bytes())
+	b.Write(rp.Cz.Bytes())
+	b.Write(rp.Cx.Bytes())
+	b.Write(rp.IPP.Bytes())
+	return b.Bytes()
+}
+
+func (rp * RangeProof) SetBytes(buffer []byte) *RangeProof {
+	offset:=0
+	rp.Comm = * new(ECPoint).SetBytes(buffer[offset:offset+64])
+	offset += 64
+	rp.A =  * new(ECPoint).SetBytes(buffer[offset:offset+64])
+	offset += 64
+	rp.S = * new(ECPoint).SetBytes(buffer[offset:offset+64])
+	offset += 64
+	rp.T1 = * new(ECPoint).SetBytes(buffer[offset:offset+64])
+	offset += 64
+	rp.T2 = * new(ECPoint).SetBytes(buffer[offset:offset+64])
+	offset += 64
+	rp.Tau = new(big.Int).SetBytes(buffer[offset:offset+32])
+	offset += 32
+	rp.Th = new(big.Int).SetBytes(buffer[offset:offset+32])
+	offset += 32
+	rp.Mu = new(big.Int).SetBytes(buffer[offset:offset+32])
+	offset += 32
+	rp.Cy = new(big.Int).SetBytes(buffer[offset:offset+32])
+	offset += 32
+	rp.Cz = new(big.Int).SetBytes(buffer[offset:offset+32])
+	offset += 32
+	rp.Cx = new(big.Int).SetBytes(buffer[offset:offset+32])
+	offset += 32
+	rp.IPP = * NewInnerProdArg().SetBytes(buffer[offset:])
+	return rp
 }
 
 /*
@@ -831,7 +996,7 @@ func RPProve(v *big.Int) RangeProof {
 
 	rpresult.IPP = InnerProductProve(left, right, that, P, EC.U, EC.BPG, HPrime)
 
-	fmt.Printf("rpresult %s \n", rpresult)
+	//fmt.Printf("rpresult %s \n", rpresult)
 
 	return rpresult
 }

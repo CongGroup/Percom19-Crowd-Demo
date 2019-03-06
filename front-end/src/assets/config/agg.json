@@ -1,5 +1,5 @@
 {
-  "address": "0x3730363bdef2a8ac7c545ea4e6ea06b3980b3fc2",
+  "address": "0x9b926656d0ce54fff291b0d1d80c76241580acd4",
   "abi": [
     {
       "constant": false,
@@ -10,6 +10,10 @@
         },
         {
           "name": "aggregation",
+          "type": "bytes"
+        },
+        {
+          "name": "qualifiedSets",
           "type": "bytes"
         },
         {
@@ -93,6 +97,10 @@
         {
           "name": "data",
           "type": "bytes"
+        },
+        {
+          "name": "proof",
+          "type": "bytes"
         }
       ],
       "name": "registerAndSubmit",
@@ -150,6 +158,10 @@
         },
         {
           "name": "data",
+          "type": "bytes"
+        },
+        {
+          "name": "proof",
           "type": "bytes"
         }
       ],
@@ -335,6 +347,25 @@
           "type": "uint256"
         }
       ],
+      "name": "getQualifiedNumberOfTask",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "task_id",
+          "type": "uint256"
+        }
+      ],
       "name": "getRegisterNumberOfTask",
       "outputs": [
         {
@@ -432,6 +463,52 @@
         {
           "name": "",
           "type": "bytes"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "task_id",
+          "type": "uint256"
+        },
+        {
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "name": "getSubmitProofOfTask",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "task_id",
+          "type": "uint256"
+        },
+        {
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "isQualifiedProviderForTask",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
         }
       ],
       "payable": false,
