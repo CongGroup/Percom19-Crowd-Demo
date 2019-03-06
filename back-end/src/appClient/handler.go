@@ -709,6 +709,7 @@ func (h *Handler) sendTransactionHandler(gcuid int,data []byte) {
 			Gcuid:gcuid,
 			Status:SUCCESS,
 		},
+		Txid:payload.Txid,
 	}
 
 	h.wrapperAndSend(gcuid,res)

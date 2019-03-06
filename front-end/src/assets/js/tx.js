@@ -30,7 +30,6 @@ function searchForJsonInterface(funcName) {
 
 function signTx(tx,privateKey) {
     return accounts.signTransaction(tx,privateKey).then(signedTx=>{
-        console.log(signedTx);
         return signedTx.rawTransaction;
     })
 }

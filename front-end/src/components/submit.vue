@@ -55,15 +55,17 @@
             </div>
             <div v-if="account!==undefined">
                 <div class="form" v-if="atStage('register')">
-                    <span class="label">Value:</span>
-                    <input class="input" v-model.number="value">
-                    <button class="btn btn-dark contract-button" v-if="submitStatus===0" @click="registerAndSubmit"> submit</button>
-                    <pacman v-else-if ="submitStatus===1"></pacman>
+                    <div v-if = "!loading">
+                        <span class="label">Value:</span>
+                        <input class="input" v-model.number="value">
+                        <button class="btn btn-dark contract-button" @click="registerAndSubmit"> submit</button>
+                    </div>
+                    <pacman v-else></pacman>
                 </div>
                 <div class="formLists" v-if="account!==undefined">
                     <div class="form" v-if="atStage('claim')">
-                        <button class="btn btn-dark contract-button" v-if="claimStatus=== 0 || qualified" @click="claim"> claim</button>
-                        <pacman v-else-if="claimStatus===1"></pacman>
+                        <button class="btn btn-dark contract-button" v-if="!loading || qualified" @click="claim"> claim</button>
+                        <pacman v-else></pacman>
                     </div>
                 </div>
             </div>
@@ -113,8 +115,6 @@
         },
         data: function () {
             return {
-                submitStatus: 0,
-                claimStatus: 0,
                 loading: false,
                 wsPath: "ws://0.0.0.0:4000",
                 httpPath: "http://0.0.0.0:4000",
@@ -233,7 +233,7 @@
                 this.ws.send(JSON.stringify(payload));
             },
             registerAndSubmit: function() {
-                this.submitStatus = 1;
+                this.loading = true;
                 console.log("register and submit");
                 console.log("address:"+this.account.address);
                 let p1 = this.axios.get(`${this.httpPath}/nonce/${this.account.address}`);
@@ -265,11 +265,11 @@
                     this.ws.send(JSON.stringify(payload));
                 }).catch(err=>{
                     console.log(err);
-                    this.submitStatus = 0;
+                    this.loading = false;
                 })
             },
             claim: function() {
-                this.claimStatus = 1;
+                this.loading = true;
                 console.log("claim");
                 let p1 = this.axios.get(`${this.httpPath}/nonce/${this.account.address}`);
                 let p2 = this.axios.get(`${this.httpPath}/chainId`);
@@ -284,7 +284,6 @@
                     tx.nonce = nonce;
                     tx.data = data;
                     tx.from = this.accout;
-                    console.log(`data:${data}`);
                     tx.chainId = chainId;
                     return signTx(tx,'0x'+this.account.privateKey)
                 }).then((rawTx)=>{
@@ -296,7 +295,7 @@
                     this.ws.send(JSON.stringify(payload));
                 }).catch(err=> {
                     console.log(err);
-                    this.claimStatus = 0;
+                    this.loading = false;
                 })
             },
             getQualifiedNumber: function() {
@@ -460,19 +459,11 @@
                         case GCUID_SEND_TRANSACTION:
                             if (res.status === 0) {
                                 console.log("send transaction successfully");
-                                // if(res.txid === GCUID_CLAIM) {
-                                //     this.claimStatus = 2;
-                                // } else if (res.txid === GCUID_REGISTER_AND_SUBMIT) {
-                                //     this.submitStatus = 2;
-                                // }
                             } else {
                                 console.log(res.reason);
-                                if(res.txid === GCUID_CLAIM) {
-                                    this.claimStatus = 0;
-                                } else if (res.txid === GCUID_REGISTER_AND_SUBMIT) {
-                                    this.submitStatus = 0;
-                                }
                             }
+                            console.log("txid:",res.txid);
+                            this.loading = false;
                             break;
                         case GCUID_QUALIFIED_NUMBER:
                             if (res.status === 0) {
@@ -498,8 +489,7 @@
                     console.log("websocket close");
                     this.initialied = false;
                     this.reconnect();
-                    if(this.claimStatus === 1) this.claimStatus = 0;
-                    if(this.submitStatus === 1) this.submitStatus = 0;
+                    this.loading = false;
                 };
             },
             reconnect: function() {

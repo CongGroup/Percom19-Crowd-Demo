@@ -138,11 +138,13 @@ type ClaimResponse struct {
 
 type SendTransactionRequest struct {
 	Gcuid int `json:"gcuid"`
+	Txid int `json:"txid"`
 	RawTransaction string `json:"rawTransaction"`
 }
 
 type SendTransactionResponse struct {
 	Response
+	Txid int `json:"txid"`
 }
 
 
