@@ -15,6 +15,7 @@
     "vue-chartjs": "^3.4.0",
     "vue-cookies": "^1.5.12",
     "vue-router": "^3.0.1",
+    "vue-spinner": "^1.0.3",
     "vuex": "^3.0.1",
     "web3-eth-abi": "^1.0.0-beta.46",
     "web3-eth-accounts": "^1.0.0-beta.46",
