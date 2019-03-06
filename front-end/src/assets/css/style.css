@@ -32,6 +32,7 @@
     margin-bottom: 40px;
     display: flex;
     display: -webkit-flex;
+    flex-direction: column;
     justify-content: center;
 }
 
@@ -116,6 +117,7 @@
     /*justify-content: center;*/
     /*align-items: flex-start;*/
     width: 400px;
+    align-self: center;
     margin-bottom: 50px;
     margin-top: 50px;
 }
@@ -215,6 +217,10 @@ button[disabled]{
     margin-top: 40px;
 }
 
-.contract .contract-button {
+.contract-button {
     width: 125px;
+}
+
+.walletWaiting {
+    align-self: center;
 }

@@ -53,34 +53,25 @@
                     <span class="value"> {{claimNumber}} </span>
                 </div>
             </div>
-        </div>
-
-        <!--<div v-if="account!==undefined">-->
-            <!--<div class="form" v-if="atStage('register')">-->
-                <!--<span class="label">Value:</span>-->
-                <!--<input class="input" v-model.number="value">-->
-                <!--<button class="btn btn-dark" @click="register"> register</button>-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <div v-if="account!==undefined">
-            <div class="form" v-if="atStage('register')">
-                <span class="label">Value:</span>
-                <input class="input" v-model.number="value">
-                <button class="btn btn-dark" @click="registerAndSubmit"> submit</button>
+            <div v-if="account!==undefined">
+                <div class="form" v-if="atStage('register')">
+                    <span class="label">Value:</span>
+                    <input class="input" v-model.number="value">
+                    <button class="btn btn-dark contract-button" v-if="submitStatus===0" @click="registerAndSubmit"> submit</button>
+                    <pacman v-else-if ="submitStatus===1"></pacman>
+                </div>
+                <div class="formLists" v-if="account!==undefined">
+                    <div class="form" v-if="atStage('claim')">
+                        <button class="btn btn-dark contract-button" v-if="claimStatus=== 0 || qualified" @click="claim"> claim</button>
+                        <pacman v-else-if="claimStatus===1"></pacman>
+                    </div>
+                </div>
+            </div>
+            <div class="walletWaiting" v-else>
+                <pacman></pacman>
             </div>
         </div>
 
-
-        <div class="formLists" v-if="account!==undefined">
-            <div class="form" v-if="atStage('claim')">
-                <button class="btn btn-dark" @click="claim"> claim</button>
-            </div>
-        </div>
-
-        <div class="waiting" v-else>
-            Initializing wallet {{waiting}}
-        </div>
     </div>
 </template>
 
@@ -112,7 +103,7 @@
     const TASK_ID = 0;
 
     const INITIAL = 0;
-    const SUBMITTING = 1;
+    const WAITING = 1;
     const SUBMITTED = 2;
 
     export default {
@@ -122,10 +113,12 @@
         },
         data: function () {
             return {
+                submitStatus: 0,
+                claimStatus: 0,
+                loading: false,
                 wsPath: "ws://0.0.0.0:4000",
                 httpPath: "http://0.0.0.0:4000",
                 initialized:false,
-                submitStatus: INITIAL,
                 waiting: "",
                 waitingAnimate: undefined,
                 ws: undefined,
@@ -160,6 +153,7 @@
                 },
                 aggregateResult: undefined,
                 qualifiedNumber: undefined,
+                wsReconnect: undefined,
             }
         },
         computed: {
@@ -180,7 +174,7 @@
                   return this.stage >= this.mapToStage[stage];
             },
             atStage: function(stage) {
-                return this.stage == this.mapToStage[stage];
+                return this.stage === this.mapToStage[stage];
             },
             getTokenBalance: function () {
                 console.log("get Balance");
@@ -239,15 +233,8 @@
                 this.ws.send(JSON.stringify(payload));
             },
             registerAndSubmit: function() {
+                this.submitStatus = 1;
                 console.log("register and submit");
-                // let payload = {
-                //     gcuid: GCUID_REGISTER_AND_SUBMIT,
-                //     taskId: TASK_ID,
-                //     value: this.value,
-                //     address: this.account.address,
-                //     privateKey: this.account.privateKey,
-                // };
-                // this.ws.send(JSON.stringify(payload));
                 console.log("address:"+this.account.address);
                 let p1 = this.axios.get(`${this.httpPath}/nonce/${this.account.address}`);
                 let p2 = this.axios.get(`${this.httpPath}/chainId`);
@@ -272,20 +259,18 @@
                 }).then((rawTx)=>{
                     let payload = {
                         gcuid: GCUID_SEND_TRANSACTION,
+                        txid: GCUID_REGISTER_AND_SUBMIT,
                         rawTransaction: rawTx.slice(2),
                     };
                     this.ws.send(JSON.stringify(payload));
-                }).catch(err=>console.log(err))
+                }).catch(err=>{
+                    console.log(err);
+                    this.submitStatus = 0;
+                })
             },
             claim: function() {
+                this.claimStatus = 1;
                 console.log("claim");
-                // let payload = {
-                //     gcuid: GCUID_CLAIM,
-                //     taskId: TASK_ID,
-                //     privateKey: this.account.privateKey,
-                //     address: this.account.address,
-                // };
-                // this.ws.send(JSON.stringify(payload));
                 let p1 = this.axios.get(`${this.httpPath}/nonce/${this.account.address}`);
                 let p2 = this.axios.get(`${this.httpPath}/chainId`);
                 Promise.all([p1,p2]).then(([r1,r2])=>{
@@ -305,10 +290,14 @@
                 }).then((rawTx)=>{
                     let payload = {
                         gcuid: GCUID_SEND_TRANSACTION,
+                        txid: GCUID_CLAIM,
                         rawTransaction: rawTx.slice(2),
                     };
                     this.ws.send(JSON.stringify(payload));
-                }).catch(err=>console.log(err))
+                }).catch(err=> {
+                    console.log(err);
+                    this.claimStatus = 0;
+                })
             },
             getQualifiedNumber: function() {
                 console.log("get qualifiedNumber");
@@ -328,6 +317,8 @@
                 this.ws.send(JSON.stringify(payload));
             },
             cleanState: function() {
+                this.submitStatus = 0;
+                this.claimStatus = 0;
                 this.claimNumber = undefined;
                 this.registerNumber = undefined;
                 this.submissionNumber = undefined;
@@ -469,8 +460,18 @@
                         case GCUID_SEND_TRANSACTION:
                             if (res.status === 0) {
                                 console.log("send transaction successfully");
+                                // if(res.txid === GCUID_CLAIM) {
+                                //     this.claimStatus = 2;
+                                // } else if (res.txid === GCUID_REGISTER_AND_SUBMIT) {
+                                //     this.submitStatus = 2;
+                                // }
                             } else {
                                 console.log(res.reason);
+                                if(res.txid === GCUID_CLAIM) {
+                                    this.claimStatus = 0;
+                                } else if (res.txid === GCUID_REGISTER_AND_SUBMIT) {
+                                    this.submitStatus = 0;
+                                }
                             }
                             break;
                         case GCUID_QUALIFIED_NUMBER:
@@ -496,17 +497,23 @@
                 this.ws.onclose = e=> {
                     console.log("websocket close");
                     this.initialied = false;
-                    this.reconnect()
+                    this.reconnect();
+                    if(this.claimStatus === 1) this.claimStatus = 0;
+                    if(this.submitStatus === 1) this.submitStatus = 0;
                 };
             },
             reconnect: function() {
-                setTimeout(this.initialWS,2000);
+                this.wsReconnect= setTimeout(this.initialWS,2000);
             },
         },
-        beforeMount: function () {
+        created: function () {
             this.initialWS();
             console.log(this.ws)
         },
+        beforeDestroy: function() {
+            console.log("destroy now");
+            if(this.wsReconnect!==undefined) clearTimeout(this.wsReconnect)
+        }
     };
 </script>
 

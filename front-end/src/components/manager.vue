@@ -61,16 +61,21 @@
                     </div>
                     <div class="col buttonGroup">
                         <div class="form" v-if="atStage('solicit')">
-                            <span class="label">Target Number:</span>
-                            <input class="input" v-model.number="targetNumber">
-                            <button  :disabled="!atStage('solicit')" class="btn btn-dark contract-button" @click="solicit"> solicit</button>
+                            <div v-if="!loading">
+                                <span class="label">Target Number:</span>
+                                <input class="input" v-model.number="targetNumber">
+                                <button  :disabled="!atStage('solicit')" class="btn btn-dark contract-button" @click="solicit"> solicit</button>
+                            </div>
+                            <pacman v-else></pacman>
                         </div>
                         <div class="form" v-if="atStage('register')">
-                            <button :disabled="!atStage('register')" class="btn btn-dark contract-button" @click="stopRegisterAndSubmit"> stop register</button>
+                            <button :disabled="!atStage('register')" v-if="!loading" class="btn btn-dark contract-button" @click="stopRegisterAndSubmit"> stop register</button>
+                            <pacman v-else></pacman>
                         </div>
                         <div class="row">
                             <div class="form" v-if="atStage('approve')">
-                                <button :disabled="!atStage('approve')" class="btn btn-dark contract-button" @click="approve"> approve</button>
+                                <button :disabled="!atStage('approve')" v-if="!loading" class="btn btn-dark contract-button" @click="approve"> approve</button>
+                                <pacman v-else></pacman>
                             </div>
                             <div class="form" v-if="atStage('claim')">
                                 <button :disabled="false" class="btn btn-dark contract-button" @click="showStatics"> showStatics</button>
@@ -95,10 +100,12 @@
                     </div>
                     <div class="col buttonGroup">
                         <div class="form" v-if="atStage('aggregate')">
-                            <button :disabled="!atStage('aggregate')" class="btn btn-dark contract-button" @click="aggregate"> aggregate</button>
+                            <button :disabled="!atStage('aggregate')" v-if="!loading" class="btn btn-dark contract-button" @click="aggregate"> aggregate</button>
+                            <pacman v-else></pacman>
                         </div>
                         <div class="form" v-if="atStage('claim')">
-                            <button :disabled="!atStage('claim')" class="btn btn-dark contract-button" @click="claim"> claim</button>
+                            <button :disabled="!atStage('claim')" v-if="!loading" class="btn btn-dark contract-button" @click="claim"> claim</button>
+                            <pacman v-else></pacman>
                         </div>
                     </div>
                 </div>
@@ -151,6 +158,7 @@
         },
         data: function () {
             return {
+                loading: false,
                 wsPath: "ws://0.0.0.0:4000",
                 httpPath: "http://0.0.0.0:4000",
                 ws: undefined,
@@ -191,6 +199,7 @@
                     target: undefined
                 },
                 aggregateResult: undefined,
+                wsReconnect:undefined,
             }
         },
         computed: {
@@ -268,6 +277,7 @@
                 this.ws.send(JSON.stringify(payload));
             },
             solicit: function() {
+                this.loading = true;
                 console.log("solicit");
                 let payload = {
                     gcuid: GCUID_SOLICIT,
@@ -279,30 +289,9 @@
                     address: this.dataConsumerAccount.address,
                 };
                 this.ws.send(JSON.stringify(payload));
-                // send by mobile
-                // let data = encodeFunction("solicit",1230,16,this.serviceProviderAccount.address,this.targetNumber);
-                // let p1 = this.axios.get(`${this.httpPath}/nonce/${this.dataConsumerAccount.address}`);
-                // let p2 = this.axios.get(`${this.httpPath}/chainId`);
-                // Promise.all([p1,p2]).then(([r1,r2])=>{
-                //     let nonce = r1.data;
-                //     let chainId = r2.data;
-                //     console.log(`nonce:${nonce}`);
-                //     console.log(`chainId:${chainId}`);
-                //     let tx = getBaseTxObject();
-                //     tx.nonce = nonce;
-                //     tx.data = data;
-                //     console.log(`data:${data}`);
-                //     tx.chainId = chainId;
-                //     return signTx(tx,'0x'+this.dataConsumerAccount.privateKey)
-                // }).then((rawTx)=>{
-                //     let payload = {
-                //         gcuid: GCUID_SEND_TRANSACTION,
-                //         rawTransaction: rawTx.slice(2),
-                //     };
-                //     this.ws.send(JSON.stringify(payload));
-                // }).catch(err=>console.log(err))
             },
             aggregate: function() {
+                this.loading = true;
                 console.log("aggregate");
                 let payload = {
                     gcuid: GCUID_AGGREGATION,
@@ -313,6 +302,7 @@
                 this.ws.send(JSON.stringify(payload));
             },
             approve: function() {
+                this.loading = true;
                 console.log("approve");
                 let payload = {
                     gcuid: GCUID_APPROVE,
@@ -323,6 +313,7 @@
                 this.ws.send(JSON.stringify(payload));
             },
             claim: function() {
+                this.loading = true;
                 console.log("claim");
                 let payload = {
                     gcuid: GCUID_CLAIM,
@@ -333,6 +324,7 @@
                 this.ws.send(JSON.stringify(payload));
             },
             stopRegisterAndSubmit: function () {
+                this.loading = true;
                 console.log("stop register and submit");
                 let payload = {
                     gcuid: GCUID_STOP_REGISTER_AND_SUBMIT,
@@ -482,24 +474,14 @@
                             } else {
                                 console.log(res.reason);
                             }
-                            break;
-                        case GCUID_REGISTER:
-                            if (res.status === 0) {
-                            } else {
-                                console.log(res.reason);
-                            }
-                            break;
-                        case GCUID_SUBMIT:
-                            if (res.status === 0) {
-                            } else {
-                                console.log(res.reason);
-                            }
+                            this.loading = false;
                             break;
                         case GCUID_AGGREGATION:
                             if (res.status === 0) {
                             } else {
                                 console.log(res.reason);
                             }
+                            this.loading = false;
                             break;
                         case GCUID_APPROVE:
                             if (res.status === 0) {
@@ -508,6 +490,7 @@
                             } else {
                                 console.log(res.reason);
                             }
+                            this.loading= false;
                             break;
                         case GCUID_CLAIM:
                             if (res.status === 0) {
@@ -515,12 +498,14 @@
                             } else {
                                 console.log(res.reason);
                             }
+                            this.loading = false;
                             break;
                         case GCUID_STOP_REGISTER_AND_SUBMIT:
                             if (res.status === 0) {
                             } else {
                                 console.log(res.reason);
                             }
+                            this.loading = false;
                             break;
                         case GCUID_BALANCE:
                             if (res.status === 0) {
@@ -617,18 +602,22 @@
                 };
                 this.ws.onclose = e=> {
                     console.log("websocket close");
+                    this.loading = false;
                     this.initialied = false;
                     this.reconnect()
                 };
             },
             reconnect: function() {
-                setTimeout(this.initialWS,2000);
+               this.wsReconnect = setTimeout(this.initialWS,2000);
             },
         },
-        beforeMount: function () {
+        created: function () {
             this.initialWS();
             console.log(this.ws)
         },
+        beforeDestroy: function() {
+            if(this.wsReconnect!==undefined) clearTimeout(this.wsReconnect)
+        }
     };
 </script>
 
