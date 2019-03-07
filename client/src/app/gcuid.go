@@ -49,6 +49,11 @@ type GetStageResponse struct {
 	Stage *big.Int `json:"stage"`
 }
 
+type GetStageRequest struct {
+	Gcuid int `json:"gcuid"`
+	TaskId *big.Int `json:"taskId"`
+}
+
 type Response struct {
 	Gcuid int `json:"gcuid"`
 	Status int `json:"status"`
@@ -78,6 +83,7 @@ type ClaimRequest struct {
 type ClaimResponse struct {
 	Response
 }
+
 
 type Error struct {
 	Status int `json:"status"`

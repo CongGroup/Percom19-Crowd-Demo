@@ -8,7 +8,7 @@ import (
 
 const (
 	GETH_PORT    = "ws://localhost:8650"
-	CONTRACT_ADDRESS = "0xd573ff992c921a9d3597e8c17b5267a50f257def"
+	CONTRACT_ADDRESS = "0xe69bef55bdd3a170068345b6e29c4259d16a4ced"
 	CONTRACT_ABI     = `[
 	{
 		"constant": false,

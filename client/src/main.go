@@ -18,7 +18,7 @@ const (
 )
 
 var addr = flag.String("addr","localhost:4000","http service address")
-var number = flag.Int("number",20,"mobile account number")
+var number = flag.Int("number",100,"mobile account number")
 
 func main() {
 	f,err:= os.OpenFile(filepath.Join("etc","logfile"),os.O_RDWR|os.O_CREATE|os.O_APPEND,0666)
@@ -38,6 +38,9 @@ func main() {
 	for i:=0;i<*number;i++ {
 		wg.Add(1)
 		go func(id int) {
+			defer func() {
+				wg.Done()
+			}()
 			// load wallet
 			var account *app.Wallet
 			keystoreFile:= filepath.Join("etc",KEY_FILE_PREFIX+strconv.Itoa(id))
@@ -58,15 +61,15 @@ func main() {
 					panic(err)
 				}
 			} else {
-				account = app.NewWalletFromFile(keystoreFile)
+				account,err = app.NewWalletFromFile(keystoreFile)
+				if err!=nil {
+					log.Fatal("user",id,"can not create wallet")
+				}
 			}
 
 
 			client:=app.NewClient(id,u.String(),account)
 			client.Start()
-			defer func() {
-				wg.Done()
-			}()
 		}(i)
 	}
 

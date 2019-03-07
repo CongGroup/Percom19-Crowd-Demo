@@ -197,10 +197,7 @@ func (h *Handler) aggregateHandler(gcuid int, data []byte) {
 		submitDataByte=submitDataByte[64:]
 		submitProofByte = submitProofByte[64:]
 		rp:= new(zcrypto.RangeProof).SetBytes(submitProofByte)
-		log.Println("len submit proof:",len(submitProofByte))
-		log.Println("len challenge:",len(rp.IPP.Challenges))
-		log.Println("after A:",rp.IPP.A)
-		log.Println("after B:",rp.IPP.B)
+		log.Println("len of submitted proof:",len(submitProofByte))
 
 		if err!=nil {
 			log.Println(err.Error())
@@ -771,7 +768,6 @@ func (h *Handler) isQualifiedHandler(gcuid int,data[]byte) {
 	}
 	qualified:= new(big.Int).SetBytes(qualifiedByte).Int64()!=0
 	if qualified {
-		log.Println("user ",payload.Address," is qualified")
 	} else {
 		log.Println("user ",payload.Address," is not qualified")
 	}
@@ -802,7 +798,6 @@ func (h *Handler) HandleRequest () {
 			continue
 		}
 		gcuid := int64(gid.(float64))
-		log.Println("gcuid:", gcuid)
 
 		switch gcuid {
 		case GCUID_SOLICIT:

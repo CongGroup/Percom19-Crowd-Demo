@@ -126,6 +126,7 @@ func GenBulletProof(amount *big.Int) ([]byte) {
 	} else {
 		rpV := zcrypto.RPProve(amount);
 		proof = rpV.Bytes()
+		log.Println("len of original proof",len(proof))
 	}
 	return proof
 }

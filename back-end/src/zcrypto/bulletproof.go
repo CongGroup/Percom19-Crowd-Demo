@@ -20,6 +20,16 @@ var VecLength = 16
 Implementation of BulletProofs
 */
 
+func SetBigIntBytes(v * big.Int)  []byte{
+	d:=v.Bytes()
+	if len(d)==32 {
+		return d
+	}
+	pad:=make([]byte,32-len(d))
+	pad = append(pad,d...)
+	return pad
+}
+
 type ContractPackable interface {
 	Bytes() []byte
 }
@@ -52,8 +62,8 @@ func NewECPointCopy(p *ECPoint) *ECPoint {
 
 func (p *ECPoint) Bytes() []byte {
 	var b bytes.Buffer
-	b.Write(p.X.Bytes())
-	b.Write(p.Y.Bytes())
+	b.Write(SetBigIntBytes(p.X))
+	b.Write(SetBigIntBytes(p.Y))
 	return b.Bytes()
 }
 
@@ -304,10 +314,10 @@ func(arg *InnerProdArg) Bytes() []byte {
 	for i:=0;i< len(arg.R); i++ {
 		b.Write(arg.R[i].Bytes())
 	}
-	b.Write(arg.A.Bytes())
-	b.Write(arg.B.Bytes())
+	b.Write(SetBigIntBytes(arg.A))
+	b.Write(SetBigIntBytes(arg.B))
 	for i:=0;i<len(arg.Challenges);i++ {
-		b.Write(arg.Challenges[i].Bytes())
+		b.Write(SetBigIntBytes(arg.Challenges[i]))
 	}
 	return b.Bytes()
 }
@@ -701,12 +711,12 @@ func (rp * RangeProof) Bytes() []byte{
 	b.Write(rp.S.Bytes())
 	b.Write(rp.T1.Bytes())
 	b.Write(rp.T2.Bytes())
-	b.Write(rp.Tau.Bytes())
-	b.Write(rp.Th.Bytes())
-	b.Write(rp.Mu.Bytes())
-	b.Write(rp.Cy.Bytes())
-	b.Write(rp.Cz.Bytes())
-	b.Write(rp.Cx.Bytes())
+	b.Write(SetBigIntBytes(rp.Tau))
+	b.Write(SetBigIntBytes(rp.Th))
+	b.Write(SetBigIntBytes(rp.Mu))
+	b.Write(SetBigIntBytes(rp.Cy))
+	b.Write(SetBigIntBytes(rp.Cz))
+	b.Write(SetBigIntBytes(rp.Cx))
 	b.Write(rp.IPP.Bytes())
 	return b.Bytes()
 }

@@ -11,11 +11,17 @@ import (
 )
 
 const (
-	RECONNECT_TIME = 4 * time.Second
+	RECONNECT_TIME = 2 * time.Second
 	TRANSACTION_RETRY_TIME = 4 * time.Second
 	SEND_BUFFER = 256
 	TASKID = 0
 	SUBMIT_DATA_MAX = 65536
+)
+
+const (
+	writeWait = 6 * time.Second
+	pongWait = 6*time.Second
+	pingPeroid = 4*time.Second
 )
 
 type Client struct {
@@ -23,7 +29,6 @@ type Client struct {
 	Send chan []byte
 	Url string
 	Wg sync.WaitGroup
-	Closed chan int
 	Account *Wallet
 
 	Id int
@@ -43,18 +48,22 @@ func NewClient(id int,url string, account *Wallet) *Client {
 		Send: make(chan []byte,SEND_BUFFER),
 		Url: url,
 		Wg: sync.WaitGroup{},
-		Closed: make(chan int),
 		Account:account,
 	}
 }
 
 func (c *Client) Reader() {
+	c.W.SetReadDeadline(time.Now().Add(pongWait))
+	c.W.SetPongHandler( func(string) error {
+		c.W.SetReadDeadline(time.Now().Add(pongWait))
+		return nil
+	})
+	Outter:
 	for {
 		_, message, err:= c.W.ReadMessage()
 		if err!=nil {
 			log.Println("read:",err)
-			c.Closed <- 1;
-			break;
+			break Outter
 		}
 		// do with message
 		var kvs map[string]interface{}
@@ -75,26 +84,28 @@ func (c *Client) Reader() {
 		default:
 		}
 	}
-	close(c.Closed)
 	c.Wg.Done()
 }
 
 func (c *Client) Reconnect() error {
 	log.Println("reconnect ",c.Id)
 	c.W.Close()
+	Outter:
 	for{
 		select {
-		case <-time.After(RECONNECT_TIME*time.Second):
+		case <-time.After(RECONNECT_TIME):
 			var err error
 			c.W,_,err= websocket.DefaultDialer.Dial(c.Url,nil)
 			if err!=nil {
 				log.Println(err.Error())
 			} else {
-				return nil
+				break Outter;
 			}
-			c.Closed = make(chan int)
 		}
 	}
+	log.Println("reconnected")
+	c.GetCurrentStage(GCUID_CURRENT_STAGE)
+	return nil
 }
 
 func (c *Client) Start() {
@@ -109,22 +120,29 @@ func (c *Client) Start() {
 	defer func () {
 		c.W.Close()
 		close(c.Send)
-		close(c.Closed)
 	}()
 }
 
 func (c *Client) Sender() {
+	ticker:= time.NewTicker(pingPeroid)
+	Outter:
 	for {
 		select {
-		case <-c.Closed:
-			break;
+		case <-ticker.C:
+			c.W.SetWriteDeadline(time.Now().Add(writeWait))
+			err:=c.W.WriteMessage(websocket.PingMessage,nil)
+			if err!=nil {
+				log.Println(err.Error())
+				break Outter
+			}
 		case data:= <-c.Send:
+			c.W.SetWriteDeadline(time.Now().Add(writeWait))
 			err:=c.W.WriteMessage(websocket.TextMessage,data)
 			if err!=nil {
 				log.Println(err)
 				// re-queue
-				c.Send<-data
-				break
+				c.Send <- data
+				break Outter
 			}
 		}
 	}
@@ -180,6 +198,19 @@ func (c *Client) registerAndSubmit(gcuid int) {
 		return
 	}
 	c.Send <- data
+}
+
+func (c *Client) GetCurrentStage(gcuid int) {
+	getStageRequest:= &GetStageRequest{
+		Gcuid: gcuid,
+		TaskId: big.NewInt(TASKID),
+	}
+	data,err:=json.Marshal(getStageRequest)
+	if err!=nil {
+		log.Println(err.Error())
+		return
+	}
+	c.Send <-data
 }
 
 func (c *Client) ClaimHandler(gcuid int, data[]byte) {

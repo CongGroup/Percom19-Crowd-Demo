@@ -118,7 +118,6 @@ func (c *BaseContract) GetReceiptStatus (txHash common.Hash) (uint64,error) {
 			return 0,err
 		case <- ch:
 			count+=1
-			log.Println("getting receipt")
 			if count>=maxWaitingBlock {
 				return 0, errors.New("transaction time out")
 			} else {
@@ -126,7 +125,6 @@ func (c *BaseContract) GetReceiptStatus (txHash common.Hash) (uint64,error) {
 				if err == nil {
 					//log.Println(receipt.ContractAddress.String())
 					//log.Println(receipt.TxHash.String())
-					log.Println("receipt found")
 					if receipt.Status ==0 {
 						return receipt.Status, errors.New("transaction revert")
 					}

@@ -520,6 +520,7 @@
                             break;
                         case GCUID_SUBMISSION_NUMBER:
                             if (res.status === 0) {
+                                if(this.submissionNumber === undefined || this.submissionNumber<res.amount)
                                 this.submissionNumber = res.amount;
                             } else {
                                 console.log(res.reason);
@@ -527,6 +528,7 @@
                             break;
                         case GCUID_REGISTER_NUMBER:
                             if (res.status === 0) {
+                                if(this.registerNumber===undefined || this.registerNumber<res.amount)
                                 this.registerNumber = res.amount;
                             } else {
                                 console.log(res.reason);
@@ -582,7 +584,7 @@
                             if (res.status === 0) {
                                 console.log("claim number:"+res.amount);
                                 if(this.stage === this.mapToStage['claim']) {
-                                    this.claimNumber = res.amount;
+                                    if(this.claimNumber === undefined || this.claimNumber<res.amount) this.claimNumber = res.amount;
                                 }
                             } else {
                                 console.log(res.reason);
