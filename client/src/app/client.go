@@ -19,7 +19,7 @@ const (
 )
 
 const (
-	writeWait = 6 * time.Second
+	writeWait = 4 * time.Second
 	pongWait = 6*time.Second
 	pingPeroid = 4*time.Second
 )

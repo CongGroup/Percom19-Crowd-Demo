@@ -129,12 +129,9 @@ func (h *Handler) submitHandler(gcuid int, data []byte) {
 		h.errorHandler(gcuid,ENCRYPTION_ERROR,err)
 		return
 	}
-	submitData:=encryption.Bytes()
+	submitData:= SetBigIntBytes(encryption)
 	submitProof:= GenBulletProof(amount)
 
-
-	//submitPayload,err := json.Marshal(&appClient.SubmitPayload{
-	//	SubmitData:submitData,
 
 
 	err =u.Send(contract.FUNCTION_SUBMIT,payload.TaskId,submitData,submitProof)
@@ -181,6 +178,7 @@ func (h *Handler) aggregateHandler(gcuid int, data []byte) {
 
 	total:= big.NewInt(1)
 	qualfiedState:= make([]byte,count.Int64(),count.Int64());
+	qualifiedCount:=0
 	for i:=0; i< int(count.Int64()); i++ {
 		submitDataByte,err:= h.agg.Call(contract.FUNCTION_GET_SUBMIT_DATA_OF_TASK,payload.TaskId,big.NewInt(int64(i)))
 		if err!=nil {
@@ -197,7 +195,6 @@ func (h *Handler) aggregateHandler(gcuid int, data []byte) {
 		submitDataByte=submitDataByte[64:]
 		submitProofByte = submitProofByte[64:]
 		rp:= new(zcrypto.RangeProof).SetBytes(submitProofByte)
-		log.Println("len of submitted proof:",len(submitProofByte))
 
 		if err!=nil {
 			log.Println(err.Error())
@@ -208,7 +205,7 @@ func (h *Handler) aggregateHandler(gcuid int, data []byte) {
 			qualfiedState[i] = byte(0)
 			continue
 		}
-
+		qualifiedCount++
 		qualfiedState[i]=byte(1)
 		submitData:=new(big.Int).SetBytes(submitDataByte)
 		total.Mul(total,submitData)
@@ -216,7 +213,7 @@ func (h *Handler) aggregateHandler(gcuid int, data []byte) {
 	}
 
 	m:=zcrypto.PriKey.Decrypt(&zcrypto.Cypher{C:total})
-	log.Println("aggregate result = ",m);
+	log.Println("aggregate result = ",m, "count:",qualifiedCount);
 
 	aggregation:=total.Bytes()
 	if err!=nil {
@@ -373,7 +370,7 @@ func (h *Handler) registerAndSubmitHandler(gcuid int, data[]byte) {
 		h.errorHandler(gcuid,ENCRYPTION_ERROR,err)
 		return
 	}
-	submitData:=encryption.Bytes()
+	submitData:=SetBigIntBytes(encryption)
 	submitProof:= GenBulletProof(amount)
 
 

@@ -133,7 +133,7 @@ func getEncryptedData(w http.ResponseWriter, r *http.Request) {
 		http.Error(w,err.Error(),http.StatusInternalServerError)
 		return
 	}
-	submitData := "0x"+cipher.Text(16)
+	submitData := "0x"+hex.EncodeToString(appClient.SetBigIntBytes(cipher))
 	submitProofByte := appClient.GenBulletProof(amount)
 	submitProof:= "0x"+hex.EncodeToString(submitProofByte)
 

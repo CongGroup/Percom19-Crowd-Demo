@@ -126,7 +126,6 @@ func GenBulletProof(amount *big.Int) ([]byte) {
 	} else {
 		rpV := zcrypto.RPProve(amount);
 		proof = rpV.Bytes()
-		log.Println("len of original proof",len(proof))
 	}
 	return proof
 }
@@ -134,4 +133,15 @@ func GenBulletProof(amount *big.Int) ([]byte) {
 func GenEncryption(amount *big.Int) (*big.Int,error) {
 	cipher,err:=zcrypto.PubKey.Encrypt(amount)
 	return cipher.C,err
+}
+
+
+func SetBigIntBytes(v * big.Int)  []byte{
+	d:=v.Bytes()
+	if len(d)==32 {
+		return d
+	}
+	pad:=make([]byte,32-len(d))
+	pad = append(pad,d...)
+	return pad
 }
