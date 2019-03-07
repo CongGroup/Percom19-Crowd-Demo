@@ -3,7 +3,7 @@ package appClient
 import "math/big"
 
 const (
-	MAX_RANGE = 256
+	MAX_RANGE = 65536
 	MIN_RANGE = 0
 )
 

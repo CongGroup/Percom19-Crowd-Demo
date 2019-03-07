@@ -1,0 +1,234 @@
+2019/03/07 15:45:18 main.go:36: connecting to %s ws://localhost:4000/
+2019/03/07 15:47:56 main.go:36: connecting to %s ws://localhost:4000/
+2019/03/07 15:48:01 client.go:65: gcuid: 102
+2019/03/07 15:48:03 client.go:65: gcuid: 106
+2019/03/07 15:48:03 client.go:75: receive other message
+2019/03/07 15:48:03 client.go:65: gcuid: 102
+2019/03/07 15:48:06 client.go:65: gcuid: 102
+2019/03/07 15:48:06 client.go:147: begin to claim
+2019/03/07 15:48:06 client.go:65: gcuid: 5
+2019/03/07 15:48:06 client.go:187: json: Unmarshal(non-pointer app.ClaimResponse)
+2019/03/07 15:48:09 client.go:65: gcuid: 107
+2019/03/07 15:48:09 client.go:75: receive other message
+2019/03/07 15:48:09 client.go:65: gcuid: 102
+2019/03/07 15:48:39 main.go:36: connecting to %s ws://localhost:4000/
+2019/03/07 15:48:44 client.go:65: gcuid: 102
+2019/03/07 15:48:44 client.go:65: gcuid: 105
+2019/03/07 15:48:44 client.go:75: receive other message
+2019/03/07 15:48:44 client.go:144: start register
+2019/03/07 15:48:44 client.go:65: gcuid: 6
+2019/03/07 15:48:44 client.go:216: json: Unmarshal(non-pointer app.Error)
+2019/03/07 15:49:25 main.go:36: connecting to %s ws://localhost:4000/
+2019/03/07 15:49:28 client.go:65: gcuid: 102
+2019/03/07 15:49:31 client.go:65: gcuid: 106
+2019/03/07 15:49:31 client.go:75: receive other message
+2019/03/07 15:49:31 client.go:65: gcuid: 102
+2019/03/07 15:49:35 client.go:65: gcuid: 102
+2019/03/07 15:49:35 client.go:147: begin to claim
+2019/03/07 15:49:35 client.go:65: gcuid: 5
+2019/03/07 15:49:35 client.go:198: claim fail, reason: wrong private key format
+2019/03/07 15:49:37 client.go:65: gcuid: 107
+2019/03/07 15:49:37 client.go:75: receive other message
+2019/03/07 15:49:37 client.go:65: gcuid: 102
+2019/03/07 15:50:27 client.go:53: read: websocket: close 1006 (abnormal closure): unexpected EOF
+2019/03/07 15:52:07 main.go:36: connecting to %s ws://localhost:4000/
+2019/03/07 15:52:23 client.go:53: read: websocket: close 1006 (abnormal closure): unexpected EOF
+2019/03/07 15:53:03 main.go:36: connecting to %s ws://localhost:4000/
+2019/03/07 15:53:03 client.go:34: dial tcp [::1]:4000: connect: connection refused
+2019/03/07 15:53:08 main.go:36: connecting to %s ws://localhost:4000/
+2019/03/07 15:53:25 client.go:65: gcuid: 105
+2019/03/07 15:53:25 client.go:75: receive other message
+2019/03/07 15:53:25 client.go:65: gcuid: 102
+2019/03/07 15:53:25 client.go:145: start register
+2019/03/07 15:53:25 client.go:65: gcuid: 6
+2019/03/07 15:53:25 client.go:220: register and submit fail, reason: wrong private key format
+2019/03/07 15:54:28 client.go:53: read: websocket: close 1006 (abnormal closure): unexpected EOF
+2019/03/07 15:54:32 main.go:36: connecting to %s ws://localhost:4000/
+2019/03/07 15:54:37 client.go:65: gcuid: 102
+2019/03/07 15:54:39 client.go:65: gcuid: 102
+2019/03/07 15:54:39 client.go:65: gcuid: 106
+2019/03/07 15:54:39 client.go:75: receive other message
+2019/03/07 15:54:41 client.go:65: gcuid: 102
+2019/03/07 15:54:41 client.go:148: begin to claim
+2019/03/07 15:54:41 client.go:65: gcuid: 5
+2019/03/07 15:54:41 client.go:199: claim fail, reason: wrong private key format
+2019/03/07 15:54:44 client.go:65: gcuid: 107
+2019/03/07 15:54:44 client.go:75: receive other message
+2019/03/07 15:54:44 client.go:65: gcuid: 102
+2019/03/07 15:54:47 client.go:65: gcuid: 105
+2019/03/07 15:54:47 client.go:75: receive other message
+2019/03/07 15:54:47 client.go:65: gcuid: 102
+2019/03/07 15:54:47 client.go:145: start register
+2019/03/07 15:54:47 client.go:65: gcuid: 6
+2019/03/07 15:54:47 client.go:220: register and submit fail, reason: wrong private key format
+2019/03/07 15:55:54 main.go:36: connecting to %s ws://localhost:4000/
+2019/03/07 15:55:59 client.go:65: gcuid: 102
+2019/03/07 15:56:01 client.go:65: gcuid: 106
+2019/03/07 15:56:01 client.go:75: receive other message
+2019/03/07 15:56:01 client.go:65: gcuid: 102
+2019/03/07 15:56:04 client.go:65: gcuid: 102
+2019/03/07 15:56:04 client.go:148: begin to claim
+2019/03/07 15:56:06 client.go:65: gcuid: 5
+2019/03/07 15:56:06 client.go:199: claim fail, reason: transaction revert
+2019/03/07 15:56:07 client.go:65: gcuid: 107
+2019/03/07 15:56:07 client.go:75: receive other message
+2019/03/07 15:56:07 client.go:65: gcuid: 102
+2019/03/07 15:56:10 client.go:65: gcuid: 105
+2019/03/07 15:56:10 client.go:75: receive other message
+2019/03/07 15:56:10 client.go:65: gcuid: 102
+2019/03/07 15:56:10 client.go:145: start register
+2019/03/07 15:56:10 client.go:53: read: websocket: close 1006 (abnormal closure): unexpected EOF
+2019/03/07 15:58:59 main.go:36: connecting to %s ws://localhost:4000/
+2019/03/07 15:58:59 client.go:36: dial tcp [::1]:4000: connect: connection refused
+2019/03/07 15:59:08 main.go:36: connecting to %s ws://localhost:4000/
+2019/03/07 15:59:25 client.go:67: gcuid: 102
+2019/03/07 15:59:28 client.go:67: gcuid: 106
+2019/03/07 15:59:28 client.go:77: receive other message
+2019/03/07 15:59:28 client.go:67: gcuid: 102
+2019/03/07 15:59:31 client.go:67: gcuid: 102
+2019/03/07 15:59:31 client.go:150: begin to claim
+2019/03/07 15:59:33 client.go:67: gcuid: 107
+2019/03/07 15:59:33 client.go:77: receive other message
+2019/03/07 15:59:33 client.go:67: gcuid: 102
+2019/03/07 15:59:33 client.go:67: gcuid: 5
+2019/03/07 15:59:33 client.go:202: claim fail, reason: transaction revert
+2019/03/07 15:59:36 client.go:67: gcuid: 105
+2019/03/07 15:59:36 client.go:77: receive other message
+2019/03/07 15:59:36 client.go:67: gcuid: 102
+2019/03/07 15:59:36 client.go:147: start register
+2019/03/07 15:59:36 client.go:67: gcuid: 6
+2019/03/07 15:59:36 client.go:223: register and submit fail, reason: transaction revert
+2019/03/07 16:30:46 client.go:55: read: websocket: close 1006 (abnormal closure): unexpected EOF
+2019/03/07 16:30:53 main.go:36: connecting to %s ws://localhost:4000/
+2019/03/07 16:31:06 client.go:148: begin to claim
+2019/03/07 16:31:08 client.go:200: claim fail, reason: transaction revert
+2019/03/07 16:31:12 client.go:145: start register
+2019/03/07 16:31:40 client.go:148: begin to claim
+2019/03/07 16:31:49 client.go:145: start register
+2019/03/07 16:32:00 client.go:148: begin to claim
+2019/03/07 16:32:21 main.go:36: connecting to %s ws://localhost:4000/
+2019/03/07 16:32:25 client.go:145: start register
+2019/03/07 16:32:25 client.go:145: start register
+2019/03/07 16:32:25 client.go:145: start register
+2019/03/07 16:32:25 client.go:145: start register
+2019/03/07 16:32:25 client.go:145: start register
+2019/03/07 16:32:25 client.go:145: start register
+2019/03/07 16:32:25 client.go:145: start register
+2019/03/07 16:32:25 client.go:145: start register
+2019/03/07 16:32:25 client.go:145: start register
+2019/03/07 16:32:25 client.go:145: start register
+2019/03/07 16:32:25 client.go:145: start register
+2019/03/07 16:32:25 client.go:145: start register
+2019/03/07 16:32:25 client.go:145: start register
+2019/03/07 16:32:25 client.go:145: start register
+2019/03/07 16:32:25 client.go:145: start register
+2019/03/07 16:32:25 client.go:145: start register
+2019/03/07 16:32:25 client.go:145: start register
+2019/03/07 16:32:25 client.go:145: start register
+2019/03/07 16:32:25 client.go:145: start register
+2019/03/07 16:32:25 client.go:145: start register
+2019/03/07 16:32:38 client.go:148: begin to claim
+2019/03/07 16:32:38 client.go:148: begin to claim
+2019/03/07 16:32:38 client.go:148: begin to claim
+2019/03/07 16:32:38 client.go:148: begin to claim
+2019/03/07 16:32:38 client.go:148: begin to claim
+2019/03/07 16:32:38 client.go:148: begin to claim
+2019/03/07 16:32:38 client.go:148: begin to claim
+2019/03/07 16:32:38 client.go:148: begin to claim
+2019/03/07 16:32:38 client.go:148: begin to claim
+2019/03/07 16:32:38 client.go:148: begin to claim
+2019/03/07 16:32:38 client.go:148: begin to claim
+2019/03/07 16:32:38 client.go:148: begin to claim
+2019/03/07 16:32:38 client.go:148: begin to claim
+2019/03/07 16:32:38 client.go:148: begin to claim
+2019/03/07 16:32:38 client.go:148: begin to claim
+2019/03/07 16:32:38 client.go:148: begin to claim
+2019/03/07 16:32:38 client.go:148: begin to claim
+2019/03/07 16:32:38 client.go:148: begin to claim
+2019/03/07 16:32:38 client.go:148: begin to claim
+2019/03/07 16:32:38 client.go:148: begin to claim
+2019/03/07 16:32:40 client.go:200: claim fail, reason: transaction revert
+2019/03/07 16:32:40 client.go:200: claim fail, reason: transaction revert
+2019/03/07 16:34:59 client.go:145: start register
+2019/03/07 16:34:59 client.go:145: start register
+2019/03/07 16:34:59 client.go:145: start register
+2019/03/07 16:34:59 client.go:145: start register
+2019/03/07 16:34:59 client.go:145: start register
+2019/03/07 16:34:59 client.go:145: start register
+2019/03/07 16:34:59 client.go:145: start register
+2019/03/07 16:34:59 client.go:145: start register
+2019/03/07 16:34:59 client.go:145: start register
+2019/03/07 16:34:59 client.go:145: start register
+2019/03/07 16:34:59 client.go:145: start register
+2019/03/07 16:34:59 client.go:145: start register
+2019/03/07 16:34:59 client.go:145: start register
+2019/03/07 16:34:59 client.go:145: start register
+2019/03/07 16:34:59 client.go:145: start register
+2019/03/07 16:34:59 client.go:145: start register
+2019/03/07 16:34:59 client.go:145: start register
+2019/03/07 16:34:59 client.go:145: start register
+2019/03/07 16:34:59 client.go:145: start register
+2019/03/07 16:34:59 client.go:145: start register
+2019/03/07 16:35:37 client.go:148: begin to claim
+2019/03/07 16:35:37 client.go:148: begin to claim
+2019/03/07 16:35:37 client.go:148: begin to claim
+2019/03/07 16:35:37 client.go:148: begin to claim
+2019/03/07 16:35:37 client.go:148: begin to claim
+2019/03/07 16:35:37 client.go:148: begin to claim
+2019/03/07 16:35:37 client.go:148: begin to claim
+2019/03/07 16:35:37 client.go:148: begin to claim
+2019/03/07 16:35:37 client.go:148: begin to claim
+2019/03/07 16:35:37 client.go:148: begin to claim
+2019/03/07 16:35:37 client.go:148: begin to claim
+2019/03/07 16:35:37 client.go:148: begin to claim
+2019/03/07 16:35:37 client.go:148: begin to claim
+2019/03/07 16:35:37 client.go:148: begin to claim
+2019/03/07 16:35:37 client.go:148: begin to claim
+2019/03/07 16:35:37 client.go:148: begin to claim
+2019/03/07 16:35:37 client.go:148: begin to claim
+2019/03/07 16:35:37 client.go:148: begin to claim
+2019/03/07 16:35:37 client.go:148: begin to claim
+2019/03/07 16:35:37 client.go:148: begin to claim
+2019/03/07 16:35:39 client.go:200: claim fail, reason: transaction revert
+2019/03/07 16:35:39 client.go:200: claim fail, reason: transaction revert
+2019/03/07 16:35:44 client.go:145: start register
+2019/03/07 16:35:44 client.go:145: start register
+2019/03/07 16:35:44 client.go:145: start register
+2019/03/07 16:35:44 client.go:145: start register
+2019/03/07 16:35:44 client.go:145: start register
+2019/03/07 16:35:44 client.go:145: start register
+2019/03/07 16:35:44 client.go:145: start register
+2019/03/07 16:35:44 client.go:145: start register
+2019/03/07 16:35:44 client.go:145: start register
+2019/03/07 16:35:44 client.go:145: start register
+2019/03/07 16:35:44 client.go:145: start register
+2019/03/07 16:35:44 client.go:145: start register
+2019/03/07 16:35:44 client.go:145: start register
+2019/03/07 16:35:44 client.go:145: start register
+2019/03/07 16:35:44 client.go:145: start register
+2019/03/07 16:35:44 client.go:145: start register
+2019/03/07 16:35:44 client.go:145: start register
+2019/03/07 16:35:44 client.go:145: start register
+2019/03/07 16:35:44 client.go:145: start register
+2019/03/07 16:35:44 client.go:145: start register
+2019/03/07 16:35:53 client.go:148: begin to claim
+2019/03/07 16:35:53 client.go:148: begin to claim
+2019/03/07 16:35:53 client.go:148: begin to claim
+2019/03/07 16:35:53 client.go:148: begin to claim
+2019/03/07 16:35:53 client.go:148: begin to claim
+2019/03/07 16:35:53 client.go:148: begin to claim
+2019/03/07 16:35:53 client.go:148: begin to claim
+2019/03/07 16:35:53 client.go:148: begin to claim
+2019/03/07 16:35:53 client.go:148: begin to claim
+2019/03/07 16:35:53 client.go:148: begin to claim
+2019/03/07 16:35:53 client.go:148: begin to claim
+2019/03/07 16:35:53 client.go:148: begin to claim
+2019/03/07 16:35:53 client.go:148: begin to claim
+2019/03/07 16:35:53 client.go:148: begin to claim
+2019/03/07 16:35:53 client.go:148: begin to claim
+2019/03/07 16:35:53 client.go:148: begin to claim
+2019/03/07 16:35:53 client.go:148: begin to claim
+2019/03/07 16:35:53 client.go:148: begin to claim
+2019/03/07 16:35:53 client.go:148: begin to claim
+2019/03/07 16:35:53 client.go:148: begin to claim
+2019/03/07 16:35:55 client.go:200: claim fail, reason: transaction revert

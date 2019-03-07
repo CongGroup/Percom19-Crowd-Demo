@@ -2,10 +2,13 @@ package appClient
 
 import (
 	"crypto/ecdsa"
+	"encoding/hex"
 	"encoding/json"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/gorilla/websocket"
 	"log"
+	"math/big"
+	"zcrypto"
 )
 
 func (h *Handler) writeMessage(messageType int, data []byte) error {
@@ -81,4 +84,53 @@ func (h *Handler) errorHandler(gcuid int, errorId int, err error) {
 		break;
 	}
 	return
+}
+
+func PackSubmitPayload(amount *big.Int) ([]byte,error) {
+	var submitProof string
+
+	if amount.Cmp(big.NewInt(MIN_RANGE))==-1 || amount.Cmp(big.NewInt(MAX_RANGE))!=-1 {
+		log.Println("out of range, generate random proof");
+		data:= make([]byte,1248)
+		submitProof="0x"+hex.EncodeToString(data)
+	} else {
+		rpV := zcrypto.RPProve(amount);
+		submitProof="0x"+hex.EncodeToString(rpV.Bytes())
+	}
+
+	cipher,err:=zcrypto.PubKey.Encrypt(amount)
+	if err!=nil {
+		log.Println(err.Error())
+		return nil,err
+	}
+
+	submitData := "0x"+cipher.C.Text(16)
+	//log.Println("proof:",submitProof)
+
+	submitPayload,err := json.Marshal(&SubmitPayload{
+		SubmitData:submitData,
+		SubmitProof:submitProof,
+	})
+	if err!=nil {
+		log.Println(err.Error())
+		return nil,err
+	}
+	return submitPayload,nil
+}
+
+func GenBulletProof(amount *big.Int) ([]byte) {
+	var proof []byte
+	if amount.Cmp(big.NewInt(MIN_RANGE))==-1 || amount.Cmp(big.NewInt(MAX_RANGE))!=-1 {
+		log.Println("out of range, generate random proof");
+		proof = make([]byte,1248)
+	} else {
+		rpV := zcrypto.RPProve(amount);
+		proof = rpV.Bytes()
+	}
+	return proof
+}
+
+func GenEncryption(amount *big.Int) (*big.Int,error) {
+	cipher,err:=zcrypto.PubKey.Encrypt(amount)
+	return cipher.C,err
 }

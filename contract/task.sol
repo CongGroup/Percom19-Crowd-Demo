@@ -6,8 +6,6 @@ contract Crowdsourcing {
 
 	uint constant public MAX_TASK = 1;
 	uint constant internal TASK_FULL = 10;
-	uint constant internal FALSE = 1;
-	uint constant internal TRUE = 2;
 	
 	IERC20 public token;
 	address private admin;
@@ -30,15 +28,17 @@ contract Crowdsourcing {
 
     struct DataProvider {
     	address account;
-    	uint registered;
-    	uint submited;
-    	uint claimed;
+    	bool registered;
+    	bool submited;
+    	bool qualified;
+    	bool claimed;
+    	bytes submit_proof;
     	bytes submit_data;
     }
 
     struct ServiceProvider {
     	address account;
-    	uint claimed;
+    	bool claimed;
     }
 
     struct Aggregation {
@@ -55,9 +55,10 @@ contract Crowdsourcing {
 		DataProvider [] data_provider;
 		mapping(address => uint) data_provider_id;
 		Aggregation aggregate;
-		uint busy;
+		bool busy;
 		uint register_count;
 		uint submit_count;
+		uint qualified_count;
 		uint claim_count;
 	}	
     
@@ -124,10 +125,53 @@ contract Crowdsourcing {
 	function getAggregationResultOfTask(uint task_id) external view returns (bytes memory) {
 	    return task[task_id].aggregate.aggregation;
 	}
+	
+
+    function getSubmitProofOfTask(uint task_id, uint index) external view returns (bytes memory) {
+        return task[task_id].data_provider[index].submit_proof;
+    }
+	
+
+	function isQualifiedProviderForTask(uint task_id, address user) external view returns (bool) {
+	    uint id = task[task_id].data_provider_id[user];
+	    require(id!=0,"data provider not exist");
+	    require(task[task_id].stage> Stages.aggregate,"only be called after aggregation!");
+	    return task[task_id].data_provider[id-1].qualified;
+	}
+	
+	function isRegisteredOfTask(uint task_id, address user) external view returns (bool) {
+	    
+	}
+	
+	function isSubmittedOfTask(uint task_id,address user) external view returns (bool) {
+	    
+	}
+	
+	function isClaimmedOfTask(uint task_id,address user) external view returns (bool) {
+	    
+	}
+	
+
+	function getQualifiedNumberOfTask(uint task_id) external view returns (uint) {
+	    return task[task_id].qualified_count;
+	}
+	
+	function setQualifiedDataProvider(uint task_id,bytes memory qualifiedSets) internal  {
+	    uint qualified_count = 0;
+	    for(uint i=0; i< qualifiedSets.length; ++i) {
+	        if(qualifiedSets[i]!=bytes1(0)) {
+	            qualified_count +=1;
+	            task[task_id].data_provider[i].qualified = true;
+	        } else {
+	            task[task_id].data_provider[i].qualified = false;
+	        }
+	    }
+	    task[task_id].qualified_count = qualified_count;
+	}
 
 	function getEmptyTaskSlot () internal view returns (uint) {
 		for(uint i = 0; i< MAX_TASK ; ++i) {
-			if (task[i].busy == FALSE || task[i].busy == 0){
+			if (task[i].busy == false){
 				return i;
 			}
 		}
@@ -162,8 +206,8 @@ contract Crowdsourcing {
 		require(task_id != TASK_FULL);
 		task[task_id].request = Request(data_fee, service_fee, target);
 		task[task_id].owner = msg.sender;
-		task[task_id].service_provider = ServiceProvider(service_provider, FALSE);
-		task[task_id].busy = TRUE;
+		task[task_id].service_provider = ServiceProvider(service_provider, false);
+		task[task_id].busy = true;
 		emit Solicit(task_id);
 		nextStage(task_id);
 		//emit Solicit(data_fee, service_fee, msg.sender, service_provider, target, request_id, task_id);
@@ -176,12 +220,12 @@ contract Crowdsourcing {
 		uint lastest_id = task[task_id].register_count;
 		require(id == 0 || id > lastest_id || task[task_id].data_provider[id-1].account != provider);
 		if (task[task_id].data_provider.length == lastest_id) {
-		    task[task_id].data_provider.push(DataProvider(provider,TRUE,FALSE,FALSE,"0x1"));
+		    task[task_id].data_provider.push(DataProvider(provider,true,false,false,false,"0x1","0x1"));
 		} else{
 		    task[task_id].data_provider[lastest_id].account = provider;
-		    task[task_id].data_provider[lastest_id].registered = TRUE;
-		    task[task_id].data_provider[lastest_id].submited = FALSE;
-		    task[task_id].data_provider[lastest_id].claimed = FALSE;
+		    task[task_id].data_provider[lastest_id].registered = true;
+		    task[task_id].data_provider[lastest_id].submited = false;
+		    task[task_id].data_provider[lastest_id].claimed = false;
 		}
 		task[task_id].data_provider_id[provider] = lastest_id + 1;
 		task[task_id].register_count += 1;
@@ -193,16 +237,16 @@ contract Crowdsourcing {
 		}
 	}
     
-	function submit(uint task_id, bytes calldata data) external {
+	function submit(uint task_id, bytes calldata data,bytes calldata proof) external {
 		require(atStage(task_id, Stages.submit));
 		address provider = msg.sender;
 		uint id = task[task_id].data_provider_id[provider];
 		require (!(id> task[task_id].register_count || id ==0));
-		require (task[task_id].data_provider[id-1].registered == TRUE && task[task_id].data_provider[id-1].submited == FALSE);
- 
+		require (task[task_id].data_provider[id-1].registered == true && task[task_id].data_provider[id-1].submited == false);
 		
-		task[task_id].data_provider[id-1].submited = TRUE;
+		task[task_id].data_provider[id-1].submited = true;
 		task[task_id].data_provider[id-1].submit_data = data;
+		task[task_id].data_provider[id-1].submit_proof = proof;
 		task[task_id].submit_count += 1;
 		//emit Submit(data_provider, task_id);
 		emit Submit(task_id, task[task_id].submit_count);
@@ -213,22 +257,23 @@ contract Crowdsourcing {
 	}
 	
 	// only for demo
-	function registerAndSubmit(uint task_id, bytes calldata data) external {
+	function registerAndSubmit(uint task_id, bytes calldata data,bytes calldata proof) external {
 	    require(atStage(task_id, Stages.register));
 		address provider = msg.sender;
 		uint id = task[task_id].data_provider_id[provider];
 		uint lastest_id = task[task_id].register_count;
 		require(id == 0 || id > lastest_id || task[task_id].data_provider[id-1].account != provider);
 		if (task[task_id].data_provider.length == lastest_id) {
-		    task[task_id].data_provider.push(DataProvider(provider,TRUE,TRUE,FALSE,"0x1"));
+		    task[task_id].data_provider.push(DataProvider(provider,true,false,false,false,"0x1","0x1"));
 		} else{
 		    task[task_id].data_provider[lastest_id].account = provider;
-		    task[task_id].data_provider[lastest_id].registered = TRUE;
-		    task[task_id].data_provider[lastest_id].submited = TRUE;
-		    task[task_id].data_provider[lastest_id].claimed = FALSE;
+		    task[task_id].data_provider[lastest_id].registered = true;
+		    task[task_id].data_provider[lastest_id].submited = true;
+		    task[task_id].data_provider[lastest_id].claimed = false;
 		}
 		task[task_id].data_provider_id[provider] = lastest_id + 1;
 		task[task_id].data_provider[lastest_id].submit_data = data;
+		task[task_id].data_provider[lastest_id].submit_proof = proof;
 		task[task_id].register_count += 1;
 		task[task_id].submit_count += 1;
 		//emit Register(data_provider, task_id);
@@ -236,8 +281,8 @@ contract Crowdsourcing {
 		emit Submit(task_id, task[task_id].submit_count);
 		
 		if(task[task_id].register_count == task[task_id].request.target) {
-			nextStage(task_id);
-			nextStage(task_id);
+			task[task_id].stage = Stages.aggregate;
+			emit StageTransfer(task_id, uint(task[task_id].stage), uint(Stages.register));
 			//emit RegisterCollected(task_id);
 		}
 	}
@@ -250,12 +295,14 @@ contract Crowdsourcing {
 	    nextStage(task_id);   // to aggregate stage 
 	}
 
-	function aggregate(uint task_id, bytes calldata aggregation, bytes calldata share, bytes calldata attestatino) external {
+	function aggregate(uint task_id, bytes calldata aggregation, bytes calldata qualifiedSets,bytes calldata share, bytes calldata attestatino) external {
 	    require(atStage(task_id, Stages.aggregate));
 	   	require(task[task_id].service_provider.account == msg.sender);
+	   	require(qualifiedSets.length == task[task_id].register_count, "wrong qualifiedSets length");
 	   	task[task_id].aggregate.aggregation = aggregation;
 	   	task[task_id].aggregate.share = share;
 	   	task[task_id].aggregate.attestatino = attestatino;
+	   	setQualifiedDataProvider(task_id,qualifiedSets);
 	   	emit Aggregate(task_id,aggregation);
 		nextStage(task_id);
 		//emit Aggregate(task_id);
@@ -273,26 +320,27 @@ contract Crowdsourcing {
 		require(atStage(task_id, Stages.claim));
 	    address payable user = msg.sender;
 	    uint id = task[task_id].data_provider_id[user];
-	    bool is_data_provider = !(id> task[task_id].register_count || id == 0) && task[task_id].data_provider[id-1].claimed == FALSE;
-	    bool is_service_provider = ( user == task[task_id].service_provider.account && task[task_id].service_provider.claimed==FALSE);
-	    require (is_data_provider || is_service_provider);
+	    bool is_qualified_data_provider = !(id> task[task_id].register_count || id == 0) &&
+	    !task[task_id].data_provider[id-1].claimed &&
+	    task[task_id].data_provider[id-1].qualified;
+	    bool is_service_provider = ( user == task[task_id].service_provider.account && !task[task_id].service_provider.claimed);
+	    require (is_qualified_data_provider || is_service_provider);
 		if (is_service_provider) {
 			//user.transfer(task[task_id].request.service_fee);  // pay ether
 			token.transfer(user,task[task_id].request.service_fee); //pay token
-			task[task_id].service_provider.claimed = TRUE;
+			task[task_id].service_provider.claimed = true;
 			task[task_id].claim_count +=1;
-			emit Claim(task_id,task[task_id].claim_count);
 		}
-		if (is_data_provider){
+		if (is_qualified_data_provider){
 			uint reward = task[task_id].request.data_fee/task[task_id].request.target;
 // 			address(user).transfer(reward);  // pay ether 
             token.transfer(user,reward);  // pay token
-			task[task_id].data_provider[id-1].claimed = TRUE;
+			task[task_id].data_provider[id-1].claimed = true;
 			task[task_id].claim_count +=1;
-			emit Claim(task_id,task[task_id].claim_count);
 		}
-		if(task[task_id].claim_count == task[task_id].submit_count + 1 ) {  // number of data_provider + service_provider
-			task[task_id].busy = FALSE;
+		emit Claim(task_id,task[task_id].claim_count);
+		if(task[task_id].claim_count == task[task_id].qualified_count + 1 ) {  // number of data_provider + service_provider
+			task[task_id].busy = false;
 			task[task_id].register_count = 0;
     		task[task_id].submit_count = 0;
     		task[task_id].claim_count = 0;

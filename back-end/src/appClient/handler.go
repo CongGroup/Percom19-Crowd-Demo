@@ -40,7 +40,7 @@ func (h *Handler) solicitHandler(gcuid int,data []byte) {
 		h.errorHandler(gcuid,UNMARSHAL_JSON_ERROR,err)
 		return
 	}
-
+	log.Println("data consumer private key:",payload.PrivateKey)
 	pk,err:= derivePrivateKey(payload.PrivateKey)
 	if err!=nil {
 		log.Println(err.Error())
@@ -116,30 +116,34 @@ func (h *Handler) submitHandler(gcuid int, data []byte) {
 		return
 	}
 
-	log.Println("data to encrypt:",payload.Value)
 	u:= user.NewUser(common.HexToAddress(payload.Address),pk,h.agg)
-	cipher,err:=zcrypto.PubKey.Encrypt(payload.Value)
+
+
+	amount:=payload.Value
+	log.Println("data to encrypt:",payload.Value)
+
+
+	encryption,err:= GenEncryption(amount)
 	if err!=nil {
 		log.Println(err.Error())
 		h.errorHandler(gcuid,ENCRYPTION_ERROR,err)
 		return
 	}
+	submitData:=encryption.Bytes()
+	submitProof:= GenBulletProof(amount)
 
-	submitData:=cipher.C.Bytes()
-	if err!=nil {
-		log.Println(err.Error())
-		h.errorHandler(gcuid,DATA_FORMAT_ERROR,err)
-		return
-	}
 
-	err =u.Send(contract.FUNCTION_SUBMIT,payload.TaskId,submitData)
+	//submitPayload,err := json.Marshal(&appClient.SubmitPayload{
+	//	SubmitData:submitData,
+
+
+	err =u.Send(contract.FUNCTION_SUBMIT,payload.TaskId,submitData,submitProof)
 
 	if err!=nil {
 		log.Println(err.Error())
 		h.errorHandler(gcuid,TRANSACTION_ERROR,err)
 		return
 	}
-
 	res:= &SubmitResponse{
 		Response: Response {
 			Gcuid:gcuid,
@@ -359,23 +363,28 @@ func (h *Handler) registerAndSubmitHandler(gcuid int, data[]byte) {
 		return
 	}
 
-	log.Println("data to encrypt:",payload.Value)
 	u:= user.NewUser(common.HexToAddress(payload.Address),pk,h.agg)
-	cipher,err:=zcrypto.PubKey.Encrypt(payload.Value)
+
+
+	amount:=payload.Value
+	log.Println("data to encrypt:",payload.Value)
+
+
+	encryption,err:= GenEncryption(amount)
 	if err!=nil {
 		log.Println(err.Error())
 		h.errorHandler(gcuid,ENCRYPTION_ERROR,err)
 		return
 	}
+	submitData:=encryption.Bytes()
+	submitProof:= GenBulletProof(amount)
 
-	submitData:=cipher.C.Bytes()
-	if err!=nil {
-		log.Println(err.Error())
-		h.errorHandler(gcuid,DATA_FORMAT_ERROR,err)
-		return
-	}
 
-	err =u.Send(contract.FUNCTION_REGISTER_AND_SUBMIT,payload.TaskId,submitData)
+	//submitPayload,err := json.Marshal(&appClient.SubmitPayload{
+	//	SubmitData:submitData,
+
+
+	err =u.Send(contract.FUNCTION_REGISTER_AND_SUBMIT,payload.TaskId,submitData,submitProof)
 
 	if err!=nil {
 		log.Println(err.Error())

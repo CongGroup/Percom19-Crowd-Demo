@@ -14,6 +14,8 @@ import (
 	"log"
 	"math/big"
 	"net/http"
+	"os"
+	"path/filepath"
 	"zcrypto"
 )
 
@@ -110,7 +112,7 @@ func getChainId(agg *contract.Agg) func(w http.ResponseWriter, r* http.Request) 
 
 func getEncryptedData(w http.ResponseWriter, r *http.Request) {
 	log.Println("get encrypted data")
-	var amount int64
+	amount:=big.NewInt(0)
 	data, err:= ioutil.ReadAll(r.Body)
 	if err!=nil {
 		log.Println(err.Error())
@@ -126,36 +128,20 @@ func getEncryptedData(w http.ResponseWriter, r *http.Request) {
 	}
 
 	log.Println("data to encrypt:",amount)
-
-
-
-	var submitProof string
-
-	if amount<=appClient.MIN_RANGE || amount>= appClient.MAX_RANGE {
-		log.Println("out of range, generate random proof");
-		data:= make([]byte,1248)
-		submitProof="0x"+hex.EncodeToString(data)
-	} else {
-		rpV := zcrypto.RPProve(big.NewInt(amount));
-		submitProof="0x"+hex.EncodeToString(rpV.Bytes())
-	}
-
-	cipher,err:=zcrypto.PubKey.Encrypt(big.NewInt(amount))
+	cipher,err := appClient.GenEncryption(amount)
 	if err!=nil {
-		log.Println(err.Error())
 		http.Error(w,err.Error(),http.StatusInternalServerError)
 		return
 	}
-
-	submitData := "0x"+cipher.C.Text(16)
-	//log.Println("proof:",submitProof)
+	submitData := "0x"+cipher.Text(16)
+	submitProofByte := appClient.GenBulletProof(amount)
+	submitProof:= "0x"+hex.EncodeToString(submitProofByte)
 
 	submitPayload,err := json.Marshal(&appClient.SubmitPayload{
 		SubmitData:submitData,
 		SubmitProof:submitProof,
 	})
 	if err!=nil {
-		log.Println(err.Error())
 		http.Error(w,err.Error(),http.StatusInternalServerError)
 		return
 	}
@@ -241,6 +227,12 @@ func start() {
 
 func main() {
 	//testPallier()
+	f,err:= os.OpenFile(filepath.Join("etc","logfile"),os.O_RDWR|os.O_CREATE|os.O_APPEND,0666)
+	if err!=nil {
+		log.Fatal(err)
+	}
+	defer f.Close()
+	log.SetOutput(f)
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	//testBulletProof()
 	//testBulletProof2()
