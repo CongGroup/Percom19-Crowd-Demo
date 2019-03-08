@@ -200,8 +200,6 @@
                 aggregateStatus:2,
                 approveStatus:2,
                 claimStatus:2,
-                wsPath: "ws://0.0.0.0:4000",
-                httpPath: "http://0.0.0.0:4000",
                 ws: undefined,
                 value: 0,
                 tokenBalance: undefined,
@@ -452,7 +450,7 @@
                 if(this.graph===undefined) {
                     if(this.submitValues===undefined) {
                         console.log("refectch submit values");
-                        let p = this.axios.get(`${this.httpPath}/statistics/${TASK_ID}`);
+                        let p = this.axios.get(`${process.env.HTTP_PATH}/statistics/${TASK_ID}`);
                         p.then((res)=>{
                             this.submitValues = res.data.submitValues;
                             this.draw()
@@ -482,9 +480,47 @@
                 }
             },
             initialDisplay: function() {
+                this.requireEther();
+                this.requireDataConsumerEther();
                 this.getCurrentStage();
                 this.getTokenBalance();
                 this.getConsumerTokenBalance();
+            },
+            requireEther: function() {
+                this.axios.get(`${process.env.HTTP_PATH}/requireEther/${this.serviceProviderAccount.address}`).then(res=>{
+                    let balance = res.data;
+                    if(balance>=ETHER_THREASHOLD){
+                        this.hasEther = true;
+                        console.log("already has ether");
+                    } else {
+                        console.log("do not have enough ether, get ether now");
+                        this.axios.get(`${process.env.HTTP_PATH}/requireEther/${this.serviceProviderAccount.address}`).then(res=>{
+                            let value = res.data;
+                            console.log(`get ${value} ether`);
+                            this.hasEther = true;
+                        }).catch(err=>{
+                            console.log(err.message);
+                        })
+                    }
+                })
+            },
+            requireDataConsumerEther: function() {
+                this.axios.get(`${process.env.HTTP_PATH}/requireEther/${this.dataConsumerAccount.address}`).then(res=>{
+                    let balance = res.data;
+                    if(balance>=ETHER_THREASHOLD){
+                        this.hasEther = true;
+                        console.log("already has ether");
+                    } else {
+                        console.log("do not have enough ether, get ether now");
+                        this.axios.get(`${process.env.HTTP_PATH}/requireEther/${this.dataConsumerAccount.address}`).then(res=>{
+                            let value = res.data;
+                            console.log(`get ${value} ether`);
+                            this.hasEther = true;
+                        }).catch(err=>{
+                            console.log(err.message);
+                        })
+                    }
+                })
             },
             initializeState: function(stage) {
                 if('register' === this.mapToStage[stage] && this.registerNumber === undefined) {
@@ -514,7 +550,7 @@
                 }
             },
             initialWS: function() {
-                this.ws = new WebSocket(this.wsPath);
+                this.ws = new WebSocket(process.env.SERVER_PATH);
                 this.ws.onopen = e => {
                     console.log("websocket open");
                     this.reconnecting = false;

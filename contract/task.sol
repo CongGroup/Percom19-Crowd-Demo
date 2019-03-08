@@ -166,7 +166,8 @@ contract Crowdsourcing {
 	
 	function isClaimmedOfTask(uint task_id,address user) external view returns (bool) {
 	    require(afterStage(task_id,Stages.approve));
-	    if(!isServiceProviderOfTask(task_id,user) || !isSubmittedOfTask(task_id,user) || !isQualifiedProviderForTask(task_id,user)) return false;
+	    if( !isServiceProviderOfTask(task_id,user) && !isSubmittedOfTask(task_id,user) 
+	    && !isQualifiedProviderForTask(task_id,user)) return false;
 	   
 	    //service provider
         if(isServiceProviderOfTask(task_id,user)) {

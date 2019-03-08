@@ -18,7 +18,7 @@ const (
 )
 
 var addr = flag.String("addr","localhost:4000","http service address")
-var number = flag.Int("number",20,"mobile account number")
+var number = flag.Int("number",50,"mobile account number")
 
 func main() {
 	f,err:= os.OpenFile(filepath.Join("etc","logfile"),os.O_RDWR|os.O_CREATE|os.O_APPEND,0666)
@@ -33,6 +33,7 @@ func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
 	u:= url.URL{Scheme:"ws",Host:*addr,Path:"/"}
+	httpPath:= "http://"+*addr;
 	log.Println("connecting to %s", u.String())
 
 	for i:=0;i<*number;i++ {
@@ -68,7 +69,7 @@ func main() {
 			}
 
 
-			client:=app.NewClient(id,u.String(),account)
+			client:=app.NewClient(id,u.String(),httpPath,account)
 			client.Start()
 		}(i)
 	}

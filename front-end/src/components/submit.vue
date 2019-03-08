@@ -54,7 +54,7 @@
                 </div>
             </div>
             <div v-if="!reconnecting">
-                <div v-if="account!==undefined">
+                <div v-if="account!==undefined && hasEther">
                     <div>
                         <!--<div class="formNote">-->
                             <!--<span class="note">*Note:</span><span class="noteBody"> Input length should be less than 256</span>-->
@@ -70,7 +70,7 @@
                             <pacman v-else-if="submitStatus === 1"></pacman>
                         </div>
                     </div>
-                    <div class="formLists" v-if="account!==undefined">
+                    <div class="formLists">
                         <div class="form" v-if="atStage('claim')">
                             <button class="btn btn-dark contract-button" v-if="claimStatus===0" @click="claim"> claim</button>
                             <pacman v-else-if="claimStatus===1"></pacman>
@@ -123,6 +123,8 @@
     const WAITING = 1;
     const SUBMITTED = 2;
 
+    const ETHER_THREASHOLD = 10000000000000000;
+
     export default {
         name: "HelloWorld",
         props: {
@@ -134,12 +136,11 @@
         },
         data: function () {
             return {
+                hasEther: false,
                 value: undefined,
                 reconnecting: false,
                 submitStatus: SUBMITTED,
                 claimStatus: SUBMITTED,
-                wsPath: "ws://0.0.0.0:4000",
-                httpPath: "http://0.0.0.0:4000",
                 initialized:false,
                 waiting: "",
                 waitingAnimate: undefined,
@@ -186,6 +187,8 @@
         watch: {
             account: function(newV,oldV){
                 if(newV !== undefined){
+                    console.log("get balance and require ether")
+                    this.requireEther();
                     this.getTokenBalance();
                 }
             }
@@ -253,6 +256,25 @@
                 };
                 this.ws.send(JSON.stringify(payload));
             },
+            requireEther: function() {
+                console.log("get ether");
+                this.axios.get(`${process.env.HTTP_PATH}/ether/${this.account.address}`).then(res=>{
+                    let balance = res.data;
+                    if(balance>=ETHER_THREASHOLD){
+                       this.hasEther = true;
+                       console.log("already has ether");
+                    } else {
+                        console.log("do not have enough ether, get ether now");
+                        this.axios.get(`${process.env.HTTP_PATH}/requireEther/${this.account.address}`).then(res=>{
+                            let value = res.data;
+                            console.log(`get ${value} ether`);
+                            this.hasEther = true;
+                        }).catch(err=>{
+                            console.log(err.message);
+                        })
+                    }
+                })
+            },
             registerAndSubmit: function() {
                 if(this.value.length>256) return;
                 let value = this.value;
@@ -260,9 +282,9 @@
                 this.submitStatus = WAITING;
                 console.log("register and submit");
                 console.log("address:"+this.account.address);
-                let p1 = this.axios.get(`${this.httpPath}/nonce/${this.account.address}`);
-                let p2 = this.axios.get(`${this.httpPath}/chainId`);
-                let p3 = this.axios.post(`${this.httpPath}/encryptedData`,value);
+                let p1 = this.axios.get(`${process.env.HTTP_PATH}/nonce/${this.account.address}`);
+                let p2 = this.axios.get(`${process.env.HTTP_PATH}/chainId`);
+                let p3 = this.axios.post(`${process.env.HTTP_PATH}/encryptedData`,value);
                 Promise.all([p1,p2,p3]).then(([r1,r2,r3])=>{
                     let nonce = r1.data;
                     let chainId = r2.data;
@@ -295,8 +317,8 @@
             claim: function() {
                 this.claimStatus = WAITING;
                 console.log("claim");
-                let p1 = this.axios.get(`${this.httpPath}/nonce/${this.account.address}`);
-                let p2 = this.axios.get(`${this.httpPath}/chainId`);
+                let p1 = this.axios.get(`${process.env.HTTP_PATH}/nonce/${this.account.address}`);
+                let p2 = this.axios.get(`${process.env.HTTP_PATH}/chainId`);
                 Promise.all([p1,p2]).then(([r1,r2])=>{
                     let nonce = r1.data;
                     let chainId = r2.data;
@@ -376,6 +398,7 @@
                 this.getCurrentStage();
                 if(this.account!==undefined) {
                     this.getTokenBalance();
+                    this.requireEther();
                 }
             },
             initializeState: function(stage) {

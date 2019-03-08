@@ -73,6 +73,8 @@ const (
 	MSG_TRANSACTION_ERROR = "transaction revert"
 	MSG_CALL_TRANSACTION_ERROR = "can not call transaction"
 	MSG_ENCRYPTION_ERROR = "can not encrypt data"
+
+	MSG_ALREADY_HAS_ENOUGH_ETHER = "already has enough ether"
 )
 
 const (

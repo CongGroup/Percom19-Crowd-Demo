@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
@@ -16,6 +17,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"user"
 	"zcrypto"
 )
 
@@ -196,6 +198,71 @@ func getStatistics(agg *contract.Agg) func(w http.ResponseWriter, r* http.Reques
 	}
 }
 
+func requireEther(owner *user.User, agg *contract.Agg) func (http.ResponseWriter,*http.Request) {
+	return func(w http.ResponseWriter,r *http.Request) {
+		vars:=mux.Vars(r)
+		account:=common.HexToAddress(vars["user"])
+		log.Println(vars["user"],"require for ether")
+		value,_:=new(big.Int).SetString(user.TRANSFER_VALUE,10)
+		// check user Balance first
+		// only send if user balance less than 0.001 ether
+		balance,err:=agg.GetEther(account)
+		if err!=nil {
+			log.Println(err.Error())
+			http.Error(w,err.Error(),http.StatusInternalServerError)
+			return
+		}
+		thresholdValue,_:= new(big.Int).SetString(user.THRESHOLD_VALUE,10)
+		if balance.Cmp(thresholdValue) == 1 {
+			errorMsg:= appClient.MSG_ALREADY_HAS_ENOUGH_ETHER
+			log.Println("user: ",vars["user"],errorMsg)
+			http.Error(w,errorMsg,http.StatusBadRequest)
+			return
+		}
+
+		// send ether
+		err =owner.Transfer(account,value)
+		if err!=nil {
+			log.Println(err.Error())
+			http.Error(w,err.Error(),http.StatusInternalServerError)
+			return
+		}
+
+		valueWrapper,err:=json.Marshal(value)
+		if err!=nil {
+			log.Println(err.Error())
+			http.Error(w,err.Error(),http.StatusInternalServerError)
+			return
+		}
+		log.Println(vars["user"],"got ether")
+		w.Write(valueWrapper)
+	}
+}
+
+func getEther(agg *contract.Agg) func (http.ResponseWriter,*http.Request) {
+	return func(w http.ResponseWriter,r *http.Request) {
+		vars:=mux.Vars(r)
+		account:=common.HexToAddress(vars["user"])
+
+		balance,err:=agg.GetEther(account)
+		log.Println("user",vars["user"],"balance: ",balance)
+		if err!=nil {
+			log.Println(err.Error())
+			http.Error(w,err.Error(),http.StatusInternalServerError)
+			return
+		}
+
+		balanceWrapper,err:=json.Marshal(balance)
+		if err!=nil {
+			log.Println(err.Error())
+			http.Error(w,err.Error(),http.StatusInternalServerError)
+			return
+		}
+		w.Write(balanceWrapper)
+	}
+}
+
+
 func init() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 }
@@ -207,6 +274,19 @@ func start() {
 	agg:= contract.NewAgg(contract.GETH_PORT,contract.CONTRACT_ABI,common.HexToAddress(contract.CONTRACT_ADDRESS))
 	token:= contract.NewERC20(contract.GETH_PORT,contract.ERC20_ABI,common.HexToAddress(contract.ERC20_ADDRESS))
 
+	pk,err:= crypto.HexToECDSA(user.MASTER_KEY)
+	if err!=nil {
+		panic(err)
+	}
+
+	owner := user.NewUser(common.HexToAddress(user.MASTER_ADDRESS),pk,agg)
+	nonce,err:=agg.GetNonce(owner.Address)
+	if err!=nil {
+		log.Println(err.Error())
+		panic(err)
+	}
+	owner.Nonce = nonce
+
 	go manager.Start()
 	go manager.SubScriptContractEvent(agg)
 
@@ -215,6 +295,8 @@ func start() {
 	r.HandleFunc("/chainId",getChainId(agg)).Methods("GET")
 	r.HandleFunc("/encryptedData",getEncryptedData).Methods("POST")
 	r.HandleFunc("/statistics/{taskId}",getStatistics(agg)).Methods("GET")
+	r.HandleFunc("/requireEther/{user}",requireEther(owner,agg)).Methods("GET")
+	r.HandleFunc("/ether/{user}",getEther(agg)).Methods("GET")
 
 	fmt.Println("Running http server")
 	http.ListenAndServe(

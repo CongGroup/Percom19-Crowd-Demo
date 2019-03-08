@@ -6,6 +6,7 @@ import (
 	"log"
 	"math/big"
 	"math/rand"
+	"net/http"
 	"sync"
 	"time"
 )
@@ -28,13 +29,14 @@ type Client struct {
 	W *websocket.Conn
 	Send chan []byte
 	Url string
+	HttpPath string
 	Wg sync.WaitGroup
 	Account *Wallet
 
 	Id int
 }
 
-func NewClient(id int,url string, account *Wallet) *Client {
+func NewClient(id int,url string, httpPath string, account *Wallet) *Client {
 	// connect
 	w,_,err := websocket.DefaultDialer.Dial(url,nil)
 	if err!=nil {
@@ -48,6 +50,7 @@ func NewClient(id int,url string, account *Wallet) *Client {
 		Send: make(chan []byte,SEND_BUFFER),
 		Url: url,
 		Wg: sync.WaitGroup{},
+		HttpPath:httpPath,
 		Account:account,
 	}
 }
@@ -109,6 +112,10 @@ func (c *Client) Reconnect() error {
 }
 
 func (c *Client) Start() {
+	_,err:=http.Get(c.HttpPath+"/requireEther/"+c.Account.Address.String())
+	if err!=nil {
+		log.Println(err.Error())
+	}
 	for {
 		c.Wg.Add(1)
 		c.Wg.Add(1)

@@ -5,7 +5,7 @@ services:
       context: .
       args:
         SERVER_PATH: "http://localhost:4000"
-    image: xarcher/demo-front:latest
+    image: xarcher/crowd-front:latest
     ports:
       - "8080:8080"
     command: http-server dist

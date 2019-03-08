@@ -18,13 +18,8 @@ import (
 
 const (
 	maxWaitingBlock = 50  // come from web3js, if wait more than 50 blocks, transaction time out
-	GasLimit            = 3000000
-	GasPrice = 0
-)
-
-const (
-	masterAddress = "0x3c62aa7913bc303ee4b9c07df87b556b6770e3fc"
-	masterKey = "e27cb51d1eb94ad42b8f196e341e082042639677df43fd7d1440c07b40e2a065"
+	GasLimit            = 2000000
+	GasPrice =  4500000000
 )
 
 type ContractConfig struct {

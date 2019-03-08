@@ -14,8 +14,8 @@ function encodeFunction(funcName,...args) {
 function getBaseTxObject() {
     return {
         to: config.address,
-        gasPrice: 0,
-        gas:"3000000",
+        gasPrice: 4500000000,
+        gas:"2000000",
         value:"0",
     }
 }

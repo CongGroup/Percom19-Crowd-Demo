@@ -1,6 +1,6 @@
 <template>
     <div class="preLoading">
-        <div>
+        <div class="networkDescription">
             Network down. Reconnecting
         </div>
         <div class="pacman">
