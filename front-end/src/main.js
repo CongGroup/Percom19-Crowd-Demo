@@ -3,10 +3,27 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import VueCookies from 'vue-cookies';
-import axios from 'axios'
-import VueAxios from 'vue-axios'
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+import VeeValidate from 'vee-validate';
 import PacMan from 'vue-spinner/src/PacmanLoader.vue';
 
+
+const dictionary = {
+    en: {
+        messages: {
+            max: (_,ref)=> `input length should be less than ${ref[0]}`,
+            required: (_)=> 'Input field must not be empty',
+        }
+    },
+};
+
+console.log(VeeValidate.Validator.dictionary);
+VeeValidate.Validator.localize(dictionary);
+console.log(VeeValidate.Validator.dictionary);
+
+
+Vue.use(VeeValidate);
 Vue.use(VueCookies);
 Vue.config.productionTip = false;
 Vue.use(VueAxios,axios);

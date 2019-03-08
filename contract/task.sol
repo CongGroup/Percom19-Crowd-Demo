@@ -132,23 +132,52 @@ contract Crowdsourcing {
     }
 	
 
-	function isQualifiedProviderForTask(uint task_id, address user) external view returns (bool) {
+	function isQualifiedProviderForTask(uint task_id, address user) public view returns (bool) {
 	    uint id = task[task_id].data_provider_id[user];
 	    require(id!=0,"data provider not exist");
 	    require(task[task_id].stage> Stages.aggregate,"only be called after aggregation!");
 	    return task[task_id].data_provider[id-1].qualified;
 	}
 	
-	function isRegisteredOfTask(uint task_id, address user) external view returns (bool) {
-	    
+	function isRegisteredOfTask(uint task_id, address user) public view returns (bool) {
+	    require(afterStage(task_id,Stages.solicit));
+		uint id = task[task_id].data_provider_id[user];
+		uint lastest_id = task[task_id].register_count;
+		if(id == 0 || id > lastest_id || task[task_id].data_provider[id-1].account != user) {
+		    return false;
+		}
+		return true;
 	}
 	
-	function isSubmittedOfTask(uint task_id,address user) external view returns (bool) {
+	function isSubmittedOfTask(uint task_id,address user) public view returns (bool) {
+	    require(afterStage(task_id,Stages.register));
 	    
+	    if(!isRegisteredOfTask(task_id,user)) return false;
+	    uint id = task[task_id].data_provider_id[user];
+		if (!task[task_id].data_provider[id-1].submited) return false;
+		
+		return true;
+	}
+	
+	function isServiceProviderOfTask(uint task_id, address user) public view returns (bool) {
+	    if (user!=task[task_id].service_provider.account) return false;
+	    return true;
 	}
 	
 	function isClaimmedOfTask(uint task_id,address user) external view returns (bool) {
-	    
+	    require(afterStage(task_id,Stages.approve));
+	    if(!isServiceProviderOfTask(task_id,user) || !isSubmittedOfTask(task_id,user) || !isQualifiedProviderForTask(task_id,user)) return false;
+	   
+	    //service provider
+        if(isServiceProviderOfTask(task_id,user)) {
+            if(task[task_id].service_provider.claimed) return true;
+            else return false;
+        } 
+        
+        // data_provider
+        uint id = task[task_id].data_provider_id[user];
+        if(task[task_id].data_provider[id-1].claimed) return true;
+	    return false;
 	}
 	
 
@@ -181,6 +210,14 @@ contract Crowdsourcing {
 
 	function atStage (uint task_id, Stages _stage) internal view returns (bool) {
 		if(task[task_id].stage == _stage){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	function afterStage(uint task_id,Stages _stage) internal view returns (bool) {
+		if(task[task_id].stage > _stage){
 			return true;
 		} else {
 			return false;
@@ -281,8 +318,9 @@ contract Crowdsourcing {
 		emit Submit(task_id, task[task_id].submit_count);
 		
 		if(task[task_id].register_count == task[task_id].request.target) {
+		    Stages oldStage = task[task_id].stage;
 			task[task_id].stage = Stages.aggregate;
-			emit StageTransfer(task_id, uint(task[task_id].stage), uint(Stages.register));
+			emit StageTransfer(task_id, uint(task[task_id].stage), uint(oldStage));
 			//emit RegisterCollected(task_id);
 		}
 	}
@@ -291,8 +329,10 @@ contract Crowdsourcing {
 	function stopRegisterAndSubmit(uint task_id) external {
 	    require(atStage(task_id, Stages.register));
 	    require(task[task_id].owner == msg.sender);
-	    nextStage(task_id);   // to submit stage 
-	    nextStage(task_id);   // to aggregate stage 
+	    
+	    Stages oldStage = task[task_id].stage;
+		task[task_id].stage = Stages.aggregate;
+		emit StageTransfer(task_id, uint(task[task_id].stage), uint(oldStage));
 	}
 
 	function aggregate(uint task_id, bytes calldata aggregation, bytes calldata qualifiedSets,bytes calldata share, bytes calldata attestatino) external {

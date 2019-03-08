@@ -53,6 +53,26 @@ func (h *Handler) sendError(gcuid int, errorCode int, reason string) error{
 	return err
 }
 
+func (h *Handler) sendTransactionError(gcuid int, errorCode int, reason string, txid int) error {
+	reqError:= &SendTransactionErrorResponse{
+		Error: Error {
+			Status: FAIL,
+			Gcuid:  gcuid,
+			Code: errorCode,
+			Reason: reason,
+		},
+		Txid:txid,
+	}
+	reqErrorWrapper, err := json.Marshal(reqError)
+	if err != nil {
+		log.Println(err.Error())
+		h.writeMessage(websocket.TextMessage, []byte(MSG_UNMARSHAL_JSON_ERROR))
+		return err
+	}
+	err =h.writeMessage(websocket.TextMessage, reqErrorWrapper)
+	return err
+}
+
 
 func derivePrivateKey(rawString string) (*ecdsa.PrivateKey,error) {
 	pk,err:= crypto.HexToECDSA(rawString)

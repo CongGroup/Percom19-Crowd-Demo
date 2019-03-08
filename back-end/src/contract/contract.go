@@ -8,7 +8,7 @@ import (
 
 const (
 	GETH_PORT    = "ws://localhost:8650"
-	CONTRACT_ADDRESS = "0xe69bef55bdd3a170068345b6e29c4259d16a4ced"
+	CONTRACT_ADDRESS = "0x5852ab9147cf5297d5bed4ff1a2d8d7fb7ede9b9"
 	CONTRACT_ABI     = `[
 	{
 		"constant": false,
@@ -513,7 +513,99 @@ const (
 				"type": "address"
 			}
 		],
+		"name": "isClaimmedOfTask",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "task_id",
+				"type": "uint256"
+			},
+			{
+				"name": "user",
+				"type": "address"
+			}
+		],
 		"name": "isQualifiedProviderForTask",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "task_id",
+				"type": "uint256"
+			},
+			{
+				"name": "user",
+				"type": "address"
+			}
+		],
+		"name": "isRegisteredOfTask",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "task_id",
+				"type": "uint256"
+			},
+			{
+				"name": "user",
+				"type": "address"
+			}
+		],
+		"name": "isServiceProviderOfTask",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "task_id",
+				"type": "uint256"
+			},
+			{
+				"name": "user",
+				"type": "address"
+			}
+		],
+		"name": "isSubmittedOfTask",
 		"outputs": [
 			{
 				"name": "",
@@ -620,6 +712,10 @@ const (
 
 	FUNCTION_GET_SOLICITINFO_OF_TASK = "getSolicitInfoOfTask"
 	FUNCTION_GET_AGGREGATION_RESULT_OF_TASK = "getAggregationResultOfTask"
+
+	FUNCTION_IS_REGISTERED_OF_TASK = "isRegisteredOfTask"
+	FUNCTION_IS_ClAIMMED_OF_TASK = "isClaimmedOfTask"
+	FUNCTION_IS_SERVICE_PROVIDER_OF_TASK = "isServiceProviderOfTask"
 )
 
 type StageTransferEvent struct {

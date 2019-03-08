@@ -688,14 +688,14 @@ func (h *Handler) sendTransactionHandler(gcuid int,data []byte) {
 	err:= json.Unmarshal(data,&payload)
 	if err!=nil {
 		log.Println(err.Error())
-		h.errorHandler(gcuid,DATA_FORMAT_ERROR,err)
+		h.sendTransactionError(gcuid,DATA_FORMAT_ERROR,err.Error(),payload.Txid)
 		return
 	}
 
 	rawTx,err:= hex.DecodeString(payload.RawTransaction)
 	if err!=nil {
 		log.Println(err.Error())
-		h.errorHandler(gcuid,DATA_FORMAT_ERROR,err)
+		h.sendTransactionError(gcuid,DATA_FORMAT_ERROR,err.Error(),payload.Txid)
 		return
 	}
 
@@ -704,7 +704,7 @@ func (h *Handler) sendTransactionHandler(gcuid int,data []byte) {
 	rlp.DecodeBytes(rawTx,&tx)
 	if err!=nil {
 		log.Println(err.Error())
-		h.errorHandler(gcuid,DATA_FORMAT_ERROR,err)
+		h.sendTransactionError(gcuid,DATA_FORMAT_ERROR,err.Error(),payload.Txid)
 		return
 	}
 
@@ -712,7 +712,7 @@ func (h *Handler) sendTransactionHandler(gcuid int,data []byte) {
 	_, err =h.agg.SendTransaction(&tx)
 	if err!=nil {
 		log.Println(err.Error())
-		h.errorHandler(gcuid,TRANSACTION_ERROR,err)
+		h.sendTransactionError(gcuid,TRANSACTION_ERROR,err.Error(),payload.Txid)
 		return
 	}
 
@@ -789,6 +789,141 @@ func (h *Handler) isQualifiedHandler(gcuid int,data[]byte) {
 	h.wrapperAndSend(gcuid, res)
 }
 
+func (h *Handler) canRegisterAndClaimForTaskHandler(gcuid int, data []byte) {
+	var payload CanRegisterAndSubmitRequest
+	err:= json.Unmarshal(data,&payload)
+	if err!=nil {
+		log.Println(err.Error())
+		h.errorHandler(gcuid,DATA_FORMAT_ERROR,err)
+		return
+	}
+
+	var canRegister bool
+
+	stageByte,err:= h.agg.Call(contract.FUNCTION_GET_STAGE_OF_TASK,payload.TaskId)
+	if err!=nil {
+		log.Println(err.Error())
+		h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
+		return
+	}
+	stage:= new(big.Int).SetBytes(stageByte)
+
+	if(stage.Int64() != REGISTER) {
+		canRegister = false;
+	} else {
+		registeredBytes,err:= h.agg.Call(contract.FUNCTION_IS_REGISTERED_OF_TASK,payload.TaskId,common.HexToAddress(payload.Address))
+		if err!=nil {
+			log.Println(err.Error())
+			h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
+			return
+		}
+		registered:= new(big.Int).SetBytes(registeredBytes).Int64()!=0
+		if registered {
+			canRegister = false;
+		} else {
+			canRegister = true;
+		}
+	}
+
+
+	res:= &CanRegisterAndSubmitResponse{
+		Response:Response{
+			Gcuid:gcuid,
+			Status:SUCCESS,
+		},
+		CanRegister:canRegister,
+	}
+
+	h.wrapperAndSend(gcuid, res)
+}
+
+func (h *Handler) canClaimForTaskHandler(gcuid int,data []byte) {
+	var payload CanClaimRequest
+	err:= json.Unmarshal(data,&payload)
+	if err!=nil {
+		log.Println(err.Error())
+		h.errorHandler(gcuid,DATA_FORMAT_ERROR,err)
+		return
+	}
+
+	var canClaim bool
+
+	stageByte,err:= h.agg.Call(contract.FUNCTION_GET_STAGE_OF_TASK,payload.TaskId)
+	if err!=nil {
+		log.Println(err.Error())
+		h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
+		return
+	}
+	stage:= new(big.Int).SetBytes(stageByte)
+
+	if(stage.Int64() != CLAIM) {
+		canClaim = false;
+	} else {
+		registeredBytes,err:= h.agg.Call(contract.FUNCTION_IS_REGISTERED_OF_TASK,payload.TaskId,common.HexToAddress(payload.Address))
+		if err!=nil {
+			log.Println(err.Error())
+			h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
+			return
+		}
+		registered:= new(big.Int).SetBytes(registeredBytes).Int64()!=0
+
+		rightUser:= true
+		if !registered {
+			// test if is service provider
+			isServiceProviderBytes,err:= h.agg.Call(contract.FUNCTION_IS_SERVICE_PROVIDER_OF_TASK,payload.TaskId,common.HexToAddress(payload.Address))
+			if err!=nil {
+				log.Println(err.Error())
+				h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
+				return
+			}
+			isServiceProvider:= new(big.Int).SetBytes(isServiceProviderBytes).Int64()!=0
+			if !isServiceProvider {
+				canClaim = false;
+				rightUser = false;
+			}
+		} else {
+			qualifiedByte,err:= h.agg.Call(contract.FUNCTION_IS_QUALIFIED_PROVIDER_FOR_TASK,payload.TaskId,common.HexToAddress(payload.Address))
+			if err!=nil {
+				log.Println(err.Error())
+				h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
+				return
+			}
+			qualified:= new(big.Int).SetBytes(qualifiedByte).Int64()!=0
+			if !qualified {
+				rightUser = false
+				canClaim = false
+			}
+		}
+
+		if(rightUser) { // qualified data provider or service provider
+			// test if claimed
+			claimBytes,err:= h.agg.Call(contract.FUNCTION_IS_ClAIMMED_OF_TASK,payload.TaskId,common.HexToAddress(payload.Address))
+			if err!=nil {
+				log.Println(err.Error())
+				h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
+				return
+			}
+			claimed:= new(big.Int).SetBytes(claimBytes).Int64()!=0
+			if claimed {
+				canClaim = false
+			} else {
+				canClaim = true;
+			}
+		}
+
+	}
+
+	res:= &CanClaimResponse{
+		Response:Response{
+			Gcuid:gcuid,
+			Status:SUCCESS,
+		},
+		CanClaim:canClaim,
+	}
+
+	h.wrapperAndSend(gcuid, res)
+}
+
 func (h *Handler) HandleRequest () {
 	for {
 		_,data,err:= h.w.ReadMessage()
@@ -844,6 +979,10 @@ func (h *Handler) HandleRequest () {
 			go h.qualfiedNumberHandler(GCUID_QUALIFIED_NUMBER,data)
 		case GCUID_IS_QUALIFIED:
 			go h.isQualifiedHandler(GCUID_IS_QUALIFIED,data)
+		case GCUID_CAN_REGISTER_AND_SUBMIT_FOR_TASK:
+			go h.canRegisterAndClaimForTaskHandler(GCUID_CAN_REGISTER_AND_SUBMIT_FOR_TASK,data)
+		case GCUID_CAN_CLAIM_FOR_TASK:
+			go h.canClaimForTaskHandler(GCUID_CAN_CLAIM_FOR_TASK, data)
 		}
 	}
 }

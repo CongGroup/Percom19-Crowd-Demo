@@ -16031,3 +16031,1805 @@
 2019/03/08 10:36:57 handler.go:747: qualified number: 100
 2019/03/08 10:36:57 handler.go:636: aggregation result: 3343895
 2019/03/08 10:36:58 main.go:154: get statistics
+2019/03/08 12:57:35 messagePush.go:58: start event watcher
+2019/03/08 12:57:51 main.go:49: receive a reqeust
+2019/03/08 12:57:51 main.go:49: receive a reqeust
+2019/03/08 12:57:51 main.go:49: receive a reqeust
+2019/03/08 12:57:51 main.go:49: receive a reqeust
+2019/03/08 12:57:51 messagePush.go:37: a new user register message push
+2019/03/08 12:57:51 messagePush.go:37: a new user register message push
+2019/03/08 12:57:51 messagePush.go:37: a new user register message push
+2019/03/08 12:57:51 messagePush.go:37: a new user register message push
+2019/03/08 12:57:51 main.go:49: receive a reqeust
+2019/03/08 12:57:51 main.go:49: receive a reqeust
+2019/03/08 12:57:51 messagePush.go:37: a new user register message push
+2019/03/08 12:57:51 messagePush.go:37: a new user register message push
+2019/03/08 12:57:51 main.go:49: receive a reqeust
+2019/03/08 12:57:51 messagePush.go:37: a new user register message push
+2019/03/08 12:57:51 main.go:49: receive a reqeust
+2019/03/08 12:57:51 main.go:49: receive a reqeust
+2019/03/08 12:57:51 main.go:49: receive a reqeust
+2019/03/08 12:57:51 messagePush.go:37: a new user register message push
+2019/03/08 12:57:51 messagePush.go:37: a new user register message push
+2019/03/08 12:57:51 messagePush.go:37: a new user register message push
+2019/03/08 12:57:51 main.go:49: receive a reqeust
+2019/03/08 12:57:51 main.go:49: receive a reqeust
+2019/03/08 12:57:51 main.go:49: receive a reqeust
+2019/03/08 12:57:51 main.go:49: receive a reqeust
+2019/03/08 12:57:51 main.go:49: receive a reqeust
+2019/03/08 12:57:51 main.go:49: receive a reqeust
+2019/03/08 12:57:51 messagePush.go:37: a new user register message push
+2019/03/08 12:57:51 messagePush.go:37: a new user register message push
+2019/03/08 12:57:51 messagePush.go:37: a new user register message push
+2019/03/08 12:57:51 messagePush.go:37: a new user register message push
+2019/03/08 12:57:51 messagePush.go:37: a new user register message push
+2019/03/08 12:57:51 messagePush.go:37: a new user register message push
+2019/03/08 12:57:51 main.go:49: receive a reqeust
+2019/03/08 12:57:51 main.go:49: receive a reqeust
+2019/03/08 12:57:51 main.go:49: receive a reqeust
+2019/03/08 12:57:51 main.go:49: receive a reqeust
+2019/03/08 12:57:51 messagePush.go:37: a new user register message push
+2019/03/08 12:57:51 messagePush.go:37: a new user register message push
+2019/03/08 12:57:51 messagePush.go:37: a new user register message push
+2019/03/08 12:57:51 messagePush.go:37: a new user register message push
+2019/03/08 12:58:34 main.go:49: receive a reqeust
+2019/03/08 12:58:34 messagePush.go:37: a new user register message push
+2019/03/08 12:58:34 handler.go:479: method 'balanceOf' not found
+2019/03/08 12:58:34 handler.go:479: method 'balanceOf' not found
+2019/03/08 12:58:35 main.go:49: receive a reqeust
+2019/03/08 12:58:35 messagePush.go:37: a new user register message push
+2019/03/08 12:58:35 handler.go:479: method 'balanceOf' not found
+2019/03/08 13:00:38 messagePush.go:58: start event watcher
+2019/03/08 13:00:39 main.go:49: receive a reqeust
+2019/03/08 13:00:39 messagePush.go:37: a new user register message push
+2019/03/08 13:00:39 main.go:49: receive a reqeust
+2019/03/08 13:00:39 messagePush.go:37: a new user register message push
+2019/03/08 13:00:45 main.go:49: receive a reqeust
+2019/03/08 13:00:45 main.go:49: receive a reqeust
+2019/03/08 13:00:45 main.go:49: receive a reqeust
+2019/03/08 13:00:45 main.go:49: receive a reqeust
+2019/03/08 13:00:45 main.go:49: receive a reqeust
+2019/03/08 13:00:45 main.go:49: receive a reqeust
+2019/03/08 13:00:45 main.go:49: receive a reqeust
+2019/03/08 13:00:45 main.go:49: receive a reqeust
+2019/03/08 13:00:45 main.go:49: receive a reqeust
+2019/03/08 13:00:45 main.go:49: receive a reqeust
+2019/03/08 13:00:45 messagePush.go:37: a new user register message push
+2019/03/08 13:00:45 main.go:49: receive a reqeust
+2019/03/08 13:00:45 messagePush.go:37: a new user register message push
+2019/03/08 13:00:45 messagePush.go:37: a new user register message push
+2019/03/08 13:00:45 messagePush.go:37: a new user register message push
+2019/03/08 13:00:45 messagePush.go:37: a new user register message push
+2019/03/08 13:00:45 messagePush.go:37: a new user register message push
+2019/03/08 13:00:45 messagePush.go:37: a new user register message push
+2019/03/08 13:00:45 messagePush.go:37: a new user register message push
+2019/03/08 13:00:45 messagePush.go:37: a new user register message push
+2019/03/08 13:00:45 messagePush.go:37: a new user register message push
+2019/03/08 13:00:45 main.go:49: receive a reqeust
+2019/03/08 13:00:45 main.go:49: receive a reqeust
+2019/03/08 13:00:45 main.go:49: receive a reqeust
+2019/03/08 13:00:45 main.go:49: receive a reqeust
+2019/03/08 13:00:45 messagePush.go:37: a new user register message push
+2019/03/08 13:00:45 messagePush.go:37: a new user register message push
+2019/03/08 13:00:45 messagePush.go:37: a new user register message push
+2019/03/08 13:00:45 main.go:49: receive a reqeust
+2019/03/08 13:00:45 messagePush.go:37: a new user register message push
+2019/03/08 13:00:45 messagePush.go:37: a new user register message push
+2019/03/08 13:00:45 messagePush.go:37: a new user register message push
+2019/03/08 13:00:45 main.go:49: receive a reqeust
+2019/03/08 13:00:45 main.go:49: receive a reqeust
+2019/03/08 13:00:45 messagePush.go:37: a new user register message push
+2019/03/08 13:00:45 main.go:49: receive a reqeust
+2019/03/08 13:00:45 messagePush.go:37: a new user register message push
+2019/03/08 13:00:45 main.go:49: receive a reqeust
+2019/03/08 13:00:45 messagePush.go:37: a new user register message push
+2019/03/08 13:00:45 messagePush.go:37: a new user register message push
+2019/03/08 13:00:52 handler.go:903: websocket: close 1001 (going away)
+2019/03/08 13:00:52 messagePush.go:41: a user unregister message push
+2019/03/08 13:00:53 main.go:49: receive a reqeust
+2019/03/08 13:00:53 messagePush.go:37: a new user register message push
+2019/03/08 13:02:06 main.go:49: receive a reqeust
+2019/03/08 13:02:06 messagePush.go:37: a new user register message push
+2019/03/08 13:02:08 handler.go:903: websocket: close 1001 (going away)
+2019/03/08 13:02:08 messagePush.go:41: a user unregister message push
+2019/03/08 13:02:08 handler.go:903: websocket: close 1001 (going away)
+2019/03/08 13:02:08 messagePush.go:41: a user unregister message push
+2019/03/08 13:02:09 main.go:49: receive a reqeust
+2019/03/08 13:02:09 messagePush.go:37: a new user register message push
+2019/03/08 13:03:23 main.go:49: receive a reqeust
+2019/03/08 13:03:23 messagePush.go:37: a new user register message push
+2019/03/08 13:04:49 main.go:49: receive a reqeust
+2019/03/08 13:04:49 messagePush.go:37: a new user register message push
+2019/03/08 13:04:54 handler.go:903: websocket: close 1001 (going away)
+2019/03/08 13:04:54 messagePush.go:41: a user unregister message push
+2019/03/08 13:04:54 handler.go:903: websocket: close 1001 (going away)
+2019/03/08 13:04:54 messagePush.go:41: a user unregister message push
+2019/03/08 13:04:54 handler.go:903: websocket: close 1001 (going away)
+2019/03/08 13:04:54 messagePush.go:41: a user unregister message push
+2019/03/08 13:04:55 main.go:49: receive a reqeust
+2019/03/08 13:04:55 messagePush.go:37: a new user register message push
+2019/03/08 13:10:39 main.go:49: receive a reqeust
+2019/03/08 13:10:39 messagePush.go:37: a new user register message push
+2019/03/08 13:10:41 handler.go:43: data consumer private key: e27cb51d1eb94ad42b8f196e341e082042639677df43fd7d1440c07b40e2a065
+2019/03/08 13:10:41 handler.go:51: data fee: 1230
+2019/03/08 13:10:41 handler.go:52: service fee: 16
+2019/03/08 13:10:43 messagePush.go:44: broadcast a message: {"gcuid":105,"status":0,"dataFee":1230,"serviceFee":16,"serviceProvider":"0x88d6F234b6327b7a9d9d23014EFd6E05b6Dc8943","target":100}
+2019/03/08 13:10:43 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":1}
+2019/03/08 13:10:43 handler.go:375: data to encrypt: 62166
+2019/03/08 13:10:43 handler.go:375: data to encrypt: 25484
+2019/03/08 13:10:43 handler.go:375: data to encrypt: 14858
+2019/03/08 13:10:43 handler.go:375: data to encrypt: 31622
+2019/03/08 13:10:43 handler.go:375: data to encrypt: 50774
+2019/03/08 13:10:43 handler.go:375: data to encrypt: 10835
+2019/03/08 13:10:43 handler.go:375: data to encrypt: 18260
+2019/03/08 13:10:43 handler.go:375: data to encrypt: 43436
+2019/03/08 13:10:43 handler.go:375: data to encrypt: 24119
+2019/03/08 13:10:43 handler.go:375: data to encrypt: 54995
+2019/03/08 13:10:43 handler.go:375: data to encrypt: 31189
+2019/03/08 13:10:43 handler.go:375: data to encrypt: 30994
+2019/03/08 13:10:43 handler.go:375: data to encrypt: 18434
+2019/03/08 13:10:43 handler.go:375: data to encrypt: 54980
+2019/03/08 13:10:43 handler.go:375: data to encrypt: 47558
+2019/03/08 13:10:43 handler.go:375: data to encrypt: 18949
+2019/03/08 13:10:43 handler.go:375: data to encrypt: 56910
+2019/03/08 13:10:43 handler.go:375: data to encrypt: 16826
+2019/03/08 13:10:43 handler.go:375: data to encrypt: 15030
+2019/03/08 13:10:43 handler.go:375: data to encrypt: 11740
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":1}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":1}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":2}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":2}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":3}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":3}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":4}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":4}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":5}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":5}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":6}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":6}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":7}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":7}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":8}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":8}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":9}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":9}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":10}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":10}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":11}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":11}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":12}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":12}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":13}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":13}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":14}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":14}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":15}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":15}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":16}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":16}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":17}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":17}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":18}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":18}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":19}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":19}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":20}
+2019/03/08 13:10:45 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":20}
+2019/03/08 13:10:51 main.go:71: get nonce
+2019/03/08 13:10:51 main.go:94: get chain id
+2019/03/08 13:10:51 main.go:80: user: 0x79Ad982e4Fa81F4746A5925d43558553392507Ef
+2019/03/08 13:10:51 main.go:81: nonce: 0
+2019/03/08 13:10:51 main.go:114: get encrypted data
+2019/03/08 13:10:51 main.go:130: data to encrypt: 5
+2019/03/08 13:10:53 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":21}
+2019/03/08 13:10:53 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":21}
+2019/03/08 13:10:55 handler.go:903: websocket: close 1001 (going away)
+2019/03/08 13:10:55 messagePush.go:41: a user unregister message push
+2019/03/08 13:10:56 main.go:49: receive a reqeust
+2019/03/08 13:10:56 messagePush.go:37: a new user register message push
+2019/03/08 13:11:05 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":3}
+2019/03/08 13:11:05 handler.go:903: websocket: close 1001 (going away)
+2019/03/08 13:11:05 messagePush.go:41: a user unregister message push
+2019/03/08 13:11:05 handler.go:903: websocket: close 1001 (going away)
+2019/03/08 13:11:05 messagePush.go:41: a user unregister message push
+2019/03/08 13:11:06 main.go:49: receive a reqeust
+2019/03/08 13:11:06 messagePush.go:37: a new user register message push
+2019/03/08 13:11:36 main.go:49: receive a reqeust
+2019/03/08 13:11:36 messagePush.go:37: a new user register message push
+2019/03/08 13:11:39 handler.go:227: aggregate result =  639164 count: 21
+2019/03/08 13:11:41 messagePush.go:44: broadcast a message: {"gcuid":106,"status":0,"amount":639164,"qualifiedNumber":21}
+2019/03/08 13:11:41 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":4}
+2019/03/08 13:11:42 handler.go:903: websocket: close 1001 (going away)
+2019/03/08 13:11:42 messagePush.go:41: a user unregister message push
+2019/03/08 13:11:42 handler.go:903: websocket: close 1001 (going away)
+2019/03/08 13:11:42 messagePush.go:41: a user unregister message push
+2019/03/08 13:11:43 main.go:49: receive a reqeust
+2019/03/08 13:11:43 messagePush.go:37: a new user register message push
+2019/03/08 13:11:43 handler.go:731: get qualified Number
+2019/03/08 13:11:43 handler.go:747: qualified number: 21
+2019/03/08 13:11:43 handler.go:636: aggregation result: 639164
+2019/03/08 13:11:47 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":5}
+2019/03/08 13:11:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":1}
+2019/03/08 13:11:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":2}
+2019/03/08 13:11:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":3}
+2019/03/08 13:11:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":4}
+2019/03/08 13:11:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":5}
+2019/03/08 13:11:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":6}
+2019/03/08 13:11:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":7}
+2019/03/08 13:11:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":8}
+2019/03/08 13:11:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":9}
+2019/03/08 13:11:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":10}
+2019/03/08 13:11:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":11}
+2019/03/08 13:11:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":12}
+2019/03/08 13:11:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":13}
+2019/03/08 13:11:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":14}
+2019/03/08 13:11:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":15}
+2019/03/08 13:11:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":16}
+2019/03/08 13:11:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":17}
+2019/03/08 13:11:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":18}
+2019/03/08 13:11:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":19}
+2019/03/08 13:11:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":20}
+2019/03/08 13:12:25 main.go:49: receive a reqeust
+2019/03/08 13:12:25 messagePush.go:37: a new user register message push
+2019/03/08 13:12:25 handler.go:731: get qualified Number
+2019/03/08 13:12:25 handler.go:747: qualified number: 21
+2019/03/08 13:12:25 handler.go:636: aggregation result: 639164
+2019/03/08 13:13:43 main.go:49: receive a reqeust
+2019/03/08 13:13:43 messagePush.go:37: a new user register message push
+2019/03/08 13:13:43 handler.go:731: get qualified Number
+2019/03/08 13:13:43 handler.go:747: qualified number: 21
+2019/03/08 13:13:43 handler.go:636: aggregation result: 639164
+2019/03/08 13:15:04 main.go:49: receive a reqeust
+2019/03/08 13:15:04 messagePush.go:37: a new user register message push
+2019/03/08 13:15:04 handler.go:731: get qualified Number
+2019/03/08 13:15:04 handler.go:747: qualified number: 21
+2019/03/08 13:15:04 handler.go:636: aggregation result: 639164
+2019/03/08 13:15:20 main.go:49: receive a reqeust
+2019/03/08 13:15:20 messagePush.go:37: a new user register message push
+2019/03/08 13:15:20 handler.go:731: get qualified Number
+2019/03/08 13:15:20 handler.go:747: qualified number: 21
+2019/03/08 13:15:20 handler.go:636: aggregation result: 639164
+2019/03/08 13:17:08 handler.go:903: websocket: close 1001 (going away)
+2019/03/08 13:17:08 messagePush.go:41: a user unregister message push
+2019/03/08 13:17:09 main.go:49: receive a reqeust
+2019/03/08 13:17:09 messagePush.go:37: a new user register message push
+2019/03/08 13:17:09 handler.go:731: get qualified Number
+2019/03/08 13:17:09 handler.go:747: qualified number: 21
+2019/03/08 13:17:09 handler.go:636: aggregation result: 639164
+2019/03/08 13:17:13 main.go:71: get nonce
+2019/03/08 13:17:13 main.go:94: get chain id
+2019/03/08 13:17:13 main.go:80: user: 0x79Ad982e4Fa81F4746A5925d43558553392507Ef
+2019/03/08 13:17:13 main.go:81: nonce: 1
+2019/03/08 13:17:15 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":21}
+2019/03/08 13:17:15 handler.go:903: websocket: close 1001 (going away)
+2019/03/08 13:17:15 messagePush.go:41: a user unregister message push
+2019/03/08 13:17:16 main.go:49: receive a reqeust
+2019/03/08 13:17:16 messagePush.go:37: a new user register message push
+2019/03/08 13:17:16 handler.go:731: get qualified Number
+2019/03/08 13:17:16 handler.go:747: qualified number: 21
+2019/03/08 13:17:16 handler.go:636: aggregation result: 639164
+2019/03/08 13:17:25 main.go:71: get nonce
+2019/03/08 13:17:25 main.go:94: get chain id
+2019/03/08 13:17:25 main.go:80: user: 0x79Ad982e4Fa81F4746A5925d43558553392507Ef
+2019/03/08 13:17:25 main.go:81: nonce: 2
+2019/03/08 13:17:27 handler.go:714: transaction revert
+2019/03/08 13:18:28 main.go:49: receive a reqeust
+2019/03/08 13:18:28 messagePush.go:37: a new user register message push
+2019/03/08 13:18:28 handler.go:731: get qualified Number
+2019/03/08 13:18:28 handler.go:747: qualified number: 21
+2019/03/08 13:18:28 handler.go:636: aggregation result: 639164
+2019/03/08 13:18:32 main.go:71: get nonce
+2019/03/08 13:18:32 main.go:94: get chain id
+2019/03/08 13:18:32 main.go:80: user: 0x79Ad982e4Fa81F4746A5925d43558553392507Ef
+2019/03/08 13:18:32 main.go:81: nonce: 3
+2019/03/08 13:18:34 handler.go:714: transaction revert
+2019/03/08 13:24:03 messagePush.go:58: start event watcher
+2019/03/08 13:24:04 main.go:49: receive a reqeust
+2019/03/08 13:24:04 messagePush.go:37: a new user register message push
+2019/03/08 13:24:04 main.go:49: receive a reqeust
+2019/03/08 13:24:04 messagePush.go:37: a new user register message push
+2019/03/08 13:24:04 handler.go:731: get qualified Number
+2019/03/08 13:24:04 handler.go:747: qualified number: 21
+2019/03/08 13:24:04 handler.go:636: aggregation result: 639164
+2019/03/08 13:24:04 main.go:49: receive a reqeust
+2019/03/08 13:24:04 messagePush.go:37: a new user register message push
+2019/03/08 13:24:04 handler.go:731: get qualified Number
+2019/03/08 13:24:04 handler.go:747: qualified number: 21
+2019/03/08 13:24:04 handler.go:636: aggregation result: 639164
+2019/03/08 13:24:04 main.go:49: receive a reqeust
+2019/03/08 13:24:04 messagePush.go:37: a new user register message push
+2019/03/08 13:24:04 handler.go:731: get qualified Number
+2019/03/08 13:24:04 handler.go:747: qualified number: 21
+2019/03/08 13:24:04 handler.go:636: aggregation result: 639164
+2019/03/08 13:24:04 main.go:49: receive a reqeust
+2019/03/08 13:24:04 messagePush.go:37: a new user register message push
+2019/03/08 13:24:04 handler.go:731: get qualified Number
+2019/03/08 13:24:04 handler.go:747: qualified number: 21
+2019/03/08 13:24:04 handler.go:636: aggregation result: 639164
+2019/03/08 13:24:04 handler.go:731: get qualified Number
+2019/03/08 13:24:04 handler.go:747: qualified number: 21
+2019/03/08 13:24:04 handler.go:636: aggregation result: 639164
+2019/03/08 13:24:05 main.go:49: receive a reqeust
+2019/03/08 13:24:05 messagePush.go:37: a new user register message push
+2019/03/08 13:24:05 handler.go:731: get qualified Number
+2019/03/08 13:24:05 handler.go:747: qualified number: 21
+2019/03/08 13:24:05 handler.go:636: aggregation result: 639164
+2019/03/08 13:24:05 main.go:49: receive a reqeust
+2019/03/08 13:24:05 messagePush.go:37: a new user register message push
+2019/03/08 13:24:05 handler.go:731: get qualified Number
+2019/03/08 13:24:05 handler.go:747: qualified number: 21
+2019/03/08 13:24:05 handler.go:636: aggregation result: 639164
+2019/03/08 13:24:07 main.go:71: get nonce
+2019/03/08 13:24:07 main.go:94: get chain id
+2019/03/08 13:24:07 main.go:80: user: 0x79Ad982e4Fa81F4746A5925d43558553392507Ef
+2019/03/08 13:24:07 main.go:81: nonce: 4
+2019/03/08 13:24:07 main.go:49: receive a reqeust
+2019/03/08 13:24:07 main.go:49: receive a reqeust
+2019/03/08 13:24:07 main.go:49: receive a reqeust
+2019/03/08 13:24:07 main.go:49: receive a reqeust
+2019/03/08 13:24:07 main.go:49: receive a reqeust
+2019/03/08 13:24:07 messagePush.go:37: a new user register message push
+2019/03/08 13:24:07 main.go:49: receive a reqeust
+2019/03/08 13:24:07 main.go:49: receive a reqeust
+2019/03/08 13:24:07 main.go:49: receive a reqeust
+2019/03/08 13:24:07 main.go:49: receive a reqeust
+2019/03/08 13:24:07 messagePush.go:37: a new user register message push
+2019/03/08 13:24:07 messagePush.go:37: a new user register message push
+2019/03/08 13:24:07 messagePush.go:37: a new user register message push
+2019/03/08 13:24:07 main.go:49: receive a reqeust
+2019/03/08 13:24:07 main.go:49: receive a reqeust
+2019/03/08 13:24:07 main.go:49: receive a reqeust
+2019/03/08 13:24:07 main.go:49: receive a reqeust
+2019/03/08 13:24:07 main.go:49: receive a reqeust
+2019/03/08 13:24:07 messagePush.go:37: a new user register message push
+2019/03/08 13:24:07 messagePush.go:37: a new user register message push
+2019/03/08 13:24:07 messagePush.go:37: a new user register message push
+2019/03/08 13:24:07 messagePush.go:37: a new user register message push
+2019/03/08 13:24:07 messagePush.go:37: a new user register message push
+2019/03/08 13:24:07 messagePush.go:37: a new user register message push
+2019/03/08 13:24:07 messagePush.go:37: a new user register message push
+2019/03/08 13:24:07 messagePush.go:37: a new user register message push
+2019/03/08 13:24:07 messagePush.go:37: a new user register message push
+2019/03/08 13:24:07 messagePush.go:37: a new user register message push
+2019/03/08 13:24:07 main.go:49: receive a reqeust
+2019/03/08 13:24:07 main.go:49: receive a reqeust
+2019/03/08 13:24:07 messagePush.go:37: a new user register message push
+2019/03/08 13:24:07 main.go:49: receive a reqeust
+2019/03/08 13:24:07 messagePush.go:37: a new user register message push
+2019/03/08 13:24:07 messagePush.go:37: a new user register message push
+2019/03/08 13:24:07 main.go:49: receive a reqeust
+2019/03/08 13:24:07 main.go:49: receive a reqeust
+2019/03/08 13:24:07 messagePush.go:37: a new user register message push
+2019/03/08 13:24:07 main.go:49: receive a reqeust
+2019/03/08 13:24:07 messagePush.go:37: a new user register message push
+2019/03/08 13:24:07 messagePush.go:37: a new user register message push
+2019/03/08 13:24:08 base.go:76: known transaction: 2139321bf907d927cd7bc65755029dc1d7e89a793de0fdbeed44125251cfddf4
+2019/03/08 13:24:08 handler.go:339: known transaction: 2139321bf907d927cd7bc65755029dc1d7e89a793de0fdbeed44125251cfddf4
+2019/03/08 13:24:08 base.go:76: known transaction: 918545905034fc32585c0e452e16640ee2b03dbc613f81e35832fe83592ac16c
+2019/03/08 13:24:08 handler.go:339: known transaction: 918545905034fc32585c0e452e16640ee2b03dbc613f81e35832fe83592ac16c
+2019/03/08 13:24:08 base.go:76: known transaction: 0508ec64e05849db0a314a7a426736dfa353d76a21338841856f4f0b442718a0
+2019/03/08 13:24:08 handler.go:339: known transaction: 0508ec64e05849db0a314a7a426736dfa353d76a21338841856f4f0b442718a0
+2019/03/08 13:24:08 base.go:76: known transaction: 90cd878ba954c96a43baeeedc4accb8e52155217b63e16754f328d57a9547b59
+2019/03/08 13:24:08 handler.go:339: known transaction: 90cd878ba954c96a43baeeedc4accb8e52155217b63e16754f328d57a9547b59
+2019/03/08 13:24:08 base.go:76: known transaction: 03f94a8aae9d2e1c628bff5e9b3f9c627e07fb826767ac4854fdce433aab8cc9
+2019/03/08 13:24:08 handler.go:339: known transaction: 03f94a8aae9d2e1c628bff5e9b3f9c627e07fb826767ac4854fdce433aab8cc9
+2019/03/08 13:24:08 base.go:76: known transaction: 12111740ffdb3e613b3665047087ad69a3cabc61a7bba2a6fe70ccac2be44093
+2019/03/08 13:24:08 handler.go:339: known transaction: 12111740ffdb3e613b3665047087ad69a3cabc61a7bba2a6fe70ccac2be44093
+2019/03/08 13:24:08 base.go:76: known transaction: 8dc661b206b07288a16ac9846acc915d0d222491e9a092b51c59845e3f251cbb
+2019/03/08 13:24:08 handler.go:339: known transaction: 8dc661b206b07288a16ac9846acc915d0d222491e9a092b51c59845e3f251cbb
+2019/03/08 13:24:08 base.go:76: known transaction: 18cb17760d78cb0a987e0a3151e75b5c42b39e3dc3f7a8df30886e16f19a8ec1
+2019/03/08 13:24:08 handler.go:339: known transaction: 18cb17760d78cb0a987e0a3151e75b5c42b39e3dc3f7a8df30886e16f19a8ec1
+2019/03/08 13:24:08 base.go:76: known transaction: ee40ad661cde070246723138cc02fe9df620d587e4128f963a0173e2db04b4c3
+2019/03/08 13:24:08 handler.go:339: known transaction: ee40ad661cde070246723138cc02fe9df620d587e4128f963a0173e2db04b4c3
+2019/03/08 13:24:08 base.go:76: known transaction: 624dfc8bfdd91d1dad04ccec657dbedb383136c9b5ca2ae02905224ae0caba96
+2019/03/08 13:24:08 handler.go:339: known transaction: 624dfc8bfdd91d1dad04ccec657dbedb383136c9b5ca2ae02905224ae0caba96
+2019/03/08 13:24:08 base.go:76: known transaction: 8d2ba9d5b2f86fa4c2f2b83a6cb4e9b43d14af8308c51f6d3cb1a66a727214c1
+2019/03/08 13:24:08 handler.go:339: known transaction: 8d2ba9d5b2f86fa4c2f2b83a6cb4e9b43d14af8308c51f6d3cb1a66a727214c1
+2019/03/08 13:24:08 base.go:76: known transaction: d36df796f509ea8f8fd90700becfa4f25e9d8717ebf8fb3c63ee971131d0bf4e
+2019/03/08 13:24:08 handler.go:339: known transaction: d36df796f509ea8f8fd90700becfa4f25e9d8717ebf8fb3c63ee971131d0bf4e
+2019/03/08 13:24:08 base.go:76: known transaction: 50d52a35fec82421338c086985e52af010f7b5d21c34b6a413565ad5d8279e80
+2019/03/08 13:24:08 handler.go:339: known transaction: 50d52a35fec82421338c086985e52af010f7b5d21c34b6a413565ad5d8279e80
+2019/03/08 13:24:08 base.go:76: known transaction: e05a875635bae2a9db9749cd04c02a1e1590c27e94b4b0579c28c567e0059d65
+2019/03/08 13:24:08 handler.go:339: known transaction: e05a875635bae2a9db9749cd04c02a1e1590c27e94b4b0579c28c567e0059d65
+2019/03/08 13:24:08 base.go:76: known transaction: 1e93fcf5064fbd0124ce58215d4337858355cd46c35d1bf61189910d121a5f4a
+2019/03/08 13:24:08 handler.go:339: known transaction: 1e93fcf5064fbd0124ce58215d4337858355cd46c35d1bf61189910d121a5f4a
+2019/03/08 13:24:08 base.go:76: known transaction: fc2d574e640f87a794701f3b2efb39b8fa0ffa0e52e45d7d0c120a5fef0004a4
+2019/03/08 13:24:08 handler.go:339: known transaction: fc2d574e640f87a794701f3b2efb39b8fa0ffa0e52e45d7d0c120a5fef0004a4
+2019/03/08 13:24:08 base.go:76: known transaction: b014f2adea895ad172f40114c7257a26d191261e189c43fd9f9a29088812dd2d
+2019/03/08 13:24:08 handler.go:339: known transaction: b014f2adea895ad172f40114c7257a26d191261e189c43fd9f9a29088812dd2d
+2019/03/08 13:24:08 base.go:76: known transaction: 559861a66e66adf6563bd2cfdea57afd84d24486d6db03472af040c4a655c5fd
+2019/03/08 13:24:08 handler.go:339: known transaction: 559861a66e66adf6563bd2cfdea57afd84d24486d6db03472af040c4a655c5fd
+2019/03/08 13:24:08 base.go:76: known transaction: 3ed9a4970c0f8133a8388d7c092cab6768fb306f86748a82611f576cbec3014f
+2019/03/08 13:24:08 handler.go:339: known transaction: 3ed9a4970c0f8133a8388d7c092cab6768fb306f86748a82611f576cbec3014f
+2019/03/08 13:24:08 base.go:76: known transaction: 63bfda5e9ab54cc982a2c3494e25e8d6f0beeeaa9d7717f8febf4d7b4864d042
+2019/03/08 13:24:08 handler.go:339: known transaction: 63bfda5e9ab54cc982a2c3494e25e8d6f0beeeaa9d7717f8febf4d7b4864d042
+2019/03/08 13:24:10 handler.go:339: transaction revert
+2019/03/08 13:24:10 handler.go:339: transaction revert
+2019/03/08 13:24:10 handler.go:339: transaction revert
+2019/03/08 13:24:10 handler.go:339: transaction revert
+2019/03/08 13:24:10 handler.go:339: transaction revert
+2019/03/08 13:24:10 handler.go:339: transaction revert
+2019/03/08 13:24:10 handler.go:339: transaction revert
+2019/03/08 13:24:10 handler.go:339: transaction revert
+2019/03/08 13:24:10 handler.go:339: transaction revert
+2019/03/08 13:24:10 handler.go:339: transaction revert
+2019/03/08 13:24:10 handler.go:339: transaction revert
+2019/03/08 13:24:10 handler.go:339: transaction revert
+2019/03/08 13:24:10 handler.go:339: transaction revert
+2019/03/08 13:24:10 handler.go:339: transaction revert
+2019/03/08 13:24:10 handler.go:714: transaction revert
+2019/03/08 13:24:10 handler.go:339: transaction revert
+2019/03/08 13:24:10 handler.go:339: transaction revert
+2019/03/08 13:24:10 handler.go:339: transaction revert
+2019/03/08 13:24:10 handler.go:339: transaction revert
+2019/03/08 13:24:10 handler.go:339: transaction revert
+2019/03/08 13:24:10 handler.go:339: transaction revert
+2019/03/08 13:24:19 handler.go:903: websocket: close 1001 (going away)
+2019/03/08 13:24:19 messagePush.go:41: a user unregister message push
+2019/03/08 13:24:19 handler.go:903: websocket: close 1001 (going away)
+2019/03/08 13:24:19 messagePush.go:41: a user unregister message push
+2019/03/08 13:24:19 handler.go:903: websocket: close 1001 (going away)
+2019/03/08 13:24:19 messagePush.go:41: a user unregister message push
+2019/03/08 13:24:19 handler.go:903: websocket: close 1001 (going away)
+2019/03/08 13:24:19 messagePush.go:41: a user unregister message push
+2019/03/08 13:24:19 handler.go:903: websocket: close 1001 (going away)
+2019/03/08 13:24:19 messagePush.go:41: a user unregister message push
+2019/03/08 13:24:20 main.go:49: receive a reqeust
+2019/03/08 13:24:20 messagePush.go:37: a new user register message push
+2019/03/08 13:24:20 handler.go:731: get qualified Number
+2019/03/08 13:24:20 handler.go:747: qualified number: 21
+2019/03/08 13:24:20 handler.go:636: aggregation result: 639164
+2019/03/08 13:31:16 handler.go:903: websocket: close 1001 (going away)
+2019/03/08 13:31:16 messagePush.go:41: a user unregister message push
+2019/03/08 13:31:17 main.go:49: receive a reqeust
+2019/03/08 13:31:17 messagePush.go:37: a new user register message push
+2019/03/08 13:31:17 handler.go:731: get qualified Number
+2019/03/08 13:31:17 handler.go:747: qualified number: 21
+2019/03/08 13:31:17 handler.go:636: aggregation result: 639164
+2019/03/08 13:31:17 handler.go:903: websocket: close 1001 (going away)
+2019/03/08 13:31:17 messagePush.go:41: a user unregister message push
+2019/03/08 13:31:17 handler.go:903: websocket: close 1001 (going away)
+2019/03/08 13:31:17 messagePush.go:41: a user unregister message push
+2019/03/08 13:31:18 main.go:49: receive a reqeust
+2019/03/08 13:31:18 messagePush.go:37: a new user register message push
+2019/03/08 13:31:18 handler.go:731: get qualified Number
+2019/03/08 13:31:18 handler.go:747: qualified number: 21
+2019/03/08 13:31:18 handler.go:636: aggregation result: 639164
+2019/03/08 13:31:19 main.go:71: get nonce
+2019/03/08 13:31:19 main.go:94: get chain id
+2019/03/08 13:31:19 main.go:80: user: 0x79Ad982e4Fa81F4746A5925d43558553392507Ef
+2019/03/08 13:31:19 main.go:81: nonce: 5
+2019/03/08 13:31:21 handler.go:714: transaction revert
+2019/03/08 13:40:19 main.go:49: receive a reqeust
+2019/03/08 13:40:19 messagePush.go:37: a new user register message push
+2019/03/08 13:40:19 main.go:49: receive a reqeust
+2019/03/08 13:40:19 messagePush.go:37: a new user register message push
+2019/03/08 13:40:19 handler.go:731: get qualified Number
+2019/03/08 13:40:19 handler.go:747: qualified number: 21
+2019/03/08 13:40:19 handler.go:636: aggregation result: 639164
+2019/03/08 13:40:19 handler.go:731: get qualified Number
+2019/03/08 13:40:19 handler.go:747: qualified number: 21
+2019/03/08 13:40:19 handler.go:636: aggregation result: 639164
+2019/03/08 13:40:28 messagePush.go:58: start event watcher
+2019/03/08 13:40:29 main.go:49: receive a reqeust
+2019/03/08 13:40:29 messagePush.go:37: a new user register message push
+2019/03/08 13:40:29 main.go:49: receive a reqeust
+2019/03/08 13:40:29 messagePush.go:37: a new user register message push
+2019/03/08 13:40:29 main.go:49: receive a reqeust
+2019/03/08 13:40:29 messagePush.go:37: a new user register message push
+2019/03/08 13:40:29 main.go:49: receive a reqeust
+2019/03/08 13:40:29 messagePush.go:37: a new user register message push
+2019/03/08 13:40:34 main.go:49: receive a reqeust
+2019/03/08 13:40:34 main.go:49: receive a reqeust
+2019/03/08 13:40:34 main.go:49: receive a reqeust
+2019/03/08 13:40:34 main.go:49: receive a reqeust
+2019/03/08 13:40:34 main.go:49: receive a reqeust
+2019/03/08 13:40:34 main.go:49: receive a reqeust
+2019/03/08 13:40:34 main.go:49: receive a reqeust
+2019/03/08 13:40:34 main.go:49: receive a reqeust
+2019/03/08 13:40:34 messagePush.go:37: a new user register message push
+2019/03/08 13:40:34 messagePush.go:37: a new user register message push
+2019/03/08 13:40:34 messagePush.go:37: a new user register message push
+2019/03/08 13:40:34 messagePush.go:37: a new user register message push
+2019/03/08 13:40:34 messagePush.go:37: a new user register message push
+2019/03/08 13:40:34 messagePush.go:37: a new user register message push
+2019/03/08 13:40:34 messagePush.go:37: a new user register message push
+2019/03/08 13:40:34 messagePush.go:37: a new user register message push
+2019/03/08 13:40:34 main.go:49: receive a reqeust
+2019/03/08 13:40:34 messagePush.go:37: a new user register message push
+2019/03/08 13:40:34 main.go:49: receive a reqeust
+2019/03/08 13:40:34 main.go:49: receive a reqeust
+2019/03/08 13:40:34 main.go:49: receive a reqeust
+2019/03/08 13:40:34 main.go:49: receive a reqeust
+2019/03/08 13:40:34 main.go:49: receive a reqeust
+2019/03/08 13:40:34 main.go:49: receive a reqeust
+2019/03/08 13:40:34 messagePush.go:37: a new user register message push
+2019/03/08 13:40:34 messagePush.go:37: a new user register message push
+2019/03/08 13:40:34 messagePush.go:37: a new user register message push
+2019/03/08 13:40:34 messagePush.go:37: a new user register message push
+2019/03/08 13:40:34 messagePush.go:37: a new user register message push
+2019/03/08 13:40:34 messagePush.go:37: a new user register message push
+2019/03/08 13:40:34 main.go:49: receive a reqeust
+2019/03/08 13:40:34 messagePush.go:37: a new user register message push
+2019/03/08 13:40:34 main.go:49: receive a reqeust
+2019/03/08 13:40:34 messagePush.go:37: a new user register message push
+2019/03/08 13:40:34 main.go:49: receive a reqeust
+2019/03/08 13:40:34 messagePush.go:37: a new user register message push
+2019/03/08 13:40:34 main.go:49: receive a reqeust
+2019/03/08 13:40:34 messagePush.go:37: a new user register message push
+2019/03/08 13:40:34 main.go:49: receive a reqeust
+2019/03/08 13:40:34 messagePush.go:37: a new user register message push
+2019/03/08 13:42:09 handler.go:43: data consumer private key: e27cb51d1eb94ad42b8f196e341e082042639677df43fd7d1440c07b40e2a065
+2019/03/08 13:42:09 handler.go:51: data fee: 1230
+2019/03/08 13:42:09 handler.go:52: service fee: 16
+2019/03/08 13:42:11 messagePush.go:44: broadcast a message: {"gcuid":105,"status":0,"dataFee":1230,"serviceFee":16,"serviceProvider":"0x88d6F234b6327b7a9d9d23014EFd6E05b6Dc8943","target":100}
+2019/03/08 13:42:11 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":1}
+2019/03/08 13:42:11 handler.go:375: data to encrypt: 61164
+2019/03/08 13:42:11 handler.go:375: data to encrypt: 30202
+2019/03/08 13:42:11 handler.go:375: data to encrypt: 25521
+2019/03/08 13:42:11 handler.go:375: data to encrypt: 10269
+2019/03/08 13:42:11 handler.go:375: data to encrypt: 48456
+2019/03/08 13:42:11 handler.go:375: data to encrypt: 19043
+2019/03/08 13:42:11 handler.go:375: data to encrypt: 47381
+2019/03/08 13:42:11 handler.go:375: data to encrypt: 464
+2019/03/08 13:42:11 handler.go:375: data to encrypt: 43378
+2019/03/08 13:42:11 handler.go:375: data to encrypt: 16916
+2019/03/08 13:42:11 handler.go:375: data to encrypt: 27637
+2019/03/08 13:42:11 handler.go:375: data to encrypt: 37223
+2019/03/08 13:42:11 handler.go:375: data to encrypt: 39672
+2019/03/08 13:42:11 handler.go:375: data to encrypt: 48813
+2019/03/08 13:42:11 handler.go:375: data to encrypt: 29333
+2019/03/08 13:42:11 handler.go:375: data to encrypt: 55167
+2019/03/08 13:42:11 handler.go:375: data to encrypt: 50496
+2019/03/08 13:42:11 handler.go:375: data to encrypt: 26029
+2019/03/08 13:42:11 handler.go:375: data to encrypt: 8999
+2019/03/08 13:42:11 handler.go:375: data to encrypt: 27567
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":1}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":1}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":2}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":2}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":3}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":3}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":4}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":4}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":5}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":5}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":6}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":6}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":7}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":7}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":8}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":8}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":9}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":9}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":10}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":10}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":11}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":11}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":12}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":12}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":13}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":13}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":14}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":14}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":15}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":15}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":16}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":16}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":17}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":17}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":18}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":18}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":19}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":19}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":20}
+2019/03/08 13:42:13 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":20}
+2019/03/08 13:42:16 main.go:71: get nonce
+2019/03/08 13:42:16 main.go:80: user: 0x79Ad982e4Fa81F4746A5925d43558553392507Ef
+2019/03/08 13:42:16 main.go:81: nonce: 6
+2019/03/08 13:42:16 main.go:94: get chain id
+2019/03/08 13:42:16 main.go:114: get encrypted data
+2019/03/08 13:42:16 main.go:130: data to encrypt: 2
+2019/03/08 13:42:18 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":21}
+2019/03/08 13:42:18 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":21}
+2019/03/08 13:42:21 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 13:42:21 messagePush.go:41: a user unregister message push
+2019/03/08 13:42:21 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 13:42:21 messagePush.go:41: a user unregister message push
+2019/03/08 13:42:22 main.go:49: receive a reqeust
+2019/03/08 13:42:22 messagePush.go:37: a new user register message push
+2019/03/08 13:42:27 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":3}
+2019/03/08 13:42:28 handler.go:227: aggregate result =  653732 count: 21
+2019/03/08 13:42:30 messagePush.go:44: broadcast a message: {"gcuid":106,"status":0,"amount":653732,"qualifiedNumber":21}
+2019/03/08 13:42:30 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":4}
+2019/03/08 13:42:39 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":5}
+2019/03/08 13:42:41 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":1}
+2019/03/08 13:42:41 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":2}
+2019/03/08 13:42:41 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":3}
+2019/03/08 13:42:41 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":4}
+2019/03/08 13:42:41 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":5}
+2019/03/08 13:42:41 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":6}
+2019/03/08 13:42:41 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":7}
+2019/03/08 13:42:41 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":8}
+2019/03/08 13:42:41 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":9}
+2019/03/08 13:42:41 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":10}
+2019/03/08 13:42:41 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":11}
+2019/03/08 13:42:41 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":12}
+2019/03/08 13:42:41 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":13}
+2019/03/08 13:42:41 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":14}
+2019/03/08 13:42:41 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":15}
+2019/03/08 13:42:41 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":16}
+2019/03/08 13:42:41 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":17}
+2019/03/08 13:42:41 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":18}
+2019/03/08 13:42:41 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":19}
+2019/03/08 13:42:41 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":20}
+2019/03/08 13:42:47 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":21}
+2019/03/08 13:42:50 main.go:71: get nonce
+2019/03/08 13:42:50 main.go:94: get chain id
+2019/03/08 13:42:50 main.go:80: user: 0x79Ad982e4Fa81F4746A5925d43558553392507Ef
+2019/03/08 13:42:50 main.go:81: nonce: 7
+2019/03/08 13:42:52 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":22}
+2019/03/08 13:42:52 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":0}
+2019/03/08 13:42:54 handler.go:43: data consumer private key: e27cb51d1eb94ad42b8f196e341e082042639677df43fd7d1440c07b40e2a065
+2019/03/08 13:42:54 handler.go:51: data fee: 1230
+2019/03/08 13:42:54 handler.go:52: service fee: 16
+2019/03/08 13:42:56 messagePush.go:44: broadcast a message: {"gcuid":105,"status":0,"dataFee":1230,"serviceFee":16,"serviceProvider":"0x88d6F234b6327b7a9d9d23014EFd6E05b6Dc8943","target":100}
+2019/03/08 13:42:56 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":1}
+2019/03/08 13:42:56 handler.go:375: data to encrypt: 37729
+2019/03/08 13:42:56 handler.go:375: data to encrypt: 28953
+2019/03/08 13:42:56 handler.go:375: data to encrypt: 1340
+2019/03/08 13:42:56 handler.go:375: data to encrypt: 9058
+2019/03/08 13:42:56 handler.go:375: data to encrypt: 9844
+2019/03/08 13:42:56 handler.go:375: data to encrypt: 4311
+2019/03/08 13:42:56 handler.go:375: data to encrypt: 39678
+2019/03/08 13:42:56 handler.go:375: data to encrypt: 65308
+2019/03/08 13:42:56 handler.go:375: data to encrypt: 64785
+2019/03/08 13:42:56 handler.go:375: data to encrypt: 42884
+2019/03/08 13:42:56 handler.go:375: data to encrypt: 41157
+2019/03/08 13:42:56 handler.go:375: data to encrypt: 18848
+2019/03/08 13:42:56 handler.go:375: data to encrypt: 47598
+2019/03/08 13:42:56 handler.go:375: data to encrypt: 9608
+2019/03/08 13:42:56 handler.go:375: data to encrypt: 48985
+2019/03/08 13:42:56 handler.go:375: data to encrypt: 11271
+2019/03/08 13:42:56 handler.go:375: data to encrypt: 19142
+2019/03/08 13:42:56 handler.go:375: data to encrypt: 35642
+2019/03/08 13:42:56 handler.go:375: data to encrypt: 50258
+2019/03/08 13:42:56 handler.go:375: data to encrypt: 19460
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":1}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":1}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":2}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":2}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":3}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":3}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":4}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":4}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":5}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":5}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":6}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":6}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":7}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":7}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":8}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":8}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":9}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":9}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":10}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":10}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":11}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":11}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":12}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":12}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":13}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":13}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":14}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":14}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":15}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":15}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":16}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":16}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":17}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":17}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":18}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":18}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":19}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":19}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":20}
+2019/03/08 13:42:58 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":20}
+2019/03/08 13:43:03 main.go:71: get nonce
+2019/03/08 13:43:03 main.go:80: user: 0x79Ad982e4Fa81F4746A5925d43558553392507Ef
+2019/03/08 13:43:03 main.go:81: nonce: 8
+2019/03/08 13:43:03 main.go:94: get chain id
+2019/03/08 13:43:03 main.go:114: get encrypted data
+2019/03/08 13:43:03 main.go:130: data to encrypt: 5
+2019/03/08 13:43:05 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":21}
+2019/03/08 13:43:05 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":21}
+2019/03/08 13:43:15 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":3}
+2019/03/08 13:43:16 handler.go:227: aggregate result =  605864 count: 21
+2019/03/08 13:43:18 messagePush.go:44: broadcast a message: {"gcuid":106,"status":0,"amount":605864,"qualifiedNumber":21}
+2019/03/08 13:43:18 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":4}
+2019/03/08 13:43:21 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":5}
+2019/03/08 13:43:21 main.go:154: get statistics
+2019/03/08 13:43:23 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":1}
+2019/03/08 13:43:23 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":2}
+2019/03/08 13:43:23 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":3}
+2019/03/08 13:43:23 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":4}
+2019/03/08 13:43:23 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":5}
+2019/03/08 13:43:23 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":6}
+2019/03/08 13:43:23 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":7}
+2019/03/08 13:43:23 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":8}
+2019/03/08 13:43:23 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":9}
+2019/03/08 13:43:23 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":10}
+2019/03/08 13:43:23 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":11}
+2019/03/08 13:43:23 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":12}
+2019/03/08 13:43:23 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":13}
+2019/03/08 13:43:23 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":14}
+2019/03/08 13:43:23 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":15}
+2019/03/08 13:43:23 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":16}
+2019/03/08 13:43:23 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":17}
+2019/03/08 13:43:23 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":18}
+2019/03/08 13:43:23 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":19}
+2019/03/08 13:43:23 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":20}
+2019/03/08 13:43:29 main.go:71: get nonce
+2019/03/08 13:43:29 main.go:94: get chain id
+2019/03/08 13:43:29 main.go:80: user: 0x79Ad982e4Fa81F4746A5925d43558553392507Ef
+2019/03/08 13:43:29 main.go:81: nonce: 9
+2019/03/08 13:43:31 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":21}
+2019/03/08 13:45:41 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":22}
+2019/03/08 13:45:41 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":0}
+2019/03/08 13:45:50 handler.go:43: data consumer private key: e27cb51d1eb94ad42b8f196e341e082042639677df43fd7d1440c07b40e2a065
+2019/03/08 13:45:50 handler.go:51: data fee: 1230
+2019/03/08 13:45:50 handler.go:52: service fee: 16
+2019/03/08 13:45:52 messagePush.go:44: broadcast a message: {"gcuid":105,"status":0,"dataFee":1230,"serviceFee":16,"serviceProvider":"0x88d6F234b6327b7a9d9d23014EFd6E05b6Dc8943","target":100}
+2019/03/08 13:45:52 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":1}
+2019/03/08 13:45:52 handler.go:375: data to encrypt: 43269
+2019/03/08 13:45:52 handler.go:375: data to encrypt: 30512
+2019/03/08 13:45:52 handler.go:375: data to encrypt: 19449
+2019/03/08 13:45:52 handler.go:375: data to encrypt: 21918
+2019/03/08 13:45:52 handler.go:375: data to encrypt: 15300
+2019/03/08 13:45:52 handler.go:375: data to encrypt: 50610
+2019/03/08 13:45:52 handler.go:375: data to encrypt: 36772
+2019/03/08 13:45:52 handler.go:375: data to encrypt: 7654
+2019/03/08 13:45:52 handler.go:375: data to encrypt: 57106
+2019/03/08 13:45:52 handler.go:375: data to encrypt: 4914
+2019/03/08 13:45:52 handler.go:375: data to encrypt: 60888
+2019/03/08 13:45:52 handler.go:375: data to encrypt: 61437
+2019/03/08 13:45:52 handler.go:375: data to encrypt: 9305
+2019/03/08 13:45:52 handler.go:375: data to encrypt: 30062
+2019/03/08 13:45:52 handler.go:375: data to encrypt: 731
+2019/03/08 13:45:52 handler.go:375: data to encrypt: 37693
+2019/03/08 13:45:52 handler.go:375: data to encrypt: 49596
+2019/03/08 13:45:52 handler.go:375: data to encrypt: 64383
+2019/03/08 13:45:52 handler.go:375: data to encrypt: 56073
+2019/03/08 13:45:52 handler.go:375: data to encrypt: 15538
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":1}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":1}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":2}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":2}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":3}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":3}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":4}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":4}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":5}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":5}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":6}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":6}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":7}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":7}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":8}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":8}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":9}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":9}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":10}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":10}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":11}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":11}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":12}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":12}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":13}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":13}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":14}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":14}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":15}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":15}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":16}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":16}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":17}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":17}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":18}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":18}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":19}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":19}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":20}
+2019/03/08 13:45:54 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":20}
+2019/03/08 13:45:54 main.go:71: get nonce
+2019/03/08 13:45:54 main.go:114: get encrypted data
+2019/03/08 13:45:54 main.go:130: data to encrypt: 0
+2019/03/08 13:45:54 main.go:94: get chain id
+2019/03/08 13:45:54 main.go:80: user: 0x79Ad982e4Fa81F4746A5925d43558553392507Ef
+2019/03/08 13:45:54 main.go:81: nonce: 10
+2019/03/08 13:45:57 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":21}
+2019/03/08 13:45:57 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":21}
+2019/03/08 13:46:00 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":3}
+2019/03/08 13:46:01 handler.go:227: aggregate result =  673210 count: 21
+2019/03/08 13:46:03 messagePush.go:44: broadcast a message: {"gcuid":106,"status":0,"amount":673210,"qualifiedNumber":21}
+2019/03/08 13:46:03 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":4}
+2019/03/08 13:46:06 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":5}
+2019/03/08 13:46:08 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":1}
+2019/03/08 13:46:08 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":2}
+2019/03/08 13:46:08 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":3}
+2019/03/08 13:46:08 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":4}
+2019/03/08 13:46:08 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":5}
+2019/03/08 13:46:08 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":6}
+2019/03/08 13:46:08 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":7}
+2019/03/08 13:46:08 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":8}
+2019/03/08 13:46:08 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":9}
+2019/03/08 13:46:08 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":10}
+2019/03/08 13:46:08 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":11}
+2019/03/08 13:46:08 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":12}
+2019/03/08 13:46:08 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":13}
+2019/03/08 13:46:08 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":14}
+2019/03/08 13:46:08 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":15}
+2019/03/08 13:46:08 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":16}
+2019/03/08 13:46:08 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":17}
+2019/03/08 13:46:08 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":18}
+2019/03/08 13:46:08 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":19}
+2019/03/08 13:46:08 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":20}
+2019/03/08 13:46:11 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":21}
+2019/03/08 13:46:14 main.go:71: get nonce
+2019/03/08 13:46:14 main.go:94: get chain id
+2019/03/08 13:46:14 main.go:80: user: 0x79Ad982e4Fa81F4746A5925d43558553392507Ef
+2019/03/08 13:46:14 main.go:81: nonce: 11
+2019/03/08 13:46:16 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":22}
+2019/03/08 13:46:16 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":0}
+2019/03/08 13:47:20 main.go:49: receive a reqeust
+2019/03/08 13:47:20 messagePush.go:37: a new user register message push
+2019/03/08 13:48:05 main.go:49: receive a reqeust
+2019/03/08 13:48:05 messagePush.go:37: a new user register message push
+2019/03/08 13:49:34 main.go:49: receive a reqeust
+2019/03/08 13:49:34 messagePush.go:37: a new user register message push
+2019/03/08 13:49:34 main.go:49: receive a reqeust
+2019/03/08 13:49:34 messagePush.go:37: a new user register message push
+2019/03/08 13:51:46 main.go:49: receive a reqeust
+2019/03/08 13:51:46 messagePush.go:37: a new user register message push
+2019/03/08 13:59:32 main.go:49: receive a reqeust
+2019/03/08 13:59:32 messagePush.go:37: a new user register message push
+2019/03/08 14:00:14 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:00:14 messagePush.go:41: a user unregister message push
+2019/03/08 14:00:14 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:00:14 messagePush.go:41: a user unregister message push
+2019/03/08 14:00:14 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:00:14 messagePush.go:41: a user unregister message push
+2019/03/08 14:00:14 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:00:14 messagePush.go:41: a user unregister message push
+2019/03/08 14:00:15 main.go:49: receive a reqeust
+2019/03/08 14:00:15 messagePush.go:37: a new user register message push
+2019/03/08 14:01:06 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:01:06 messagePush.go:41: a user unregister message push
+2019/03/08 14:01:08 main.go:49: receive a reqeust
+2019/03/08 14:01:08 messagePush.go:37: a new user register message push
+2019/03/08 14:04:29 main.go:49: receive a reqeust
+2019/03/08 14:04:29 messagePush.go:37: a new user register message push
+2019/03/08 14:06:07 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:06:07 messagePush.go:41: a user unregister message push
+2019/03/08 14:06:08 main.go:49: receive a reqeust
+2019/03/08 14:06:08 messagePush.go:37: a new user register message push
+2019/03/08 14:06:53 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:06:53 messagePush.go:41: a user unregister message push
+2019/03/08 14:06:55 main.go:49: receive a reqeust
+2019/03/08 14:06:55 messagePush.go:37: a new user register message push
+2019/03/08 14:10:05 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:10:05 messagePush.go:41: a user unregister message push
+2019/03/08 14:10:06 main.go:49: receive a reqeust
+2019/03/08 14:10:06 messagePush.go:37: a new user register message push
+2019/03/08 14:15:32 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:15:32 messagePush.go:41: a user unregister message push
+2019/03/08 14:15:33 main.go:49: receive a reqeust
+2019/03/08 14:15:33 messagePush.go:37: a new user register message push
+2019/03/08 14:22:25 main.go:49: receive a reqeust
+2019/03/08 14:22:25 messagePush.go:37: a new user register message push
+2019/03/08 14:22:40 handler.go:43: data consumer private key: e27cb51d1eb94ad42b8f196e341e082042639677df43fd7d1440c07b40e2a065
+2019/03/08 14:22:40 handler.go:51: data fee: 1230
+2019/03/08 14:22:40 handler.go:52: service fee: 16
+2019/03/08 14:22:42 messagePush.go:44: broadcast a message: {"gcuid":105,"status":0,"dataFee":1230,"serviceFee":16,"serviceProvider":"0x88d6F234b6327b7a9d9d23014EFd6E05b6Dc8943","target":100}
+2019/03/08 14:22:42 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":1}
+2019/03/08 14:22:42 handler.go:375: data to encrypt: 43317
+2019/03/08 14:22:42 handler.go:375: data to encrypt: 10996
+2019/03/08 14:22:42 handler.go:375: data to encrypt: 53716
+2019/03/08 14:22:42 handler.go:375: data to encrypt: 51952
+2019/03/08 14:22:42 handler.go:375: data to encrypt: 44171
+2019/03/08 14:22:42 handler.go:375: data to encrypt: 10733
+2019/03/08 14:22:42 handler.go:375: data to encrypt: 62889
+2019/03/08 14:22:42 handler.go:375: data to encrypt: 30176
+2019/03/08 14:22:42 handler.go:375: data to encrypt: 35415
+2019/03/08 14:22:42 handler.go:375: data to encrypt: 23959
+2019/03/08 14:22:42 handler.go:375: data to encrypt: 20690
+2019/03/08 14:22:42 handler.go:375: data to encrypt: 44383
+2019/03/08 14:22:42 handler.go:375: data to encrypt: 39341
+2019/03/08 14:22:42 handler.go:375: data to encrypt: 65459
+2019/03/08 14:22:42 handler.go:375: data to encrypt: 10486
+2019/03/08 14:22:42 handler.go:375: data to encrypt: 17871
+2019/03/08 14:22:42 handler.go:375: data to encrypt: 27496
+2019/03/08 14:22:42 handler.go:375: data to encrypt: 58903
+2019/03/08 14:22:42 handler.go:375: data to encrypt: 11688
+2019/03/08 14:22:42 handler.go:375: data to encrypt: 49977
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":1}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":1}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":2}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":2}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":3}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":3}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":4}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":4}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":5}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":5}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":6}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":6}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":7}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":7}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":8}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":8}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":9}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":9}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":10}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":10}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":11}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":11}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":12}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":12}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":13}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":13}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":14}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":14}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":15}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":15}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":16}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":16}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":17}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":17}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":18}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":18}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":19}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":19}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":20}
+2019/03/08 14:22:44 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":20}
+2019/03/08 14:22:50 main.go:71: get nonce
+2019/03/08 14:22:50 main.go:114: get encrypted data
+2019/03/08 14:22:50 main.go:94: get chain id
+2019/03/08 14:22:50 main.go:130: data to encrypt: 432
+2019/03/08 14:22:50 main.go:80: user: 0x79Ad982e4Fa81F4746A5925d43558553392507Ef
+2019/03/08 14:22:50 main.go:81: nonce: 12
+2019/03/08 14:22:52 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":21}
+2019/03/08 14:22:52 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":21}
+2019/03/08 14:23:23 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":3}
+2019/03/08 14:23:25 handler.go:227: aggregate result =  714050 count: 21
+2019/03/08 14:23:27 messagePush.go:44: broadcast a message: {"gcuid":106,"status":0,"amount":714050,"qualifiedNumber":21}
+2019/03/08 14:23:27 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":4}
+2019/03/08 14:23:58 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":5}
+2019/03/08 14:24:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":1}
+2019/03/08 14:24:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":2}
+2019/03/08 14:24:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":3}
+2019/03/08 14:24:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":4}
+2019/03/08 14:24:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":5}
+2019/03/08 14:24:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":6}
+2019/03/08 14:24:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":7}
+2019/03/08 14:24:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":8}
+2019/03/08 14:24:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":9}
+2019/03/08 14:24:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":10}
+2019/03/08 14:24:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":11}
+2019/03/08 14:24:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":12}
+2019/03/08 14:24:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":13}
+2019/03/08 14:24:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":14}
+2019/03/08 14:24:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":15}
+2019/03/08 14:24:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":16}
+2019/03/08 14:24:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":17}
+2019/03/08 14:24:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":18}
+2019/03/08 14:24:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":19}
+2019/03/08 14:24:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":20}
+2019/03/08 14:24:02 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":21}
+2019/03/08 14:24:03 main.go:71: get nonce
+2019/03/08 14:24:03 main.go:94: get chain id
+2019/03/08 14:24:03 main.go:80: user: 0x79Ad982e4Fa81F4746A5925d43558553392507Ef
+2019/03/08 14:24:03 main.go:81: nonce: 13
+2019/03/08 14:24:05 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":22}
+2019/03/08 14:24:05 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":0}
+2019/03/08 14:24:39 handler.go:43: data consumer private key: e27cb51d1eb94ad42b8f196e341e082042639677df43fd7d1440c07b40e2a065
+2019/03/08 14:24:39 handler.go:51: data fee: 1230
+2019/03/08 14:24:39 handler.go:52: service fee: 16
+2019/03/08 14:24:41 messagePush.go:44: broadcast a message: {"gcuid":105,"status":0,"dataFee":1230,"serviceFee":16,"serviceProvider":"0x88d6F234b6327b7a9d9d23014EFd6E05b6Dc8943","target":100}
+2019/03/08 14:24:41 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":1}
+2019/03/08 14:24:41 handler.go:375: data to encrypt: 34960
+2019/03/08 14:24:41 handler.go:375: data to encrypt: 877
+2019/03/08 14:24:41 handler.go:375: data to encrypt: 21353
+2019/03/08 14:24:41 handler.go:375: data to encrypt: 52908
+2019/03/08 14:24:41 handler.go:375: data to encrypt: 12361
+2019/03/08 14:24:41 handler.go:375: data to encrypt: 53471
+2019/03/08 14:24:41 handler.go:375: data to encrypt: 31325
+2019/03/08 14:24:41 handler.go:375: data to encrypt: 47075
+2019/03/08 14:24:41 handler.go:375: data to encrypt: 32644
+2019/03/08 14:24:41 handler.go:375: data to encrypt: 9625
+2019/03/08 14:24:41 handler.go:375: data to encrypt: 48160
+2019/03/08 14:24:41 handler.go:375: data to encrypt: 38555
+2019/03/08 14:24:41 handler.go:375: data to encrypt: 12616
+2019/03/08 14:24:41 handler.go:375: data to encrypt: 16076
+2019/03/08 14:24:41 handler.go:375: data to encrypt: 41705
+2019/03/08 14:24:41 handler.go:375: data to encrypt: 49068
+2019/03/08 14:24:41 handler.go:375: data to encrypt: 8803
+2019/03/08 14:24:41 handler.go:375: data to encrypt: 25218
+2019/03/08 14:24:41 handler.go:375: data to encrypt: 58515
+2019/03/08 14:24:41 handler.go:375: data to encrypt: 48938
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":1}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":1}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":2}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":2}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":3}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":3}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":4}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":4}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":5}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":5}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":6}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":6}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":7}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":7}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":8}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":8}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":9}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":9}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":10}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":10}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":11}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":11}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":12}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":12}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":13}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":13}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":14}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":14}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":15}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":15}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":16}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":16}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":17}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":17}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":18}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":18}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":19}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":19}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":20}
+2019/03/08 14:24:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":20}
+2019/03/08 14:28:02 main.go:49: receive a reqeust
+2019/03/08 14:28:02 messagePush.go:37: a new user register message push
+2019/03/08 14:28:02 main.go:49: receive a reqeust
+2019/03/08 14:28:02 messagePush.go:37: a new user register message push
+2019/03/08 14:28:17 main.go:49: receive a reqeust
+2019/03/08 14:28:17 messagePush.go:37: a new user register message push
+2019/03/08 14:28:17 main.go:49: receive a reqeust
+2019/03/08 14:28:17 messagePush.go:37: a new user register message push
+2019/03/08 14:28:48 main.go:49: receive a reqeust
+2019/03/08 14:28:48 messagePush.go:37: a new user register message push
+2019/03/08 14:28:48 main.go:49: receive a reqeust
+2019/03/08 14:28:48 messagePush.go:37: a new user register message push
+2019/03/08 14:29:59 main.go:49: receive a reqeust
+2019/03/08 14:29:59 messagePush.go:37: a new user register message push
+2019/03/08 14:30:00 main.go:49: receive a reqeust
+2019/03/08 14:30:00 messagePush.go:37: a new user register message push
+2019/03/08 14:30:49 main.go:49: receive a reqeust
+2019/03/08 14:30:49 messagePush.go:37: a new user register message push
+2019/03/08 14:30:49 main.go:49: receive a reqeust
+2019/03/08 14:30:49 messagePush.go:37: a new user register message push
+2019/03/08 14:33:02 main.go:49: receive a reqeust
+2019/03/08 14:33:02 messagePush.go:37: a new user register message push
+2019/03/08 14:33:02 main.go:49: receive a reqeust
+2019/03/08 14:33:02 messagePush.go:37: a new user register message push
+2019/03/08 14:33:28 main.go:49: receive a reqeust
+2019/03/08 14:33:28 messagePush.go:37: a new user register message push
+2019/03/08 14:33:28 main.go:49: receive a reqeust
+2019/03/08 14:33:28 messagePush.go:37: a new user register message push
+2019/03/08 14:51:26 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:51:26 messagePush.go:41: a user unregister message push
+2019/03/08 14:51:26 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:51:26 messagePush.go:41: a user unregister message push
+2019/03/08 14:51:26 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:51:26 messagePush.go:41: a user unregister message push
+2019/03/08 14:51:26 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:51:26 messagePush.go:41: a user unregister message push
+2019/03/08 14:51:26 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:51:26 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:51:26 messagePush.go:41: a user unregister message push
+2019/03/08 14:51:26 messagePush.go:41: a user unregister message push
+2019/03/08 14:51:26 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:51:26 messagePush.go:41: a user unregister message push
+2019/03/08 14:51:26 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:51:26 messagePush.go:41: a user unregister message push
+2019/03/08 14:51:46 main.go:49: receive a reqeust
+2019/03/08 14:51:46 messagePush.go:37: a new user register message push
+2019/03/08 14:52:15 main.go:49: receive a reqeust
+2019/03/08 14:52:15 messagePush.go:37: a new user register message push
+2019/03/08 14:56:57 main.go:49: receive a reqeust
+2019/03/08 14:56:57 messagePush.go:37: a new user register message push
+2019/03/08 14:57:45 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:57:45 messagePush.go:41: a user unregister message push
+2019/03/08 14:57:45 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:57:45 messagePush.go:41: a user unregister message push
+2019/03/08 14:57:45 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:57:45 messagePush.go:41: a user unregister message push
+2019/03/08 14:57:45 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:57:45 messagePush.go:41: a user unregister message push
+2019/03/08 14:57:45 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:57:45 messagePush.go:41: a user unregister message push
+2019/03/08 14:57:45 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:57:45 messagePush.go:41: a user unregister message push
+2019/03/08 14:57:45 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:57:45 messagePush.go:41: a user unregister message push
+2019/03/08 14:57:45 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 14:57:45 messagePush.go:41: a user unregister message push
+2019/03/08 14:58:44 main.go:49: receive a reqeust
+2019/03/08 14:58:44 messagePush.go:37: a new user register message push
+2019/03/08 15:16:33 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:16:33 messagePush.go:41: a user unregister message push
+2019/03/08 15:16:33 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:16:33 messagePush.go:41: a user unregister message push
+2019/03/08 15:16:33 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:16:33 messagePush.go:41: a user unregister message push
+2019/03/08 15:16:33 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:16:33 messagePush.go:41: a user unregister message push
+2019/03/08 15:16:35 main.go:49: receive a reqeust
+2019/03/08 15:16:35 messagePush.go:37: a new user register message push
+2019/03/08 15:17:26 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:17:26 messagePush.go:41: a user unregister message push
+2019/03/08 15:17:28 main.go:49: receive a reqeust
+2019/03/08 15:17:28 messagePush.go:37: a new user register message push
+2019/03/08 15:18:07 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:18:07 messagePush.go:41: a user unregister message push
+2019/03/08 15:19:20 main.go:49: receive a reqeust
+2019/03/08 15:19:20 messagePush.go:37: a new user register message push
+2019/03/08 15:22:08 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:22:08 messagePush.go:41: a user unregister message push
+2019/03/08 15:22:10 main.go:49: receive a reqeust
+2019/03/08 15:22:10 messagePush.go:37: a new user register message push
+2019/03/08 15:22:33 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:22:33 messagePush.go:41: a user unregister message push
+2019/03/08 15:22:35 main.go:49: receive a reqeust
+2019/03/08 15:22:35 messagePush.go:37: a new user register message push
+2019/03/08 15:22:41 main.go:49: receive a reqeust
+2019/03/08 15:22:41 messagePush.go:37: a new user register message push
+2019/03/08 15:22:45 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:22:45 messagePush.go:41: a user unregister message push
+2019/03/08 15:22:45 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:22:45 messagePush.go:41: a user unregister message push
+2019/03/08 15:22:46 main.go:49: receive a reqeust
+2019/03/08 15:22:46 messagePush.go:37: a new user register message push
+2019/03/08 15:34:45 main.go:49: receive a reqeust
+2019/03/08 15:34:45 messagePush.go:37: a new user register message push
+2019/03/08 15:35:52 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:35:52 messagePush.go:41: a user unregister message push
+2019/03/08 15:35:52 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:35:52 messagePush.go:41: a user unregister message push
+2019/03/08 15:35:53 main.go:49: receive a reqeust
+2019/03/08 15:35:53 messagePush.go:37: a new user register message push
+2019/03/08 15:35:59 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:35:59 messagePush.go:41: a user unregister message push
+2019/03/08 15:36:00 main.go:49: receive a reqeust
+2019/03/08 15:36:00 messagePush.go:37: a new user register message push
+2019/03/08 15:36:28 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:36:28 messagePush.go:41: a user unregister message push
+2019/03/08 15:36:29 main.go:49: receive a reqeust
+2019/03/08 15:36:29 messagePush.go:37: a new user register message push
+2019/03/08 15:36:42 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:36:42 messagePush.go:41: a user unregister message push
+2019/03/08 15:36:43 main.go:49: receive a reqeust
+2019/03/08 15:36:43 messagePush.go:37: a new user register message push
+2019/03/08 15:37:33 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:37:33 messagePush.go:41: a user unregister message push
+2019/03/08 15:37:35 main.go:49: receive a reqeust
+2019/03/08 15:37:35 messagePush.go:37: a new user register message push
+2019/03/08 15:38:09 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:38:09 messagePush.go:41: a user unregister message push
+2019/03/08 15:38:10 main.go:49: receive a reqeust
+2019/03/08 15:38:10 messagePush.go:37: a new user register message push
+2019/03/08 15:38:31 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:38:31 messagePush.go:41: a user unregister message push
+2019/03/08 15:38:32 main.go:49: receive a reqeust
+2019/03/08 15:38:32 messagePush.go:37: a new user register message push
+2019/03/08 15:44:30 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:44:30 messagePush.go:41: a user unregister message push
+2019/03/08 15:44:31 main.go:49: receive a reqeust
+2019/03/08 15:44:31 messagePush.go:37: a new user register message push
+2019/03/08 15:44:37 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:44:37 messagePush.go:41: a user unregister message push
+2019/03/08 15:44:38 main.go:49: receive a reqeust
+2019/03/08 15:44:38 messagePush.go:37: a new user register message push
+2019/03/08 15:44:55 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:44:55 messagePush.go:41: a user unregister message push
+2019/03/08 15:44:57 main.go:49: receive a reqeust
+2019/03/08 15:44:57 messagePush.go:37: a new user register message push
+2019/03/08 15:46:00 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:46:00 messagePush.go:41: a user unregister message push
+2019/03/08 15:46:02 main.go:49: receive a reqeust
+2019/03/08 15:46:02 messagePush.go:37: a new user register message push
+2019/03/08 15:46:13 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:46:13 messagePush.go:41: a user unregister message push
+2019/03/08 15:46:14 main.go:49: receive a reqeust
+2019/03/08 15:46:14 messagePush.go:37: a new user register message push
+2019/03/08 15:46:20 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:46:20 messagePush.go:41: a user unregister message push
+2019/03/08 15:46:28 main.go:49: receive a reqeust
+2019/03/08 15:46:28 messagePush.go:37: a new user register message push
+2019/03/08 15:50:52 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:50:52 messagePush.go:41: a user unregister message push
+2019/03/08 15:52:22 main.go:49: receive a reqeust
+2019/03/08 15:52:22 messagePush.go:37: a new user register message push
+2019/03/08 15:52:30 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:52:30 messagePush.go:41: a user unregister message push
+2019/03/08 15:52:31 main.go:49: receive a reqeust
+2019/03/08 15:52:31 messagePush.go:37: a new user register message push
+2019/03/08 15:54:02 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:54:02 messagePush.go:41: a user unregister message push
+2019/03/08 15:54:03 main.go:49: receive a reqeust
+2019/03/08 15:54:03 messagePush.go:37: a new user register message push
+2019/03/08 15:55:02 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:55:02 messagePush.go:41: a user unregister message push
+2019/03/08 15:55:03 main.go:49: receive a reqeust
+2019/03/08 15:55:03 messagePush.go:37: a new user register message push
+2019/03/08 15:56:03 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:56:03 messagePush.go:41: a user unregister message push
+2019/03/08 15:56:04 main.go:49: receive a reqeust
+2019/03/08 15:56:04 messagePush.go:37: a new user register message push
+2019/03/08 15:59:29 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 15:59:29 messagePush.go:41: a user unregister message push
+2019/03/08 15:59:31 main.go:49: receive a reqeust
+2019/03/08 15:59:31 messagePush.go:37: a new user register message push
+2019/03/08 16:00:15 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 16:00:15 messagePush.go:41: a user unregister message push
+2019/03/08 16:00:17 main.go:49: receive a reqeust
+2019/03/08 16:00:17 messagePush.go:37: a new user register message push
+2019/03/08 16:12:28 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 16:12:28 messagePush.go:41: a user unregister message push
+2019/03/08 16:12:29 main.go:49: receive a reqeust
+2019/03/08 16:12:29 messagePush.go:37: a new user register message push
+2019/03/08 16:15:26 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 16:15:26 messagePush.go:41: a user unregister message push
+2019/03/08 16:15:27 main.go:49: receive a reqeust
+2019/03/08 16:15:27 messagePush.go:37: a new user register message push
+2019/03/08 16:18:37 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 16:18:37 messagePush.go:41: a user unregister message push
+2019/03/08 16:18:38 main.go:49: receive a reqeust
+2019/03/08 16:18:38 messagePush.go:37: a new user register message push
+2019/03/08 16:21:01 main.go:49: receive a reqeust
+2019/03/08 16:21:01 messagePush.go:37: a new user register message push
+2019/03/08 16:21:03 main.go:71: get nonce
+2019/03/08 16:21:03 main.go:80: user: 0x79Ad982e4Fa81F4746A5925d43558553392507Ef
+2019/03/08 16:21:03 main.go:81: nonce: 14
+2019/03/08 16:21:03 main.go:94: get chain id
+2019/03/08 16:21:03 main.go:114: get encrypted data
+2019/03/08 16:21:03 main.go:130: data to encrypt: 4
+2019/03/08 16:21:05 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":21}
+2019/03/08 16:21:05 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":21}
+2019/03/08 16:21:12 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":3}
+2019/03/08 16:21:13 handler.go:227: aggregate result =  644257 count: 21
+2019/03/08 16:21:15 messagePush.go:44: broadcast a message: {"gcuid":106,"status":0,"amount":644257,"qualifiedNumber":21}
+2019/03/08 16:21:15 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":4}
+2019/03/08 16:21:18 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":5}
+2019/03/08 16:21:20 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":1}
+2019/03/08 16:21:20 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":2}
+2019/03/08 16:21:20 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":3}
+2019/03/08 16:21:20 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":4}
+2019/03/08 16:21:20 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":5}
+2019/03/08 16:21:20 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":6}
+2019/03/08 16:21:20 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":7}
+2019/03/08 16:21:20 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":8}
+2019/03/08 16:21:20 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":9}
+2019/03/08 16:21:20 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":10}
+2019/03/08 16:21:20 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":11}
+2019/03/08 16:21:20 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":12}
+2019/03/08 16:21:20 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":13}
+2019/03/08 16:21:20 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":14}
+2019/03/08 16:21:20 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":15}
+2019/03/08 16:21:20 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":16}
+2019/03/08 16:21:20 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":17}
+2019/03/08 16:21:20 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":18}
+2019/03/08 16:21:20 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":19}
+2019/03/08 16:21:20 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":20}
+2019/03/08 16:21:21 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":21}
+2019/03/08 16:21:25 main.go:71: get nonce
+2019/03/08 16:21:25 main.go:94: get chain id
+2019/03/08 16:21:25 main.go:80: user: 0x79Ad982e4Fa81F4746A5925d43558553392507Ef
+2019/03/08 16:21:25 main.go:81: nonce: 15
+2019/03/08 16:21:27 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":22}
+2019/03/08 16:21:27 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":0}
+2019/03/08 16:21:28 handler.go:43: data consumer private key: e27cb51d1eb94ad42b8f196e341e082042639677df43fd7d1440c07b40e2a065
+2019/03/08 16:21:28 handler.go:51: data fee: 1230
+2019/03/08 16:21:28 handler.go:52: service fee: 16
+2019/03/08 16:21:30 messagePush.go:44: broadcast a message: {"gcuid":105,"status":0,"dataFee":1230,"serviceFee":16,"serviceProvider":"0x88d6F234b6327b7a9d9d23014EFd6E05b6Dc8943","target":100}
+2019/03/08 16:21:30 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":1}
+2019/03/08 16:21:30 handler.go:375: data to encrypt: 12710
+2019/03/08 16:21:30 handler.go:375: data to encrypt: 20936
+2019/03/08 16:21:30 handler.go:375: data to encrypt: 65453
+2019/03/08 16:21:30 handler.go:375: data to encrypt: 19874
+2019/03/08 16:21:30 handler.go:375: data to encrypt: 46881
+2019/03/08 16:21:30 handler.go:375: data to encrypt: 33321
+2019/03/08 16:21:30 handler.go:375: data to encrypt: 23187
+2019/03/08 16:21:30 handler.go:375: data to encrypt: 40699
+2019/03/08 16:21:30 handler.go:375: data to encrypt: 60915
+2019/03/08 16:21:30 handler.go:375: data to encrypt: 21522
+2019/03/08 16:21:30 handler.go:375: data to encrypt: 47587
+2019/03/08 16:21:30 handler.go:375: data to encrypt: 25453
+2019/03/08 16:21:30 handler.go:375: data to encrypt: 49219
+2019/03/08 16:21:30 handler.go:375: data to encrypt: 12242
+2019/03/08 16:21:30 handler.go:375: data to encrypt: 58850
+2019/03/08 16:21:30 handler.go:375: data to encrypt: 4187
+2019/03/08 16:21:30 handler.go:375: data to encrypt: 18775
+2019/03/08 16:21:30 handler.go:375: data to encrypt: 2711
+2019/03/08 16:21:30 handler.go:375: data to encrypt: 2863
+2019/03/08 16:21:30 handler.go:375: data to encrypt: 39919
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":1}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":1}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":2}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":2}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":3}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":3}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":4}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":4}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":5}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":5}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":6}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":6}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":7}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":7}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":8}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":8}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":9}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":9}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":10}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":10}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":11}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":11}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":12}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":12}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":13}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":13}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":14}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":14}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":15}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":15}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":16}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":16}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":17}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":17}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":18}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":18}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":19}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":19}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":20}
+2019/03/08 16:21:32 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":20}
+2019/03/08 16:22:09 main.go:94: get chain id
+2019/03/08 16:22:09 main.go:71: get nonce
+2019/03/08 16:22:09 main.go:80: user: 0x79Ad982e4Fa81F4746A5925d43558553392507Ef
+2019/03/08 16:22:09 main.go:81: nonce: 16
+2019/03/08 16:22:09 main.go:114: get encrypted data
+2019/03/08 16:22:09 main.go:125: math/big: cannot unmarshal "1.111111111111111e+265" into a *big.Int
+2019/03/08 16:22:09 main.go:49: receive a reqeust
+2019/03/08 16:22:09 messagePush.go:37: a new user register message push
+2019/03/08 16:22:11 main.go:71: get nonce
+2019/03/08 16:22:11 main.go:94: get chain id
+2019/03/08 16:22:11 main.go:114: get encrypted data
+2019/03/08 16:22:11 main.go:130: data to encrypt: 313213
+2019/03/08 16:22:11 main.go:80: user: 0x79Ad982e4Fa81F4746A5925d43558553392507Ef
+2019/03/08 16:22:11 main.go:81: nonce: 16
+2019/03/08 16:22:11 handlerUtil.go:144: out of range, generate random proof
+2019/03/08 16:22:13 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":21}
+2019/03/08 16:22:13 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":21}
+2019/03/08 16:22:31 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":3}
+2019/03/08 16:22:33 handler.go:227: aggregate result =  607304 count: 20
+2019/03/08 16:22:35 messagePush.go:44: broadcast a message: {"gcuid":106,"status":0,"amount":607304,"qualifiedNumber":20}
+2019/03/08 16:22:35 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":4}
+2019/03/08 16:22:35 handler.go:778: user  0x79Ad982e4Fa81F4746A5925d43558553392507Ef  is not qualified
+2019/03/08 16:22:35 handler.go:778: user  0x79Ad982e4Fa81F4746A5925d43558553392507Ef  is not qualified
+2019/03/08 16:22:35 handler.go:778: user  0x79Ad982e4Fa81F4746A5925d43558553392507Ef  is not qualified
+2019/03/08 16:22:38 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":5}
+2019/03/08 16:22:40 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":1}
+2019/03/08 16:22:40 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":2}
+2019/03/08 16:22:40 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":3}
+2019/03/08 16:22:40 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":4}
+2019/03/08 16:22:40 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":5}
+2019/03/08 16:22:40 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":6}
+2019/03/08 16:22:40 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":7}
+2019/03/08 16:22:40 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":8}
+2019/03/08 16:22:40 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":9}
+2019/03/08 16:22:40 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":10}
+2019/03/08 16:22:40 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":11}
+2019/03/08 16:22:40 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":12}
+2019/03/08 16:22:40 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":13}
+2019/03/08 16:22:40 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":14}
+2019/03/08 16:22:40 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":15}
+2019/03/08 16:22:40 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":16}
+2019/03/08 16:22:40 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":17}
+2019/03/08 16:22:40 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":18}
+2019/03/08 16:22:40 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":19}
+2019/03/08 16:22:40 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":20}
+2019/03/08 16:22:44 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":21}
+2019/03/08 16:22:44 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":0}
+2019/03/08 16:22:48 handler.go:43: data consumer private key: e27cb51d1eb94ad42b8f196e341e082042639677df43fd7d1440c07b40e2a065
+2019/03/08 16:22:48 handler.go:51: data fee: 1230
+2019/03/08 16:22:48 handler.go:52: service fee: 16
+2019/03/08 16:22:50 messagePush.go:44: broadcast a message: {"gcuid":105,"status":0,"dataFee":1230,"serviceFee":16,"serviceProvider":"0x88d6F234b6327b7a9d9d23014EFd6E05b6Dc8943","target":100}
+2019/03/08 16:22:50 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":1}
+2019/03/08 16:22:50 handler.go:375: data to encrypt: 61629
+2019/03/08 16:22:50 handler.go:375: data to encrypt: 22509
+2019/03/08 16:22:50 handler.go:375: data to encrypt: 58392
+2019/03/08 16:22:50 handler.go:375: data to encrypt: 63518
+2019/03/08 16:22:50 handler.go:375: data to encrypt: 49219
+2019/03/08 16:22:50 handler.go:375: data to encrypt: 63397
+2019/03/08 16:22:50 handler.go:375: data to encrypt: 49556
+2019/03/08 16:22:50 handler.go:375: data to encrypt: 11229
+2019/03/08 16:22:50 handler.go:375: data to encrypt: 60111
+2019/03/08 16:22:50 handler.go:375: data to encrypt: 49235
+2019/03/08 16:22:50 handler.go:375: data to encrypt: 53975
+2019/03/08 16:22:50 handler.go:375: data to encrypt: 58729
+2019/03/08 16:22:50 handler.go:375: data to encrypt: 16816
+2019/03/08 16:22:50 handler.go:375: data to encrypt: 26183
+2019/03/08 16:22:50 handler.go:375: data to encrypt: 45009
+2019/03/08 16:22:50 handler.go:375: data to encrypt: 41429
+2019/03/08 16:22:50 handler.go:375: data to encrypt: 36851
+2019/03/08 16:22:50 handler.go:375: data to encrypt: 4737
+2019/03/08 16:22:50 handler.go:375: data to encrypt: 31236
+2019/03/08 16:22:50 handler.go:375: data to encrypt: 41489
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":1}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":1}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":2}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":2}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":3}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":3}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":4}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":4}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":5}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":5}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":6}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":6}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":7}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":7}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":8}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":8}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":9}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":9}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":10}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":10}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":11}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":11}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":12}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":12}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":13}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":13}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":14}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":14}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":15}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":15}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":16}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":16}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":17}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":17}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":18}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":18}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":19}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":19}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":20}
+2019/03/08 16:22:52 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":20}
+2019/03/08 16:22:59 main.go:49: receive a reqeust
+2019/03/08 16:22:59 messagePush.go:37: a new user register message push
+2019/03/08 16:23:14 main.go:49: receive a reqeust
+2019/03/08 16:23:14 messagePush.go:37: a new user register message push
+2019/03/08 16:23:31 main.go:71: get nonce
+2019/03/08 16:23:31 main.go:114: get encrypted data
+2019/03/08 16:23:31 main.go:94: get chain id
+2019/03/08 16:23:31 main.go:125: math/big: cannot unmarshal "1e+256" into a *big.Int
+2019/03/08 16:23:31 main.go:80: user: 0x79Ad982e4Fa81F4746A5925d43558553392507Ef
+2019/03/08 16:23:31 main.go:81: nonce: 17
+2019/03/08 16:23:39 main.go:71: get nonce
+2019/03/08 16:23:39 main.go:94: get chain id
+2019/03/08 16:23:39 main.go:114: get encrypted data
+2019/03/08 16:23:39 main.go:125: math/big: cannot unmarshal "1e+256" into a *big.Int
+2019/03/08 16:23:39 main.go:80: user: 0x79Ad982e4Fa81F4746A5925d43558553392507Ef
+2019/03/08 16:23:39 main.go:81: nonce: 17
+2019/03/08 16:24:18 main.go:49: receive a reqeust
+2019/03/08 16:24:18 messagePush.go:37: a new user register message push
+2019/03/08 16:24:22 main.go:71: get nonce
+2019/03/08 16:24:22 main.go:94: get chain id
+2019/03/08 16:24:22 main.go:114: get encrypted data
+2019/03/08 16:24:22 main.go:130: data to encrypt: 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+2019/03/08 16:24:22 main.go:80: user: 0x79Ad982e4Fa81F4746A5925d43558553392507Ef
+2019/03/08 16:24:22 main.go:81: nonce: 17
+2019/03/08 16:24:22 handlerUtil.go:144: out of range, generate random proof
+2019/03/08 16:24:24 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":21}
+2019/03/08 16:24:24 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":21}
+2019/03/08 16:24:39 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":3}
+2019/03/08 16:24:40 handler.go:227: aggregate result =  845249 count: 20
+2019/03/08 16:24:42 messagePush.go:44: broadcast a message: {"gcuid":106,"status":0,"amount":845249,"qualifiedNumber":20}
+2019/03/08 16:24:42 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":4}
+2019/03/08 16:24:42 handler.go:778: user  0x79Ad982e4Fa81F4746A5925d43558553392507Ef  is not qualified
+2019/03/08 16:24:42 handler.go:778: user  0x79Ad982e4Fa81F4746A5925d43558553392507Ef  is not qualified
+2019/03/08 16:24:42 handler.go:778: user  0x79Ad982e4Fa81F4746A5925d43558553392507Ef  is not qualified
+2019/03/08 16:24:42 handler.go:778: user  0x79Ad982e4Fa81F4746A5925d43558553392507Ef  is not qualified
+2019/03/08 16:24:42 handler.go:778: user  0x79Ad982e4Fa81F4746A5925d43558553392507Ef  is not qualified
+2019/03/08 16:24:42 handler.go:778: user  0x79Ad982e4Fa81F4746A5925d43558553392507Ef  is not qualified
+2019/03/08 16:24:47 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":5}
+2019/03/08 16:24:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":1}
+2019/03/08 16:24:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":2}
+2019/03/08 16:24:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":3}
+2019/03/08 16:24:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":4}
+2019/03/08 16:24:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":5}
+2019/03/08 16:24:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":6}
+2019/03/08 16:24:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":7}
+2019/03/08 16:24:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":8}
+2019/03/08 16:24:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":9}
+2019/03/08 16:24:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":10}
+2019/03/08 16:24:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":11}
+2019/03/08 16:24:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":12}
+2019/03/08 16:24:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":13}
+2019/03/08 16:24:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":14}
+2019/03/08 16:24:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":15}
+2019/03/08 16:24:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":16}
+2019/03/08 16:24:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":17}
+2019/03/08 16:24:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":18}
+2019/03/08 16:24:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":19}
+2019/03/08 16:24:49 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":20}
+2019/03/08 16:24:55 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 16:24:55 messagePush.go:41: a user unregister message push
+2019/03/08 16:24:55 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 16:24:55 messagePush.go:41: a user unregister message push
+2019/03/08 16:24:55 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 16:24:55 messagePush.go:41: a user unregister message push
+2019/03/08 16:24:55 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 16:24:55 messagePush.go:41: a user unregister message push
+2019/03/08 16:24:55 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 16:24:55 messagePush.go:41: a user unregister message push
+2019/03/08 16:24:55 handler.go:920: websocket: close 1001 (going away)
+2019/03/08 16:24:55 messagePush.go:41: a user unregister message push
+2019/03/08 16:24:56 main.go:49: receive a reqeust
+2019/03/08 16:24:56 messagePush.go:37: a new user register message push
+2019/03/08 16:24:56 handler.go:731: get qualified Number
+2019/03/08 16:24:56 handler.go:778: user  0x79Ad982e4Fa81F4746A5925d43558553392507Ef  is not qualified
+2019/03/08 16:24:56 handler.go:747: qualified number: 20
+2019/03/08 16:24:56 handler.go:636: aggregation result: 845249
+2019/03/08 16:24:56 handler.go:778: user  0x79Ad982e4Fa81F4746A5925d43558553392507Ef  is not qualified
+2019/03/08 16:27:27 messagePush.go:58: start event watcher
+2019/03/08 16:27:28 main.go:49: receive a reqeust
+2019/03/08 16:27:28 messagePush.go:37: a new user register message push
+2019/03/08 16:27:28 handler.go:731: get qualified Number
+2019/03/08 16:27:28 handler.go:747: qualified number: 20
+2019/03/08 16:27:28 handler.go:636: aggregation result: 845249
+2019/03/08 16:27:28 main.go:49: receive a reqeust
+2019/03/08 16:27:28 messagePush.go:37: a new user register message push
+2019/03/08 16:27:28 handler.go:731: get qualified Number
+2019/03/08 16:27:28 handler.go:747: qualified number: 20
+2019/03/08 16:27:28 handler.go:636: aggregation result: 845249
+2019/03/08 16:27:28 main.go:49: receive a reqeust
+2019/03/08 16:27:28 messagePush.go:37: a new user register message push
+2019/03/08 16:27:28 handler.go:731: get qualified Number
+2019/03/08 16:27:28 handler.go:747: qualified number: 20
+2019/03/08 16:27:28 handler.go:636: aggregation result: 845249
+2019/03/08 16:27:28 main.go:49: receive a reqeust
+2019/03/08 16:27:28 messagePush.go:37: a new user register message push
+2019/03/08 16:27:28 handler.go:731: get qualified Number
+2019/03/08 16:27:28 handler.go:747: qualified number: 20
+2019/03/08 16:27:28 handler.go:636: aggregation result: 845249
+2019/03/08 16:27:28 main.go:49: receive a reqeust
+2019/03/08 16:27:28 messagePush.go:37: a new user register message push
+2019/03/08 16:27:28 handler.go:731: get qualified Number
+2019/03/08 16:27:28 handler.go:747: qualified number: 20
+2019/03/08 16:27:28 handler.go:636: aggregation result: 845249
+2019/03/08 16:27:28 main.go:49: receive a reqeust
+2019/03/08 16:27:28 messagePush.go:37: a new user register message push
+2019/03/08 16:27:28 handler.go:731: get qualified Number
+2019/03/08 16:27:28 handler.go:747: qualified number: 20
+2019/03/08 16:27:28 handler.go:636: aggregation result: 845249
+2019/03/08 16:27:29 main.go:49: receive a reqeust
+2019/03/08 16:27:29 messagePush.go:37: a new user register message push
+2019/03/08 16:27:29 handler.go:731: get qualified Number
+2019/03/08 16:27:29 handler.go:747: qualified number: 20
+2019/03/08 16:27:29 handler.go:778: user  0x79Ad982e4Fa81F4746A5925d43558553392507Ef  is not qualified
+2019/03/08 16:27:29 handler.go:636: aggregation result: 845249
+2019/03/08 16:27:29 handler.go:778: user  0x79Ad982e4Fa81F4746A5925d43558553392507Ef  is not qualified
+2019/03/08 16:27:30 handler.go:932: websocket: close 1001 (going away)
+2019/03/08 16:27:30 messagePush.go:41: a user unregister message push
+2019/03/08 16:27:31 main.go:49: receive a reqeust
+2019/03/08 16:27:31 messagePush.go:37: a new user register message push
+2019/03/08 16:27:31 handler.go:731: get qualified Number
+2019/03/08 16:27:31 handler.go:747: qualified number: 20
+2019/03/08 16:27:31 handler.go:778: user  0x79Ad982e4Fa81F4746A5925d43558553392507Ef  is not qualified
+2019/03/08 16:27:31 handler.go:636: aggregation result: 845249
+2019/03/08 16:27:31 handler.go:778: user  0x79Ad982e4Fa81F4746A5925d43558553392507Ef  is not qualified
+2019/03/08 16:27:32 main.go:49: receive a reqeust
+2019/03/08 16:27:32 main.go:49: receive a reqeust
+2019/03/08 16:27:32 messagePush.go:37: a new user register message push
+2019/03/08 16:27:32 main.go:49: receive a reqeust
+2019/03/08 16:27:32 messagePush.go:37: a new user register message push
+2019/03/08 16:27:32 main.go:49: receive a reqeust
+2019/03/08 16:27:32 messagePush.go:37: a new user register message push
+2019/03/08 16:27:32 main.go:49: receive a reqeust
+2019/03/08 16:27:32 main.go:49: receive a reqeust
+2019/03/08 16:27:32 main.go:49: receive a reqeust
+2019/03/08 16:27:32 messagePush.go:37: a new user register message push
+2019/03/08 16:27:32 messagePush.go:37: a new user register message push
+2019/03/08 16:27:32 messagePush.go:37: a new user register message push
+2019/03/08 16:27:32 messagePush.go:37: a new user register message push
+2019/03/08 16:27:32 main.go:49: receive a reqeust
+2019/03/08 16:27:32 main.go:49: receive a reqeust
+2019/03/08 16:27:32 messagePush.go:37: a new user register message push
+2019/03/08 16:27:32 main.go:49: receive a reqeust
+2019/03/08 16:27:32 main.go:49: receive a reqeust
+2019/03/08 16:27:32 main.go:49: receive a reqeust
+2019/03/08 16:27:32 main.go:49: receive a reqeust
+2019/03/08 16:27:32 main.go:49: receive a reqeust
+2019/03/08 16:27:32 main.go:49: receive a reqeust
+2019/03/08 16:27:32 main.go:49: receive a reqeust
+2019/03/08 16:27:32 main.go:49: receive a reqeust
+2019/03/08 16:27:32 messagePush.go:37: a new user register message push
+2019/03/08 16:27:32 main.go:49: receive a reqeust
+2019/03/08 16:27:32 messagePush.go:37: a new user register message push
+2019/03/08 16:27:32 messagePush.go:37: a new user register message push
+2019/03/08 16:27:32 messagePush.go:37: a new user register message push
+2019/03/08 16:27:32 messagePush.go:37: a new user register message push
+2019/03/08 16:27:32 messagePush.go:37: a new user register message push
+2019/03/08 16:27:32 messagePush.go:37: a new user register message push
+2019/03/08 16:27:32 messagePush.go:37: a new user register message push
+2019/03/08 16:27:32 messagePush.go:37: a new user register message push
+2019/03/08 16:27:32 messagePush.go:37: a new user register message push
+2019/03/08 16:27:32 main.go:49: receive a reqeust
+2019/03/08 16:27:32 messagePush.go:37: a new user register message push
+2019/03/08 16:27:32 main.go:49: receive a reqeust
+2019/03/08 16:27:32 messagePush.go:37: a new user register message push
+2019/03/08 16:27:32 base.go:76: known transaction: 06981f8696efb7716ef25f5d34d4e37bc46478675aa0ffe0ec5b96af88e936c8
+2019/03/08 16:27:32 handler.go:339: known transaction: 06981f8696efb7716ef25f5d34d4e37bc46478675aa0ffe0ec5b96af88e936c8
+2019/03/08 16:27:32 base.go:76: known transaction: 7baa185723361b0b2f3b6d7886cab951cd8a81c1d02e7a454377a3d8442ade91
+2019/03/08 16:27:32 handler.go:339: known transaction: 7baa185723361b0b2f3b6d7886cab951cd8a81c1d02e7a454377a3d8442ade91
+2019/03/08 16:27:32 base.go:76: known transaction: 579c281ec7703a14b37ac45b0d69f6e1db7bb02fc2786ef3dce1efb09da3ef50
+2019/03/08 16:27:32 handler.go:339: known transaction: 579c281ec7703a14b37ac45b0d69f6e1db7bb02fc2786ef3dce1efb09da3ef50
+2019/03/08 16:27:32 base.go:76: known transaction: e293f670a82dec5b90170d0c683896bd20db906ebea78fbb5d34a955bf4454c2
+2019/03/08 16:27:32 handler.go:339: known transaction: e293f670a82dec5b90170d0c683896bd20db906ebea78fbb5d34a955bf4454c2
+2019/03/08 16:27:32 base.go:76: known transaction: 4e763b58e0821a1ae0bc716fff6ac3597b2beb2aaa2dd766d5f5cf6987835c8b
+2019/03/08 16:27:32 handler.go:339: known transaction: 4e763b58e0821a1ae0bc716fff6ac3597b2beb2aaa2dd766d5f5cf6987835c8b
+2019/03/08 16:27:32 base.go:76: known transaction: b2d67d101556c3a300c2442d35be616f098be228e8f21c752eb582a9acb27858
+2019/03/08 16:27:32 handler.go:339: known transaction: b2d67d101556c3a300c2442d35be616f098be228e8f21c752eb582a9acb27858
+2019/03/08 16:27:32 base.go:76: known transaction: a938fced26afcdad7b505ef2eb3f9956211729f12172a00884a4531bc211ec10
+2019/03/08 16:27:32 handler.go:339: known transaction: a938fced26afcdad7b505ef2eb3f9956211729f12172a00884a4531bc211ec10
+2019/03/08 16:27:32 base.go:76: known transaction: 39d10134080adb89892f5145c66ff048f7e6497eed1cd2337192e82e995187cf
+2019/03/08 16:27:32 handler.go:339: known transaction: 39d10134080adb89892f5145c66ff048f7e6497eed1cd2337192e82e995187cf
+2019/03/08 16:27:32 base.go:76: known transaction: ca0671f61556e6c8bdf61339883402e3710b007b52d28b3ef7df62aa983d7c85
+2019/03/08 16:27:32 handler.go:339: known transaction: ca0671f61556e6c8bdf61339883402e3710b007b52d28b3ef7df62aa983d7c85
+2019/03/08 16:27:32 base.go:76: known transaction: 29725ce136e9f2ad87f553b6686f84aba7bee6ccb9872c180e6e88a1cb9f33d9
+2019/03/08 16:27:32 handler.go:339: known transaction: 29725ce136e9f2ad87f553b6686f84aba7bee6ccb9872c180e6e88a1cb9f33d9
+2019/03/08 16:27:32 base.go:76: known transaction: 6060cd4fc5708f9ec98412746262929e88c335fd925479f6bf1fb15ff0ade6ea
+2019/03/08 16:27:32 handler.go:339: known transaction: 6060cd4fc5708f9ec98412746262929e88c335fd925479f6bf1fb15ff0ade6ea
+2019/03/08 16:27:32 base.go:76: known transaction: 8fb7753b12738fa38ed6eb2f23d3be72492bd2b34416aaa5e2f6b51d82198062
+2019/03/08 16:27:32 handler.go:339: known transaction: 8fb7753b12738fa38ed6eb2f23d3be72492bd2b34416aaa5e2f6b51d82198062
+2019/03/08 16:27:32 base.go:76: known transaction: 590a95793a95042e2425e26e92caad9129811cec67c542c0e19f78d9e159d9e8
+2019/03/08 16:27:32 handler.go:339: known transaction: 590a95793a95042e2425e26e92caad9129811cec67c542c0e19f78d9e159d9e8
+2019/03/08 16:27:32 base.go:76: known transaction: a82f0286c39ded32dabc80397ee0ea7187e9deef2f6b68e00244190aa4b7ade8
+2019/03/08 16:27:32 handler.go:339: known transaction: a82f0286c39ded32dabc80397ee0ea7187e9deef2f6b68e00244190aa4b7ade8
+2019/03/08 16:27:32 base.go:76: known transaction: 5a246dad39a964431b486dc5436195e895d3ad94bd534f21ee8c03312e09d293
+2019/03/08 16:27:32 handler.go:339: known transaction: 5a246dad39a964431b486dc5436195e895d3ad94bd534f21ee8c03312e09d293
+2019/03/08 16:27:32 base.go:76: known transaction: 71005016d5fdb96cfd5cd43406db927f6ab773fb3ae83141b29b822c3f696dcf
+2019/03/08 16:27:32 handler.go:339: known transaction: 71005016d5fdb96cfd5cd43406db927f6ab773fb3ae83141b29b822c3f696dcf
+2019/03/08 16:27:32 base.go:76: known transaction: ad459bf3a8f47bd0f6358bff1fc6ddc1af44a5a7489586585a024ad06d86131e
+2019/03/08 16:27:32 handler.go:339: known transaction: ad459bf3a8f47bd0f6358bff1fc6ddc1af44a5a7489586585a024ad06d86131e
+2019/03/08 16:27:32 base.go:76: known transaction: cbfb0472e3ef4bc7465f653edac86903ca91bbbda76b1fd53e870b0b9c3a5f98
+2019/03/08 16:27:32 base.go:76: known transaction: 56fe7c8d89f051101b9436f0c80bb54415d7ba97d7ec2f7497e4d09420911bd1
+2019/03/08 16:27:32 handler.go:339: known transaction: 56fe7c8d89f051101b9436f0c80bb54415d7ba97d7ec2f7497e4d09420911bd1
+2019/03/08 16:27:32 handler.go:339: known transaction: cbfb0472e3ef4bc7465f653edac86903ca91bbbda76b1fd53e870b0b9c3a5f98
+2019/03/08 16:27:32 base.go:76: known transaction: 6e6a2493099de8b9e85c62f7fc89b8514fe4be3ff8822a5e506d6dd2d02a1bdd
+2019/03/08 16:27:32 handler.go:339: known transaction: 6e6a2493099de8b9e85c62f7fc89b8514fe4be3ff8822a5e506d6dd2d02a1bdd
+2019/03/08 16:27:34 handler.go:339: transaction revert
+2019/03/08 16:27:34 handler.go:339: transaction revert
+2019/03/08 16:27:34 handler.go:339: transaction revert
+2019/03/08 16:27:34 handler.go:339: transaction revert
+2019/03/08 16:27:34 handler.go:339: transaction revert
+2019/03/08 16:27:34 handler.go:339: transaction revert
+2019/03/08 16:27:34 handler.go:339: transaction revert
+2019/03/08 16:27:34 handler.go:339: transaction revert
+2019/03/08 16:27:34 handler.go:339: transaction revert
+2019/03/08 16:27:34 handler.go:339: transaction revert
+2019/03/08 16:27:34 handler.go:339: transaction revert
+2019/03/08 16:27:34 handler.go:339: transaction revert
+2019/03/08 16:27:34 handler.go:339: transaction revert
+2019/03/08 16:27:34 handler.go:339: transaction revert
+2019/03/08 16:27:34 handler.go:339: transaction revert
+2019/03/08 16:27:34 handler.go:339: transaction revert
+2019/03/08 16:27:34 handler.go:339: transaction revert
+2019/03/08 16:27:34 handler.go:339: transaction revert
+2019/03/08 16:27:34 handler.go:339: transaction revert
+2019/03/08 16:27:34 handler.go:339: transaction revert
+2019/03/08 16:27:38 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":21}
+2019/03/08 16:27:38 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":0}
+2019/03/08 16:27:39 handler.go:43: data consumer private key: e27cb51d1eb94ad42b8f196e341e082042639677df43fd7d1440c07b40e2a065
+2019/03/08 16:27:39 handler.go:51: data fee: 1230
+2019/03/08 16:27:39 handler.go:52: service fee: 16
+2019/03/08 16:27:41 messagePush.go:44: broadcast a message: {"gcuid":105,"status":0,"dataFee":1230,"serviceFee":16,"serviceProvider":"0x88d6F234b6327b7a9d9d23014EFd6E05b6Dc8943","target":100}
+2019/03/08 16:27:41 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":1}
+2019/03/08 16:27:41 handler.go:375: data to encrypt: 13217
+2019/03/08 16:27:41 handler.go:375: data to encrypt: 51740
+2019/03/08 16:27:41 handler.go:375: data to encrypt: 41506
+2019/03/08 16:27:41 handler.go:375: data to encrypt: 49081
+2019/03/08 16:27:41 handler.go:375: data to encrypt: 57650
+2019/03/08 16:27:41 handler.go:375: data to encrypt: 36347
+2019/03/08 16:27:41 handler.go:375: data to encrypt: 24415
+2019/03/08 16:27:41 handler.go:375: data to encrypt: 17028
+2019/03/08 16:27:41 handler.go:375: data to encrypt: 22651
+2019/03/08 16:27:41 handler.go:375: data to encrypt: 41904
+2019/03/08 16:27:41 handler.go:375: data to encrypt: 1845
+2019/03/08 16:27:41 handler.go:375: data to encrypt: 27016
+2019/03/08 16:27:41 handler.go:375: data to encrypt: 16594
+2019/03/08 16:27:41 handler.go:375: data to encrypt: 38816
+2019/03/08 16:27:41 handler.go:375: data to encrypt: 23072
+2019/03/08 16:27:41 handler.go:375: data to encrypt: 35405
+2019/03/08 16:27:41 handler.go:375: data to encrypt: 7262
+2019/03/08 16:27:41 handler.go:375: data to encrypt: 3791
+2019/03/08 16:27:41 handler.go:375: data to encrypt: 45867
+2019/03/08 16:27:41 handler.go:375: data to encrypt: 23694
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":1}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":1}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":2}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":2}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":3}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":3}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":4}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":4}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":5}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":5}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":6}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":6}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":7}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":7}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":8}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":8}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":9}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":9}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":10}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":10}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":11}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":11}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":12}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":12}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":13}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":13}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":14}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":14}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":15}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":15}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":16}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":16}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":17}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":17}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":18}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":18}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":19}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":19}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":103,"status":0,"amount":20}
+2019/03/08 16:27:43 messagePush.go:44: broadcast a message: {"gcuid":104,"status":0,"amount":20}
+2019/03/08 16:27:51 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":3}
+2019/03/08 16:27:53 handler.go:227: aggregate result =  578901 count: 20
+2019/03/08 16:27:55 messagePush.go:44: broadcast a message: {"gcuid":106,"status":0,"amount":578901,"qualifiedNumber":20}
+2019/03/08 16:27:55 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":4}
+2019/03/08 16:27:55 handler.go:778: user  0x79Ad982e4Fa81F4746A5925d43558553392507Ef  is not qualified
+2019/03/08 16:27:58 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":5}
+2019/03/08 16:28:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":1}
+2019/03/08 16:28:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":2}
+2019/03/08 16:28:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":3}
+2019/03/08 16:28:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":4}
+2019/03/08 16:28:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":5}
+2019/03/08 16:28:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":6}
+2019/03/08 16:28:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":7}
+2019/03/08 16:28:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":8}
+2019/03/08 16:28:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":9}
+2019/03/08 16:28:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":10}
+2019/03/08 16:28:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":11}
+2019/03/08 16:28:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":12}
+2019/03/08 16:28:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":13}
+2019/03/08 16:28:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":14}
+2019/03/08 16:28:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":15}
+2019/03/08 16:28:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":16}
+2019/03/08 16:28:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":17}
+2019/03/08 16:28:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":18}
+2019/03/08 16:28:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":19}
+2019/03/08 16:28:00 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":20}
+2019/03/08 16:28:06 messagePush.go:44: broadcast a message: {"gcuid":107,"status":0,"amount":21}
+2019/03/08 16:28:06 messagePush.go:44: broadcast a message: {"gcuid":102,"status":0,"stage":0}

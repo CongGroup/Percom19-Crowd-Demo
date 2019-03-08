@@ -113,7 +113,7 @@
     display: flex;
     display: -webkit-flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     /*justify-content: center;*/
     /*align-items: flex-start;*/
     width: 400px;
@@ -158,6 +158,12 @@
     padding: 0 15px;
     transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
     margin-right:10px ;
+}
+
+.form .error {
+    margin-top: 15px;
+    color: #FF0000;
+    font-weight: 700;
 }
 
 .formLists {
@@ -213,6 +219,7 @@ button[disabled]{
 }
 
 .agg .contract .buttonGroup {
+    margin-top: 50px;
     align-items: flex-end;
     width: 100%;
     height: 100%;
@@ -246,4 +253,41 @@ button[disabled]{
 
 .agg .graphLayout .back {
     margin-top: 50px;
+}
+
+.preLoading {
+    font-family: sans serif;
+    /*font-style: italic;*/
+    font-weight: 700;
+    font-size: 1.5rem;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+.preLoading .pacman{
+    margin-left: 20px;
+}
+
+.preLoading .loading {
+    font-style: italic;
+    margin-top: 30px;
+    align-self: center;
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+}
+
+.agg .formNote {
+    margin-bottom: 10px;
+    font-style: italic;
+    font-size: 0.92rem;
+}
+.agg .formNote .note {
+
+}
+
+.agg .formNote .noteBody {
+
 }

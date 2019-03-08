@@ -63,21 +63,21 @@
                         </div>
                         <div class="col buttonGroup">
                             <div class="form" v-if="atStage('solicit')">
-                                <div v-if="!loading">
+                                <div v-if="solicitStatus === 0">
                                     <span class="label">Target Number:</span>
                                     <input class="input" v-model.number="targetNumber">
                                     <button  :disabled="!atStage('solicit')" class="btn btn-dark contract-button" @click="solicit"> solicit</button>
                                 </div>
-                                <pacman v-else></pacman>
+                                <pacman v-else-if="solicitStatus===1"></pacman>
                             </div>
                             <div class="form" v-if="atStage('register')">
-                                <button :disabled="!atStage('register')" v-if="!loading" class="btn btn-dark contract-button" @click="stopRegisterAndSubmit"> stop register</button>
-                                <pacman v-else></pacman>
+                                <button :disabled="!atStage('register')" v-if="stopRegisterStatus === 0" class="btn btn-dark contract-button" @click="stopRegisterAndSubmit"> stop register</button>
+                                <pacman v-else-if="stopRegisterStatus===1"></pacman>
                             </div>
                             <div class="row">
                                 <div class="form" v-if="atStage('approve')">
-                                    <button :disabled="!atStage('approve')" v-if="!loading" class="btn btn-dark contract-button" @click="approve"> approve</button>
-                                    <pacman v-else></pacman>
+                                    <button :disabled="!atStage('approve')" v-if="approveStatus === 0" class="btn btn-dark contract-button" @click="approve"> approve</button>
+                                    <pacman v-else-if="approveStatus === 1"></pacman>
                                 </div>
                                 <div class="form" v-if="atStage('claim')">
                                     <button :disabled="false" class="btn btn-dark contract-button" @click="showStatics"> showStatics</button>
@@ -102,12 +102,12 @@
                         </div>
                         <div class="col buttonGroup">
                             <div class="form" v-if="atStage('aggregate')">
-                                <button :disabled="!atStage('aggregate')" v-if="!loading" class="btn btn-dark contract-button" @click="aggregate"> aggregate</button>
-                                <pacman v-else></pacman>
+                                <button :disabled="!atStage('aggregate')" v-if="aggregateStatus === 0" class="btn btn-dark contract-button" @click="aggregate"> aggregate</button>
+                                <pacman v-else-if="aggregateStatus === 1"></pacman>
                             </div>
                             <div class="form" v-if="atStage('claim')">
-                                <button :disabled="!atStage('claim')" v-if="!loading" class="btn btn-dark contract-button" @click="claim"> claim</button>
-                                <pacman v-else></pacman>
+                                <button :disabled="!atStage('claim')" v-if="claimStatus === 0" class="btn btn-dark contract-button" @click="claim"> claim</button>
+                                <pacman v-else-if="claimStatus === 1"></pacman>
                             </div>
                         </div>
                     </div>
@@ -174,10 +174,13 @@
     const GCUID_IS_QUALIFIED = 110;
     const GCUID_SUBMIT_VALUES = 111;
 
+    // const GCUID_CAN_REGISTER_AND_SUBMIT_FOR_TASK = 800;
+    const GCUID_CAN_CLAIM_FOR_TASK = 801;
+
     const TASK_ID = 0;
 
     const INITIAL = 0;
-    const SUBMITTING = 1;
+    const WAITING = 1;
     const SUBMITTED = 2;
 
     export default {
@@ -191,7 +194,12 @@
         },
         data: function () {
             return {
-                loading: false,
+                reconnecting: false,
+                solicitStatus: 2,
+                stopRegisterStatus:2,
+                aggregateStatus:2,
+                approveStatus:2,
+                claimStatus:2,
                 wsPath: "ws://0.0.0.0:4000",
                 httpPath: "http://0.0.0.0:4000",
                 ws: undefined,
@@ -313,7 +321,7 @@
                 this.ws.send(JSON.stringify(payload));
             },
             solicit: function() {
-                this.loading = true;
+                this.solicitStatus = WAITING;
                 console.log("solicit");
                 let payload = {
                     gcuid: GCUID_SOLICIT,
@@ -327,7 +335,7 @@
                 this.ws.send(JSON.stringify(payload));
             },
             aggregate: function() {
-                this.loading = true;
+                this.aggregateStatus = WAITING;
                 console.log("aggregate");
                 let payload = {
                     gcuid: GCUID_AGGREGATION,
@@ -338,7 +346,7 @@
                 this.ws.send(JSON.stringify(payload));
             },
             approve: function() {
-                this.loading = true;
+                this.approveStatus = WAITING;
                 console.log("approve");
                 let payload = {
                     gcuid: GCUID_APPROVE,
@@ -349,7 +357,7 @@
                 this.ws.send(JSON.stringify(payload));
             },
             claim: function() {
-                this.loading = true;
+                this.claimStatus = WAITING;
                 console.log("claim");
                 let payload = {
                     gcuid: GCUID_CLAIM,
@@ -359,8 +367,17 @@
                 };
                 this.ws.send(JSON.stringify(payload));
             },
+            canClaim: function() {
+                console.log("query can claim");
+                let payload = {
+                    gcuid: GCUID_CAN_CLAIM_FOR_TASK,
+                    taskId: TASK_ID,
+                    address: this.serviceProviderAccount.address,
+                };
+                this.ws.send(JSON.stringify(payload));
+            },
             stopRegisterAndSubmit: function () {
-                this.loading = true;
+                this.stopRegisterStatus = WAITING;
                 console.log("stop register and submit");
                 let payload = {
                     gcuid: GCUID_STOP_REGISTER_AND_SUBMIT,
@@ -446,8 +463,6 @@
                 }
                 if(!this.enableStatics) {
                     this.enableStatics = true;
-                } else {
-                    this.enableStatics = false;
                 }
             },
             cleanState: function() {
@@ -502,6 +517,7 @@
                 this.ws = new WebSocket(this.wsPath);
                 this.ws.onopen = e => {
                     console.log("websocket open");
+                    this.reconnecting = false;
                     this.initialDisplay();
                 };
                 this.ws.onmessage = e => {
@@ -510,41 +526,50 @@
                         case GCUID_SOLICIT:
                             if (res.status === 0) {
                                 this.getConsumerTokenBalance();
+                                this.solicitStatus = SUBMITTED;
                             } else {
                                 console.log(res.reason);
+                                this.solicitStatus = INITIAL;
+                                // TODO ERROR WARNING
                             }
-                            this.loading = false;
                             break;
                         case GCUID_AGGREGATION:
                             if (res.status === 0) {
+                                this.aggregateStatus = SUBMITTED;
                             } else {
                                 console.log(res.reason);
+                                this.aggregateStatus = INITIAL;
+                                // TODO ERROR WARNING
                             }
-                            this.loading = false;
                             break;
                         case GCUID_APPROVE:
                             if (res.status === 0) {
                                 this.submitValues = res.submitValues;
                                 console.log("submit values:",this.submitValues);
+                                this.approveStatus = SUBMITTED;
                             } else {
                                 console.log(res.reason);
+                                this.approveStatus = INITIAL;
+                                // TODO ERROR WARNING
                             }
-                            this.loading= false;
                             break;
                         case GCUID_CLAIM:
                             if (res.status === 0) {
+                                this.claimStatus = SUBMITTED;
                                 this.getTokenBalance();
                             } else {
+                                this.claimStatus = INITIAL;
                                 console.log(res.reason);
+                                // TODO ERROR WARNING
                             }
-                            this.loading = false;
                             break;
                         case GCUID_STOP_REGISTER_AND_SUBMIT:
                             if (res.status === 0) {
+                                this.stopRegisterStatus = SUBMITTED;
                             } else {
+                                this.stopRegisterStatus = INITIAL;
                                 console.log(res.reason);
                             }
-                            this.loading = false;
                             break;
                         case GCUID_BALANCE:
                             if (res.status === 0) {
@@ -576,7 +601,9 @@
                         case GCUID_CURRENT_STAGE:
                             if (res.status === 0) {
                                 this.stage = res.stage;
+                                // console.log(this.stageToProcedure[this.stage]);
                                 if(this.stageToProcedure[this.stage] === 'Solicit') {
+                                    this.solicitStatus = INITIAL;
                                     this.cleanState();
                                 } else {
                                     if(!this.initialied) {
@@ -585,6 +612,15 @@
                                         this.initialied = true;
                                     } else {
                                         this.initializeState(res.stage);
+                                    }
+                                    if (this.stageToProcedure[this.stage] === 'Register') {
+                                        this.stopRegisterStatus = INITIAL;
+                                    } else if (this.stageToProcedure[this.stage] === 'Aggregate') {
+                                        this.aggregateStatus = INITIAL;
+                                    }  else if(this.stageToProcedure[this.stage] === 'Approve') {
+                                        this.approveStatus = INITIAL;
+                                    } else if(this.stageToProcedure[this.stage] === 'Claim') {
+                                        this.canClaim()
                                     }
                                 }
                             } else {
@@ -637,14 +673,27 @@
                                 console.log(res.reason);
                             }
                             break;
+                        case GCUID_CAN_CLAIM_FOR_TASK:
+                            console.log("can calim?:",res.canClaim);
+                            if (res.status === 0) {
+                                if(res.canClaim) {
+                                    this.claimStatus = INITIAL;
+                                } else {
+                                    this.claimStatus = SUBMITTED;
+                                }
+                            } else {
+                                console.log(res.reason);
+                            }
+                            break;
                         default:
                             console.log("unknown response")
                     }
                 };
                 this.ws.onclose = e=> {
                     console.log("websocket close");
-                    this.loading = false;
                     this.initialied = false;
+                    // TODO ERROR WARNING
+                    this.reconnecting = true;
                     this.reconnect()
                 };
             },

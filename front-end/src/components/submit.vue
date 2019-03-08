@@ -15,14 +15,14 @@
                     <div class="value"> {{tokenBalance}} </div>
                 </div>
                 <div v-if="shouldShow('register')">
-                    <div class="item">
-                        <div class="label">Solicit Data Fee: </div>
-                        <div class="value"> {{solicitInfo.dataFee}} </div>
-                    </div>
-                    <div class="item">
-                        <div class="label">Solicit Service Fee: </div>
-                        <div class="value"> {{solicitInfo.serviceFee}} </div>
-                    </div>
+                    <!--<div class="item">-->
+                        <!--<div class="label">Solicit Data Fee: </div>-->
+                        <!--<div class="value"> {{solicitInfo.dataFee}} </div>-->
+                    <!--</div>-->
+                    <!--<div class="item">-->
+                        <!--<div class="label">Solicit Service Fee: </div>-->
+                        <!--<div class="value"> {{solicitInfo.serviceFee}} </div>-->
+                    <!--</div>-->
                     <div class="item">
                         <div class="label">Solicit Target Number: </div>
                         <div class="value"> {{solicitInfo.target}}</div>
@@ -42,7 +42,7 @@
                 </div>
                 <div class="item" v-if="shouldShow('approve')">
                     <span class="label">Are you qualified?  </span>
-                    <span class="value">{{qualified === undefined ? '': qualified?'true':'false'}}</span>
+                    <span class="value">{{qualified === undefined ? '': qualified?'Yes':'No'}}</span>
                 </div>
                 <div class="item" v-if="shouldShow('approve')">
                     <span class="label">Final aggregate result:</span>
@@ -53,24 +53,36 @@
                     <span class="value"> {{claimNumber}} </span>
                 </div>
             </div>
-            <div v-if="account!==undefined">
-                <div class="form" v-if="atStage('register')">
-                    <div v-if = "!loading">
-                        <span class="label">Value:</span>
-                        <input class="input" v-model.number="value">
-                        <button class="btn btn-dark contract-button" @click="registerAndSubmit"> submit</button>
+            <div v-if="!reconnecting">
+                <div v-if="account!==undefined">
+                    <div>
+                        <!--<div class="formNote">-->
+                            <!--<span class="note">*Note:</span><span class="noteBody"> Input length should be less than 256</span>-->
+                        <!--</div>-->
+                        <div class="form" v-if="atStage('register')">
+                            <div v-if = "submitStatus === 0">
+                                <span class="label">Value:</span>
+                                <!--<input class="input" type="number" v-model.number="value">-->
+                                <input pattern="\d*" v-validate="'max:256|numeric|required'" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="input" type="text" name="value" v-model="value">
+                                <button class="btn btn-dark contract-button" @click="registerAndSubmit"> submit</button>
+                                <div class="error" v-show="errors.has('value')">{{ errors.first('value') }}</div>
+                            </div>
+                            <pacman v-else-if="submitStatus === 1"></pacman>
+                        </div>
                     </div>
-                    <pacman v-else></pacman>
+                    <div class="formLists" v-if="account!==undefined">
+                        <div class="form" v-if="atStage('claim')">
+                            <button class="btn btn-dark contract-button" v-if="claimStatus===0" @click="claim"> claim</button>
+                            <pacman v-else-if="claimStatus===1"></pacman>
+                        </div>
+                    </div>
                 </div>
-                <div class="formLists" v-if="account!==undefined">
-                    <div class="form" v-if="atStage('claim')">
-                        <button class="btn btn-dark contract-button" v-if="!loading || qualified" @click="claim"> claim</button>
-                        <pacman v-else></pacman>
-                    </div>
+                <div v-else>
+                    <wallet-loading></wallet-loading>
                 </div>
             </div>
-            <div class="walletWaiting" v-else>
-                <pacman></pacman>
+            <div v-else>
+                <ws-reconnect> </ws-reconnect>
             </div>
         </div>
 
@@ -81,14 +93,14 @@
 <script>
     import {getBaseTxObject,signTx,encodeFunction} from "../assets/js/tx";
 
-    const GCUID_SOLICIT = 0;
-    const GCUID_REGISTER = 1;
-    const GCUID_SUBMIT = 2;
-    const GCUID_AGGREGATION = 3;
-    const GCUID_APPROVE = 4;
+    // const GCUID_SOLICIT = 0;
+    // const GCUID_REGISTER = 1;
+    // const GCUID_SUBMIT = 2;
+    // const GCUID_AGGREGATION = 3;
+    // const GCUID_APPROVE = 4;
     const GCUID_CLAIM = 5;
     const GCUID_REGISTER_AND_SUBMIT = 6;
-    const GCUID_STOP_REGISTER_AND_SUBMIT = 7;
+    // const GCUID_STOP_REGISTER_AND_SUBMIT = 7;
     const GCUID_SEND_TRANSACTION = 8;
 
     const GCUID_ETHER = 101;
@@ -102,6 +114,9 @@
     const GCUID_QUALIFIED_NUMBER = 109;
     const GCUID_IS_QUALIFIED = 110;
 
+    const GCUID_CAN_REGISTER_AND_SUBMIT_FOR_TASK = 800;
+    const GCUID_CAN_CLAIM_FOR_TASK = 801;
+
     const TASK_ID = 0;
 
     const INITIAL = 0;
@@ -113,16 +128,22 @@
         props: {
             account: Object
         },
+        components: {
+            walletLoading: () => import("@/components/walletInitializing.vue"),
+            wsReconnect: () => import("@/components/wsReconnect.vue"),
+        },
         data: function () {
             return {
-                loading: false,
+                value: undefined,
+                reconnecting: false,
+                submitStatus: SUBMITTED,
+                claimStatus: SUBMITTED,
                 wsPath: "ws://0.0.0.0:4000",
                 httpPath: "http://0.0.0.0:4000",
                 initialized:false,
                 waiting: "",
                 waitingAnimate: undefined,
                 ws: undefined,
-                value: 0,
                 tokenBalance: undefined,
                 stage: undefined,
                 registerNumber: undefined,
@@ -233,12 +254,15 @@
                 this.ws.send(JSON.stringify(payload));
             },
             registerAndSubmit: function() {
-                this.loading = true;
+                if(this.value.length>256) return;
+                let value = this.value;
+                console.log(value);
+                this.submitStatus = WAITING;
                 console.log("register and submit");
                 console.log("address:"+this.account.address);
                 let p1 = this.axios.get(`${this.httpPath}/nonce/${this.account.address}`);
                 let p2 = this.axios.get(`${this.httpPath}/chainId`);
-                let p3 = this.axios.post(`${this.httpPath}/encryptedData`,this.value);
+                let p3 = this.axios.post(`${this.httpPath}/encryptedData`,value);
                 Promise.all([p1,p2,p3]).then(([r1,r2,r3])=>{
                     let nonce = r1.data;
                     let chainId = r2.data;
@@ -264,12 +288,12 @@
                     };
                     this.ws.send(JSON.stringify(payload));
                 }).catch(err=>{
+                    this.submitStatus = INITIAL;
                     console.log(err);
-                    this.loading = false;
                 })
             },
             claim: function() {
-                this.loading = true;
+                this.claimStatus = WAITING;
                 console.log("claim");
                 let p1 = this.axios.get(`${this.httpPath}/nonce/${this.account.address}`);
                 let p2 = this.axios.get(`${this.httpPath}/chainId`);
@@ -295,8 +319,9 @@
                     };
                     this.ws.send(JSON.stringify(payload));
                 }).catch(err=> {
+                    this.claimStatus = INITIAL;
+                    // TODO ERROR WARNING
                     console.log(err);
-                    this.loading = false;
                 })
             },
             getQualifiedNumber: function() {
@@ -316,9 +341,25 @@
                 };
                 this.ws.send(JSON.stringify(payload));
             },
+            canRegisterAndSubmit: function(){
+                console.log("can register and submit");
+                let payload = {
+                    gcuid: GCUID_CAN_REGISTER_AND_SUBMIT_FOR_TASK,
+                    taskId: TASK_ID,
+                    address: this.account.address,
+                };
+                this.ws.send(JSON.stringify(payload));
+            },
+            canClaim: function() {
+                console.log("can claim");
+                let payload = {
+                    gcuid: GCUID_CAN_CLAIM_FOR_TASK,
+                    taskId: TASK_ID,
+                    address: this.account.address,
+                };
+                this.ws.send(JSON.stringify(payload));
+            },
             cleanState: function() {
-                this.submitStatus = 0;
-                this.claimStatus = 0;
                 this.claimNumber = undefined;
                 this.registerNumber = undefined;
                 this.submissionNumber = undefined;
@@ -369,6 +410,7 @@
                 this.ws = new WebSocket("ws://0.0.0.0:4000");
                 this.ws.onopen = e => {
                     console.log("websocket open");
+                    this.reconnecting = false;
                     this.initialDisplay();
                 };
                 this.ws.onmessage = e => {
@@ -423,6 +465,11 @@
                                     } else {
                                         this.initializeState(res.stage)
                                     }
+                                    if(this.stageToProcedure[this.stage] === 'Register') {
+                                        this.canRegisterAndSubmit()
+                                    } else if(this.stageToProcedure[this.stage] === 'Claim') {
+                                        this.canClaim()
+                                    }
                                 }
                             } else {
                                 console.log(res.reason);
@@ -463,11 +510,24 @@
                         case GCUID_SEND_TRANSACTION:
                             if (res.status === 0) {
                                 console.log("send transaction successfully");
+                                if(res.txid === GCUID_CLAIM) {
+                                     this.claimStatus = SUBMITTED;
+                                } else if (res.txid === GCUID_REGISTER_AND_SUBMIT) {
+                                    this.submitStatus = SUBMITTED;
+                                }
                             } else {
                                 console.log(res.reason);
+                                console.log("tx id",res.txid)
+                                console.log("gcuid_claim",GCUID_CLAIM);
+                                if(res.txid === GCUID_CLAIM) {
+                                    this.claimStatus = INITIAL;
+                                } else if (res.txid === GCUID_REGISTER_AND_SUBMIT) {
+                                    this.submitStatus = INITIAL;
+                                }
+
+                                //TODO  ERROR WARNING
                             }
                             // console.log("txid:",res.txid);
-                            this.loading = false;
                             break;
                         case GCUID_QUALIFIED_NUMBER:
                             if (res.status === 0) {
@@ -484,6 +544,28 @@
                                 console.log(res.reason);
                             }
                             break;
+                        case GCUID_CAN_CLAIM_FOR_TASK:
+                            if (res.status === 0) {
+                                if(res.canClaim) {
+                                    this.claimStatus = INITIAL;
+                                } else {
+                                    this.claimStatus = SUBMITTED;
+                                }
+                            } else {
+                                console.log(res.reason);
+                            }
+                            break;
+                        case GCUID_CAN_REGISTER_AND_SUBMIT_FOR_TASK:
+                            if (res.status === 0) {
+                                if(res.canRegister) {
+                                    this.submitStatus = INITIAL;
+                                } else {
+                                    this.claimStatus = SUBMITTED;
+                                }
+                            } else {
+                                console.log(res.reason);
+                            }
+                            break;
                         default:
                             console.log("unknown response")
                     }
@@ -491,8 +573,9 @@
                 this.ws.onclose = e=> {
                     console.log("websocket close");
                     this.initialied = false;
+                    this.reconnecting = true;
                     this.reconnect();
-                    this.loading = false;
+                    // TODO ERROR WARNING
                 };
             },
             reconnect: function() {

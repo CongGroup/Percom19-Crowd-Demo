@@ -21,6 +21,16 @@ const (
 )
 
 const (
+	//stage
+	SOLICIT = iota
+	REGISTER
+	SUBMIT
+	AGGREGATION
+	APPROVE
+	CLAIM
+)
+
+const (
 	GCUID_ETHER = 101+iota
 	GCUID_CURRENT_STAGE
 	GCUID_REGISTER_NUMBER
@@ -32,6 +42,12 @@ const (
 
 	GCUID_QUALIFIED_NUMBER
 	GCUID_IS_QUALIFIED
+)
+
+
+const (
+	GCUID_CAN_REGISTER_AND_SUBMIT_FOR_TASK = 800
+	GCUID_CAN_CLAIM_FOR_TASK = 801
 )
 
 const (
@@ -295,3 +311,31 @@ type SubmitPayload struct {
 	SubmitData string `json:"submitData"`
 	SubmitProof string `json:"submitProof"`
 }
+
+type CanRegisterAndSubmitRequest struct {
+	Gcuid int `json:"gcuid"`
+	TaskId *big.Int `json:"taskId"`
+	Address string `json:"address"`
+}
+
+type CanRegisterAndSubmitResponse struct {
+	Response
+	CanRegister bool `json:"canRegister"`
+}
+
+type CanClaimRequest struct {
+	Gcuid int `json:"gcuid"`
+	TaskId *big.Int `json:"taskId"`
+	Address string `json:"address"`
+}
+
+type CanClaimResponse struct {
+	Response
+	CanClaim bool `json:"canClaim"`
+}
+
+type SendTransactionErrorResponse struct {
+	Error
+	Txid int `json:"txid"`
+}
+
