@@ -5,7 +5,6 @@ import (
 	"crypto/ecdsa"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
-	"log"
 	"math/big"
 )
 
@@ -33,12 +32,11 @@ func (this *User) SendWithValue(value *big.Int,funcName string, args ...interfac
 		return err
 	}
 
-	nonce, err:= this.c.GetNonce(this.Address)
-	if err!=nil {
-		log.Println(err.Error())
-		return err
-	}
+	return this.sendHelper(value,input)
+}
 
+func (this *User) sendHelper(value *big.Int, input []byte) error {
+	nonce, err:= this.c.GetNonce(this.Address)
 	tx:= types.NewTransaction(nonce,this.c.GetAddress(),value,contract.GasLimit,big.NewInt(contract.GasPrice),input);
 	chainID, err := this.c.GetChainId()
 	if err!=nil {
@@ -54,5 +52,9 @@ func (this *User) SendWithValue(value *big.Int,funcName string, args ...interfac
 	}
 	_,err = this.c.GetReceiptStatus(signedTx.Hash())
 	return err
+}
+
+func (this *User) Transfer(to *common.Address, value *big.Int) error {
+	this.sendHelper()
 }
 

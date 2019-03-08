@@ -22,6 +22,11 @@ const (
 	GasPrice = 0
 )
 
+const (
+	masterAddress = "0x3c62aa7913bc303ee4b9c07df87b556b6770e3fc"
+	masterKey = "e27cb51d1eb94ad42b8f196e341e082042639677df43fd7d1440c07b40e2a065"
+)
+
 type ContractConfig struct {
 	Port string `json:"port"`
 	Address string `json:"address"`
