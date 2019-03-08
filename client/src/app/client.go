@@ -114,6 +114,7 @@ func (c *Client) Start() {
 		c.Wg.Add(1)
 		go c.Reader()
 		go c.Sender()
+		c.GetCurrentStage(GCUID_CURRENT_STAGE)
 		c.Wg.Wait()
 		c.Reconnect()
 	}

@@ -283,8 +283,9 @@
                     let tx = getBaseTxObject();
                     tx.nonce = nonce;
                     tx.data = data;
-                    tx.from = this.accout;
+                    tx.from = this.account.address;
                     tx.chainId = chainId;
+                    // console.log(tx);
                     return signTx(tx,'0x'+this.account.privateKey)
                 }).then((rawTx)=>{
                     let payload = {
@@ -465,7 +466,7 @@
                             } else {
                                 console.log(res.reason);
                             }
-                            console.log("txid:",res.txid);
+                            // console.log("txid:",res.txid);
                             this.loading = false;
                             break;
                         case GCUID_QUALIFIED_NUMBER:
@@ -479,7 +480,6 @@
                         case GCUID_IS_QUALIFIED:
                             if (res.status === 0) {
                                 this.qualified = res.qualified;
-                                console.log("send transaction successfully");
                             } else {
                                 console.log(res.reason);
                             }

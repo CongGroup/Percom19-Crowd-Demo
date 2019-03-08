@@ -72,6 +72,11 @@ func (c *BaseContract) Close() error {
 
 func (c *BaseContract) SendTransaction(tx *types.Transaction) (*types.Transaction, error) {
 	err := c.Client.SendTransaction(context.Background(), tx)
+	if err!=nil {
+		log.Println(err.Error())
+		return nil,err
+	}
+	_,err =c.GetReceiptStatus(tx.Hash())
 	return tx, err
 }
 

@@ -129,7 +129,7 @@ func (h *Handler) submitHandler(gcuid int, data []byte) {
 		h.errorHandler(gcuid,ENCRYPTION_ERROR,err)
 		return
 	}
-	submitData:= SetBigIntBytes(encryption)
+	submitData:=encryption.Bytes()
 	submitProof:= GenBulletProof(amount)
 
 
@@ -192,8 +192,14 @@ func (h *Handler) aggregateHandler(gcuid int, data []byte) {
 			h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
 			return
 		}
-		submitDataByte=submitDataByte[64:]
-		submitProofByte = submitProofByte[64:]
+
+
+		submitDataLen:= new(big.Int).SetBytes(submitDataByte[32:64])
+		submitDataByte=submitDataByte[64:64+submitDataLen.Int64()]
+		submitProofLen := new(big.Int).SetBytes(submitProofByte[32:64])
+		submitProofByte = submitProofByte[64:64+submitProofLen.Int64()]
+
+
 		rp:= new(zcrypto.RangeProof).SetBytes(submitProofByte)
 
 		if err!=nil {
@@ -208,8 +214,13 @@ func (h *Handler) aggregateHandler(gcuid int, data []byte) {
 		qualifiedCount++
 		qualfiedState[i]=byte(1)
 		submitData:=new(big.Int).SetBytes(submitDataByte)
+		//sd:=zcrypto.PriKey.Decrypt(&zcrypto.Cypher{C:submitData})
+		//log.Println("submit data from",i,":",sd)
 		total.Mul(total,submitData)
 		total.Mod(total,zcrypto.PubKey.GetNSquare())
+		if(total.Cmp(zcrypto.PubKey.GetNSquare())==0) {
+			log.Println("total equals 0");
+		}
 	}
 
 	m:=zcrypto.PriKey.Decrypt(&zcrypto.Cypher{C:total})
@@ -370,13 +381,8 @@ func (h *Handler) registerAndSubmitHandler(gcuid int, data[]byte) {
 		h.errorHandler(gcuid,ENCRYPTION_ERROR,err)
 		return
 	}
-	submitData:=SetBigIntBytes(encryption)
+	submitData:=encryption.Bytes()
 	submitProof:= GenBulletProof(amount)
-
-
-	//submitPayload,err := json.Marshal(&appClient.SubmitPayload{
-	//	SubmitData:submitData,
-
 
 	err =u.Send(contract.FUNCTION_REGISTER_AND_SUBMIT,payload.TaskId,submitData,submitProof)
 
@@ -613,7 +619,9 @@ func (h *Handler) getAggregationResultHandler(gcuid int, data[]byte) {
 		h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
 		return
 	}
-	aggregateResultByte = aggregateResultByte[64:]
+
+	aggregateResultLen:= new(big.Int).SetBytes(aggregateResultByte[32:64]).Int64()
+	aggregateResultByte = aggregateResultByte[64:64+aggregateResultLen]
 
 	qualifiedNumberByte,err:= h.agg.Call(contract.FUNCTION_GET_QUALIFIED_NUMBER_OF_TASK, payload.TaskId)
 	if err!=nil {
@@ -700,6 +708,7 @@ func (h *Handler) sendTransactionHandler(gcuid int,data []byte) {
 		return
 	}
 
+	//log.Println("tx:",tx.Hash().String(),"from:")
 	_, err =h.agg.SendTransaction(&tx)
 	if err!=nil {
 		log.Println(err.Error())

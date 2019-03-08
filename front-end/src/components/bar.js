@@ -6,6 +6,6 @@ export default {
     props: ['options'],
     mounted: function () {
         console.log("show graph");
-        this.renderChart(this.chartData,this.options);
+        this.renderChart(this.chartData,{responsive: false,maintainAspectRatio:false});
     }
 }

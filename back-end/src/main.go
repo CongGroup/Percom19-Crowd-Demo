@@ -21,7 +21,7 @@ import (
 
 
 func testPallier() {
-	pub,pri,err:=zcrypto.NewPallier(256);
+	pub,pri,err:=zcrypto.NewPallier(128);
 	cypher,err:=pub.Encrypt(big.NewInt(232131230))
 	if err!=nil {
 		log.Println()
@@ -133,7 +133,7 @@ func getEncryptedData(w http.ResponseWriter, r *http.Request) {
 		http.Error(w,err.Error(),http.StatusInternalServerError)
 		return
 	}
-	submitData := "0x"+hex.EncodeToString(appClient.SetBigIntBytes(cipher))
+	submitData := "0x"+cipher.Text(16)
 	submitProofByte := appClient.GenBulletProof(amount)
 	submitProof:= "0x"+hex.EncodeToString(submitProofByte)
 
@@ -165,13 +165,15 @@ func getStatistics(agg *contract.Agg) func(w http.ResponseWriter, r* http.Reques
 		submitValues:=make([]*big.Int,count.Int64(),count.Int64())
 		for i:=0; i< int(count.Int64()); i++ {
 			submitDataByte,err:= agg.Call(contract.FUNCTION_GET_SUBMIT_DATA_OF_TASK, taskId,big.NewInt(int64(i)))
-			submitDataByte=submitDataByte[64:]
-
+			submitDataLen:= new(big.Int).SetBytes(submitDataByte[32:64])
+			submitDataByte=submitDataByte[64:64+submitDataLen.Int64()]
 			if err!=nil {
 				log.Println(err.Error())
 				http.Error(w,err.Error(),http.StatusInternalServerError)
 				return
 			}
+
+
 			encryptedSubmitData:=new(big.Int).SetBytes(submitDataByte)
 
 			submitData:=zcrypto.PriKey.Decrypt(&zcrypto.Cypher {
@@ -238,4 +240,15 @@ func main() {
 	//testBulletProof2()
 
 	start()
+	//t,_:=new(big.Int).SetString(zcrypto.N,10)
+	//log.Println("t:", len(t.Bytes()))
+	//t,_=new(big.Int).SetString(zcrypto.N,10)
+	//log.Println("t:", len(t.Bytes()))
+	//t,_=new(big.Int).SetString(zcrypto.N,10)
+	//log.Println("t:", len(t.Bytes()))
+	//encryptedData,_:=appClient.GenEncryption(big.NewInt(20127))
+	//log.Println(new(big.Int).SetBytes(encryptedData.Bytes()[32:]))
+	//
+	//encryptedData,_:=appClient.GenEncryption(big.NewInt(20127))
+	//log.Println(new(big.Int).SetBytes(encryptedData.Bytes()[32:]))
 }

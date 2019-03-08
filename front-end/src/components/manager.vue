@@ -1,27 +1,123 @@
 <template>
-    <div class="agg">
-        <div class="container">
-            <div class="adminStage">
-                <div class="stageForm" v-if="!enableStatics">
-                    <img class="icon" alt="Vue logo" src="../assets/cd3.jpeg"/>
-                    <div class="value">{{stageToProcedure[stage]}} </div>
-                </div>
-                <bar-statistics :chart-data="graph" :options="graphOptions" v-else></bar-statistics>
-                <div class="stageContent contract">
-                    <div >
-                        <div class="item">
-                            <div class="label">Solicit Data Fee: </div>
-                            <div class="value"> {{solicitInfo.dataFee}} </div>
+    <div>
+        <div class="agg">
+            <div class="container" v-if="!enableStatics">
+                <div class="adminStage">
+                    <div>
+                        <div class="stageForm">
+                            <img class="icon" alt="Vue logo" src="../assets/cd3.jpeg"/>
+                            <div class="value">{{stageToProcedure[stage]}} </div>
                         </div>
-                        <div class="item">
-                            <div class="label">Solicit Service Fee: </div>
-                            <div class="value"> {{solicitInfo.serviceFee}} </div>
-                        </div>
-                        <div class="item">
-                            <div class="label">Solicit Target Number: </div>
-                            <div class="value"> {{solicitInfo.target}}</div>
+                        <div class="stageContent contract">
+                            <div >
+                                <div class="item">
+                                    <div class="label">Solicit Data Fee: </div>
+                                    <div class="value"> {{solicitInfo.dataFee}} </div>
+                                </div>
+                                <div class="item">
+                                    <div class="label">Solicit Service Fee: </div>
+                                    <div class="value"> {{solicitInfo.serviceFee}} </div>
+                                </div>
+                                <div class="item">
+                                    <div class="label">Solicit Target Number: </div>
+                                    <div class="value"> {{solicitInfo.target}}</div>
+                                </div>
+                            </div>
+                            <div class="item" >
+                                <span class="label">Register number: </span>
+                                <span class="value"> {{registerNumber}} </span>
+                            </div>
+                            <div class="item" >
+                                <span class="label">Submission number:</span>
+                                <span class="value"> {{submissionNumber}} </span>
+                            </div>
+                            <div class="item" >
+                                <span class="label">Qualified number:</span>
+                                <span class="value"> {{qualifiedNumber}} </span>
+                            </div>
+                            <div class="item" >
+                                <span class="label">Final aggregate result:</span>
+                                <span class="value"> {{qualifiedNumber !==0 ?aggregateResult:"NAN"}} </span>
+                            </div>
+                            <div class="item">
+                                <span class="label">Claim number:</span>
+                                <span class="value"> {{claimNumber}} </span>
+                            </div>
                         </div>
                     </div>
+                </div>
+                <div class="admin">
+                    <div class="contract">
+                        <div class="role">
+                            <div class ="item">
+                                <div class="stage"> Data Consumer </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="label">Address: </div>
+                            <div class="value"> {{dataConsumerAccount.address}}</div>
+                        </div>
+                        <div class="item">
+                            <div class="label">Your Balance: </div>
+                            <div class="value"> {{consumerTokenBalance}} </div>
+                        </div>
+                        <div class="col buttonGroup">
+                            <div class="form" v-if="atStage('solicit')">
+                                <div v-if="!loading">
+                                    <span class="label">Target Number:</span>
+                                    <input class="input" v-model.number="targetNumber">
+                                    <button  :disabled="!atStage('solicit')" class="btn btn-dark contract-button" @click="solicit"> solicit</button>
+                                </div>
+                                <pacman v-else></pacman>
+                            </div>
+                            <div class="form" v-if="atStage('register')">
+                                <button :disabled="!atStage('register')" v-if="!loading" class="btn btn-dark contract-button" @click="stopRegisterAndSubmit"> stop register</button>
+                                <pacman v-else></pacman>
+                            </div>
+                            <div class="row">
+                                <div class="form" v-if="atStage('approve')">
+                                    <button :disabled="!atStage('approve')" v-if="!loading" class="btn btn-dark contract-button" @click="approve"> approve</button>
+                                    <pacman v-else></pacman>
+                                </div>
+                                <div class="form" v-if="atStage('claim')">
+                                    <button :disabled="false" class="btn btn-dark contract-button" @click="showStatics"> showStatics</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="contract">
+                        <div class="role">
+                            <div class ="item">
+                                <div class="stage">Service Provider </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="label">Address: </div>
+                            <div class="value">{{serviceProviderAccount.address}}  </div>
+                        </div>
+                        <div class="item">
+                            <div class="label">Your Balance: </div>
+                            <div class="value"> {{tokenBalance}} </div>
+                        </div>
+                        <div class="col buttonGroup">
+                            <div class="form" v-if="atStage('aggregate')">
+                                <button :disabled="!atStage('aggregate')" v-if="!loading" class="btn btn-dark contract-button" @click="aggregate"> aggregate</button>
+                                <pacman v-else></pacman>
+                            </div>
+                            <div class="form" v-if="atStage('claim')">
+                                <button :disabled="!atStage('claim')" v-if="!loading" class="btn btn-dark contract-button" @click="claim"> claim</button>
+                                <pacman v-else></pacman>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="graphLayout"  v-else >
+                <div class="graph">
+                    <bar-statistics :width="1000" :height="700" :chart-data="graph" :options="graphOptions"></bar-statistics>
+                </div>
+                <div class="contract info">
                     <div class="item" >
                         <span class="label">Register number: </span>
                         <span class="value"> {{registerNumber}} </span>
@@ -35,78 +131,15 @@
                         <span class="value"> {{qualifiedNumber}} </span>
                     </div>
                     <div class="item" >
-                        <span class="label">Final aggregate result:</span>
+                        <span class="label" style="font-weight: 700">Final aggregate result:</span>
                         <span class="value"> {{qualifiedNumber !==0 ?aggregateResult:"NAN"}} </span>
                     </div>
                     <div class="item">
                         <span class="label">Claim number:</span>
                         <span class="value"> {{claimNumber}} </span>
                     </div>
-                </div>
-            </div>
-            <div class="admin">
-                <div class="contract">
-                    <div class="role">
-                        <div class ="item">
-                            <div class="stage"> Data Consumer </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="label">Address: </div>
-                        <div class="value"> {{dataConsumerAccount.address}}</div>
-                    </div>
-                    <div class="item">
-                        <div class="label">Your Balance: </div>
-                        <div class="value"> {{consumerTokenBalance}} </div>
-                    </div>
-                    <div class="col buttonGroup">
-                        <div class="form" v-if="atStage('solicit')">
-                            <div v-if="!loading">
-                                <span class="label">Target Number:</span>
-                                <input class="input" v-model.number="targetNumber">
-                                <button  :disabled="!atStage('solicit')" class="btn btn-dark contract-button" @click="solicit"> solicit</button>
-                            </div>
-                            <pacman v-else></pacman>
-                        </div>
-                        <div class="form" v-if="atStage('register')">
-                            <button :disabled="!atStage('register')" v-if="!loading" class="btn btn-dark contract-button" @click="stopRegisterAndSubmit"> stop register</button>
-                            <pacman v-else></pacman>
-                        </div>
-                        <div class="row">
-                            <div class="form" v-if="atStage('approve')">
-                                <button :disabled="!atStage('approve')" v-if="!loading" class="btn btn-dark contract-button" @click="approve"> approve</button>
-                                <pacman v-else></pacman>
-                            </div>
-                            <div class="form" v-if="atStage('claim')">
-                                <button :disabled="false" class="btn btn-dark contract-button" @click="showStatics"> showStatics</button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="contract">
-                    <div class="role">
-                        <div class ="item">
-                            <div class="stage">Service Provider </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="label">Address: </div>
-                        <div class="value">{{serviceProviderAccount.address}}  </div>
-                    </div>
-                    <div class="item">
-                        <div class="label">Your Balance: </div>
-                        <div class="value"> {{tokenBalance}} </div>
-                    </div>
-                    <div class="col buttonGroup">
-                        <div class="form" v-if="atStage('aggregate')">
-                            <button :disabled="!atStage('aggregate')" v-if="!loading" class="btn btn-dark contract-button" @click="aggregate"> aggregate</button>
-                            <pacman v-else></pacman>
-                        </div>
-                        <div class="form" v-if="atStage('claim')">
-                            <button :disabled="!atStage('claim')" v-if="!loading" class="btn btn-dark contract-button" @click="claim"> claim</button>
-                            <pacman v-else></pacman>
-                        </div>
+                    <div class="back">
+                        <button class="btn btn-dark contract-button" @click="hidenGraph"> back </button>
                     </div>
                 </div>
             </div>
@@ -207,6 +240,9 @@
         watch: {
         },
         methods: {
+            hidenGraph: function(event){
+                this.enableStatics = false;
+            },
             shouldShow: function (stage) {
                 return this.stage >= this.mapToStage[stage];
             },
@@ -342,68 +378,71 @@
                 };
                 this.ws.send(JSON.stringify(payload));
             },
+            draw: function() {
+                let qualifiedData = this.submitValues;
+                let space = 2048;
+                let minH = 0;
+                let maxH = 65536;
+                let bucket = Array((maxH-minH)/space+2).fill(0);
+                qualifiedData.forEach(v=>{
+                    let bucketNumber = Math.floor((v-minH)/space)+1;
+                    if(bucketNumber >= bucket.length) {
+                        bucketNumber = bucket.length - 1;
+                    }
+                    if(bucketNumber < 0) {
+                        bucketNumber = 0;
+                    }
+                    ++bucket[bucketNumber];
+                });
+
+                let labels = [];
+                for(let i=0;i<bucket.length;++i) {
+                    if(i===0) labels.push(`<0`);
+                    else if(i===bucket.length-1) labels.push(`>${maxH}`);
+                    else {
+                        let start = minH + space*(i-1);
+                        let end = minH + space*i;
+                        labels.push(`${start}`);
+                    }
+                }
+
+                let datasets = [
+                    {
+                        label: 'Height',
+                        data: bucket,
+                        borderColor: '#002266',
+                        backgroundColor:'#002266',
+                        hoverBackgroundColor:'#ff5050',
+                        hoverBorderColor: '#ff5050',
+                        hoverBorderWidth: 1,
+                    },
+                    // {
+                    //     label:'',
+                    //     data: bucket,
+                    //     type:'line',
+                    //     backgroundColor:'#ffffff',
+                    //     borderColor: '#000000',
+                    // }
+                ];
+
+                this.graph = {
+                    labels: labels,
+                    datasets: datasets,
+                };
+            },
             showStatics: function() {
                 console.log("showStatics");
-
                 if(this.graph===undefined) {
                     if(this.submitValues===undefined) {
                         console.log("refectch submit values");
                         let p = this.axios.get(`${this.httpPath}/statistics/${TASK_ID}`);
                         p.then((res)=>{
                             this.submitValues = res.data.submitValues;
-                            console.log("submitValues:",this.submitValues)
+                            this.draw()
                         })
+                    } else {
+                        this.draw()
                     }
-
-                    let qualifiedData = [154,165,170,156,182,183,190,166,165,160,124,200,212,323];
-                    let space = 5;
-                    let minH = 150;
-                    let maxH = 200;
-                    let bucket = Array((maxH-minH)/space+2).fill(0);
-                    qualifiedData.forEach(v=>{
-                        let bucketNumber = Math.floor((v-minH)/space)+1;
-                        if(bucketNumber >= bucket.length) {
-                            bucketNumber = bucket.length - 1;
-                        }
-                        if(bucketNumber < 0) {
-                            bucketNumber = 0;
-                        }
-                        ++bucket[bucketNumber];
-                    });
-
-                    let labels = [];
-                    for(let i=0;i<bucket.length;++i) {
-                        if(i===0) labels.push(`0-${minH}`);
-                        else if(i===bucket.length-1) labels.push(`>${maxH}`);
-                        else {
-                            let start = minH + space*(i-1);
-                            let end = minH + space*i;
-                            labels.push(`${start}-${end}`);
-                        }
-                    }
-
-                    let datasets = [
-                        {
-                            label: 'Height',
-                            data: bucket,
-                            borderColor: '#002266',
-                            backgroundColor:'#002266',
-                            hoverBackgroundColor:'#ff5050',
-                            hoverBorderColor: '#ff5050',
-                            hoverBorderWidth: 1,
-                        },{
-                            label:'',
-                            data: bucket,
-                            type:'line',
-                            backgroundColor:'#ffffff',
-                            borderColor: '#000000',
-                        }
-                    ];
-
-                    this.graph = {
-                        labels: labels,
-                        datasets: datasets,
-                    };
                 }
                 if(!this.enableStatics) {
                     this.enableStatics = true;

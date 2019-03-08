@@ -187,7 +187,8 @@ func (this *HandlerManager) SubScriptContractEvent(c contract.Contract) {
 					log.Println(err.Error())
 					return
 				}
-				aggregateResultByte = aggregateResultByte[64:]
+				aggregateResultLen:= new(big.Int).SetBytes(aggregateResultByte[32:64]).Int64()
+				aggregateResultByte = aggregateResultByte[64:64+aggregateResultLen]
 
 				qualifiedNumberByte,err:= c.Call(contract.FUNCTION_GET_QUALIFIED_NUMBER_OF_TASK, aggregateEvent.TaskId)
 				if err!=nil {
