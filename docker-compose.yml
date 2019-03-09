@@ -3,6 +3,8 @@ services:
   backend:
     image: xarcher/crowd-back-server:lastest
     working_dir: /app/src
+    expose:
+      - 4000
     ports:
       - "4000:4000"
     environment:
@@ -12,13 +14,13 @@ services:
       chain:
   frontend:
     environment:
-      - SERVER_PATH="ws://52.198.13.254:4000"
-      - HTTP_PATH="http://52.198.13.254:4000"
+      - SERVER_PATH=ws://54.238.167.18:4000
+      - HTTP_PATH=http://54.238.167.18:4000
     image: xarcher/crowd-front:latest
     depends_on:
       - backend
     ports:
-      - "8080:8080"
+      - "80:8080"
     command: bash -c "npm run build && http-server dist"
   client:
     image: xarcher/crowd-back-client:lastest

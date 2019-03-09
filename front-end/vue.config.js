@@ -7,7 +7,7 @@ module.exports = {
                     'SERVER_PATH': JSON.stringify(process.env.SERVER_PATH),
                     'HTTP_PATH': JSON.stringify(process.env.HTTP_PATH),
                 }
-            })
+            })x
         ]
     }
 };
