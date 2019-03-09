@@ -453,14 +453,17 @@
                         let p = this.axios.get(`${process.env.HTTP_PATH}/statistics/${TASK_ID}`);
                         p.then((res)=>{
                             this.submitValues = res.data.submitValues;
-                            this.draw()
+                            this.draw();
+                            if(!this.enableStatics) {
+                                this.enableStatics = true;
+                            }
                         })
                     } else {
-                        this.draw()
+                        this.draw();
+                        if(!this.enableStatics) {
+                            this.enableStatics = true;
+                        }
                     }
-                }
-                if(!this.enableStatics) {
-                    this.enableStatics = true;
                 }
             },
             cleanState: function() {
