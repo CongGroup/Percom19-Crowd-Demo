@@ -12,8 +12,8 @@ services:
       chain:
   frontend:
     environment:
-      - SERVER_PATH="ws://0.0.0.0:4000"
-      - HTTP_PATH="http://0.0.0.0:4000"
+      - SERVER_PATH="ws://52.198.13.254:4000"
+      - HTTP_PATH="http://52.198.13.254:4000"
     image: xarcher/crowd-front:latest
     depends_on:
       - backend
