@@ -23,6 +23,7 @@
             }
         },
         beforeCreate: function () {
+            console.log(process.env.HTTP_PATH);
             import('../assets/js/tx.js').then(util => {
                 let account;
                 if(this.$cookies.isKey("account")) {

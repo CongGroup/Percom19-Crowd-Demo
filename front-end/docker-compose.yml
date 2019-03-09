@@ -3,10 +3,11 @@ services:
   frontend:
     build:
       context: .
-      args:
-        SERVER_PATH: "http://localhost:4000"
+    environment:
+      - SERVER_PATH = "ws://0.0.0.0:4000"
+      - HTTP_PATH = "http://0.0.0.0:4000"
     image: xarcher/crowd-front:latest
     ports:
-      - "8080:8080"
-    command: http-server dist
+        - "80:80"
+    command: bash -c "npm run build && http-server dist"
 

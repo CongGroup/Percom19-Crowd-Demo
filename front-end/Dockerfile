@@ -10,10 +10,10 @@ RUN npm i
 
 COPY . .
 
-ARG SERVER_PATH
+#ARG SERVER_PATH
 
-RUN npm run build
+#RUN npm run build
 
-EXPOSE 8080
+EXPOSE 80
 
 CMD ["http-server","dist"]

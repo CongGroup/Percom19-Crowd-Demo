@@ -1,0 +1,11 @@
+version: '3.2'
+services:
+  client:
+    build: .
+    image: xarcher/crowd-back-client:lastest
+    working_dir: /app/src
+    ports:
+    - "3000:3000"
+    environment:
+    - GOPATH=/app
+    command: go run main.go -addr "http://localhost:4000" -number 50

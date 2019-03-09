@@ -1,0 +1,36 @@
+version: '3.2'
+services:
+  backend:
+    image: xarcher/crowd-back-server:lastest
+    working_dir: /app/src
+    ports:
+      - "4000:4000"
+    environment:
+      - GOPATH=/app
+    command: go run main.go
+    networks:
+      chain:
+  frontend:
+    environment:
+      - SERVER_PATH="ws://0.0.0.0:4000"
+      - HTTP_PATH="http://0.0.0.0:4000"
+    image: xarcher/crowd-front:latest
+    depends_on:
+      - backend
+    ports:
+      - "8080:8080"
+    command: bash -c "npm run build && http-server dist"
+  client:
+    image: xarcher/crowd-back-client:lastest
+    working_dir: /app/src
+    environment:
+      - GOPATH=/app
+    depends_on:
+      - backend
+    command: go run main.go -addr "backend:4000" -number 50
+    networks:
+      chain:
+networks:
+  chain:
+#volumes:
+#  chain_data:

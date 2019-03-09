@@ -37,16 +37,9 @@ type Client struct {
 }
 
 func NewClient(id int,url string, httpPath string, account *Wallet) *Client {
-	// connect
-	w,_,err := websocket.DefaultDialer.Dial(url,nil)
-	if err!=nil {
-		log.Println(err.Error())
-		panic(err)
-	}
 
 	return &Client{
 		Id: id,
-		W: w,
 		Send: make(chan []byte,SEND_BUFFER),
 		Url: url,
 		Wg: sync.WaitGroup{},
@@ -112,10 +105,22 @@ func (c *Client) Reconnect() error {
 }
 
 func (c *Client) Start() {
-	_,err:=http.Get(c.HttpPath+"/requireEther/"+c.Account.Address.String())
-	if err!=nil {
-		log.Println(err.Error())
+	// connect
+	for{
+		w,_,err := websocket.DefaultDialer.Dial(c.Url,nil)
+		if err!=nil {
+			log.Println(err.Error())
+			<-time.After(RECONNECT_TIME)
+			continue
+		}
+		c.W =w;
+		_,err=http.Get(c.HttpPath+"/requireEther/"+c.Account.Address.String())
+		if err!=nil {
+			log.Println(err.Error())
+		}
+		break;
 	}
+
 	for {
 		c.Wg.Add(1)
 		c.Wg.Add(1)

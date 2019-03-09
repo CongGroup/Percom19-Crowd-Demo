@@ -18,10 +18,10 @@ const dictionary = {
     },
 };
 
-console.log(VeeValidate.Validator.dictionary);
+// console.log(VeeValidate.Validator.dictionary);
 VeeValidate.Validator.localize(dictionary);
-console.log(VeeValidate.Validator.dictionary);
-
+// console.log(VeeValidate.Validator.dictionary);
+console.log(typeof process.env.SERVER_PATH);
 
 Vue.use(VeeValidate);
 Vue.use(VueCookies);

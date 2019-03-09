@@ -430,7 +430,7 @@
                 }
             },
             initialWS: function() {
-                this.ws = new WebSocket("ws://0.0.0.0:4000");
+                this.ws = new WebSocket(process.env.SERVER_PATH);
                 this.ws.onopen = e => {
                     console.log("websocket open");
                     this.reconnecting = false;
