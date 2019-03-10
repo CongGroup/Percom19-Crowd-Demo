@@ -56,14 +56,14 @@
             <div v-if="!reconnecting">
                 <div v-if="account!==undefined && hasEther">
                     <div>
-                        <div class="formNote" v-if="atStage('register')">
+                        <div class="formNote" v-if="atStage('register') && submitStatus === 0 " >
                             <span class="noteBody"> Submit Range: 0-65535</span>
                         </div>
                         <div class="form" v-if="atStage('register')">
                             <div v-if = "submitStatus === 0">
                                 <span class="label">Value:</span>
                                 <!--<input class="input" type="number" v-model.number="value">-->
-                                <input pattern="\d*" v-validate="'max:256'" v-on:keypress="validate" class="input" type="text" name="value" v-model="value">
+                                <input pattern="\d*" v-validate="'max:256|required'" v-on:keypress="validate" class="input" type="text" name="value" v-model="value">
                                 <button class="btn btn-dark contract-button" @click="registerAndSubmit"> submit</button>
                                 <div class="error" v-show="errors.has('value')">{{ errors.first('value') }}</div>
                             </div>
@@ -84,7 +84,6 @@
             <div v-else>
                 <ws-reconnect> </ws-reconnect>
             </div>
-            <!--<input v-validate="'max:256|numeric|required'" v-on:keypress="validate" class="input" type="text" name="value" v-model="value">-->
         </div>
 
     </div>
@@ -288,11 +287,19 @@
                     }
                 })
             },
+            toNum: function(n) {
+                var nStr = (n + "");
+                if(nStr.indexOf(".") > -1)
+                    nStr = nStr.replace(".","").replace(/\d+$/, function(m){ return --m; });
+                return nStr.replace(/(\d+)e\+?(\d+)/, function(m, g1, g2){
+                    return g1 + new Array(+g2).join("0") + "0";
+                })
+            },
             registerAndSubmit: function() {
                 if(this.value.length>256) return;
-                let value = 0;
+                let value = '0';
                 if(this.value.length!==0) {
-                    value = this.value;
+                    value = this.toNum(parseInt(this.value));
                 }
                 console.log(value);
                 this.submitStatus = WAITING;
