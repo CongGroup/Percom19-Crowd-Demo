@@ -14,8 +14,8 @@ services:
       chain:
   frontend:
     environment:
-      - SERVER_PATH=ws://54.238.167.18:4000
-      - HTTP_PATH=https://54.238.167.18:4000
+      - SERVER_PATH=wss://open-crowd-demo.site:4000
+      - HTTP_PATH=https://open-crowd-demo.site:4000
     image: xarcher/crowd-front:latest
     depends_on:
       - backend
@@ -30,7 +30,7 @@ services:
       - GOPATH=/app
     depends_on:
       - backend
-    command: go run main.go -addr "backend:4000" -number 20
+    command: go run main.go -addr "open-crowd-demo.site:4000" -number 20
     networks:
       chain:
 networks:

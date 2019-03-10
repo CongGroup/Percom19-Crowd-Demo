@@ -32,8 +32,8 @@ func main() {
 	flag.Parse()
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
-	u:= url.URL{Scheme:"ws",Host:*addr,Path:"/"}
-	httpPath:= "http://"+*addr;
+	u:= url.URL{Scheme:"wss",Host:*addr,Path:"/"}
+	httpPath:= "https://"+*addr;
 	log.Println("connecting to %s", u.String())
 
 	for i:=0;i<*number;i++ {
