@@ -5,7 +5,7 @@ WORKDIR /app
 COPY . .
 
 RUN go get -u "github.com/gorilla/handlers";\
-"github.com/gorilla/mux";\
-"github.com/gorilla/websocket";\
-"github.com/ethereum/go-ethereum;"
+go get -u "github.com/gorilla/mux";\
+go get -u "github.com/gorilla/websocket";\
+go get -u "github.com/ethereum/go-ethereum;"
 
