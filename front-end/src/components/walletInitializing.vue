@@ -1,7 +1,7 @@
 <template>
     <div class="preLoading">
         <div>
-            Please waiting for about 5 Seconds
+            Please waiting for about 10 Seconds
         </div>
         <div class="loading">
             <div>
