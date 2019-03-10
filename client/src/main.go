@@ -18,7 +18,7 @@ const (
 )
 
 var addr = flag.String("addr","localhost:4000","http service address")
-var number = flag.Int("number",50,"mobile account number")
+var number = flag.Int("number",20,"mobile account number")
 
 func main() {
 	f,err:= os.OpenFile(filepath.Join("etc","logfile"),os.O_RDWR|os.O_CREATE|os.O_APPEND,0666)

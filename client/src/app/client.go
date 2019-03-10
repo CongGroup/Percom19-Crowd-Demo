@@ -1,6 +1,7 @@
 package app
 
 import (
+	"crypto/tls"
 	"encoding/json"
 	"github.com/gorilla/websocket"
 	"log"
@@ -91,7 +92,12 @@ func (c *Client) Reconnect() error {
 		select {
 		case <-time.After(RECONNECT_TIME):
 			var err error
-			c.W,_,err= websocket.DefaultDialer.Dial(c.Url,nil)
+			dialer:= websocket.Dialer{
+				TLSClientConfig: &tls.Config {
+					InsecureSkipVerify: true,
+				},
+			}
+			c.W,_,err= dialer.Dial(c.Url,nil)
 			if err!=nil {
 				log.Println(err.Error())
 			} else {
@@ -107,7 +113,12 @@ func (c *Client) Reconnect() error {
 func (c *Client) Start() {
 	// connect
 	for{
-		w,_,err := websocket.DefaultDialer.Dial(c.Url,nil)
+		dialer:= websocket.Dialer{
+			TLSClientConfig: &tls.Config {
+				InsecureSkipVerify: true,
+			},
+		}
+		w,_,err:= dialer.Dial(c.Url,nil)
 		if err!=nil {
 			log.Println(err.Error())
 			<-time.After(RECONNECT_TIME)
