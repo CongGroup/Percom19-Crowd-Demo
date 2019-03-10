@@ -116,7 +116,7 @@
     flex-wrap: nowrap;
     /*justify-content: center;*/
     /*align-items: flex-start;*/
-    width: 400px;
+    width: 300px;
     align-self: center;
     margin-bottom: 50px;
     margin-top: 50px;
@@ -259,7 +259,7 @@ button[disabled]{
     font-family: sans serif;
     /*font-style: italic;*/
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     display: flex;
     display: -webkit-flex;
     flex-direction: column;

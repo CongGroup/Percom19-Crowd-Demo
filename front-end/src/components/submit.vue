@@ -7,11 +7,11 @@
                     <div class="stage">{{stageToProcedure[stage]}} stage </div>
                 </div>
                 <div class="item">
-                    <div class="label">Your Address: </div>
+                    <div class="label">Account: </div>
                     <div class="value" v-if="account!==undefined">{{address}}  </div>
                 </div>
                 <div class="item">
-                    <div class="label">Your Balance: </div>
+                    <div class="label">Balance: </div>
                     <div class="value"> {{tokenBalance}} </div>
                 </div>
                 <div v-if="shouldShow('register')">
@@ -24,7 +24,7 @@
                         <!--<div class="value"> {{solicitInfo.serviceFee}} </div>-->
                     <!--</div>-->
                     <div class="item">
-                        <div class="label">Solicit Target Number: </div>
+                        <div class="label">Target Number: </div>
                         <div class="value"> {{solicitInfo.target}}</div>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                     <!--<span class="value">{{qualifiedNumber}}</span>-->
                 <!--</div>-->
                 <div class="item" v-if="shouldShow('approve')">
-                    <span class="label">Are you qualified?  </span>
+                    <span class="label">Qualified?  </span>
                     <span class="value">{{qualified === undefined ? '': qualified?'Yes':'No'}}</span>
                 </div>
                 <!--<div class="item" v-if="shouldShow('approve')">-->
@@ -63,7 +63,7 @@
                             <div v-if = "submitStatus === 0">
                                 <span class="label">Value:</span>
                                 <!--<input class="input" type="number" v-model.number="value">-->
-                                <input pattern="\d*" v-validate="'max:256|required'" v-on:keypress="validate" class="input" type="text" name="value" v-model="value">
+                                <input v-validate="'max:256|required'" v-on:keypress="validate" class="input" type="text" name="value" v-model="value">
                                 <button class="btn btn-dark contract-button" @click="registerAndSubmit"> submit</button>
                                 <div class="error" v-show="errors.has('value')">{{ errors.first('value') }}</div>
                             </div>
@@ -84,6 +84,7 @@
             <div v-else>
                 <ws-reconnect> </ws-reconnect>
             </div>
+            <!--<input v-validate="'max:256|required'" v-on:keypress="validate" class="input" type="text" name="value" v-model="value">-->
         </div>
 
     </div>

@@ -60,11 +60,11 @@
                             </div>
                         </div>
                         <div class="item">
-                            <div class="label">Address: </div>
+                            <div class="label">Account: </div>
                             <div class="value"> {{dataConsumerAccount.address}}</div>
                         </div>
                         <div class="item">
-                            <div class="label">Your Balance: </div>
+                            <div class="label">Balance: </div>
                             <div class="value"> {{consumerTokenBalance}} </div>
                         </div>
                         <div class="col buttonGroup">
@@ -100,11 +100,11 @@
                             </div>
                         </div>
                         <div class="item">
-                            <div class="label">Address: </div>
+                            <div class="label">Account: </div>
                             <div class="value">{{serviceProviderAccount.address}}  </div>
                         </div>
                         <div class="item">
-                            <div class="label">Your Balance: </div>
+                            <div class="label">Balance: </div>
                             <div class="value"> {{tokenBalance}} </div>
                         </div>
                         <div class="col buttonGroup">
