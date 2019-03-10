@@ -122,6 +122,10 @@
     margin-top: 50px;
 }
 
+.agg .container .contract{
+    width: 400px;
+}
+
 .agg .contract .icon {
     align-self: center;
     margin-bottom: 50px;
