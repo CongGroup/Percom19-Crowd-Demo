@@ -8,7 +8,7 @@ import (
 
 const (
 	GETH_PORT    = "wss://kovan.infura.io/ws"
-	CONTRACT_ADDRESS = "0x757ff37b0417e944acc23560cad6ab9df57208d8"
+	CONTRACT_ADDRESS = "0xdd1dfee41bc100008f3f88b3ae96f8ddcc599d35"
 	CONTRACT_ABI     = `[
 	{
 		"constant": false,

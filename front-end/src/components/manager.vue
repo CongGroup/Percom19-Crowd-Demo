@@ -86,7 +86,8 @@
                                     <pacman v-else-if="approveStatus === 1"></pacman>
                                 </div>
                                 <div class="form" v-if="atStage('claim')">
-                                    <button :disabled="false" class="btn btn-dark contract-button" @click="showStatics"> showStatics</button>
+                                    <button :disabled="false" v-if="!showingStatus" class="btn btn-dark contract-button" @click="showStatics"> showStatics</button>
+                                    <pacman v-else></pacman>
                                 </div>
                             </div>
                         </div>
@@ -205,6 +206,7 @@
         data: function () {
             return {
                 reconnecting: false,
+                showingStatus: false,
                 solicitStatus: 2,
                 stopRegisterStatus:2,
                 aggregateStatus:2,
@@ -456,6 +458,7 @@
                 };
             },
             showStatics: function() {
+                this.showingStatus = true;
                 console.log("showStatics");
                 if(this.graph===undefined) {
                     if(this.submitValues===undefined) {
@@ -464,20 +467,17 @@
                         p.then((res)=>{
                             this.submitValues = res.data.submitValues;
                             this.draw();
-                            if(!this.enableStatics) {
-                                this.enableStatics = true;
-                            }
+                            this.enableStatics = true;
+                            this.showingStatus = false;
                         })
                     } else {
                         this.draw();
-                        if(!this.enableStatics) {
-                            this.enableStatics = true;
-                        }
+                        this.enableStatics = true;
+                        this.showingStatus = false;
                     }
                 } else {
-                    if(!this.enableStatics) {
-                        this.enableStatics = true;
-                    }
+                    this.enableStatics = true;
+                    this.showingStatus = false;
                 }
             },
             cleanState: function() {
