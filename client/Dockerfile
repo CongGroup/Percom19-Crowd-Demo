@@ -2,6 +2,7 @@ FROM golang:1.10
 
 WORKDIR /app
 
+ENV GOPATH /app
 
 RUN go get -u "github.com/gorilla/handlers";\
 go get -u "github.com/gorilla/mux";\

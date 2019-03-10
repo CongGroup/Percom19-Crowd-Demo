@@ -21,7 +21,7 @@ services:
       - backend
     ports:
       - "80:8080"
-    command: bash -c "npm run build && http-server dist -S -C pem/cert.pem -K pem/key.pem
+    command: bash -c "npm run build && http-server dist -S -C pem/cert.pem -K pem/key.pem"
   client:
     image: xarcher/crowd-back-client:lastest
     working_dir: /app/src
