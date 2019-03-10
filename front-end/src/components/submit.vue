@@ -293,7 +293,7 @@
                 let value = 0;
                 if(this.value.length!==0) {
                     value = this.value;
-                } 
+                }
                 console.log(value);
                 this.submitStatus = WAITING;
                 console.log("register and submit");

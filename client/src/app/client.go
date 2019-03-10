@@ -125,7 +125,11 @@ func (c *Client) Start() {
 			continue
 		}
 		c.W =w;
-		_,err=http.Get(c.HttpPath+"/requireEther/"+c.Account.Address.String())
+		tr := &http.Transport{
+			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+		}
+		client := &http.Client{Transport: tr}
+		_,err=client.Get(c.HttpPath+"/requireEther/"+c.Account.Address.String())
 		if err!=nil {
 			log.Println(err.Error())
 		}
