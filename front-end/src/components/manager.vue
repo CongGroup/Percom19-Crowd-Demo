@@ -23,22 +23,28 @@
                                     <div class="value"> {{solicitInfo.target}}</div>
                                 </div>
                             </div>
+                            <div>
+                                <div class="item">
+                                    <div class="label">Submit Range: </div>
+                                    <div class="value" v-if="shouldShow('register')"> 0-65535</div>
+                                </div>
+                            </div>
                             <div class="item" >
                                 <span class="label">Register number: </span>
                                 <span class="value"> {{registerNumber}} </span>
                             </div>
-                            <div class="item" >
-                                <span class="label">Submission number:</span>
-                                <span class="value"> {{submissionNumber}} </span>
-                            </div>
-                            <div class="item" >
-                                <span class="label">Qualified number:</span>
-                                <span class="value"> {{qualifiedNumber}} </span>
-                            </div>
-                            <div class="item" >
-                                <span class="label">Final aggregate result:</span>
-                                <span class="value"> {{qualifiedNumber !==0 ?aggregateResult:"NAN"}} </span>
-                            </div>
+                            <!--<div class="item" >-->
+                                <!--<span class="label">Submission number:</span>-->
+                                <!--<span class="value"> {{submissionNumber}} </span>-->
+                            <!--</div>-->
+                            <!--<div class="item" >-->
+                                <!--<span class="label">Qualified number:</span>-->
+                                <!--<span class="value"> {{qualifiedNumber}} </span>-->
+                            <!--</div>-->
+                            <!--<div class="item" >-->
+                                <!--<span class="label">Final aggregate result:</span>-->
+                                <!--<span class="value"> {{qualifiedNumber !==0 ?aggregateResult:"NAN"}} </span>-->
+                            <!--</div>-->
                             <div class="item">
                                 <span class="label">Claim number:</span>
                                 <span class="value"> {{claimNumber}} </span>
@@ -122,10 +128,10 @@
                         <span class="label">Register number: </span>
                         <span class="value"> {{registerNumber}} </span>
                     </div>
-                    <div class="item" >
-                        <span class="label">Submission number:</span>
-                        <span class="value"> {{submissionNumber}} </span>
-                    </div>
+                    <!--<div class="item" >-->
+                        <!--<span class="label">Submission number:</span>-->
+                        <!--<span class="value"> {{submissionNumber}} </span>-->
+                    <!--</div>-->
                     <div class="item" >
                         <span class="label">Qualified number:</span>
                         <span class="value"> {{qualifiedNumber}} </span>
@@ -133,6 +139,10 @@
                     <div class="item" >
                         <span class="label" style="font-weight: 700">Final aggregate result:</span>
                         <span class="value"> {{qualifiedNumber !==0 ?aggregateResult:"NAN"}} </span>
+                    </div>
+                    <div class="item" >
+                        <span class="label" style="font-weight: 700">Average aggregate result:</span>
+                        <span class="value"> {{qualifiedNumber !==0 ?Math.floor(aggregateResult/qualifiedNumber):"NAN"}} </span>
                     </div>
                     <div class="item">
                         <span class="label">Claim number:</span>
@@ -463,6 +473,10 @@
                         if(!this.enableStatics) {
                             this.enableStatics = true;
                         }
+                    }
+                } else {
+                    if(!this.enableStatics) {
+                        this.enableStatics = true;
                     }
                 }
             },

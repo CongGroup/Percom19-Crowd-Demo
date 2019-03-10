@@ -15,13 +15,13 @@ services:
   frontend:
     environment:
       - SERVER_PATH=ws://54.238.167.18:4000
-      - HTTP_PATH=http://54.238.167.18:4000
+      - HTTP_PATH=https://54.238.167.18:4000
     image: xarcher/crowd-front:latest
     depends_on:
       - backend
     ports:
       - "80:8080"
-    command: bash -c "npm run build && http-server dist"
+    command: bash -c "npm run build && http-server dist -S -C pem/cert.pem -K key.pem"
   client:
     image: xarcher/crowd-back-client:lastest
     working_dir: /app/src
@@ -29,7 +29,7 @@ services:
       - GOPATH=/app
     depends_on:
       - backend
-    command: go run main.go -addr "backend:4000" -number 50
+    command: go run main.go -addr "backend:4000" -number 20
     networks:
       chain:
 networks:

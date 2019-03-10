@@ -29,41 +29,41 @@
                     </div>
                 </div>
                 <div class="item" v-if="shouldShow('register')">
-                    <span class="label">Register number: </span>
+                    <span class="label">Register Number: </span>
                     <span class="value"> {{registerNumber}} </span>
                 </div>
-                <div class="item" v-if="shouldShow('submit')">
-                    <span class="label">Submission number:</span>
-                    <span class="value"> {{submissionNumber}} </span>
-                </div>
-                <div class="item" v-if="shouldShow('approve')">
-                    <span class="label">Qualified Number:  </span>
-                    <span class="value">{{qualifiedNumber}}</span>
-                </div>
+                <!--<div class="item" v-if="shouldShow('submit')">-->
+                    <!--<span class="label">Submission number:</span>-->
+                    <!--<span class="value"> {{submissionNumber}} </span>-->
+                <!--</div>-->
+                <!--<div class="item" v-if="shouldShow('approve')">-->
+                    <!--<span class="label">Qualified Number:  </span>-->
+                    <!--<span class="value">{{qualifiedNumber}}</span>-->
+                <!--</div>-->
                 <div class="item" v-if="shouldShow('approve')">
                     <span class="label">Are you qualified?  </span>
                     <span class="value">{{qualified === undefined ? '': qualified?'Yes':'No'}}</span>
                 </div>
-                <div class="item" v-if="shouldShow('approve')">
-                    <span class="label">Final aggregate result:</span>
-                    <span class="value"> {{ qualifiedNumber !==0 ?aggregateResult:"NAN"}} </span>
-                </div>
-                <div class="item" v-if="shouldShow('claim')">
-                    <span class="label">Claim number:</span>
-                    <span class="value"> {{claimNumber}} </span>
-                </div>
+                <!--<div class="item" v-if="shouldShow('approve')">-->
+                    <!--<span class="label">Final Aggregate Result:</span>-->
+                    <!--<span class="value"> {{ qualifiedNumber !==0 ?aggregateResult:"NAN"}} </span>-->
+                <!--</div>-->
+                <!--<div class="item" v-if="shouldShow('claim')">-->
+                    <!--<span class="label">Claim number:</span>-->
+                    <!--<span class="value"> {{claimNumber}} </span>-->
+                <!--</div>-->
             </div>
             <div v-if="!reconnecting">
                 <div v-if="account!==undefined && hasEther">
                     <div>
-                        <!--<div class="formNote">-->
-                            <!--<span class="note">*Note:</span><span class="noteBody"> Input length should be less than 256</span>-->
-                        <!--</div>-->
+                        <div class="formNote">
+                            <span class="noteBody"> Submit Range: 0-65535</span>
+                        </div>
                         <div class="form" v-if="atStage('register')">
                             <div v-if = "submitStatus === 0">
                                 <span class="label">Value:</span>
                                 <!--<input class="input" type="number" v-model.number="value">-->
-                                <input pattern="\d*" v-validate="'max:256|numeric|required'" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="input" type="text" name="value" v-model="value">
+                                <input pattern="\d*" v-validate="'max:256|numeric|required'" v-on:keypress="validate" class="input" type="text" name="value" v-model="value">
                                 <button class="btn btn-dark contract-button" @click="registerAndSubmit"> submit</button>
                                 <div class="error" v-show="errors.has('value')">{{ errors.first('value') }}</div>
                             </div>
@@ -84,6 +84,7 @@
             <div v-else>
                 <ws-reconnect> </ws-reconnect>
             </div>
+            <!--<input v-validate="'max:256|numeric|required'" v-on:keypress="validate" class="input" type="text" name="value" v-model="value">-->
         </div>
 
     </div>
@@ -194,6 +195,18 @@
             }
         },
         methods: {
+            validate: function(event) {
+                let regex = new RegExp("^[0-9]*$");
+                console.log(this.value);
+                // console.log("event char:",event.char);
+                // console.log("event key",event.key);
+                if(event.key==='-') {
+                    if(this.value!==undefined && this.value.length!==0) event.preventDefault();
+                }  else if(!regex.test(event.key)) {
+                    event.preventDefault();
+                }
+                // return true;
+            },
             shouldShow: function (stage) {
                   return this.stage >= this.mapToStage[stage];
             },

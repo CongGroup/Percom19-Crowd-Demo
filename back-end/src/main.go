@@ -299,14 +299,17 @@ func start() {
 	r.HandleFunc("/ether/{user}",getEther(agg)).Methods("GET")
 
 	fmt.Println("Running http server")
-	http.ListenAndServe(
-		"0.0.0.0:4000",
+	err =http.ListenAndServeTLS(
+		"0.0.0.0:4000","etc/cert.pem","etc/key.pem",
 		handlers.CORS(
 			handlers.AllowedMethods([]string{"get", "options", "post", "put", "head"}),
 			handlers.AllowedOrigins([]string{"*"}),
 			handlers.AllowedHeaders([]string{"Content-Type"}),
 		)(r),
 	)
+	if err!=nil {
+		log.Println(err.Error())
+	}
 }
 
 func main() {
