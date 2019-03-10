@@ -4,10 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-ENV GOPATH=/app
-
-WORKDIR /app/src
-
-EXPOSE 4000
-
-CMD ["go","run","main.go"]
+RUN go get -u "github.com/gorilla/handlers";\
+"github.com/gorilla/mux";\
+"github.com/gorilla/websocket";\
+"github.com/ethereum/go-ethereum;"
