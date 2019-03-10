@@ -56,7 +56,7 @@
             <div v-if="!reconnecting">
                 <div v-if="account!==undefined && hasEther">
                     <div>
-                        <div class="formNote">
+                        <div class="formNote" v-if="atStage('register')">
                             <span class="noteBody"> Submit Range: 0-65535</span>
                         </div>
                         <div class="form" v-if="atStage('register')">
