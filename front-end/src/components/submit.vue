@@ -63,7 +63,7 @@
                             <div v-if = "submitStatus === 0">
                                 <span class="label">Value:</span>
                                 <!--<input class="input" type="number" v-model.number="value">-->
-                                <input pattern="\d*" v-validate="'max:256|numeric|required'" v-on:keypress="validate" class="input" type="text" name="value" v-model="value">
+                                <input pattern="\d*" v-validate="'max:256'" v-on:keypress="validate" class="input" type="text" name="value" v-model="value">
                                 <button class="btn btn-dark contract-button" @click="registerAndSubmit"> submit</button>
                                 <div class="error" v-show="errors.has('value')">{{ errors.first('value') }}</div>
                             </div>
@@ -290,7 +290,10 @@
             },
             registerAndSubmit: function() {
                 if(this.value.length>256) return;
-                let value = this.value;
+                let value = 0;
+                if(this.value.length!==0) {
+                    value = this.value;
+                } 
                 console.log(value);
                 this.submitStatus = WAITING;
                 console.log("register and submit");
