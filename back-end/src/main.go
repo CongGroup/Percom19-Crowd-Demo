@@ -199,12 +199,15 @@ func getStatistics(agg *contract.Agg) func(w http.ResponseWriter, r* http.Reques
 			}
 
 			submitData:=new(big.Int).SetBytes(submitDataByte)
+			decryptedData:= zcrypto.PriKey.Decrypt(&zcrypto.Cypher {
+				C: submitData,
+			})
 			if !zcrypto.RPVerify(*rp) {
 				if(len(invalidSamples)<5){
-					invalidSamples = append(invalidSamples,submitData)
+					invalidSamples = append(invalidSamples,decryptedData)
 				}
 			} else {
-				submitValues= append(submitValues,submitData)
+				submitValues= append(submitValues,decryptedData)
 			}
 		}
 
