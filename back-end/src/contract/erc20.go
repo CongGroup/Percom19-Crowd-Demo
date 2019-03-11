@@ -5,7 +5,7 @@ import (
 )
 
 var (
-ERC20_ADDRESS = "0x5eb76be14a2408508f64a2d35acf3b4d19198d45"
+ERC20_ADDRESS = "0x6bd6c849094da7cff2e2c9521342e70652d043d6"
 ERC20_ABI     = `[
 	{
 		"constant": false,

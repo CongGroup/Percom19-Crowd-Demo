@@ -1,11 +1,8 @@
 <template>
     <div class="preLoading">
-        <div>
-            Please waiting for about 10 Seconds
-        </div>
         <div class="loading">
             <div>
-                Initializing Wallet
+                Initializing wallet with test ether
             </div>
             <div class="pacman">
                 <pacman> </pacman>

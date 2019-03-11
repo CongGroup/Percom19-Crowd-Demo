@@ -263,7 +263,7 @@ button[disabled]{
     font-family: sans serif;
     /*font-style: italic;*/
     font-weight: 700;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     display: flex;
     display: -webkit-flex;
     flex-direction: column;

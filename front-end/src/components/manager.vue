@@ -335,8 +335,8 @@
                 console.log("solicit");
                 let payload = {
                     gcuid: GCUID_SOLICIT,
-                    dataFee: 1230,
-                    serviceFee: 16,
+                    dataFee: 10,
+                    serviceFee: 100,
                     serviceProvider: this.serviceProviderAccount.address,
                     target: this.targetNumber,
                     privateKey: this.dataConsumerAccount.privateKey,
