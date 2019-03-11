@@ -448,6 +448,7 @@
             },
             draw: function() {
                 let qualifiedData = this.submitValues;
+                console.log("qualified data", this.submitValues)
                 let space = 4096;
                 let minH = 0;
                 let maxH = 65536;
@@ -475,7 +476,7 @@
 
                 let datasets = [
                     {
-                        // label: 'Height',
+                        label: 'Height',
                         data: bucket,
                         borderColor: '#002266',
                         backgroundColor:'#002266',
@@ -507,6 +508,7 @@
                         p.then((res)=>{
                             this.submitValues = res.data.submitValues;
                             this.invalidSamples = res.data.invalidSamples;
+                            console.log("submit values", this.submitValues);
                             console.log("invalid samples:",this.invalidSamples);
                             this.draw();
                             this.enableStatics = true;

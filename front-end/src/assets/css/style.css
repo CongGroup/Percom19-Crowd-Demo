@@ -58,7 +58,6 @@
     font-size: 1.5rem;
     font-family: sans-serif;
     font-style: italic;
-    color: #FF0000;
     margin-top: -20px;
 }
 
@@ -361,7 +360,6 @@ button[disabled]{
     font-size: 1.5rem;
     font-family: sans-serif;
     font-style: italic;
-    color: #FF0000;
     margin-top: 20px;
     align-self: center;
 }

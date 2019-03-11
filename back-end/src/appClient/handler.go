@@ -288,7 +288,7 @@ func (h *Handler) approveHandler(gcuid int, data []byte) {
 	count:=new(big.Int).SetBytes(countByte)
 	var invalidSamples []*big.Int
 
-	submitValues:=make([]*big.Int,count.Int64(),count.Int64())
+	var submitValues []*big.Int
 
 
 	for i:=0; i< int(count.Int64()); i++ {
@@ -326,7 +326,7 @@ func (h *Handler) approveHandler(gcuid int, data []byte) {
 				invalidSamples = append(invalidSamples,submitData)
 			}
 		} else {
-			submitValues[i] = submitData
+			submitValues= append(submitValues,submitData)
 		}
 	}
 

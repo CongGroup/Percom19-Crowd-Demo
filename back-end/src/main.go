@@ -165,8 +165,8 @@ func getStatistics(agg *contract.Agg) func(w http.ResponseWriter, r* http.Reques
 		}
 		count:=new(big.Int).SetBytes(countByte)
 		var invalidSamples []*big.Int
-
-		submitValues:=make([]*big.Int,count.Int64(),count.Int64())
+		var submitValues []*big.Int
+		//submitValues:=make([]*big.Int,count.Int64(),count.Int64())
 
 
 		for i:=0; i< int(count.Int64()); i++ {
@@ -204,7 +204,7 @@ func getStatistics(agg *contract.Agg) func(w http.ResponseWriter, r* http.Reques
 					invalidSamples = append(invalidSamples,submitData)
 				}
 			} else {
-				submitValues[i] = submitData
+				submitValues= append(submitValues,submitData)
 			}
 		}
 
