@@ -2,56 +2,6 @@
     <div>
         <div class="agg">
             <div class="container" v-if="!enableStatics">
-                <div class="adminStage">
-                    <div>
-                        <div class="stageForm">
-                            <img class="icon" alt="Vue logo" src="../assets/cd3.jpeg"/>
-                            <div class="value">{{stageToProcedure[stage]}} </div>
-                        </div>
-                        <div class="stageContent contract">
-                            <div >
-                                <div class="item">
-                                    <div class="label">Solicit Data Fee: </div>
-                                    <div class="value"> {{solicitInfo.dataFee}} </div>
-                                </div>
-                                <div class="item">
-                                    <div class="label">Solicit Service Fee: </div>
-                                    <div class="value"> {{solicitInfo.serviceFee}} </div>
-                                </div>
-                                <div class="item">
-                                    <div class="label">Solicit Target Number: </div>
-                                    <div class="value"> {{solicitInfo.target}}</div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="item">
-                                    <div class="label">Submit Range: </div>
-                                    <div class="value" v-if="shouldShow('register')"> 0-65535</div>
-                                </div>
-                            </div>
-                            <div class="item" >
-                                <span class="label">Register number: </span>
-                                <span class="value"> {{registerNumber}} </span>
-                            </div>
-                            <!--<div class="item" >-->
-                                <!--<span class="label">Submission number:</span>-->
-                                <!--<span class="value"> {{submissionNumber}} </span>-->
-                            <!--</div>-->
-                            <!--<div class="item" >-->
-                                <!--<span class="label">Qualified number:</span>-->
-                                <!--<span class="value"> {{qualifiedNumber}} </span>-->
-                            <!--</div>-->
-                            <!--<div class="item" >-->
-                                <!--<span class="label">Final aggregate result:</span>-->
-                                <!--<span class="value"> {{qualifiedNumber !==0 ?aggregateResult:"NAN"}} </span>-->
-                            <!--</div>-->
-                            <div class="item">
-                                <span class="label">Claim number:</span>
-                                <span class="value"> {{claimNumber}} </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="admin">
                     <div class="contract">
                         <div class="role">
@@ -72,21 +22,36 @@
                                 <div v-if="solicitStatus === 0">
                                     <span class="label">Target Number:</span>
                                     <input class="input" v-model.number="targetNumber">
-                                    <button  :disabled="!atStage('solicit')" class="btn btn-dark contract-button" @click="solicit"> solicit</button>
+                                    <button  :disabled="!atStage('solicit')" class="btn btn-dark contract-button" @click="solicit"> Solicit</button>
                                 </div>
-                                <pacman v-else-if="solicitStatus===1"></pacman>
+                                <div class="buttonWaiting" v-else-if="solicitStatus===1">
+                                    <div class="label">
+                                         Soliciting
+                                    </div>
+                                    <pacman></pacman>
+                                </div>
                             </div>
                             <div class="form" v-if="atStage('register')">
-                                <button :disabled="!atStage('register')" v-if="stopRegisterStatus === 0" class="btn btn-dark contract-button" @click="stopRegisterAndSubmit"> stop register</button>
-                                <pacman v-else-if="stopRegisterStatus===1"></pacman>
+                                <button :disabled="!atStage('register')" v-if="stopRegisterStatus === 0" class="btn btn-dark contract-button" @click="stopRegisterAndSubmit"> Stop Registration</button>
+                                <div class="buttonWaiting" v-else-if="stopRegisterStatus===1">
+                                    <div class="label">
+                                        Stopping
+                                    </div>
+                                    <pacman></pacman>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="form" v-if="atStage('approve')">
-                                    <button :disabled="!atStage('approve')" v-if="approveStatus === 0" class="btn btn-dark contract-button" @click="approve"> approve</button>
-                                    <pacman v-else-if="approveStatus === 1"></pacman>
+                                    <button :disabled="!atStage('approve')" v-if="approveStatus === 0" class="btn btn-dark contract-button" @click="approve"> Approve</button>
+                                    <div class="buttonWaiting" v-else-if="approveStatus === 1">
+                                        <div class="label">
+                                            Approving
+                                            <pacman></pacman>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form" v-if="atStage('claim')">
-                                    <button :disabled="false" v-if="!showingStatus" class="btn btn-dark contract-button" @click="showStatics"> showStatics</button>
+                                    <button :disabled="false" v-if="!showingStatus" class="btn btn-dark contract-button" @click="showStatics"> Show Statics</button>
                                     <pacman v-else></pacman>
                                 </div>
                             </div>
@@ -109,49 +74,124 @@
                         </div>
                         <div class="col buttonGroup">
                             <div class="form" v-if="atStage('aggregate')">
-                                <button :disabled="!atStage('aggregate')" v-if="aggregateStatus === 0" class="btn btn-dark contract-button" @click="aggregate"> aggregate</button>
-                                <pacman v-else-if="aggregateStatus === 1"></pacman>
+                                <button :disabled="!atStage('aggregate')" v-if="aggregateStatus === 0" class="btn btn-dark contract-button" @click="aggregate"> Aggregate</button>
+                                <div class="buttonWaiting" v-else-if="aggregateStatus === 1">
+                                    <div class="label">
+                                        Aggregating
+                                    </div>
+                                    <pacman></pacman>
+                                </div>
                             </div>
                             <div class="form" v-if="atStage('claim')">
-                                <button :disabled="!atStage('claim')" v-if="claimStatus === 0" class="btn btn-dark contract-button" @click="claim"> claim</button>
-                                <pacman v-else-if="claimStatus === 1"></pacman>
+                                <button :disabled="!atStage('claim')" v-if="claimStatus === 0" class="btn btn-dark contract-button" @click="claim"> Claim</button>
+                                <div class="buttonWaiting" v-else-if="claimStatus === 1">
+                                    <div class="label">
+                                        Claiming
+                                    </div>
+                                    <pacman></pacman>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="adminStage">
+                        <div class="stageForm">
+                            <img class="icon" alt="Vue logo" src="../assets/cd3.jpeg"/>
+                            <!--<div class="value">{{stageToProcedure[stage]}} </div>-->
+                        </div>
+                        <div class="stageHead">
+                            Task Information
+                        </div>
+                        <div class="stageContent contract">
+                            <div >
+                                <div class="item">
+                                    <div class="label">Reward for data provider: </div>
+                                    <div class="value"> {{solicitInfo.dataFee}} </div>
+                                </div>
+                                <div class="item">
+                                    <div class="label">Reward for service provider: </div>
+                                    <div class="value"> {{solicitInfo.serviceFee}} </div>
+                                </div>
+                                <div class="item">
+                                    <div class="label">Expected number of submissions: </div>
+                                    <div class="value"> {{solicitInfo.target}}</div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="item">
+                                    <div class="label">Submission range: </div>
+                                    <div class="value" v-if="shouldShow('register')"> 0-65535</div>
+                                </div>
+                            </div>
+                            <div class="item" >
+                                <span class="label">Current number of submissions: </span>
+                                <span class="value"> {{registerNumber}} </span>
+                            </div>
+                            <!--<div class="item" >-->
+                            <!--<span class="label">Submission number:</span>-->
+                            <!--<span class="value"> {{submissionNumber}} </span>-->
+                            <!--</div>-->
+                            <div class="item" >
+                                <span class="label">Number of valid submissions::</span>
+                                <span class="value"> {{qualifiedNumber}} </span>
+                            </div>
+                            <!--<div class="item" >-->
+                            <!--<span class="label">Final aggregate result:</span>-->
+                            <!--<span class="value"> {{qualifiedNumber !==0 ?aggregateResult:"NAN"}} </span>-->
+                            <!--</div>-->
+                            <div class="item">
+                                <span class="label">Claim number:</span>
+                                <span class="value"> {{claimNumber}} </span>
+                            </div>
+                        </div>
+                </div>
             </div>
             <div class="graphLayout"  v-else >
-                <div class="graph">
-                    <bar-statistics :width="1000" :height="700" :chart-data="graph" :options="graphOptions"></bar-statistics>
+                <div class="head">
+                    Task Statistics
                 </div>
                 <div class="contract info">
-                    <div class="item" >
-                        <span class="label">Register number: </span>
-                        <span class="value"> {{registerNumber}} </span>
-                    </div>
                     <!--<div class="item" >-->
-                        <!--<span class="label">Submission number:</span>-->
-                        <!--<span class="value"> {{submissionNumber}} </span>-->
+                    <!--<span class="label">Register number: </span>-->
+                    <!--<span class="value"> {{registerNumber}} </span>-->
+                    <!--</div>-->
+                    <!--<div class="item" >-->
+                    <!--<span class="label">Submission number:</span>-->
+                    <!--<span class="value"> {{submissionNumber}} </span>-->
                     <!--</div>-->
                     <div class="item" >
-                        <span class="label">Qualified number:</span>
+                        <span class="label" >Number of valid submissions:</span>
                         <span class="value"> {{qualifiedNumber}} </span>
                     </div>
                     <div class="item" >
-                        <span class="label" style="font-weight: 700">Final aggregate result:</span>
+                        <span class="label" >Aggregation sum:</span>
                         <span class="value"> {{qualifiedNumber !==0 ?aggregateResult:"NAN"}} </span>
                     </div>
                     <div class="item" >
-                        <span class="label" style="font-weight: 700">Average aggregate result:</span>
+                        <span class="label" >Aggregation average:</span>
                         <span class="value"> {{qualifiedNumber !==0 ?Math.floor(aggregateResult/qualifiedNumber):"NAN"}} </span>
                     </div>
-                    <div class="item">
-                        <span class="label">Claim number:</span>
-                        <span class="value"> {{claimNumber}} </span>
+                    <!--<div class="item">-->
+                    <!--<span class="label">Claim number:</span>-->
+                    <!--<span class="value"> {{claimNumber}} </span>-->
+                    <!--</div>-->
+                </div>
+                <div class="plotHeader">
+                    Distribution of valid submissions
+                </div>
+                <div class="graph">
+                    <bar-statistics :width="1300" :height="700" :chart-data="graph" :options="graphOptions"></bar-statistics>
+                </div>
+                <div class="samplesHeader">
+                    Invalid submission samples
+                </div>
+                <div class="samples">
+                    <div class="sample" v-for="s in invalidSamples">
+                        {{s}}
                     </div>
-                    <div class="back">
-                        <button class="btn btn-dark contract-button" @click="hidenGraph"> back </button>
-                    </div>
+                </div>
+                <div class="back">
+                    <button class="btn btn-dark contract-button" @click="hidenGraph"> Back </button>
                 </div>
             </div>
         </div>
@@ -206,6 +246,7 @@
         data: function () {
             return {
                 reconnecting: false,
+                invalidSamples: undefined,
                 showingStatus: false,
                 solicitStatus: 2,
                 stopRegisterStatus:2,
@@ -407,35 +448,34 @@
             },
             draw: function() {
                 let qualifiedData = this.submitValues;
-                let space = 2048;
+                let space = 4096;
                 let minH = 0;
                 let maxH = 65536;
-                let bucket = Array((maxH-minH)/space+2).fill(0);
+                let bucket = Array((maxH-minH)/space).fill(0);
                 qualifiedData.forEach(v=>{
-                    let bucketNumber = Math.floor((v-minH)/space)+1;
-                    if(bucketNumber >= bucket.length) {
-                        bucketNumber = bucket.length - 1;
-                    }
-                    if(bucketNumber < 0) {
-                        bucketNumber = 0;
-                    }
+                    let bucketNumber = Math.floor((v-minH)/space);
+                    // if(bucketNumber >= bucket.length) {
+                    //     bucketNumber = bucket.length - 1;
+                    // }
+                    // if(bucketNumber < 0) {
+                    //     bucketNumber = 0;
+                    // }
                     ++bucket[bucketNumber];
                 });
 
+                bucket.forEach((v,i)=>{
+                    console.log(`${i},${v}`);
+                    bucket[i] = (v/qualifiedData.length).toFixed(2);
+                });
+
                 let labels = [];
-                for(let i=0;i<bucket.length;++i) {
-                    if(i===0) labels.push(`<0`);
-                    else if(i===bucket.length-1) labels.push(`>${maxH}`);
-                    else {
-                        let start = minH + space*(i-1);
-                        let end = minH + space*i;
-                        labels.push(`${start}`);
-                    }
+                for(let i=0;i<bucket.length-1;++i) {
+                    labels.push(`${minH+space*i}-${minH+space*(i+1)}`);
                 }
 
                 let datasets = [
                     {
-                        label: 'Height',
+                        // label: 'Height',
                         data: bucket,
                         borderColor: '#002266',
                         backgroundColor:'#002266',
@@ -466,6 +506,7 @@
                         let p = this.axios.get(`${process.env.HTTP_PATH}/statistics/${TASK_ID}`);
                         p.then((res)=>{
                             this.submitValues = res.data.submitValues;
+                            this.invalidSamples = res.data.invalidSamples;
                             this.draw();
                             this.enableStatics = true;
                             this.showingStatus = false;
@@ -488,6 +529,7 @@
                 this.aggregateResult = undefined;
                 this.qualifiedNumber = undefined;
                 this.submitValues = undefined;
+                this.invalidSamples = undefined;
                 this.enableStatics = false;
                 this.solicitInfo = {
                     dataFee: undefined,
@@ -598,6 +640,7 @@
                         case GCUID_APPROVE:
                             if (res.status === 0) {
                                 this.submitValues = res.submitValues;
+                                this.invalidSamples =res.invalidSamples;
                                 console.log("submit values:",this.submitValues);
                                 this.approveStatus = SUBMITTED;
                             } else {

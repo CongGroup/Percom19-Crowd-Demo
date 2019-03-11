@@ -4,7 +4,10 @@
             <div class="contract">
                 <div class ="item">
                     <img class="icon" alt="Vue logo" src="../assets/cd3.jpeg"/>
-                    <div class="stage">{{stageToProcedure[stage]}} stage </div>
+                    <!--<div class="stage">{{stageToProcedure[stage]}} stage </div>-->
+                </div>
+                <div class="item head">
+                     Task Information
                 </div>
                 <div class="item">
                     <div class="label">Account: </div>
@@ -15,21 +18,21 @@
                     <div class="value"> {{tokenBalance}} </div>
                 </div>
                 <div v-if="shouldShow('register')">
-                    <!--<div class="item">-->
-                        <!--<div class="label">Solicit Data Fee: </div>-->
-                        <!--<div class="value"> {{solicitInfo.dataFee}} </div>-->
-                    <!--</div>-->
-                    <!--<div class="item">-->
-                        <!--<div class="label">Solicit Service Fee: </div>-->
-                        <!--<div class="value"> {{solicitInfo.serviceFee}} </div>-->
-                    <!--</div>-->
                     <div class="item">
-                        <div class="label">Target Number: </div>
+                        <div class="label">Reward for data provider: </div>
+                        <div class="value"> {{solicitInfo.dataFee}} </div>
+                    </div>
+                    <div class="item">
+                        <div class="label">Reward for service provider: </div>
+                        <div class="value"> {{solicitInfo.serviceFee}} </div>
+                    </div>
+                    <div class="item">
+                        <div class="label">Expected number of submissions: </div>
                         <div class="value"> {{solicitInfo.target}}</div>
                     </div>
                 </div>
                 <div class="item" v-if="shouldShow('register')">
-                    <span class="label">Register Number: </span>
+                    <span class="label">Current number of submissions: </span>
                     <span class="value"> {{registerNumber}} </span>
                 </div>
                 <!--<div class="item" v-if="shouldShow('submit')">-->
@@ -41,7 +44,7 @@
                     <!--<span class="value">{{qualifiedNumber}}</span>-->
                 <!--</div>-->
                 <div class="item" v-if="shouldShow('approve')">
-                    <span class="label">Qualified?  </span>
+                    <span class="label">Is Your submission valid ?  </span>
                     <span class="value">{{qualified === undefined ? '': qualified?'Yes':'No'}}</span>
                 </div>
                 <!--<div class="item" v-if="shouldShow('approve')">-->
@@ -57,7 +60,7 @@
                 <div v-if="account!==undefined && hasEther">
                     <div>
                         <div class="formNote" v-if="atStage('register') && submitStatus === 0 " >
-                            <span class="noteBody"> Submit Range: 0-65535</span>
+                            <span class="noteBody"> Submission range: 0-65535</span>
                         </div>
                         <div class="form" v-if="atStage('register')">
                             <div v-if = "submitStatus === 0">
@@ -67,13 +70,23 @@
                                 <button class="btn btn-dark contract-button" @click="registerAndSubmit"> submit</button>
                                 <div class="error" v-show="errors.has('value')">{{ errors.first('value') }}</div>
                             </div>
-                            <pacman v-else-if="submitStatus === 1"></pacman>
+                            <div class="buttonWaiting" v-else-if="submitStatus === 1">
+                                <div class="label">
+                                    Submitting
+                                </div>
+                                <pacman></pacman>
+                            </div>
                         </div>
                     </div>
                     <div class="formLists">
                         <div class="form" v-if="atStage('claim')">
                             <button class="btn btn-dark contract-button" v-if="claimStatus===0" @click="claim"> claim</button>
-                            <pacman v-else-if="claimStatus===1"></pacman>
+                            <div class="buttonWaiting" v-else-if="claimStatus===1">
+                                <div class="label">
+                                    Claiming
+                                </div>
+                                <pacman></pacman>
+                            </div>
                         </div>
                     </div>
                 </div>

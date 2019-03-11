@@ -37,7 +37,9 @@
 }
 
 .agg .adminStage {
+    margin-top: -100px;
     display: flex;
+    width: 800px;
     display: -webkit-flex;
     flex-direction: column;
 }
@@ -45,15 +47,22 @@
 .agg .adminStage .stageForm {
     display: flex;
     display: -webkit-flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    /*justify-content: space-around;*/
     align-items: center;
     margin-top: 100px;
     margin-bottom: 100px;
 }
 
+.agg .adminStage .stageHead {
+    font-size: 1.5rem;
+    font-family: sans-serif;
+    font-style: italic;
+    color: #FF0000;
+    margin-top: -20px;
+}
+
 .agg .adminStage .stageContent {
-    margin-top: 50px;
     font-size: 1.2rem;
 }
 
@@ -81,11 +90,12 @@
     display: flex;
     display: -webkit-flex;
     justify-content: space-between;
+    flex-wrap: nowrap;
     margin-bottom: 15px;
 }
 
 .agg .contract .item .label {
-    margin-right: 100px;
+    /*margin-right: 100px;*/
     font-style: italic;
 }
 
@@ -123,12 +133,17 @@
 }
 
 .agg .container .contract{
-    width: 400px;
+    width: 450px;
+    margin-left: -50px;
 }
 
 .agg .contract .icon {
     align-self: center;
-    margin-bottom: 50px;
+    /*margin-bottom: 10px;*/
+}
+
+.agg .display .contract .icon {
+    margin-left: 40px;
 }
 
 .form {
@@ -136,7 +151,7 @@
     display: flex;
     display: -webkit-flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
 }
@@ -230,7 +245,7 @@ button[disabled]{
 }
 
 .contract-button {
-    width: 125px;
+    width: 150px;
 }
 
 .walletWaiting {
@@ -240,11 +255,50 @@ button[disabled]{
 .agg .graphLayout {
     display: flex;
     display: -webkit-flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    height: 800px;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    /*height: 800px;*/
 }
+
+.agg .graphLayout .head {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.agg .graphLayout .plotHeader {
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-family: sans-serif;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.agg .graphLayout .samplesHeader {
+    font-size:  1.2rem;
+    font-weight: 600;
+    font-family: sans-serif;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.agg .graphLayout .samples {
+    width: 400px;
+    align-self: center;
+    margin-top: 50px;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+}
+
+.agg .graphLayout .sample {
+    align-self: flex-start;
+    margin-bottom: 10px;
+}
+
+
 
 .agg .graphLayout .graph {
     align-self: center;
@@ -299,4 +353,31 @@ button[disabled]{
 
 .agg .formNote .noteBody {
 
+}
+
+.agg .display .head {
+    margin-left: 10px;
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+    font-family: sans-serif;
+    font-style: italic;
+    color: #FF0000;
+    margin-top: 20px;
+    align-self: center;
+}
+
+.agg .buttonWaiting {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.agg .buttonWaiting .label {
+    font-style: italic;
+    font-size: 1.0rem;
+    font-weight: 700;
+    font-family: sans-serif;
 }
