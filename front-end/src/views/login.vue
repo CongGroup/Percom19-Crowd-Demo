@@ -31,8 +31,9 @@
         },
         methods: {
           submit:function(){
+              console.log("password",this.value);
               this.accessStatus = WAITING;
-              this.axios.post(`${process.env.HTTP_PATH}/validate`,this.value).then(res=>{
+              this.axios.post(`${process.env.HTTP_PATH}/validate`,JSON.stringify(this.value)).then(res=>{
                   let accessToken = res.data;
                   this.$cookies.set('accessToken',accessToken,'7d');
                   this.accessStatus = ACCESSED;

@@ -321,6 +321,7 @@ func validate(w http.ResponseWriter,r *http.Request) {
 		return
 	}
 
+	log.Println("admin password",password)
 	err = json.Unmarshal(data,&password)
 	if err!=nil {
 		log.Println(err.Error())
