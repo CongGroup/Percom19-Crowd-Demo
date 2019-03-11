@@ -5,7 +5,7 @@
         <div class="form" v-else-if="accessStatus===2">
             <span class="label">Password:</span>
             <!--<input class="input" type="number" v-model.number="value">-->
-            <input class="input" type="text" v-model="value">
+            <input class="input" type="password" v-model="value">
             <button class="btn btn-dark contract-button" @click="submit"> Submit</button>
             <!--<div class="error" v-show="errors.has('value')">{{ errors.first('value') }}</div>-->
         </div>
@@ -32,7 +32,7 @@
         methods: {
           submit:function(){
               this.accessStatus = WAITING;
-              this.axios.get(`${process.env.HTTP_PATH}/validate/${this.account.address}`,this.value).then(res=>{
+              this.axios.post(`${process.env.HTTP_PATH}/validate`,this.value).then(res=>{
                   let accessToken = res.data;
                   this.$cookies.set('accessToken',accessToken,'7d');
                   this.accessStatus = ACCESSED;
