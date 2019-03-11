@@ -245,6 +245,7 @@
     const INITIAL = 0;
     const WAITING = 1;
     const SUBMITTED = 2;
+    const ETHER_THREASHOLD = 10000000000000000;
 
     export default {
         name: "manager",
@@ -583,7 +584,7 @@
                 this.getConsumerTokenBalance();
             },
             requireEther: function() {
-                this.axios.get(`${process.env.HTTP_PATH}/requireEther/${this.serviceProviderAccount.address}`).then(res=>{
+                this.axios.get(`${process.env.HTTP_PATH}/ether/${this.serviceProviderAccount.address}`).then(res=>{
                     let balance = res.data;
                     if(balance>=ETHER_THREASHOLD){
                         this.hasEther = true;
@@ -601,7 +602,7 @@
                 }).catch(console.log)
             },
             requireDataConsumerEther: function() {
-                this.axios.get(`${process.env.HTTP_PATH}/requireEther/${this.dataConsumerAccount.address}`).then(res=>{
+                this.axios.get(`${process.env.HTTP_PATH}/ether/${this.dataConsumerAccount.address}`).then(res=>{
                     let balance = res.data;
                     if(balance>=ETHER_THREASHOLD){
                         this.hasEther = true;
