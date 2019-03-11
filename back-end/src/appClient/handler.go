@@ -666,7 +666,7 @@ func (h *Handler) getAggregationResultHandler(gcuid int, data[]byte) {
 	}
 
 	aggregateResultLen:= new(big.Int).SetBytes(aggregateResultByte[32:64]).Int64()
-	aggregateResultByte = aggregateResultByte[65:65+aggregateResultLen]
+	aggregateResultByte = aggregateResultByte[64:64+aggregateResultLen]
 
 	qualifiedNumberByte,err:= h.agg.Call(contract.FUNCTION_GET_QUALIFIED_NUMBER_OF_TASK, payload.TaskId)
 	if err!=nil {
