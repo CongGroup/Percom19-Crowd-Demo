@@ -214,7 +214,6 @@
 
 <script>
     import barChart from './bar.js';
-    import Chart from 'chart.js';
     const GCUID_SOLICIT = 0;
     const GCUID_REGISTER = 1;
     const GCUID_SUBMIT = 2;
