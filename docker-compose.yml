@@ -9,10 +9,10 @@ services:
       - "0.0.0.0:4000:4000"
     deploy:
       replicas: 1
-    restart_policy:
-      condition: on-failure
-      delay: 2s
-      max_attempts: 10
+      restart_policy:
+        condition: on-failure
+        delay: 2s
+        max_attempts: 10
     environment:
       - GOPATH=/app
     command: go run main.go
@@ -27,10 +27,10 @@ services:
       - backend
     deploy:
       replicas: 1
-    restart_policy:
-      condition: on-failure
-      delay: 2s
-      max_attempts: 10
+      restart_policy:
+        condition: on-failure
+        delay: 2s
+        max_attempts: 10
     ports:
       - "80:8080"
       - "443:8080"
@@ -44,10 +44,10 @@ services:
       - backend
     deploy:
       replicas: 1
-    restart_policy:
-      condition: on-failure
-      delay: 2s
-      max_attempts: 10
+      restart_policy:
+        condition: on-failure
+        delay: 2s
+        max_attempts: 10
     command: go run main.go -addr "open-crowd-demo.site:4000" -number 20
     networks:
       chain:
