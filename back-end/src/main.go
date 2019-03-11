@@ -198,8 +198,8 @@ func getStatistics(agg *contract.Agg) func(w http.ResponseWriter, r* http.Reques
 
 			submitDataLen:= new(big.Int).SetBytes(submitDataByte[32:64])
 			log.Println("static byte:",submitDataByte)
-			negative:=submitDataByte[64:96]
-			submitDataByte=submitDataByte[96:64+submitDataLen.Int64()]
+			negative:=submitDataByte[64:68]
+			submitDataByte=submitDataByte[68:64+submitDataLen.Int64()]
 			submitProofLen := new(big.Int).SetBytes(submitProofByte[32:64])
 			submitProofByte = submitProofByte[64:64+submitProofLen.Int64()]
 
