@@ -355,6 +355,15 @@ func main() {
 	//testBulletProof2()
 
 	start()
+	//c,err:=zcrypto.PubKey.Encrypt(big.NewInt(-32131))
+	//if err!=nil {
+	//	log.Println(err.Error())
+	//	return
+	//}
+	//n,_:=new(big.Int).SetString(zcrypto.N,10)
+	//m:=new(big.Int).ModInverse(zcrypto.PriKey.Decrypt(c),n)
+	//log.Println(m)
+
 	//t,_:=new(big.Int).SetString(zcrypto.N,10)
 	//log.Println("t:", len(t.Bytes()))
 	//t,_=new(big.Int).SetString(zcrypto.N,10)

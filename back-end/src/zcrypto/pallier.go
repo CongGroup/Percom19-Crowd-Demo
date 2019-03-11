@@ -108,7 +108,15 @@ func (this *PublicKey)Encrypt(m *big.Int) (*Cypher,error) {
 		return nil, err
 	}
 	nSquare := this.GetNSquare()
-	gm := new(big.Int).Exp(this.G, m, nSquare)
+
+	var message *big.Int
+	if(m.Cmp(new(big.Int))==-1) {
+		message = new(big.Int).ModInverse(new(big.Int).Neg(m),this.N)
+	} else {
+		message = m
+	}
+
+	gm := new(big.Int).Exp(this.G, message, nSquare)
 	rn := new(big.Int).Exp(r, this.N, nSquare)
 	return &Cypher{
 		C:new(big.Int).Mod(new(big.Int).Mul(rn, gm), nSquare),
