@@ -197,8 +197,9 @@ func getStatistics(agg *contract.Agg) func(w http.ResponseWriter, r* http.Reques
 
 
 			submitDataLen:= new(big.Int).SetBytes(submitDataByte[32:64])
+			log.Println("static byte:",submitDataByte)
 			negative:=submitDataByte[64:96]
-			submitDataByte=submitDataByte[96:96+submitDataLen.Int64()-32]
+			submitDataByte=submitDataByte[96:64+submitDataLen.Int64()]
 			submitProofLen := new(big.Int).SetBytes(submitProofByte[32:64])
 			submitProofByte = submitProofByte[64:64+submitProofLen.Int64()]
 
@@ -373,6 +374,16 @@ func main() {
 	//testBulletProof2()
 
 	start()
+
+	//
+	//negative:=make([]byte,4)
+	//negative[0]=byte(0)
+	//negative[1]=byte(0)
+	//negative[2]=byte(0)
+	//negative[3]=byte(1)
+	//a:=new(big.Int).SetBytes(negative)
+	//log.Println(a)
+
 	//c,err:=zcrypto.PubKey.Encrypt(big.NewInt(-32131))
 	//if err!=nil {
 	//	log.Println(err.Error())
