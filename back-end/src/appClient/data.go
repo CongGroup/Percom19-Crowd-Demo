@@ -141,6 +141,7 @@ type ApproveRequest struct {
 type ApproveResponse struct {
 	Response
 	SubmitValues []*big.Int `json:"submitValues"`
+	InvalidSamples []*big.Int `json:"invalidSamples"`
 }
 
 type ClaimRequest struct {

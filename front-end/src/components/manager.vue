@@ -507,6 +507,7 @@
                         p.then((res)=>{
                             this.submitValues = res.data.submitValues;
                             this.invalidSamples = res.data.invalidSamples;
+                            console.log("invalid samples:",this.invalidSamples);
                             this.draw();
                             this.enableStatics = true;
                             this.showingStatus = false;
@@ -641,6 +642,7 @@
                             if (res.status === 0) {
                                 this.submitValues = res.submitValues;
                                 this.invalidSamples =res.invalidSamples;
+                                console.log("invalid samples:",this.invalidSamples);
                                 console.log("submit values:",this.submitValues);
                                 this.approveStatus = SUBMITTED;
                             } else {

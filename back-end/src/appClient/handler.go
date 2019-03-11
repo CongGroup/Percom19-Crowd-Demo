@@ -286,23 +286,48 @@ func (h *Handler) approveHandler(gcuid int, data []byte) {
 		return
 	}
 	count:=new(big.Int).SetBytes(countByte)
+	var invalidSamples []*big.Int
 
 	submitValues:=make([]*big.Int,count.Int64(),count.Int64())
+
+
 	for i:=0; i< int(count.Int64()); i++ {
 		submitDataByte,err:= h.agg.Call(contract.FUNCTION_GET_SUBMIT_DATA_OF_TASK,payload.TaskId,big.NewInt(int64(i)))
-		submitDataByte=submitDataByte[64:]
-
 		if err!=nil {
 			log.Println(err.Error())
 			h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
 			return
 		}
-		encryptedSubmitData:=new(big.Int).SetBytes(submitDataByte)
+		submitProofByte,err:= h.agg.Call(contract.FUNCTION_GET_SUBMIT_PROOF_OF_TASK,payload.TaskId,big.NewInt(int64(i)))
+		if err!=nil {
+			log.Println(err.Error())
+			h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
+			return
+		}
 
-		submitData:=zcrypto.PriKey.Decrypt(&zcrypto.Cypher {
-			C: encryptedSubmitData,
-		})
-		submitValues[i] = submitData
+
+		submitDataLen:= new(big.Int).SetBytes(submitDataByte[32:64])
+		submitDataByte=submitDataByte[64:64+submitDataLen.Int64()]
+		submitProofLen := new(big.Int).SetBytes(submitProofByte[32:64])
+		submitProofByte = submitProofByte[64:64+submitProofLen.Int64()]
+
+
+		rp:= new(zcrypto.RangeProof).SetBytes(submitProofByte)
+
+		if err!=nil {
+			log.Println(err.Error())
+			h.errorHandler(gcuid,UNMARSHAL_JSON_ERROR,err)
+			return
+		}
+
+		submitData:=new(big.Int).SetBytes(submitDataByte)
+		if !zcrypto.RPVerify(*rp) {
+			if(len(invalidSamples)<5) {
+				invalidSamples = append(invalidSamples,submitData)
+			}
+		} else {
+			submitValues[i] = submitData
+		}
 	}
 
 	res:= &ApproveResponse{
@@ -311,6 +336,7 @@ func (h *Handler) approveHandler(gcuid int, data []byte) {
 			Status:SUCCESS,
 		},
 		SubmitValues:submitValues,
+		InvalidSamples: invalidSamples,
 	}
 
 	h.wrapperAndSend(gcuid, res)

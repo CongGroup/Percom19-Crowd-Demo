@@ -19,7 +19,7 @@ import (
 const (
 	maxWaitingBlock = 50  // come from web3js, if wait more than 50 blocks, transaction time out
 	GasLimit            = 2000000
-	GasPrice =  4500000000
+	GasPrice =  1500000000
 )
 
 type ContractConfig struct {

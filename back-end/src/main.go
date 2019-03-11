@@ -164,11 +164,19 @@ func getStatistics(agg *contract.Agg) func(w http.ResponseWriter, r* http.Reques
 			return
 		}
 		count:=new(big.Int).SetBytes(countByte)
+		var invalidSamples []*big.Int
+
 		submitValues:=make([]*big.Int,count.Int64(),count.Int64())
+
+
 		for i:=0; i< int(count.Int64()); i++ {
-			submitDataByte,err:= agg.Call(contract.FUNCTION_GET_SUBMIT_DATA_OF_TASK, taskId,big.NewInt(int64(i)))
-			submitDataLen:= new(big.Int).SetBytes(submitDataByte[32:64])
-			submitDataByte=submitDataByte[64:64+submitDataLen.Int64()]
+			submitDataByte,err:= agg.Call(contract.FUNCTION_GET_SUBMIT_DATA_OF_TASK,taskId,big.NewInt(int64(i)))
+			if err!=nil {
+				log.Println(err.Error())
+				http.Error(w,err.Error(),http.StatusInternalServerError)
+				return
+			}
+			submitProofByte,err:= agg.Call(contract.FUNCTION_GET_SUBMIT_PROOF_OF_TASK,taskId,big.NewInt(int64(i)))
 			if err!=nil {
 				log.Println(err.Error())
 				http.Error(w,err.Error(),http.StatusInternalServerError)
@@ -176,19 +184,38 @@ func getStatistics(agg *contract.Agg) func(w http.ResponseWriter, r* http.Reques
 			}
 
 
-			encryptedSubmitData:=new(big.Int).SetBytes(submitDataByte)
+			submitDataLen:= new(big.Int).SetBytes(submitDataByte[32:64])
+			submitDataByte=submitDataByte[64:64+submitDataLen.Int64()]
+			submitProofLen := new(big.Int).SetBytes(submitProofByte[32:64])
+			submitProofByte = submitProofByte[64:64+submitProofLen.Int64()]
 
-			submitData:=zcrypto.PriKey.Decrypt(&zcrypto.Cypher {
-				C: encryptedSubmitData,
-			})
-			submitValues[i] = submitData
+
+			rp:= new(zcrypto.RangeProof).SetBytes(submitProofByte)
+
+			if err!=nil {
+				log.Println(err.Error())
+				http.Error(w,err.Error(),http.StatusInternalServerError)
+				return
+			}
+
+			submitData:=new(big.Int).SetBytes(submitDataByte)
+			if !zcrypto.RPVerify(*rp) {
+				if(len(invalidSamples)<5){
+					invalidSamples = append(invalidSamples,submitData)
+				}
+			} else {
+				submitValues[i] = submitData
+			}
 		}
 
 		type payload struct {
 			SubmitValues []*big.Int `json:"submitValues"`
+			InvalidSamples[]*big.Int `json:"invalidSamples"`
 		}
+
 		submitValuesWrapper,err :=json.Marshal(&payload{
-			submitValues,
+			SubmitValues:submitValues,
+			InvalidSamples:invalidSamples,
 		})
 		if err!=nil {
 			log.Println(err.Error())

@@ -18,6 +18,8 @@ const (
 	SEND_BUFFER = 256
 	TASKID = 0
 	SUBMIT_DATA_MAX = 65536
+	SUBMIT_DATA_SPACE = 4096
+	SUBMIT_DATA_MIN = 0
 )
 
 const (
@@ -213,12 +215,28 @@ func (c *Client) claim(gcuid int) {
 }
 
 func (c *Client) registerAndSubmit(gcuid int) {
+	var submitData *big.Int
+	if c.Id == 0  {
+		submitData,_ = new(big.Int).SetString("2131232132141208903824928213",10)
+	} else if c.Id == 1 {
+		submitData,_ = new(big.Int).SetString("-65464334564",10)
+	} else if c.Id == 2 {
+		submitData,_ = new(big.Int).SetString("9546653",10)
+	} else {
+		var randData int
+		randData = rand.Intn(SUBMIT_DATA_SPACE) + c.Id * SUBMIT_DATA_SPACE
+		if randData >= SUBMIT_DATA_MAX {
+			randData = rand.Intn(SUBMIT_DATA_MAX)
+		}
+		submitData = big.NewInt(int64(randData))
+	}
+	//submitData:= rand.Intn(SUBMIT_DATA_SPACE) + c.Id * SUBMIT_DATA_SPACE
 	registerAndSubmitRequest:=&RegisterAndSubmitRequest{
 		Gcuid: gcuid,
 		TaskId: big.NewInt(TASKID),
 		PrivateKey: c.Account.PrivateKey.D.Text(16),
 		Address:c.Account.Address.String(),
-		Value: big.NewInt(int64(rand.Intn(SUBMIT_DATA_MAX))),
+		Value: submitData,
 	}
 	data,err:=json.Marshal(registerAndSubmitRequest)
 	if err!=nil {
