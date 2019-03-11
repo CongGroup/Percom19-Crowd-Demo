@@ -119,8 +119,8 @@
                             </div>
                             <div>
                                 <div class="item">
-                                    <div class="label">Submission range: </div>
-                                    <div class="value" v-if="shouldShow('register')"> 0-65535</div>
+                                    <div class="label">Valid data range </div>
+                                    <div class="value" v-if="shouldShow('register')"> 0—65535</div>
                                 </div>
                             </div>
                             <div class="item" >
@@ -180,7 +180,15 @@
                     Distribution of valid submissions
                 </div>
                 <div class="graph">
-                    <bar-statistics :width="1300" :height="700" :chart-data="graph" :options="graphOptions"></bar-statistics>
+                    <!--<canvas  id="myChart"></canvas>-->
+                    <bar-statistics :width="900" :height="600" :chart-data="graph" :options="graphOptions"></bar-statistics>
+                </div>
+                <div class="labels">
+                    <div class="label" v-for="(l,i) in labels">
+                        <span v-if="i<=1">{{l}} </span>
+                        <span v-else-if="i===2" style="margin-left: -15px">{{l}}</span>
+                        <span style="margin-left: -16px;" v-else-if="i>=2">{{l}}</span>
+                    </div>
                 </div>
                 <div class="samplesHeader">
                     Invalid submission samples
@@ -206,7 +214,7 @@
 
 <script>
     import barChart from './bar.js';
-    import {getBaseTxObject,encodeFunction,signTx} from '../assets/js/tx.js'
+    import Chart from 'chart.js';
     const GCUID_SOLICIT = 0;
     const GCUID_REGISTER = 1;
     const GCUID_SUBMIT = 2;
@@ -250,6 +258,7 @@
         },
         data: function () {
             return {
+                labels: undefined,
                 reconnecting: false,
                 invalidSamples: undefined,
                 showingStatus: false,
@@ -382,7 +391,7 @@
                 let payload = {
                     gcuid: GCUID_SOLICIT,
                     dataFee: 10,
-                    serviceFee: 100,
+                    serviceFee: 50,
                     serviceProvider: this.serviceProviderAccount.address,
                     target: this.targetNumber,
                     privateKey: this.dataConsumerAccount.privateKey,
@@ -454,7 +463,7 @@
             draw: function() {
                 let qualifiedData = this.submitValues;
                 console.log("qualified data", this.submitValues)
-                let space = 4096;
+                let space = 8192;
                 let minH = 0;
                 let maxH = 65536;
                 let bucket = Array((maxH-minH)/space).fill(0);
@@ -474,10 +483,14 @@
                     bucket[i] = (v/qualifiedData.length).toFixed(2);
                 });
 
-                let labels = [];
-                for(let i=0;i<bucket.length-1;++i) {
-                    labels.push(`${minH+space*i}-${minH+space*(i+1)}`);
+                let labels = ['0'];
+                let labels2 = [''];
+                for(let i=0;i<bucket.length;++i) {
+                    labels.push(`${space*(i+1)}`);
+                    labels2.push('');
                 }
+                this.labels = labels;
+                labels = labels2;
 
                 let datasets = [
                     {
@@ -489,17 +502,34 @@
                         hoverBorderColor: '#ff5050',
                         hoverBorderWidth: 1,
                     },
-                    // {
-                    //     label:'',
-                    //     data: bucket,
-                    //     type:'line',
-                    //     backgroundColor:'#ffffff',
-                    //     borderColor: '#000000',
-                    // }
                 ];
 
+                this.graphOptions = {
+                    legend: {
+                        display: false,
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                max:1.0,
+                                fontSize: 15,
+                            },
+                        }],
+                        xAxes: [{
+                            // gridLines: {
+                            //     offset: true
+                            // },
+                            type:'category',
+                            labels: labels,
+                            ticks: {
+                                fontSize: 15,
+                            },
+                        }],
+                    },
+                };
                 this.graph = {
-                    labels: labels,
+                    // labels: labels,
                     datasets: datasets,
                 };
             },
@@ -815,7 +845,6 @@
         }
     };
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 
 <style scoped>

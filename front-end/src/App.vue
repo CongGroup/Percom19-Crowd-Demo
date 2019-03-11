@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+      <!--<vue-headful title="crowd demo"></vue-headful>-->
     <router-view />
   </div>
 </template>

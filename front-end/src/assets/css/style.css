@@ -55,10 +55,9 @@
 }
 
 .agg .adminStage .stageHead {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-family: sans-serif;
-    font-style: italic;
-    margin-top: -20px;
+    margin-top: -40px;
 }
 
 .agg .adminStage .stageContent {
@@ -369,9 +368,8 @@ button[disabled]{
 .agg .display .head {
     margin-left: 10px;
     margin-bottom: 30px;
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-family: sans-serif;
-    font-style: italic;
     margin-top: 20px;
     align-self: center;
 }
@@ -390,4 +388,28 @@ button[disabled]{
     font-size: 1.0rem;
     font-weight: 700;
     font-family: sans-serif;
+}
+
+.agg .user  {
+    margin-bottom: 20px;
+}
+
+.agg .user .role {
+    margin-bottom: 20px;
+}
+
+.agg .graphLayout .labels {
+    width: 830px;
+    margin-top: -20px;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.agg .graphLayout .labels .label {
+    font-size: 15px;
+    margin-right: 75px;
 }

@@ -6,12 +6,6 @@ export default {
     props: ['options'],
     mounted: function () {
         console.log("show graph");
-        this.renderChart(this.chartData,{
-            legend: {
-              display: false,
-            },
-            responsive: false,
-            maintainAspectRatio:false,
-        });
+        this.renderChart(this.chartData,this.options);
     }
 }

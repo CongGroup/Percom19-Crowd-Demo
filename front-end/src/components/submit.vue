@@ -2,21 +2,30 @@
     <div class="agg">
         <div class="display">
             <div class="contract">
+                <div class="user">
+                    <div class="role">
+                        <div class ="item">
+                            <div class="stage">Data Provider </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="label">Account: </div>
+                        <div class="value" v-if="account!==undefined">{{address}}  </div>
+                    </div>
+                    <div class="item">
+                        <div class="label">Balance: </div>
+                        <div class="value"> {{tokenBalance}} </div>
+                    </div>
+                </div>
                 <div class ="item">
                     <img class="icon" alt="Vue logo" src="../assets/cd3.jpeg"/>
                     <!--<div class="stage">{{stageToProcedure[stage]}} stage </div>-->
                 </div>
+
                 <div class="item head">
                      Task Information
                 </div>
-                <div class="item">
-                    <div class="label">Account: </div>
-                    <div class="value" v-if="account!==undefined">{{address}}  </div>
-                </div>
-                <div class="item">
-                    <div class="label">Balance: </div>
-                    <div class="value"> {{tokenBalance}} </div>
-                </div>
+
                 <div v-if="shouldShow('register')">
                     <div class="item">
                         <div class="label">Reward for data provider: </div>
@@ -60,7 +69,7 @@
                 <div v-if="account!==undefined && hasEther">
                     <div>
                         <div class="formNote" v-if="atStage('register') && submitStatus === 0 " >
-                            <span class="noteBody"> Submission range: 0-65535</span>
+                            <span class="noteBody"> Valid data range: 0—65535</span>
                         </div>
                         <div class="form" v-if="atStage('register')">
                             <div v-if = "submitStatus === 0">
