@@ -116,6 +116,7 @@ func getEncryptedData(w http.ResponseWriter, r *http.Request) {
 	log.Println("get encrypted data")
 	amount:=big.NewInt(0)
 	data, err:= ioutil.ReadAll(r.Body)
+
 	if err!=nil {
 		log.Println(err.Error())
 		http.Error(w,err.Error(),http.StatusInternalServerError)
@@ -129,13 +130,21 @@ func getEncryptedData(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	negative:=make([]byte,1)
+	if(amount.Cmp(big.NewInt(0)) == -1) {
+		negative[0] = byte(1)
+	} else {
+		negative[0] = byte(0)
+	}
+
 	log.Println("data to encrypt:",amount)
 	cipher,err := appClient.GenEncryption(amount)
 	if err!=nil {
 		http.Error(w,err.Error(),http.StatusInternalServerError)
 		return
 	}
-	submitData := "0x"+cipher.Text(16)
+
+	submitData := "0x"+hex.EncodeToString(negative)+cipher.Text(16)
 	submitProofByte := appClient.GenBulletProof(amount)
 	submitProof:= "0x"+hex.EncodeToString(submitProofByte)
 
@@ -185,7 +194,8 @@ func getStatistics(agg *contract.Agg) func(w http.ResponseWriter, r* http.Reques
 
 
 			submitDataLen:= new(big.Int).SetBytes(submitDataByte[32:64])
-			submitDataByte=submitDataByte[64:64+submitDataLen.Int64()]
+			negative:=submitDataByte[64:65]
+			submitDataByte=submitDataByte[65:65+submitDataLen.Int64()]
 			submitProofLen := new(big.Int).SetBytes(submitProofByte[32:64])
 			submitProofByte = submitProofByte[64:64+submitProofLen.Int64()]
 
@@ -204,6 +214,11 @@ func getStatistics(agg *contract.Agg) func(w http.ResponseWriter, r* http.Reques
 			})
 			if !zcrypto.RPVerify(*rp) {
 				if(len(invalidSamples)<5){
+					if negative[0]==byte(1) {
+						N,_:=big.NewInt(0).SetString(zcrypto.N,10)
+						decryptedData.ModInverse(decryptedData,N)
+						decryptedData.Neg(decryptedData)
+					}
 					invalidSamples = append(invalidSamples,decryptedData)
 				}
 			} else {
