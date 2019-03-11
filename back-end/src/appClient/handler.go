@@ -410,6 +410,9 @@ func (h *Handler) registerAndSubmitHandler(gcuid int, data[]byte) {
 	log.Println("data to encrypt:",payload.Value)
 
 	negative:=make([]byte,4)
+	negative[0]=byte(0)
+	negative[1]=byte(0)
+	negative[2]=byte(0)
 	if(amount.Cmp(big.NewInt(0)) == -1) {
 		negative[3] = byte(1)
 	} else {

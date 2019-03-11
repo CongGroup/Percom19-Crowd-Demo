@@ -131,6 +131,9 @@ func getEncryptedData(w http.ResponseWriter, r *http.Request) {
 	}
 
 	negative:=make([]byte,4)
+	negative[0]=byte(0)
+	negative[1]=byte(0)
+	negative[2]=byte(0)
 	if(amount.Cmp(big.NewInt(0)) == -1) {
 		negative[3] = byte(1)
 	} else {
@@ -195,7 +198,7 @@ func getStatistics(agg *contract.Agg) func(w http.ResponseWriter, r* http.Reques
 
 			submitDataLen:= new(big.Int).SetBytes(submitDataByte[32:64])
 			negative:=submitDataByte[64:96]
-			submitDataByte=submitDataByte[96:96+submitDataLen.Int64()]
+			submitDataByte=submitDataByte[96:96+submitDataLen.Int64()-32]
 			submitProofLen := new(big.Int).SetBytes(submitProofByte[32:64])
 			submitProofByte = submitProofByte[64:64+submitProofLen.Int64()]
 
