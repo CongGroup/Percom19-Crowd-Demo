@@ -195,7 +195,7 @@ func (h *Handler) aggregateHandler(gcuid int, data []byte) {
 
 
 		submitDataLen:= new(big.Int).SetBytes(submitDataByte[32:64])
-		submitDataByte=submitDataByte[72:72+submitDataLen.Int64()]
+		submitDataByte=submitDataByte[64:96+submitDataLen.Int64()-32]
 		submitProofLen := new(big.Int).SetBytes(submitProofByte[32:64])
 		submitProofByte = submitProofByte[64:64+submitProofLen.Int64()]
 
