@@ -1,13 +1,13 @@
 import Vue from "vue";
 import App from "./App.vue";
+import VueCookies from 'vue-cookies';
+Vue.use(VueCookies);
 import router from "./router";
 import store from "./store";
-import VueCookies from 'vue-cookies';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VeeValidate from 'vee-validate';
 import PacMan from 'vue-spinner/src/PacmanLoader.vue';
-import vueHeadful from 'vue-headful';
 
 const dictionary = {
     en: {
@@ -25,11 +25,9 @@ VeeValidate.Validator.localize(dictionary);
 console.log(typeof process.env.SERVER_PATH);
 
 Vue.use(VeeValidate);
-Vue.use(VueCookies);
 Vue.config.productionTip = false;
 Vue.use(VueAxios,axios);
 Vue.component('pacman',PacMan);
-Vue.component('vue-headful',vueHeadful);
 
 new Vue({
   router,

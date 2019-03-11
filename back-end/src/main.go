@@ -311,6 +311,40 @@ func getEther(agg *contract.Agg) func (http.ResponseWriter,*http.Request) {
 	}
 }
 
+func validate(w http.ResponseWriter,r *http.Request) {
+	var password string
+	data, err:= ioutil.ReadAll(r.Body)
+
+	if err!=nil {
+		log.Println(err.Error())
+		http.Error(w,err.Error(),http.StatusInternalServerError)
+		return
+	}
+
+	err = json.Unmarshal(data,&password)
+	if err!=nil {
+		log.Println(err.Error())
+		http.Error(w,err.Error(),http.StatusInternalServerError)
+		return
+	}
+
+	if password==appClient.ADMIN_PASSWORD {
+		accessToken:=big.NewInt(20190311)
+		accessTokenWrapper,err:= json.Marshal(accessToken)
+		if err!=nil {
+			log.Println(err.Error())
+			http.Error(w,err.Error(),http.StatusInternalServerError)
+			return
+		}
+		w.Write(accessTokenWrapper)
+	} else {
+		errorMsg:=appClient.MSG_ADMIN_WRONG_PASSWORD
+		log.Println(errorMsg)
+		http.Error(w,errorMsg,http.StatusInternalServerError)
+		return
+	}
+}
+
 
 func init() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
@@ -346,6 +380,7 @@ func start() {
 	r.HandleFunc("/statistics/{taskId}",getStatistics(agg)).Methods("GET")
 	r.HandleFunc("/requireEther/{user}",requireEther(owner,agg)).Methods("GET")
 	r.HandleFunc("/ether/{user}",getEther(agg)).Methods("GET")
+	r.HandleFunc("/validate",validate).Methods("POST")
 
 	fmt.Println("Running http server")
 	err =http.ListenAndServeTLS(

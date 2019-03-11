@@ -43,21 +43,16 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
     document.title="crowd demo";
     next();
-    // if (to.name !== 'admin') {
-    //     next('/')
-    //     if (store.state.ks != undefined) {
-    //         next('/');
-    //     } else {
-    //         next();
-    //     }
-    // } else {
-    //     if (to.meta.requireAuth && store.state.ks == undefined) {
-    //         next('/login')
-    //
-    //     } else {
-    //         next();
-    //     }
-    // }
+    if (to.name !== 'admin') {
+        next()
+    } else {
+        let accessToken = Vue.cookies.get('accessToken');
+        if(accessToken==null) {
+            next('/login')
+        } else {
+            next();
+        }
+    }
 })
 
 

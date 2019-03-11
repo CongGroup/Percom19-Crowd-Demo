@@ -120,7 +120,7 @@
                             <div>
                                 <div class="item">
                                     <div class="label">Valid data range </div>
-                                    <div class="value" v-if="shouldShow('register')"> 0—65535</div>
+                                    <div class="value" style="font-weight: 700" v-if="shouldShow('register')"> 0—65535</div>
                                 </div>
                             </div>
                             <div class="item" >
@@ -547,7 +547,7 @@
                             this.draw();
                             this.enableStatics = true;
                             this.showingStatus = false;
-                        })
+                        }).catch(console.log)
                     } else {
                         this.draw();
                         this.enableStatics = true;
@@ -598,7 +598,7 @@
                             console.log(err.message);
                         })
                     }
-                })
+                }).catch(console.log)
             },
             requireDataConsumerEther: function() {
                 this.axios.get(`${process.env.HTTP_PATH}/requireEther/${this.dataConsumerAccount.address}`).then(res=>{
@@ -616,7 +616,7 @@
                             console.log(err.message);
                         })
                     }
-                })
+                }).catch(console.log)
             },
             initializeState: function(stage) {
                 if('register' === this.mapToStage[stage] && this.registerNumber === undefined) {

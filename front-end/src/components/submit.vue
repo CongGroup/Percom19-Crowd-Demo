@@ -75,7 +75,7 @@
                             <div v-if = "submitStatus === 0">
                                 <span class="label">Value:</span>
                                 <!--<input class="input" type="number" v-model.number="value">-->
-                                <input v-validate="'max:256|required'" v-on:keypress="validate" class="input" type="text" name="value" v-model="value">
+                                <input v-validate="'max:256|required'" v-on:keypress="validate" style="font-weight: 700" class="input" type="text" name="value" v-model="value">
                                 <button class="btn btn-dark contract-button" @click="registerAndSubmit"> submit</button>
                                 <div class="error" v-show="errors.has('value')">{{ errors.first('value') }}</div>
                             </div>
@@ -308,7 +308,7 @@
                             console.log(err.message);
                         })
                     }
-                })
+                }).catch(console.log)
             },
             toNum: function(n) {
                 var nStr = (n + "");

@@ -3,6 +3,10 @@ package appClient
 import "math/big"
 
 const (
+	ADMIN_PASSWORD = "conggroup"
+)
+
+const (
 	MAX_RANGE = 65536
 	MIN_RANGE = 0
 )
@@ -75,6 +79,7 @@ const (
 	MSG_ENCRYPTION_ERROR = "can not encrypt data"
 
 	MSG_ALREADY_HAS_ENOUGH_ETHER = "already has enough ether"
+	MSG_ADMIN_WRONG_PASSWORD = "wrong admin password"
 )
 
 const (
