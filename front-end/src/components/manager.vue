@@ -642,10 +642,10 @@
                             break;
                         case GCUID_APPROVE:
                             if (res.status === 0) {
-                                this.submitValues = res.submitValues;
-                                this.invalidSamples =res.invalidSamples;
-                                console.log("invalid samples:",this.invalidSamples);
-                                console.log("submit values:",this.submitValues);
+                                // this.submitValues = res.submitValues;
+                                // this.invalidSamples =res.invalidSamples;
+                                // console.log("invalid samples:",this.invalidSamples);
+                                // console.log("submit values:",this.submitValues);
                                 this.approveStatus = SUBMITTED;
                             } else {
                                 console.log(res.reason);

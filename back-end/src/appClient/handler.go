@@ -279,73 +279,73 @@ func (h *Handler) approveHandler(gcuid int, data []byte) {
 	}
 
 
-	countByte,err:= h.agg.Call(contract.FUNCTION_GET_SUBMIT_COUNT_OF_TASK,payload.TaskId)
-	if err!=nil {
-		log.Println(err.Error())
-		h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
-		return
-	}
-	count:=new(big.Int).SetBytes(countByte)
-	var invalidSamples []*big.Int
-
-	var submitValues []*big.Int
-
-
-	for i:=0; i< int(count.Int64()); i++ {
-		submitDataByte,err:= h.agg.Call(contract.FUNCTION_GET_SUBMIT_DATA_OF_TASK,payload.TaskId,big.NewInt(int64(i)))
-		if err!=nil {
-			log.Println(err.Error())
-			h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
-			return
-		}
-		submitProofByte,err:= h.agg.Call(contract.FUNCTION_GET_SUBMIT_PROOF_OF_TASK,payload.TaskId,big.NewInt(int64(i)))
-		if err!=nil {
-			log.Println(err.Error())
-			h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
-			return
-		}
-
-
-		submitDataLen:= new(big.Int).SetBytes(submitDataByte[32:64])
-		negative:=submitDataByte[64:65]
-		submitDataByte=submitDataByte[65:65+submitDataLen.Int64()]
-		submitProofLen := new(big.Int).SetBytes(submitProofByte[32:64])
-		submitProofByte = submitProofByte[64:64+submitProofLen.Int64()]
-
-
-		rp:= new(zcrypto.RangeProof).SetBytes(submitProofByte)
-
-		if err!=nil {
-			log.Println(err.Error())
-			h.errorHandler(gcuid,UNMARSHAL_JSON_ERROR,err)
-			return
-		}
-
-		submitData:=new(big.Int).SetBytes(submitDataByte)
-		decryptedData:= zcrypto.PriKey.Decrypt(&zcrypto.Cypher {
-			C: submitData,
-		})
-		if !zcrypto.RPVerify(*rp) {
-			if(len(invalidSamples)<5) {
-				if negative[0]==byte(1) {
-					N,_:=big.NewInt(0).SetString(zcrypto.N,10)
-					decryptedData.ModInverse(decryptedData,N)
-					decryptedData.Neg(decryptedData)
-				}
-				invalidSamples = append(invalidSamples,decryptedData)
-			}
-		} else {
-			submitValues= append(submitValues,decryptedData)
-		}
-	}
+	//countByte,err:= h.agg.Call(contract.FUNCTION_GET_SUBMIT_COUNT_OF_TASK,payload.TaskId)
+	//if err!=nil {
+	//	log.Println(err.Error())
+	//	h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
+	//	return
+	//}
+	//count:=new(big.Int).SetBytes(countByte)
+	//var invalidSamples []*big.Int
+	//
+	//var submitValues []*big.Int
+	//
+	//
+	//for i:=0; i< int(count.Int64()); i++ {
+	//	submitDataByte,err:= h.agg.Call(contract.FUNCTION_GET_SUBMIT_DATA_OF_TASK,payload.TaskId,big.NewInt(int64(i)))
+	//	if err!=nil {
+	//		log.Println(err.Error())
+	//		h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
+	//		return
+	//	}
+	//	submitProofByte,err:= h.agg.Call(contract.FUNCTION_GET_SUBMIT_PROOF_OF_TASK,payload.TaskId,big.NewInt(int64(i)))
+	//	if err!=nil {
+	//		log.Println(err.Error())
+	//		h.errorHandler(gcuid,CALL_TRANSACTION_ERROR,err)
+	//		return
+	//	}
+	//
+	//
+	//	submitDataLen:= new(big.Int).SetBytes(submitDataByte[32:64])
+	//	negative:=submitDataByte[64:65]
+	//	submitDataByte=submitDataByte[65:65+submitDataLen.Int64()]
+	//	submitProofLen := new(big.Int).SetBytes(submitProofByte[32:64])
+	//	submitProofByte = submitProofByte[64:64+submitProofLen.Int64()]
+	//
+	//
+	//	rp:= new(zcrypto.RangeProof).SetBytes(submitProofByte)
+	//
+	//	if err!=nil {
+	//		log.Println(err.Error())
+	//		h.errorHandler(gcuid,UNMARSHAL_JSON_ERROR,err)
+	//		return
+	//	}
+	//
+	//	submitData:=new(big.Int).SetBytes(submitDataByte)
+	//	decryptedData:= zcrypto.PriKey.Decrypt(&zcrypto.Cypher {
+	//		C: submitData,
+	//	})
+	//	if !zcrypto.RPVerify(*rp) {
+	//		if(len(invalidSamples)<5) {
+	//			if negative[0]==byte(1) {
+	//				N,_:=big.NewInt(0).SetString(zcrypto.N,10)
+	//				decryptedData.ModInverse(decryptedData,N)
+	//				decryptedData.Neg(decryptedData)
+	//			}
+	//			invalidSamples = append(invalidSamples,decryptedData)
+	//		}
+	//	} else {
+	//		submitValues= append(submitValues,decryptedData)
+	//	}
+	//}
 
 	res:= &ApproveResponse{
 		Response: Response {
 			Gcuid:gcuid,
 			Status:SUCCESS,
 		},
-		SubmitValues:submitValues,
-		InvalidSamples: invalidSamples,
+		SubmitValues:nil,
+		InvalidSamples: nil,
 	}
 
 	h.wrapperAndSend(gcuid, res)
@@ -409,11 +409,11 @@ func (h *Handler) registerAndSubmitHandler(gcuid int, data[]byte) {
 	amount:=payload.Value
 	log.Println("data to encrypt:",payload.Value)
 
-	negative:=make([]byte,1)
+	negative:=make([]byte,4)
 	if(amount.Cmp(big.NewInt(0)) == -1) {
-		negative[0] = byte(1)
+		negative[3] = byte(1)
 	} else {
-		negative[0] = byte(0)
+		negative[3] = byte(0)
 	}
 
 
