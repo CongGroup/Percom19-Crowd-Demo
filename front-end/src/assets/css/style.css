@@ -282,9 +282,7 @@ button[disabled]{
 }
 
 .agg .graphLayout .samples {
-    width: 400px;
     align-self: center;
-    margin-top: 50px;
     display: flex;
     display: -webkit-flex;
     flex-direction: column;
@@ -294,7 +292,21 @@ button[disabled]{
 
 .agg .graphLayout .sample {
     align-self: flex-start;
+    width: 300px;
     margin-bottom: 10px;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.agg .samples .label {
+    font-style: italic;
+}
+
+.agg .samples .value {
+    font-weight: 500;
 }
 
 

@@ -186,8 +186,13 @@
                     Invalid submission samples
                 </div>
                 <div class="samples">
-                    <div class="sample" v-for="s in invalidSamples">
-                        {{s}}
+                    <div class="sample" v-for="(s,i) in invalidSamples">
+                        <div class="value">
+                            {{i}}.
+                        </div>
+                        <div>
+                            <span style="font-weight: 600;">{{s}}</span>
+                        </div>
                     </div>
                 </div>
                 <div class="back">
