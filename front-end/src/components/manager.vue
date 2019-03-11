@@ -507,7 +507,6 @@
                         yAxes: [{
                             ticks: {
                                 beginAtZero: true,
-                                max:1.0,
                                 fontSize: 15,
                             },
                         }],
