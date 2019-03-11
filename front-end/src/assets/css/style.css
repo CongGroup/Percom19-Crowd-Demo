@@ -273,10 +273,10 @@ button[disabled]{
 }
 
 .agg .graphLayout .samplesHeader {
-    font-size:  1.2rem;
+    font-size:  1.5rem;
     font-weight: 600;
     font-family: sans-serif;
-    margin-top: 20px;
+    margin-top: 50px;
     margin-bottom: 20px;
 }
 
@@ -290,14 +290,10 @@ button[disabled]{
 }
 
 .agg .graphLayout .sample {
-    align-self: flex-start;
-    width: 300px;
+    font-size: 1.1rem;
+    align-self: center;
     margin-bottom: 10px;
-    display: flex;
-    display: -webkit-flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    font-weight: 500;
 }
 
 .agg .samples .label {

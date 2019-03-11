@@ -53,5 +53,5 @@ services:
       chain:
 networks:
   chain:
-#volumes:
-#  chain_data:
+volumes:
+  backend:

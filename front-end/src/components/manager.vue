@@ -185,9 +185,9 @@
                 </div>
                 <div class="labels">
                     <div class="label" v-for="(l,i) in labels">
-                        <span v-if="i<=1">{{l}} </span>
-                        <span v-else-if="i===2" style="margin-left: -15px">{{l}}</span>
-                        <span style="margin-left: -16px;" v-else-if="i>=2">{{l}}</span>
+                        <span style="margin-left: 5px" v-if="i<=1">{{l}} </span>
+                        <span v-else-if="i===2" style="margin-left: 0px">{{l}}</span>
+                        <span style="margin-left: -5px;" v-else-if="i>=2">{{l}}</span>
                     </div>
                 </div>
                 <div class="samplesHeader">
@@ -195,12 +195,7 @@
                 </div>
                 <div class="samples">
                     <div class="sample" v-for="(s,i) in invalidSamples">
-                        <div class="value">
-                            {{i}}.
-                        </div>
-                        <div>
-                            <span style="font-weight: 600;">{{s}}</span>
-                        </div>
+                            {{s}}
                     </div>
                 </div>
                 <div class="back">
@@ -484,7 +479,7 @@
                 });
 
                 let labels = ['0'];
-                let labels2 = [''];
+                let labels2 = [];
                 for(let i=0;i<bucket.length;++i) {
                     labels.push(`${space*(i+1)}`);
                     labels2.push('');
