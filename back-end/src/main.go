@@ -399,6 +399,8 @@ func start() {
 
 func main() {
 	//testPallier()
+	//testBulletProof()
+	//testBulletProof2()
 	f,err:= os.OpenFile(filepath.Join("etc","logfile"),os.O_RDWR|os.O_CREATE|os.O_APPEND,0666)
 	if err!=nil {
 		log.Fatal(err)
@@ -406,38 +408,6 @@ func main() {
 	defer f.Close()
 	log.SetOutput(f)
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	//testBulletProof()
-	//testBulletProof2()
 
 	start()
-
-	//
-	//negative:=make([]byte,4)
-	//negative[0]=byte(0)
-	//negative[1]=byte(0)
-	//negative[2]=byte(0)
-	//negative[3]=byte(1)
-	//a:=new(big.Int).SetBytes(negative)
-	//log.Println(a)
-
-	//c,err:=zcrypto.PubKey.Encrypt(big.NewInt(-32131))
-	//if err!=nil {
-	//	log.Println(err.Error())
-	//	return
-	//}
-	//n,_:=new(big.Int).SetString(zcrypto.N,10)
-	//m:=new(big.Int).ModInverse(zcrypto.PriKey.Decrypt(c),n)
-	//log.Println(m)
-
-	//t,_:=new(big.Int).SetString(zcrypto.N,10)
-	//log.Println("t:", len(t.Bytes()))
-	//t,_=new(big.Int).SetString(zcrypto.N,10)
-	//log.Println("t:", len(t.Bytes()))
-	//t,_=new(big.Int).SetString(zcrypto.N,10)
-	//log.Println("t:", len(t.Bytes()))
-	//encryptedData,_:=appClient.GenEncryption(big.NewInt(20127))
-	//log.Println(new(big.Int).SetBytes(encryptedData.Bytes()[32:]))
-	//
-	//encryptedData,_:=appClient.GenEncryption(big.NewInt(20127))
-	//log.Println(new(big.Int).SetBytes(encryptedData.Bytes()[32:]))
 }

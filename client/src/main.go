@@ -73,6 +73,5 @@ func main() {
 			client.Start()
 		}(i)
 	}
-
 	wg.Wait()
 }
