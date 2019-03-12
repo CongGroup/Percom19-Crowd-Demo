@@ -53,7 +53,7 @@
                     <!--<span class="value">{{qualifiedNumber}}</span>-->
                 <!--</div>-->
                 <div class="item" v-if="shouldShow('approve')">
-                    <span class="label">Is Your submission valid ?  </span>
+                    <span class="label">Is your submission valid ?  </span>
                     <span class="value">{{qualified === undefined ? '': qualified?'Yes':'No'}}</span>
                 </div>
                 <!--<div class="item" v-if="shouldShow('approve')">-->

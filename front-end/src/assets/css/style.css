@@ -28,6 +28,20 @@
     align-items: flex-start;
 }
 
+.agg .admin .contract {
+    font-size: 1.7rem;
+    width: 450px !important;
+}
+
+.agg .admin .contract .item  {
+    margin-top: -20px;
+    margin-bottom: 55px;
+}
+
+.agg .admin .contract .stage {
+    margin-bottom: -25px;
+}
+
 .agg .display {
     margin-bottom: 40px;
     display: flex;
@@ -36,7 +50,17 @@
     justify-content: center;
 }
 
+.agg .display .contract .item {
+    font-size: 1.2rem;
+}
+
+.agg .display .contract .head {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
 .agg .adminStage {
+    margin-left: -70px;
     margin-top: -100px;
     display: flex;
     width: 800px;
@@ -44,24 +68,29 @@
     flex-direction: column;
 }
 
+/*.agg .admin .role {*/
+    /*font-size: 2.2rem !important;*/
+/*}*/
+
 .agg .adminStage .stageForm {
     display: flex;
     display: -webkit-flex;
     flex-direction: column;
     /*justify-content: space-around;*/
     align-items: center;
-    margin-top: 100px;
+    margin-top: 50px;
     margin-bottom: 100px;
 }
 
 .agg .adminStage .stageHead {
     font-size: 2rem;
     font-family: sans-serif;
-    margin-top: -40px;
+    margin-top: -70px;
+    margin-bottom: 30px;
 }
 
 .agg .adminStage .stageContent {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
 }
 
 .agg .adminStage .stageForm .label {
@@ -70,10 +99,19 @@
 }
 
 .agg .adminStage .stageForm .value {
-    font-style: italic;
+    /*font-style: italic;*/
     font-weight: 700;
     font-size: 3.0rem;
     font-family: sans serif;
+}
+
+.agg .adminStage .contract .item{
+    font-size: 1.7rem;
+    margin-bottom: 40px;
+}
+
+.agg .adminStage .contract .item .label{
+    /*margin-right: 50px !important;*/
 }
 
 .agg .contract .stage {
@@ -93,8 +131,7 @@
 }
 
 .agg .contract .item .label {
-    /*margin-right: 100px;*/
-    font-style: italic;
+
 }
 
 .agg .solicitInfo {
@@ -131,7 +168,7 @@
 }
 
 .agg .container .contract{
-    width: 450px;
+    width: 600px;
     margin-left: -50px;
 }
 
@@ -265,17 +302,14 @@ button[disabled]{
 }
 
 .agg .graphLayout .plotHeader {
-    font-size: 1.2rem;
-    font-weight: 600;
-    font-family: sans-serif;
-    font-style: italic;
+    font-size: 1.8rem;
+    font-weight: 700;
     margin-bottom: 20px;
 }
 
 .agg .graphLayout .samplesHeader {
-    font-size:  1.5rem;
-    font-weight: 600;
-    font-family: sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
     margin-top: 50px;
     margin-bottom: 20px;
 }
@@ -290,14 +324,14 @@ button[disabled]{
 }
 
 .agg .graphLayout .sample {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     align-self: center;
     margin-bottom: 10px;
     font-weight: 500;
 }
 
 .agg .samples .label {
-    font-style: italic;
+
 }
 
 .agg .samples .value {
@@ -312,7 +346,7 @@ button[disabled]{
 
 .agg .graphLayout .info {
     width: 500px;
-    font-size:1.3rem;
+    font-size:1.5rem;
 }
 
 .agg .graphLayout .back {
@@ -395,8 +429,8 @@ button[disabled]{
 }
 
 .agg .graphLayout .labels {
-    width: 830px;
-    margin-top: -20px;
+    width: 650px;
+    margin-top: -27px;
     display: -webkit-flex;
     display: flex;
     flex-direction: row;

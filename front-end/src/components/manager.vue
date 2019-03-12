@@ -11,7 +11,7 @@
                         </div>
                         <div class="item">
                             <div class="label">Account: </div>
-                            <div class="value"> {{dataConsumerAccount.address}}</div>
+                            <div class="value"> {{dataProviderDisplayAddress}}</div>
                         </div>
                         <div class="item">
                             <div class="label">Balance: </div>
@@ -66,7 +66,7 @@
                         </div>
                         <div class="item">
                             <div class="label">Account: </div>
-                            <div class="value">{{serviceProviderAccount.address}}  </div>
+                            <div class="value">{{serviceProviderDisplayAddress}}  </div>
                         </div>
                         <div class="item">
                             <div class="label">Balance: </div>
@@ -99,10 +99,10 @@
                             <img class="icon" alt="Vue logo" src="../assets/cd3.jpeg"/>
                             <!--<div class="value">{{stageToProcedure[stage]}} </div>-->
                         </div>
-                        <div class="stageHead">
+                        <div class="stageHead" style="font-weight: 700;">
                             Task Information
                         </div>
-                        <div class="stageContent contract">
+                        <div class="contract stageContent stageSize">
                             <div >
                                 <div class="item">
                                     <div class="label">Reward for data provider: </div>
@@ -132,17 +132,17 @@
                             <!--<span class="value"> {{submissionNumber}} </span>-->
                             <!--</div>-->
                             <div class="item" >
-                                <span class="label">Number of valid submissions::</span>
+                                <span class="label">Number of valid submissions:</span>
                                 <span class="value"> {{qualifiedNumber}} </span>
                             </div>
                             <!--<div class="item" >-->
                             <!--<span class="label">Final aggregate result:</span>-->
                             <!--<span class="value"> {{qualifiedNumber !==0 ?aggregateResult:"NAN"}} </span>-->
                             <!--</div>-->
-                            <div class="item">
-                                <span class="label">Claim number:</span>
-                                <span class="value"> {{claimNumber}} </span>
-                            </div>
+                            <!--<div class="item">-->
+                                <!--<span class="label">Claim number:</span>-->
+                                <!--<span class="value"> {{claimNumber}} </span>-->
+                            <!--</div>-->
                         </div>
                 </div>
             </div>
@@ -181,17 +181,18 @@
                 </div>
                 <div class="graph">
                     <!--<canvas  id="myChart"></canvas>-->
-                    <bar-statistics :width="900" :height="600" :chart-data="graph" :options="graphOptions"></bar-statistics>
+                    <bar-statistics :width="650" :height="450" :chart-data="graph" :options="graphOptions"></bar-statistics>
                 </div>
                 <div class="labels">
                     <div class="label" v-for="(l,i) in labels">
-                        <span style="margin-left: 5px" v-if="i<=1">{{l}} </span>
-                        <span v-else-if="i===2" style="margin-left: 0px">{{l}}</span>
-                        <span style="margin-left: -5px;" v-else-if="i>=2">{{l}}</span>
+                        <span style="margin-left: 43px" v-if="i===0">{{l}} </span>
+                        <span style="margin-left: -33px" v-else-if="i===1">{{l}} </span>
+                        <span v-else-if="i===2" style="margin-left: -65px">{{l}}</span>
+                        <span style="margin-left: -65px;" v-else-if="i>=2">{{l}}</span>
                     </div>
                 </div>
                 <div class="samplesHeader">
-                    Invalid submission samples
+                    Samples from invalid submissions
                 </div>
                 <div class="samples">
                     <div class="sample" v-for="(s,i) in invalidSamples">
@@ -304,10 +305,19 @@
             }
         },
         computed: {
+            dataProviderDisplayAddress: function(){
+               return this.formatAddress(this.dataConsumerAccount.address);
+            },
+            serviceProviderDisplayAddress: function(){
+                return this.formatAddress(this.serviceProviderAccount.address);
+            },
         },
         watch: {
         },
         methods: {
+            formatAddress: function (address){
+                return address.slice(0,8)+'...'+ address.slice(-6);
+            },
             hidenGraph: function(event){
                 this.enableStatics = false;
             },
