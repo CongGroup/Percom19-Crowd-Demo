@@ -217,11 +217,11 @@ func (c *Client) claim(gcuid int) {
 func (c *Client) registerAndSubmit(gcuid int) {
 	var submitData *big.Int
 	if c.Id == 17  {
-		submitData,_ = new(big.Int).SetString("66454",10)
+		submitData =big.NewInt(66453)
 	} else if c.Id == 18 {
-		submitData,_ = new(big.Int).SetString("-6",10)
+		submitData =big.NewInt(-98)
 	} else if c.Id == 19 {
-		submitData,_ = new(big.Int).SetString("95466",10)
+		submitData =big.NewInt(95466)
 	} else {
 		var randData int
 		randData = rand.Intn(SUBMIT_DATA_SPACE) + c.Id * SUBMIT_DATA_SPACE
