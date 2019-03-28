@@ -2,26 +2,38 @@ version: '3.2'
 services:
   backend:
     image: xarcher/crowd-back-server:lastest
-    working_dir: /app/src
     expose:
       - 4000
     ports:
       - "0.0.0.0:4000:4000"
+    working_dir: /go-project/src/Percome19-Crowd-Demo/back-end
+    volumes:
+      - type: bind
+        source: ${BASE_PATH}/back-end/etc
+        target: /go-project/src/Percome19-Crowd-Demo/back-end/etc
+    environment:
+      - GOPATH=/go-project
     deploy:
       replicas: 1
       restart_policy:
         condition: on-failure
         delay: 2s
         max_attempts: 10
-    environment:
-      - GOPATH=/app
-    command: go run main.go
+    command: go run main.go -chainPort "wss://kovan.infura.io/ws"
     networks:
       chain:
   frontend:
+    working_dir: /app
     environment:
-      - SERVER_PATH=wss://open-crowd-demo.site:4000
-      - HTTP_PATH=https://open-crowd-demo.site:4000
+      - SERVER_PATH=wss://crowd.secdevgame.site:4000
+      - HTTP_PATH=https://crowd.secdevgame.site:4000
+    volumes:
+      - type: bind
+        source: ${BASE_PATH}/front-end/src/assets/config
+        target: /app/src/assets/config
+      - type: bind
+        source: ${BASE_PATH}/front-end/pem
+        target: /app/pem
     image: xarcher/crowd-front:latest
     depends_on:
       - backend
@@ -37,9 +49,13 @@ services:
     command: bash -c "npm run build && http-server dist -S -C pem/cert.pem -K pem/key.pem"
   client:
     image: xarcher/crowd-back-client:lastest
-    working_dir: /app/src
+    working_dir: /go-project/src/Percome19-Crowd-Demo/client
+    volumes:
+      - type: bind
+        source: ${BASE_PATH}/client/etc
+        target: /go-project/src/Percome19-Crowd-Demo/client/etc
     environment:
-      - GOPATH=/app
+      - GOPATH=/go-project
     depends_on:
       - backend
     deploy:
@@ -48,7 +64,7 @@ services:
         condition: on-failure
         delay: 2s
         max_attempts: 10
-    command: go run main.go -addr "open-crowd-demo.site:4000" -number 20
+    command: go run main.go -addr "crowd.secdevgame.site:4000" -number 20
     networks:
       chain:
 networks:

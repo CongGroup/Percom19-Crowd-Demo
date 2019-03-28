@@ -1,7 +1,7 @@
 package appClient
 
 import (
-	"contract"
+	"Percome19-Crowd-Demo/back-end/contract"
 	"encoding/hex"
 	"encoding/json"
 	"errors"
@@ -12,8 +12,8 @@ import (
 	"log"
 	"math/big"
 	"sync"
-	"user"
-	"zcrypto"
+	"Percome19-Crowd-Demo/back-end/user"
+	"Percome19-Crowd-Demo/back-end/zcrypto"
 )
 
 type Handler struct {

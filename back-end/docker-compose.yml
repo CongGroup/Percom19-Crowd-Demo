@@ -3,9 +3,9 @@ services:
   backend:
     build: .
     image: xarcher/crowd-back-server:lastest
-    working_dir: /app/src
+    working_dir: /go-project/src/Percome19-Crowd-Demo/back-end
     ports:
     - "4000:4000"
     environment:
-    - GOPATH=/app
-    command: go run main.go
+    - GOPATH=/go-project
+    command: ls vendor/github.com

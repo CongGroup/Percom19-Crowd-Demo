@@ -1,10 +1,13 @@
 package main
 
 import (
-	"appClient"
-	"contract"
+	"Percome19-Crowd-Demo/back-end/appClient"
+	"Percome19-Crowd-Demo/back-end/contract"
+	"Percome19-Crowd-Demo/back-end/user"
+	"Percome19-Crowd-Demo/back-end/zcrypto"
 	"encoding/hex"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
@@ -16,9 +19,12 @@ import (
 	"math/big"
 	"net/http"
 	"os"
-	"path/filepath"
-	"user"
-	"zcrypto"
+)
+
+const (
+	AGG_CONFIG = "etc/agg.json"
+	ERC20_CONFIG = "etc/erc20.json"
+	LOG_FILE="etc/logfile"
 )
 
 
@@ -355,8 +361,16 @@ func start() {
 	r := mux.NewRouter()
 
 	manager:= appClient.NewHandlerManager()
-	agg:= contract.NewAgg(contract.GETH_PORT,contract.CONTRACT_ABI,common.HexToAddress(contract.CONTRACT_ADDRESS))
-	token:= contract.NewERC20(contract.GETH_PORT,contract.ERC20_ABI,common.HexToAddress(contract.ERC20_ADDRESS))
+	aggConfig,err:=contract.ReadConfig(AGG_CONFIG)
+	if err!=nil {
+		panic(err)
+	}
+	erc20Config,err:=contract.ReadConfig(ERC20_CONFIG)
+	if err!=nil {
+		panic(err)
+	}
+	agg:= contract.NewAgg(chainPort,aggConfig.Abi,common.HexToAddress(aggConfig.Address))
+	token:= contract.NewERC20(chainPort,erc20Config.Abi,common.HexToAddress(erc20Config.Address))
 
 	pk,err:= crypto.HexToECDSA(user.MASTER_KEY)
 	if err!=nil {
@@ -397,11 +411,19 @@ func start() {
 	}
 }
 
+var (
+	chainPort string
+)
+
+func init() {
+	flag.StringVar(&chainPort,"chainPort","wss://kovan.infura.io/ws","chain websocket(default wss://kovan.infura.io/ws)")
+}
+
 func main() {
 	//testPallier()
 	//testBulletProof()
 	//testBulletProof2()
-	f,err:= os.OpenFile(filepath.Join("etc","logfile"),os.O_RDWR|os.O_CREATE|os.O_APPEND,0666)
+	f,err:= os.OpenFile(LOG_FILE,os.O_RDWR|os.O_CREATE|os.O_APPEND,0666)
 	if err!=nil {
 		log.Fatal(err)
 	}
