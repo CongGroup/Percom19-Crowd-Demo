@@ -8,4 +8,4 @@ services:
     - "4000:4000"
     environment:
     - GOPATH=/go-project
-    command: go run main.go -chainPort "wss://kovan.infura.io/ws"
+    command: ls vendor/github.com

@@ -12,4 +12,4 @@ services:
     - "3000:3000"
     environment:
     - GOPATH=/go-project
-    command: go run main.go -addr "http://localhost:4000" -number 50
+    command: go run main.go

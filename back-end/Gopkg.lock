@@ -21,11 +21,12 @@
   revision = "a123909ec740ba2ed43a293e3febaf7618aa67d5"
 
 [[projects]]
-  digest = "1:477f6df8a1915abb180d730179a4a45212328effdf98cc6ca5b0e5741db00125"
+  branch = "master"
+  digest = "1:093bf93a65962e8191e3e8cd8fc6c363f83d43caca9739c906531ba7210a9904"
   name = "github.com/btcsuite/btcd"
   packages = ["btcec"]
   pruneopts = "UT"
-  revision = "2e60448ffcc6bf78332d1fe590260095f554dd78"
+  revision = "aa6e0f35703c1438cc45860ddc0c3f6e6c633c93"
 
 [[projects]]
   digest = "1:e47d51dab652d26c3fba6f8cba403f922d02757a82abdc77e90df7948daf296e"
@@ -160,7 +161,8 @@
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:8b4dcdf3822c1407fd4546d05d3883f825834171b4e974ec9df0a897a16e2a56"
+  branch = "master"
+  digest = "1:78fc3cf6458aa4eceac6234691e50706d7aab83295068df9fcc6d37ef29b537d"
   name = "golang.org/x/crypto"
   packages = [
     "pbkdf2",
@@ -168,7 +170,7 @@
     "sha3",
   ]
   pruneopts = "UT"
-  revision = "ff983b9c42bc9fbf91556e191cc8efb585c16908"
+  revision = "a5d413f7728c81fb97d96a2b722368945f651e78"
 
 [[projects]]
   branch = "master"
@@ -180,9 +182,12 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:5637b3b43405643229e55140bb3049dfa7d73957ba9ecfccc31cdadbfbe0b1f9"
+  digest = "1:d3229d0c4f5a29399fe3d39cd64de216af15f8bce9a00932c0a7a5ddaa6418f7"
   name = "golang.org/x/sys"
-  packages = ["unix"]
+  packages = [
+    "cpu",
+    "unix",
+  ]
   pruneopts = "UT"
   revision = "f49334f85ddcf0f08d7fb6dd7363e9e6d6b777eb"
 
