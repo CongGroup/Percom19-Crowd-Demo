@@ -31,6 +31,9 @@ services:
       - type: bind
         source: ${BASE_PATH}/front-end/src/assets/config
         target: /app/src/assets/config
+      - type: bind
+        source: ${BASE_PATH}/front-end/pem
+        target: /app/pem
     image: xarcher/crowd-front:latest
     depends_on:
       - backend
