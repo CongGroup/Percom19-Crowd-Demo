@@ -3,9 +3,13 @@ services:
   backend:
     build: .
     image: xarcher/crowd-back-server:lastest
-    working_dir: /app/src
+    working_dir: /go-project/src/Percome19-Crowd-Demo/back-end
+    volumes:
+      - type: bind
+        source: etc
+        target: /go-project/src/Percome19-Crowd-Demo/back-end/etc
     ports:
     - "4000:4000"
     environment:
-    - GOPATH=/app
-    command: go run main.go
+    - GOPATH=/go-project
+    command: go run main.go -chainPort "wss://kovan.infura.io/ws"

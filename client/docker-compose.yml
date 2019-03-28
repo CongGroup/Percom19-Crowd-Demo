@@ -3,9 +3,13 @@ services:
   client:
     build: .
     image: xarcher/crowd-back-client:lastest
-    working_dir: /app/src
+    working_dir: /go-project/src/Percome19-Crowd-Demo/client
+    volumes:
+      - type: bind
+        source: etc
+        target: /go-project/src/Percome19-Crowd-Demo/client/etc
     ports:
     - "3000:3000"
     environment:
-    - GOPATH=/app
+    - GOPATH=/go-project
     command: go run main.go -addr "http://localhost:4000" -number 50

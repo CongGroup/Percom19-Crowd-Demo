@@ -7,6 +7,11 @@ services:
       - SERVER_PATH = "ws://0.0.0.0:4000"
       - HTTP_PATH = "http://0.0.0.0:4000"
     image: xarcher/crowd-front:latest
+    working_dir: /app
+    volumes:
+      - type: bind
+        source: src/assets/config/agg.json
+        target: /app/src/assets/config/agg.json
     ports:
         - "80:80"
     command: bash -c "npm run build && http-server dist"

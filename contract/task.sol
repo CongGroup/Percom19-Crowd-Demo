@@ -238,7 +238,7 @@ contract Crowdsourcing {
 
 	function solicit(uint data_fee, uint service_fee, address service_provider, uint target) external {
 		//require(address(this).balance > data_fee + service_fee);
-		token.transferFrom(msg.sender,address(this),service_fee+data_fee);  // transfer token to contract 
+		token.transferFrom(msg.sender,address(this),service_fee+data_fee*target);  // transfer token to contract 
 		uint task_id = getEmptyTaskSlot();
 		//lastest_task = task_id;
 		require(task_id != TASK_FULL);
@@ -373,14 +373,16 @@ contract Crowdsourcing {
 			task[task_id].claim_count +=1;
 		}
 		if (is_qualified_data_provider){
-			uint reward = task[task_id].request.data_fee/task[task_id].request.target;
-// 			address(user).transfer(reward);  // pay ether 
-            token.transfer(user,reward);  // pay token
+            token.transfer(user,task[task_id].request.data_fee);  // pay token
 			task[task_id].data_provider[id-1].claimed = true;
 			task[task_id].claim_count +=1;
 		}
 		emit Claim(task_id,task[task_id].claim_count);
 		if(task[task_id].claim_count == task[task_id].qualified_count + 1 ) {  // number of data_provider + service_provider
+		    if(task[task_id].qualified_count!=task[task_id].request.target) {
+		        uint refund = (task[task_id].request.target-task[task_id].qualified_count) * task[task_id].request.data_fee;
+		        token.transfer(task[task_id].owner,refund);
+		    }
 			task[task_id].busy = false;
 			task[task_id].register_count = 0;
     		task[task_id].submit_count = 0;
@@ -388,6 +390,11 @@ contract Crowdsourcing {
     		delete task[task_id].request;
 			nextStage(task_id);
 		}
+	}
+	
+	function stopClaim(uint task_id) external {
+	    require(atStage(task_id, Stages.claim));
+	    nextStage(task_id);
 	}
 
 }

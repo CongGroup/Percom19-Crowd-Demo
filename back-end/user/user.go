@@ -1,7 +1,7 @@
 package user
 
 import (
-	"contract"
+	"Percome19-Crowd-Demo/back-end/contract"
 	"crypto/ecdsa"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"

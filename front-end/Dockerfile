@@ -16,4 +16,4 @@ COPY . .
 
 EXPOSE 80
 
-CMD ["http-server","dist"]
+#CMD ["http-server","dist"]

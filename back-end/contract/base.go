@@ -2,6 +2,7 @@ package contract
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/accounts/abi"
@@ -23,7 +24,6 @@ const (
 )
 
 type ContractConfig struct {
-	Port string `json:"port"`
 	Address string `json:"address"`
 	Abi string `json:"abi"`
 }
@@ -51,6 +51,16 @@ func (c *BaseContract) Connect(socket string) {
 	if err != nil {
 		panic(err.Error())
 	}
+}
+
+func ReadConfig(file string) (*ContractConfig,error) {
+	config:=&ContractConfig{}
+	data,err:= ioutil.ReadFile(file)
+	if err!=nil {
+		return config,err
+	}
+	err=json.Unmarshal(data,config)
+	return config,err
 }
 
 func (c* BaseContract) LoadABI(contractAbi string) {

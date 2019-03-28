@@ -1,14 +1,14 @@
 FROM golang:1.10
 
-WORKDIR /app
+WORKDIR /go-project/src/Percome19-Crowd-Demo/client
 
-ENV GOPATH /app
+ENV GOPATH /go-project
 
-RUN go get -u "github.com/gorilla/handlers";\
-go get -u "github.com/gorilla/mux";\
-go get -u "github.com/gorilla/websocket";\
-go get -u "github.com/ethereum/go-ethereum";\
-go get -u "github.com/btcsuite/btcd/btcec";
+RUN mkdir /go-project/bin && curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+
+ADD Gopkg.* main.go ./
+
+RUN  /go-project/bin/dep ensure
 
 COPY . .
 
