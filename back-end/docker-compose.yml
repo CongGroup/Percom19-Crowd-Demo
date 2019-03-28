@@ -4,10 +4,6 @@ services:
     build: .
     image: xarcher/crowd-back-server:lastest
     working_dir: /go-project/src/Percome19-Crowd-Demo/back-end
-    volumes:
-      - type: bind
-        source: etc
-        target: /go-project/src/Percome19-Crowd-Demo/back-end/etc
     ports:
     - "4000:4000"
     environment:

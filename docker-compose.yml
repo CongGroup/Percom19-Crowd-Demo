@@ -9,8 +9,8 @@ services:
     working_dir: /go-project/src/Percome19-Crowd-Demo/back-end
     volumes:
       - type: bind
-        source: back-end
-        target: /go-project/src/Percome19-Crowd-Demo/back-end
+        source: ${BASE_PATH}/back-end/etc
+        target: /go-project/src/Percome19-Crowd-Demo/back-end/etc
     environment:
       - GOPATH=/go-project
     deploy:
@@ -27,13 +27,13 @@ services:
     environment:
       - SERVER_PATH=wss://crowd.secdevgame.site:4000
       - HTTP_PATH=https://crowd.secdevgame.site:4000
+    volumes:
+      - type: bind
+        source: ${BASE_PATH}/front-end/src/assets/config
+        target: /app/src/assets/config
     image: xarcher/crowd-front:latest
     depends_on:
       - backend
-    volumes:
-      - type: bind
-        source: front-end
-        target: /app
     deploy:
       replicas: 1
       restart_policy:
@@ -49,8 +49,8 @@ services:
     working_dir: /go-project/src/Percome19-Crowd-Demo/client
     volumes:
       - type: bind
-        source: client
-        target: /go-project/src/Percome19-Crowd-Demo/client
+        source: ${BASE_PATH}/client/etc
+        target: /go-project/src/Percome19-Crowd-Demo/client/etc
     environment:
       - GOPATH=/go-project
     depends_on:
