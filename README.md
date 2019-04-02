@@ -20,18 +20,21 @@ Rootpath /: Provide friendly interface for data providers to submit their data a
 
 A simulation of data consumer. You can set the number of data consumers to exploring this demo.
 
-## Usage
+## Usage (Only for running in cityu server)
 
-**Only for running in cityu server**
+1. Clone this project.
 
-clone this project.
+``` bash
+git clone https://github.com/CongGroup/Percome19-Crowd-Demo.git
+```
 
-In root path of this project
+2. Pull image
 
 ```bash
 docker-compose pull
 ```
 
+3. Run
 ```bash
 docker-compose up
 ```
