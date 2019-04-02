@@ -27,7 +27,7 @@ A simulation of data consumer. You can set the number of data consumers to explo
 ``` bash
 git clone https://github.com/CongGroup/Percome19-Crowd-Demo.git
 ```
-2. modify .env file. Change the path to your current project absolute path.
+2. modify ```.env``` in root path of project. Change the path to your current project absolute path.
 
 3. Pull image
 
