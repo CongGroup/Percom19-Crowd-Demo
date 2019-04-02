@@ -746,7 +746,7 @@ func (h *Handler) sendTransactionHandler(gcuid int,data []byte) {
 
 	var tx types.Transaction
 
-	rlp.DecodeBytes(rawTx,&tx)
+	err=rlp.DecodeBytes(rawTx,&tx)
 	if err!=nil {
 		log.Println(err.Error())
 		h.sendTransactionError(gcuid,DATA_FORMAT_ERROR,err.Error(),payload.Txid)
