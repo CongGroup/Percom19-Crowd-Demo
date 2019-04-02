@@ -19,3 +19,19 @@ Rootpath /: Provide friendly interface for data providers to submit their data a
 ### client
 
 A simulation of data consumer. You can set the number of data consumers to exploring this demo.
+
+## Usage
+
+**Only for running in cityu server**
+
+clone this project.
+
+In root path of this project
+
+```bash
+docker-compose pull
+```
+
+```bash
+docker-compose up
+```
