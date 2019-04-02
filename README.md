@@ -27,14 +27,15 @@ A simulation of data consumer. You can set the number of data consumers to explo
 ``` bash
 git clone https://github.com/CongGroup/Percome19-Crowd-Demo.git
 ```
+2. modify .env file. Change the path to your current project absolute path.
 
-2. Pull image
+3. Pull image
 
 ```bash
 docker-compose pull
 ```
 
-3. Run
+4. Run
 ```bash
 docker-compose up
 ```
