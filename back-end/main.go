@@ -1,10 +1,10 @@
 package main
 
 import (
-	"Percome19-Crowd-Demo/back-end/appClient"
-	"Percome19-Crowd-Demo/back-end/contract"
-	"Percome19-Crowd-Demo/back-end/user"
-	"Percome19-Crowd-Demo/back-end/zcrypto"
+	"github.com/xxRanger/Percome19-Crowd-Demo/back-end/appClient"
+	"github.com/xxRanger/Percome19-Crowd-Demo/back-end/contract"
+	"github.com/xxRanger/Percome19-Crowd-Demo/back-end/user"
+	"github.com/xxRanger/Percome19-Crowd-Demo/back-end/zcrypto"
 	"encoding/hex"
 	"encoding/json"
 	"flag"

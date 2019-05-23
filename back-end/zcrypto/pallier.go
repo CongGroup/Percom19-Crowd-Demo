@@ -110,7 +110,7 @@ func (this *PublicKey)Encrypt(m *big.Int) (*Cypher,error) {
 	nSquare := this.GetNSquare()
 
 	var message *big.Int
-	if(m.Cmp(new(big.Int))==-1) {
+	if m.Cmp(big.NewInt(0))==-1 {
 		message = new(big.Int).ModInverse(new(big.Int).Neg(m),this.N)
 	} else {
 		message = m
