@@ -581,6 +581,7 @@
                                 console.log("send transaction successfully");
                                 if(res.txid === GCUID_CLAIM) {
                                      this.claimStatus = SUBMITTED;
+                                     this.getTokenBalance();
                                 } else if (res.txid === GCUID_REGISTER_AND_SUBMIT) {
                                     this.submitStatus = SUBMITTED;
                                 }
@@ -590,6 +591,7 @@
                                 console.log("gcuid_claim",GCUID_CLAIM);
                                 if(res.txid === GCUID_CLAIM) {
                                     this.claimStatus = INITIAL;
+
                                 } else if (res.txid === GCUID_REGISTER_AND_SUBMIT) {
                                     this.submitStatus = INITIAL;
                                 }

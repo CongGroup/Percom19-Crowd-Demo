@@ -696,6 +696,7 @@
                             if (res.status === 0) {
                                 this.claimStatus = SUBMITTED;
                                 this.getTokenBalance();
+                                this.consumerTokenBalance();
                             } else {
                                 this.claimStatus = INITIAL;
                                 console.log(res.reason);
