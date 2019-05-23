@@ -6,11 +6,11 @@ services:
       - 4000
     ports:
       - "0.0.0.0:4000:4000"
-    working_dir: /go-project/src/Percome19-Crowd-Demo/back-end
+    working_dir: /go-project/src/github.com/xxRanger/Percome19-Crowd-Demo/back-end
     volumes:
       - type: bind
         source: ${BASE_PATH}/back-end/etc
-        target: /go-project/src/Percome19-Crowd-Demo/back-end/etc
+        target: /go-project/src/github.com/xxRanger/Percome19-Crowd-Demo/back-end/etc
     environment:
       - GOPATH=/go-project
     deploy:

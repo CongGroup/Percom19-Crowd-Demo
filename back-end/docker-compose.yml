@@ -3,7 +3,7 @@ services:
   backend:
     build: .
     image: xarcher/crowd-back-server:lastest
-    working_dir: /go-project/src/Percome19-Crowd-Demo/back-end
+    working_dir: /go-project/src/github.com/xxRanger/Percome19-Crowd-Demo/back-end
     ports:
     - "4000:4000"
     environment:
