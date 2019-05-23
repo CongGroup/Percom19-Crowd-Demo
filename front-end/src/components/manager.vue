@@ -624,6 +624,8 @@
                 }).catch(console.log)
             },
             initializeState: function(stage) {
+                this.getTokenBalance();
+                this.getConsumerTokenBalance();
                 if('register' === this.mapToStage[stage] && this.registerNumber === undefined) {
                     this.registerNumber = 0;
                 } else if('submit' === this.mapToStage[stage] && this.submissionNumber=== undefined) {
@@ -696,7 +698,7 @@
                             if (res.status === 0) {
                                 this.claimStatus = SUBMITTED;
                                 this.getTokenBalance();
-                                this.consumerTokenBalance();
+                                this.getConsumerTokenBalance();
                             } else {
                                 this.claimStatus = INITIAL;
                                 console.log(res.reason);
