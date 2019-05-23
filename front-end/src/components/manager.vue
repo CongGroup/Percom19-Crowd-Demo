@@ -579,6 +579,7 @@
                     serviceProvider: undefined,
                     target: undefined
                 }
+                this.graph = undefined;
             },
             initialDisplay: function() {
                 this.requireEther();
