@@ -579,6 +579,7 @@
                     serviceProvider: undefined,
                     target: undefined
                 }
+                this.graph = undefined;
             },
             initialDisplay: function() {
                 this.requireEther();
@@ -742,6 +743,7 @@
                                 this.stage = res.stage;
                                 // console.log(this.stageToProcedure[this.stage]);
                                 if(this.stageToProcedure[this.stage] === 'Solicit') {
+                                    this.getConsumerTokenBalance();
                                     this.solicitStatus = INITIAL;
                                     this.cleanState();
                                 } else {

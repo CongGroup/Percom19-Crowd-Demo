@@ -8,7 +8,7 @@ import (
 	"github.com/gorilla/websocket"
 	"log"
 	"math/big"
-	"Percome19-Crowd-Demo/back-end/zcrypto"
+	"github.com/xxRanger/Percome19-Crowd-Demo/back-end/zcrypto"
 )
 
 func (h *Handler) writeMessage(messageType int, data []byte) error {

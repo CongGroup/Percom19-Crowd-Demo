@@ -1,8 +1,8 @@
 package appClient
 
 import (
-	"Percome19-Crowd-Demo/back-end/contract"
-	"Percome19-Crowd-Demo/back-end/zcrypto"
+	"github.com/xxRanger/Percome19-Crowd-Demo/back-end/contract"
+	"github.com/xxRanger/Percome19-Crowd-Demo/back-end/zcrypto"
 	"encoding/hex"
 	"encoding/json"
 	"github.com/ethereum/go-ethereum/common"
